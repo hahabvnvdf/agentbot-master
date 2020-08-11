@@ -19,6 +19,8 @@
 
 ## Support Server
 Cần sự giúp đỡ nhiều hơn? Có bất kỳ ý tưởng cho bot? Muốn báo cáo lỗi?
+
+
 [![widget](https://discordapp.com/api/v7/guilds/699872807605108744/widget.png?style=banner4)](https://discord.gg/SEMXgcj)
 
 Hoặc có thể mở [issue](https://github.com/phamleduy04/agentbot-master/issues) hoặc [pull request](https://github.com/phamleduy04/agentbot-master/pulls).
