@@ -1,4 +1,5 @@
 ![Agent](https://cdn.discordapp.com/attachments/699884417069613076/742485462358163597/flanders-bannerBOT.png)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fphamleduy04%2Fagentbot-master.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fphamleduy04%2Fagentbot-master?ref=badge_shield)
 
 
 [![issue](https://img.shields.io/github/issues/phamleduy04/agentbot-master?style=for-the-badge)](https://github.com/phamleduy04/agentbot-master/issues)
@@ -45,3 +46,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fphamleduy04%2Fagentbot-master.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fphamleduy04%2Fagentbot-master?ref=badge_large)
