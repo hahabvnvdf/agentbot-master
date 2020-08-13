@@ -111,7 +111,7 @@ client.on("guildDelete", async oldguild => { //bot leave server
 
 client.on('guildMemberAdd', async member => {
     let serverdata = db.get(member.guild.id);
-    if (!serverdata.welcomechannel) return;
+    if (!db.has(`${member.guild.id}.welcomechannel`)) return;
     let channel = member.guild.channels.cache.get(serverdata.welcomechannel);
     if (!channel) return;
     let image = await welcome(member.user.username, member.user.discriminator, member.user.avatarURL({ format: 'png', dynamic: false }), member.guild.members.cache.size);
