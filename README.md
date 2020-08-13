@@ -45,7 +45,3 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
-
-## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fphamleduy04%2Fagentbot-master.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fphamleduy04%2Fagentbot-master?ref=badge_large)
