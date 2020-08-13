@@ -25,8 +25,6 @@ Cần sự giúp đỡ nhiều hơn? Có bất kỳ ý tưởng cho bot? Muốn 
 
 Hoặc có thể mở [issue](https://github.com/phamleduy04/agentbot-master/issues) hoặc [pull request](https://github.com/phamleduy04/agentbot-master/pulls).
 
-## Cảm ơn
-[inhalingzone](https://www.instagram.com/inhalingzone/) aka Quanh` đã hỗ trợ ảnh
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -39,6 +37,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/phamleduy04"><img src="https://avatars2.githubusercontent.com/u/32657584?v=4" width="100px;" alt=""/><br /><sub><b>Duy Pham Le</b></sub></a><br /><a href="https://github.com/phamleduy04/agentbot-master/commits?author=phamleduy04" title="Code">💻</a> <a href="https://github.com/phamleduy04/agentbot-master/commits?author=phamleduy04" title="Tests">⚠️</a> <a href="https://github.com/phamleduy04/agentbot-master/issues?q=author%3Aphamleduy04" title="Bug reports">🐛</a> <a href="https://github.com/phamleduy04/agentbot-master/commits?author=phamleduy04" title="Documentation">📖</a> <a href="#design-phamleduy04" title="Design">🎨</a> <a href="#maintenance-phamleduy04" title="Maintenance">🚧</a></td>
     <td align="center"><a href="https://github.com/doduc12306"><img src="https://avatars2.githubusercontent.com/u/38607396?v=4" width="100px;" alt=""/><br /><sub><b>Đức Đỗ</b></sub></a><br /><a href="https://github.com/phamleduy04/agentbot-master/commits?author=doduc12306" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/Undoing00"><img src="https://avatars2.githubusercontent.com/u/68627799?v=4" width="100px;" alt=""/><br /><sub><b>Undoing00</b></sub></a><br /><a href="#ideas-Undoing00" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/phamleduy04/agentbot-master/commits?author=Undoing00" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://instagram.com/inhalingzone"><img src="https://avatars1.githubusercontent.com/u/69654567?v=4" width="100px;" alt=""/><br /><sub><b>quanhks</b></sub></a><br /><a href="#design-quanhks" title="Design">🎨</a></td>
   </tr>
 </table>
 
