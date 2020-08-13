@@ -25,8 +25,6 @@ Cần sự giúp đỡ nhiều hơn? Có bất kỳ ý tưởng cho bot? Muốn 
 
 Hoặc có thể mở [issue](https://github.com/phamleduy04/agentbot-master/issues) hoặc [pull request](https://github.com/phamleduy04/agentbot-master/pulls).
 
-## Cảm ơn
-[inhalingzone](https://www.instagram.com/inhalingzone/) aka Quanh` đã hỗ trợ ảnh
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
