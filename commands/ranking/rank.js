@@ -1,7 +1,9 @@
 const { MessageAttachment } = require('discord.js');
 const SQLite = require('better-sqlite3');
 const sql = new SQLite('./data.sqlite');
-const canvas = require('../../functions/canvasfunction')
+const canvas = require('../../functions/canvasfunction');
+const fs = require('fs');
+const random_num = require('random-number-csprng');
 module.exports = {
     name: "rank",
     category: "ranking",
@@ -27,8 +29,13 @@ module.exports = {
         let rank = server_data.findIndex(userdata => userdata.user == member.user.id);
         if (rank == -1) return message.reply('Người bạn tìm không có rank!')
         rank++; //real rank
-        let img = await canvas.rank({ username: member.user.username, discrim: member.user.discriminator, level: data.level, rank: rank, neededXP: data.level * 300, currentXP: data.xp, avatarURL: member.user.avatarURL({ format: 'png' }), color: "#FFFFFF", status: member.user.presence.status });
-        const attachment = new MessageAttachment(img, "rank.png")
-        message.channel.send(`Rank của bạn **${member.user.username}**`,attachment);
+        let userbackground;
+        if (fs.existsSync(`././assets/userbackground/${message.author.id}.jpg`))
+          userbackground = fs.readFileSync(`././assets/userbackground/${message.author.id}.jpg`);
+        let img = await canvas.rank({ username: member.user.username, discrim: member.user.discriminator, level: data.level, rank: rank, neededXP: data.level * 300, currentXP: data.xp, avatarURL: member.user.avatarURL({ format: 'png' }), color: "#FFFFFF", status: member.user.presence.status, background: userbackground });
+        const attachment = new MessageAttachment(img, "rank.png");
+        const random = await random_num(0, 100);
+        console.log(random);
+        message.channel.send(random < 10 ? `Nếu bạn muốn có background custom, hãy vào support server!` : `Rank của bạn **${member.user.username}**`, attachment);
     }
 }
