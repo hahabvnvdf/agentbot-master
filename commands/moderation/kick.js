@@ -16,10 +16,7 @@ module.exports = {
 
         // No args
         if (!args[0]) return message.reply("Vui lòng tag một người nào đó để kick.").then(m => m.delete({timeout: 5000}));
-        let reason = args.slice(1).join(' ')
-
-        // No reason
-        if (!args[1]) reason = "Không có lý do."
+        let reason = args.slice(1).join(' ') || "Không có lý do.";
 
         // No author permissions
         if (!message.member.hasPermission("KICK_MEMBERS")) {
@@ -59,7 +56,7 @@ module.exports = {
             .setTimestamp()
             .setDescription(stripIndents `**- Đã kick:** ${toKick} (${toKick.id})
             **- Người kick:** ${message.member} (${message.member.id})
-            **- Lý do:** ${args.slice(1).join(" ")}`);
+            **- Lý do:** ${reason}`);
 
         const promptEmbed = new MessageEmbed()
             .setColor("GREEN")
@@ -75,7 +72,7 @@ module.exports = {
             if (emoji === "✅") {
                 msg.delete();
                 toKick.send(`Bạn vừa bị kick ra khỏi server \`${toKick.guild.name}\`. Lý do: \`${args.slice(1).join(' ')}\``)
-                toKick.kick(args.slice(1).join(" "))
+                toKick.kick(reason)
                     .catch(err => {
                         if (err) return message.channel.send(`Bị lỗi khi kick: ${err.message}`)
                     });

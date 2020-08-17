@@ -16,11 +16,8 @@ module.exports = {
 
         // No args
         if (!args[0]) return message.reply("Vui lòng tag một người nào đó để ban.").then(m => m.delete({timeout: 5000}));
-        let reason = args.slice(1).join(' ')
-        // No reason
-        if (!args[1]) reason = "Không có lý do."
+        let reason = args.slice(1).join(' ') || "Không có lý do."
         
-
         // No author permissions
         if (!message.member.hasPermission("BAN_MEMBERS")) {
             return message.reply("❌ Bạn không có quyền để ban người khác.")
@@ -75,12 +72,11 @@ module.exports = {
             // Verification stuffs
             if (emoji === "✅") {
                 msg.delete();
-                toBan.send(`Bạn vừa bị ban ở server \`${toBan.guild.name}\`. Lý do: \`${args.slice(1).join(' ')}\``)
-                toBan.ban(reason)
+                toBan.send(`Bạn vừa bị ban ở server \`${toBan.guild.name}\`. Lý do: \`${reason}\``)
+                toBan.ban({ reason: reason })
                     .catch(err => {
-                        if (err) return message.channel.send(`Bị lỗi khi ban: ${err.message}`)
+                        if (err) return message.channel.send(`Bị lỗi khi ban: ${err.message}`);
                     });
-
                 logChannel.send(embed);
             } else if (emoji === "❌") {
                 msg.delete();
