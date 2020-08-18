@@ -1,4 +1,4 @@
-const wolfarm_key = process.env.WOLFARM;
+const wolfarm_key = process.env.WOLFRAM;
 const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
 module.exports = {
@@ -15,6 +15,7 @@ module.exports = {
             if (err) return message.channel.send(`Bot lỗi: ${err.message}`)
         })
         data = data.data
+        console.log(data);
         if (data.queryresult.success === false) return message.reply("Mình không hiểu bạn đang hỏi gì, vui lòng hỏi câu khác.")
         const embed = new MessageEmbed()
             .setTitle(`Question: ${args.join(' ')}`)
