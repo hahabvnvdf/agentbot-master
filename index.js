@@ -114,7 +114,7 @@ client.on('guildMemberAdd', async member => {
     if (!db.has(`${member.guild.id}.welcomechannel`)) return;
     let channel = member.guild.channels.cache.get(serverdata.welcomechannel);
     if (!channel) return;
-    let image = await welcome(member.user.username, member.user.discriminator, member.user.avatarURL({ format: 'png', dynamic: false }), member.guild.members.cache.size);
+    let image = await welcome(member.user.username, member.user.discriminator, member.user.displayAvatarURL({ format: 'png', dynamic: false }), member.guild.members.cache.size);
     let attachment = new MessageAttachment(image, 'welcome.png');
     return channel.send(attachment);
 })

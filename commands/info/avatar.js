@@ -9,7 +9,7 @@ module.exports = {
     run: (client, message, args) => {
         const embed = new MessageEmbed()
         var member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
-        var avaurl = member.user.avatarURL({ format: 'jpg', dynamic: true, size: 1024 })
+        var avaurl = member.user.displayAvatarURL({ format: 'jpg', dynamic: true, size: 1024 })
         embed.setImage(avaurl)
             .setTitle(`Link avatar: `)
             .setURL(avaurl)
