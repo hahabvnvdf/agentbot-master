@@ -97,7 +97,7 @@ function createembed(nguoichoi, bet, deck_user, deck_bot ,nguoichoi_val, bot_val
     let embed = new MessageEmbed()
             .setColor("#00FFFF")
             .setTitle(`Chọn ${doubledownEmoji} để cược gấp đôi nếu bạn tự tin.`)
-            .setAuthor(`${nguoichoi.tag}, bạn đã cược ${laysodep(bet)} để chơi bài cào!`, nguoichoi.avatarURL())
+            .setAuthor(`${nguoichoi.tag}, bạn đã cược ${laysodep(bet)} để chơi bài cào!`, nguoichoi.displayAvatarURL())
             .setFooter("Đang chơi!")
     if (end == 'thang'){ 
         embed.setColor("#90EE90") //light green

@@ -8,7 +8,7 @@ module.exports = {
     usage: 'jail [@tag]',
     run: async (client, message, args) => {
         let nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
-        let avaurl = nguoitag.user.avatarURL({ format: 'png', dynamic: false })
+        let avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false })
         let image = await canva.jail(avaurl)
         let attachment = new MessageAttachment(image, 'jail.png')
         return message.channel.send(attachment)

@@ -32,7 +32,7 @@ module.exports = {
         let userbackground;
         if (fs.existsSync(`././assets/userbackground/${member.id}.jpg`))
           userbackground = fs.readFileSync(`././assets/userbackground/${member.id}.jpg`);
-        let img = await canvas.rank({ username: member.user.username, discrim: member.user.discriminator, level: data.level, rank: rank, neededXP: data.level * 300, currentXP: data.xp, avatarURL: member.user.avatarURL({ format: 'png' }), color: "#FFFFFF", status: member.user.presence.status, background: userbackground });
+        let img = await canvas.rank({ username: member.user.username, discrim: member.user.discriminator, level: data.level, rank: rank, neededXP: data.level * 300, currentXP: data.xp, avatarURL: member.user.displayAvatarURL({ format: 'png' }), color: "#FFFFFF", status: member.user.presence.status, background: userbackground });
         const attachment = new MessageAttachment(img, "rank.png");
         const random = await random_num(0, 100);
         message.channel.send(random < 20 ? `Nếu bạn muốn có background custom, hãy vào support server!` : `Rank của bạn **${member.user.username}**`, attachment);

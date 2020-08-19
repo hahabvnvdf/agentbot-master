@@ -51,8 +51,8 @@ module.exports = {
 
         const embed = new MessageEmbed()
             .setColor("#ff0000")
-            .setThumbnail(toKick.user.avatarURL())
-            .setFooter(message.member.displayName, message.author.avatarURL())
+            .setThumbnail(toKick.user.displayAvatarURL())
+            .setFooter(message.member.displayName, message.author.displayAvatarURL())
             .setTimestamp()
             .setDescription(stripIndents `**- Đã kick:** ${toKick} (${toKick.id})
             **- Người kick:** ${message.member} (${message.member.id})

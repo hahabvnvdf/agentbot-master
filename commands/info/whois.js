@@ -22,8 +22,8 @@ module.exports = {
         let userFlags = ""
         if (member.user.flags) userFlags = member.user.flags.toArray()
         const embed = new MessageEmbed()
-            .setFooter(member.displayName, member.user.avatarURL())
-            .setThumbnail(member.user.avatarURL())
+            .setFooter(member.displayName, member.user.displayAvatarURL())
+            .setThumbnail(member.user.displayAvatarURL())
             .setColor(member.displayHexColor === '#000000' ? '#ffffff' : member.displayHexColor)
 
         .addField('Thông tin thành viên (server):', stripIndents `**- Nickname:** ${member.displayName}

@@ -2,6 +2,7 @@ const { ownerID } = require('../../config.json');
 const { MessageEmbed } = require('discord.js');
 module.exports = {
     name: 'developer',
+    aliases: ['dev'],
     description: 'Show info của owner của bot xD',
     category: 'info',
     usage: 'developer',

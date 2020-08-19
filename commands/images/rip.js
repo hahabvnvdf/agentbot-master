@@ -9,7 +9,7 @@ module.exports = {
     example: "rip @phamleduy04",
     run: async (client, message, args) => {
         let nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
-        let avaurl = nguoitag.user.avatarURL({format: 'png', dynamic: false})
+        let avaurl = nguoitag.user.displayAvatarURL({format: 'png', dynamic: false})
         let image = await canva.rip(avaurl)
         let attach = new MessageAttachment(image, 'rip.png')
         return message.channel.send(attach)

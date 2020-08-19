@@ -52,8 +52,8 @@ module.exports = {
 
         const embed = new MessageEmbed()
             .setColor("#ff0000")
-            .setThumbnail(toBan.user.avatarURL())
-            .setFooter(message.member.displayName, message.author.avatarURL())
+            .setThumbnail(toBan.user.displayAvatarURL())
+            .setFooter(message.member.displayName, message.author.displayAvatarURL())
             .setTimestamp()
             .setDescription(stripIndents `**- Đã ban:** ${toBan} (${toBan.id})
             **- Người ban:** ${message.member} (${message.member.id})
