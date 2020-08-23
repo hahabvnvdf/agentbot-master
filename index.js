@@ -163,11 +163,18 @@ client.on("message", async message => {
                 message.channel.send(response.data.cnt);
             })
     }
+    // check unafk 
+    let checkAFK = await afkData.get(message.author.id);
+    if (!checkAFK) checkAFK = await reset_afk(message.author.id);
+    if (checkAFK.afk === true) {
+        await reset_afk(message.author.id)
+        message.reply('Bạn không còn AFK nữa!');
+    }
     let mention = message.mentions.members.array();
     if (mention.length !== 0) {
     mention.forEach(async member => {
         let userAFK = await afkData.get(member.id);
-        if (!userAFK) userAFK = await afkData.set(member.id, { afk: false, loinhan: '' })
+        if (!userAFK) userAFK = await reset_afk(member.id);
         if (userAFK.afk === true) message.channel.send(`${member.user.username} đã AFK, lời nhắn: ${userAFK.loinhan}`);
     })
     }   
@@ -231,6 +238,11 @@ y.addListener("data", res => {
 function logging(content){
     const moment = require('moment-timezone');
     console.log(`${moment.tz(timezone).format("LTS")} || ${content}`);
+}
+
+async function reset_afk(id) {
+    if (!id) throw new Error('Thiếu ID');
+    return await afkData.set(id, { afk: false, loinhan: '' });
 }
 
 if (process.env.TYPE_RUN == 'ci') process.exit();
