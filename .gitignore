@@ -9,3 +9,5 @@ package-lock.json
 json.sqlite
 .env
 economy.sqlite
+.DS_Store
+/assets/.DS_Store
