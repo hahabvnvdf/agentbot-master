@@ -11,6 +11,7 @@ module.exports = {
     usage: "rank [@tag]",
     example: "rank @phamleduy04",
     note: "Max level là 999",
+    cooldown: 15,
     run: async (client, message, args) => {
         const table = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name = 'xpdata';").get();
         if (!table['count(*)']) {
