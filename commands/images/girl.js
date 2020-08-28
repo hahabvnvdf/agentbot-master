@@ -3,6 +3,7 @@ const { readdirSync, readFileSync } = require('fs');
 module.exports = {
     name: 'girl',
     category: 'images',
+    description: 'Show ảnh gái xD (nguồn từ gaixinhchonloc.com)',
     aliases: ['gai', 'gái'],
     usage: 'girl',
     run: async (client, message, args) => {
