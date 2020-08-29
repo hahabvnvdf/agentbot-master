@@ -6,9 +6,10 @@ module.exports = {
     description: 'Show ảnh gái xD (nguồn từ gaixinhchonloc.com)',
     aliases: ['gai', 'gái'],
     usage: 'girl',
+    cooldown: 3,
     run: async (client, message, args) => {
         let folder = readdirSync("././assets/gaixinhchonloc");
-        let randomFile = folder[Math.floor(Math.random() * folder.length)]
+        let randomFile = folder[Math.floor(Math.random() * folder.length)];
         let file = readFileSync(`././assets/gaixinhchonloc/${randomFile}`);
         let ext = randomFile.slice(-3);
         let attachment = new MessageAttachment(file, `gaixinh.${ext}`);
