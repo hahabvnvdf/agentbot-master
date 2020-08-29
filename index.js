@@ -9,8 +9,8 @@ const SQLite = require('better-sqlite3');
 const sql = new SQLite('./data.sqlite');
 const ms = require('ms')
 const cooldown = new Set();
-const client = new Client({disableMentions: "everyone", retryLimit: 5 });
-const { timezone } = require('./config.json');
+const client = new Client({ disableMentions: "everyone", retryLimit: 5 });
+const { timezone, ownerID } = require('./config.json');
 const { BID, BRAINKEY } = process.env
 const { welcome } = require('./functions/canvasfunction');
 if (!process.env.TYPE_RUN) throw new Error("Chạy lệnh npm run dev hoặc npm run build");
@@ -197,7 +197,7 @@ client.on("message", async message => {
         let now = Date.now()
         let timestamps = cooldowns.get(command.name)
         let cooldownAmount = (command.cooldown || 3) * 1000;
-        if (timestamps.has(message.author.id)){
+        if (timestamps.has(message.author.id) && message.author.id == ownerID){
             let expirationTime = timestamps.get(message.author.id) + cooldownAmount;
             if (now < expirationTime){
                 let timeLeft = (expirationTime - now)/1000;
