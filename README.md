@@ -9,7 +9,7 @@
 [![Visits Badge](https://badges.pufler.dev/visits/phamleduy04/agentbot-master?style=for-the-badge)](https://badges.pufler.dev)
 ![GitHub top language](https://img.shields.io/github/languages/top/phamleduy04/agentbot-master?style=for-the-badge)
 [![David](https://img.shields.io/david/phamleduy04/agentbot-master?style=for-the-badge)](https://david-dm.org/phamleduy04/agentbot-master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/641d77710a564cebba4f2b75b9f3a97d)](https://app.codacy.com/manual/phamleduy04/agentbot-master?utm_source=github.com&utm_medium=referral&utm_content=phamleduy04/agentbot-master&utm_campaign=Badge_Grade_Dashboard)
+![Codacy grade](https://img.shields.io/codacy/grade/641d77710a564cebba4f2b75b9f3a97d?logo=codacy&style=for-the-badge)
 
 # AgentBot
 ## Thêm Agent Bot vào server của bạn
