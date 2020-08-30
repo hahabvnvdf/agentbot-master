@@ -7,7 +7,7 @@ module.exports = {
     description: "Người khác yêu bạn cỡ nào?",
     usage: "love [mention or id or username]",
     example: `love @phamleduy04`,
-    run: async(client, message, args) => {
+    run: async (client, message, args) => {
         // Get a member from mention, id, or username
         let person = getMember(message, args[0]);
 
@@ -30,5 +30,5 @@ module.exports = {
                 `💟 ${Math.floor(love)}%\n\n${loveLevel}`);
 
         message.channel.send(embed);
-    }
-}
+    },
+};

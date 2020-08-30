@@ -7,7 +7,7 @@ module.exports = {
     run: async (client, message, args) => {
         if (message.author.id !== ownerID) return message.channel.send('Chỉ có owner của bot mới có thể sử dụng lệnh này');
         const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
-        let data = await eco.fetchMoney(member.id);
+        const data = await eco.fetchMoney(member.id);
         message.channel.send(JSON.stringify(data, null, 4), { code: "json" });
-    }
-}
+    },
+};

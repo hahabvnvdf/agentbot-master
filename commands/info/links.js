@@ -22,7 +22,7 @@ module.exports = {
         [Discord.bots.gg:](https://discord.bots.gg/bots/645883401500622848)
 
         [Github:](https://github.com/phamleduy04/agentbot-master) 
-        `)
-        message.channel.send(embed)
-    }
-}
+        `);
+        message.channel.send(embed);
+    },
+};

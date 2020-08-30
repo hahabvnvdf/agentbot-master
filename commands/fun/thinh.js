@@ -7,7 +7,7 @@ module.exports = {
     usage: "thinh",
     cooldown: 2,
     run: async (client, message, args) => {
-        let random = array[Math.floor(Math.random() * array.length)]
-        message.channel.send(random)
-    }
-}
+        const random = array[Math.floor(Math.random() * array.length)];
+        message.channel.send(random);
+    },
+};

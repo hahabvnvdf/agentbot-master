@@ -5,7 +5,7 @@ module.exports = {
     description: 'Ai đó sẽ nhận thông báo khi bạn afk',
     usage: 'afk [lời nhắn]',
     example: 'afk sẽ quay trở lại sau',
-    run: async(client, message, args) => {
+    run: async (client, message, args) => {
         let userDb = afkData.get(message.author.id);
         if (!userDb) userDb = await afkData.set(message.author.id, { afk: false, loinhan: '' });
         if (userDb.afk == true) {
@@ -17,5 +17,5 @@ module.exports = {
             await afkData.set(message.author.id, { afk: true, loinhan: loinhan });
             message.channel.send('Bạn đã bật chế độ afk!');
         }
-    }
-}
+    },
+};

@@ -10,14 +10,15 @@ module.exports = {
     cooldown: 10,
     usage: 'mlb',
     run: async (client, message, args) => {
-        let bxh = eco.leaderboard(message.guild.id,{ limit: 10, raw: false })
-        let userdata = eco.fetchMoney(message.author.id)
-        let embed = new MessageEmbed()
+        const bxh = eco.leaderboard(message.guild.id, { limit: 10, raw: false });
+        const userdata = eco.fetchMoney(message.author.id);
+        const embed = new MessageEmbed()
             .setAuthor('Bảng xếp hạng tiền')
-            .setDescription(`Hạng của bạn: **${userdata.position}**`)
+            .setDescription(`Hạng của bạn: **${userdata.position}**`);
             bxh.forEach(user => {
-                embed.addField(`\`${user.position}\`. ${client.users.cache.get(user.id).tag}`, `Tiền: ${laysodep(user.money)} 💸`)
-            })
+                const member = client.users.cache.get(user.id);
+                embed.addField(`\`${user.position}\`. ${member ? member.tag : 'vodanh#0000'}`, `Tiền: ${laysodep(user.money)} 💸`);
+            });
         return message.channel.send(embed);
-    }
-}
+    },
+};

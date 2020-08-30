@@ -5,6 +5,6 @@ module.exports = {
     description: 'Bot uptime.',
     usage: 'uptime',
     run: async (client, message, args) => {
-        message.channel.send(`Mình đã online được \`${prettyMilliseconds(client.uptime)}\``)
-    }
-}
+        message.channel.send(`Mình đã online được \`${prettyMilliseconds(client.uptime)}\``);
+    },
+};

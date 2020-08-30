@@ -7,16 +7,16 @@ module.exports = {
     category: 'info',
     usage: 'developer',
     run: async (client, message, args) => {
-        let Dui = client.users.cache.get(ownerID);
-        let embed = new MessageEmbed()
+        const Dui = client.users.cache.get(ownerID);
+        const embed = new MessageEmbed()
             .setTitle(`Thông tin về Developer`)
             .addField('Thông tin cá nhân', [
                 `Tên Discord: ${Dui.tag}`,
                 "Quốc gia: :flag_vn:",
                 `ID user: ${Dui.id}`,
-                `Online? ${Dui.presence.status == 'online' ? 'Có' : 'Không'}`
+                `Online? ${Dui.presence.status == 'online' ? 'Có' : 'Không'}`,
             ])
-            .setThumbnail(Dui.displayAvatarURL())
+            .setThumbnail(Dui.displayAvatarURL());
         message.channel.send(embed);
-    }
-}
+    },
+};

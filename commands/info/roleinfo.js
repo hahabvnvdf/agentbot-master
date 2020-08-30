@@ -1,20 +1,18 @@
 const { MessageEmbed } = require("discord.js");
-let stringSimilarity = require('string-similarity');
+const stringSimilarity = require('string-similarity');
 
 module.exports = {
     name: "roleinfo",
     category: "info",
     description: "Trà về thông tên về role",
-    run: async(client, message, args) => {
-        let roles = message.guild.roles.cache.filter(r => r.managed === false).map(g => g.name)
-        var search = args.join(' ');
-        var matches = stringSimilarity.findBestMatch(search, roles)
-        var find = matches.bestMatch.target
-        var role = message.guild.roles.cache.find(role => role.name === find)
-        if (!isNaN(args[0])) {
-            var role = message.guild.roles.cache.get(args[0])
-        }
-        let membersWithRole = message.guild.roles.cache.get(role.id).members;
+    run: async (client, message, args) => {
+        const roles = message.guild.roles.cache.filter(r => r.managed === false).map(g => g.name);
+        const search = args.join(' ');
+        const matches = stringSimilarity.findBestMatch(search, roles);
+        const find = matches.bestMatch.target;
+        let role = message.guild.roles.cache.find(el => el.name === find);
+        if (!isNaN(args[0])) role = message.guild.roles.cache.get(args[0]);
+        const membersWithRole = message.guild.roles.cache.get(role.id).members;
         const embed = new MessageEmbed()
             .setColor(role.color)
             .setTitle("Roleinfo")
@@ -24,7 +22,7 @@ module.exports = {
             .addField("Vị trí: ", role.position, true)
             .addField("Mentionable: ", role.mentionable, true)
             .addField("Hoist: ", role.hoist, true)
-            .addField("Màu: ", role.hexColor, true)
-        message.channel.send(embed)
-    }
-}
+            .addField("Màu: ", role.hexColor, true);
+        message.channel.send(embed);
+    },
+};

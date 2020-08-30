@@ -9,18 +9,18 @@ module.exports = {
     example: "wolf GDP of vietnam",
     usage: "wolf <query>",
     run: async (client, message, args) => {
-        var query = encodeURIComponent(args.join(' '));
+        const query = encodeURIComponent(args.join(' '));
         let data = await axios.get(`https://api.wolframalpha.com/v2/query?input=${query}&format=image&output=JSON&appid=${wolfarm_key}`)
         .catch(err => {
-            if (err) return message.channel.send(`Bot lỗi: ${err.message}`)
-        })
-        data = data.data
+            if (err) return message.channel.send(`Bot lỗi: ${err.message}`);
+        });
+        data = data.data;
         console.log(data);
-        if (data.queryresult.success === false) return message.reply("Mình không hiểu bạn đang hỏi gì, vui lòng hỏi câu khác.")
+        if (data.queryresult.success === false) return message.reply("Mình không hiểu bạn đang hỏi gì, vui lòng hỏi câu khác.");
         const embed = new MessageEmbed()
             .setTitle(`Question: ${args.join(' ')}`)
             .setTimestamp()
-            .setImage(data.queryresult.pods[1].subpods[0].img.src)
-        message.channel.send(embed)
-    }
-}
+            .setImage(data.queryresult.pods[1].subpods[0].img.src);
+        message.channel.send(embed);
+    },
+};

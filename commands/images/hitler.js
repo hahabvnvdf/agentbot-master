@@ -1,5 +1,4 @@
-const Canacord = require('canvacord');
-const canva = new Canacord();
+const canva = require('canvacord');
 const { MessageAttachment } = require('discord.js');
 module.exports = {
     name: "hitler",
@@ -7,10 +6,10 @@ module.exports = {
     description: 'meme',
     usage: 'hitler [@tag]',
     run: async (client, message, args) => {
-        let nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
-        let avaurl = nguoitag.user.displayAvatarURL({format: 'png', dynamic: false})
-        let image = await canva.hitler(avaurl)
-        let attach = new MessageAttachment(image, 'hitler.png')
-        return message.channel.send(attach)
-    }
-}
+        const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+        const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false });
+        const image = await canva.hitler(avaurl);
+        const attach = new MessageAttachment(image, 'hitler.png');
+        return message.channel.send(attach);
+    },
+};

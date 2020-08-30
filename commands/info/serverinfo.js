@@ -8,8 +8,8 @@ module.exports = {
     description: 'Đưa thông tin của server!',
     category: 'info',
     usage: 'serverinfo',
-    run: async(client, message, args) => {
-        const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString())
+    run: async (client, message, args) => {
+        const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
         const members = message.guild.members.cache;
         const channels = message.guild.channels.cache;
         const emojis = message.guild.emojis.cache;
@@ -34,7 +34,7 @@ module.exports = {
         `**--> Không làm phiền:** ${members.filter(m => m.presence.status === 'dnd').size}`,
         `**--> Offline:** ${members.filter(m => m.presence.status === 'offline').size}`])
             .addField(`Roles: `, roles.length < 10 ? roles.join(', ') : roles.length > 10 ? trimArray(roles, 10) : 'None')
-            .setTimestamp()
-        message.channel.send(embed)
-    }
-}
+            .setTimestamp();
+        message.channel.send(embed);
+    },
+};

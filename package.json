@@ -1,25 +1,25 @@
 {
   "name": "agent-bot",
-  "version": "5.4.6",
+  "version": "5.5.0",
   "main": "index.js",
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
     "@google-cloud/text-to-speech": "^3.1.0",
     "ascii-table": "0.0.9",
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "better-sqlite3": "^7.1.0",
-    "canvacord": "^3.0.9",
+    "canvacord": "^4.0.1",
     "canvas": "^2.6.1",
     "capitalize": "^2.0.3",
     "common-tags": "^1.8.0",
     "cross-env": "^7.0.2",
     "dateformat": "^3.0.3",
     "dblapi.js": "^2.4.1",
-    "discord.js": "github:discordjs/discord.js",
+    "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
-    "ffmpeg-static": "^4.2.6",
+    "ffmpeg-static": "^4.2.7",
     "is-url": "^1.2.4",
-    "jimp": "^0.16.0",
+    "jimp": "^0.16.1",
     "ksoft.js": "^3.1.4",
     "mathjs": "^7.1.0",
     "moment": "^2.27.0",
@@ -40,7 +40,9 @@
     "vultrex.haste": "^1.0.1",
     "weather-js": "^2.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.7.0"
+  },
   "scripts": {
     "test": "cross-env TYPE_RUN=ci node index.js",
     "dev": "cross-env TYPE_RUN=dev nodemon index.js",

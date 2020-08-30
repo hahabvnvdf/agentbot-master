@@ -9,15 +9,16 @@ module.exports = {
     run: async (client, message, args) => {
         let emoji = client.emojis.cache.get('741039423080366090');
         if (!emoji) emoji = '🙏';
-        let nguoitag = message.mentions.members.array() || message.guild.members.cache.get(args[0]);
+        const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (nguoitag.length == 0) return message.reply('Tag ai đó đi bạn ơi :(');
-        let folder = readdirSync('././assets/highfive/');
-        let file = readFileSync(`././assets/highfive/${folder[Math.floor(Math.random() * folder.length)]}`)
-        let attachment = new MessageAttachment(file, 'highfive.gif');
-        let embed = new MessageEmbed()
+        if (nguoitag.user.id == message.author.id) return message.channel.send('Bạn không thể tự đập tay chính mình.');
+        const folder = readdirSync('././assets/highfive/');
+        const file = readFileSync(`././assets/highfive/${folder[Math.floor(Math.random() * folder.length)]}`);
+        const attachment = new MessageAttachment(file, 'highfive.gif');
+        const embed = new MessageEmbed()
             .attachFiles(attachment)
             .setImage('attachment://highfive.gif')
-            .setDescription(`${message.member} đã đập tay với ${nguoitag} ${emoji}`)
+            .setDescription(`${message.member} đã đập tay với ${nguoitag} ${emoji}`);
         message.channel.send(embed);
-    }
-}
+    },
+};

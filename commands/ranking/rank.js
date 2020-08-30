@@ -22,20 +22,20 @@ module.exports = {
           sql.pragma("synchronous = 1");
           sql.pragma("journal_mode = wal");
         }
-        const insert = sql.prepare("SELECT * FROM xpdata WHERE user = ? AND guild = ?")
+        const insert = sql.prepare("SELECT * FROM xpdata WHERE user = ? AND guild = ?");
         const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         if (member.user.bot) return message.reply('Bạn không thể xem rank của bot!');
-        let data = insert.get(member.user.id, message.guild.id)
-        let server_data = sql.prepare("SELECT * FROM xpdata WHERE guild = ? ORDER BY level DESC, xp DESC;").all(message.guild.id);
+        const data = insert.get(member.user.id, message.guild.id);
+        const server_data = sql.prepare("SELECT * FROM xpdata WHERE guild = ? ORDER BY level DESC, xp DESC;").all(message.guild.id);
         let rank = server_data.findIndex(userdata => userdata.user == member.user.id);
-        if (rank == -1) return message.reply('Người bạn tìm không có rank!')
-        rank++; //real rank
+        if (rank == -1) return message.reply('Người bạn tìm không có rank!');
+        rank++;
         let userbackground;
         if (fs.existsSync(`././assets/userbackground/${member.id}.jpg`))
           userbackground = fs.readFileSync(`././assets/userbackground/${member.id}.jpg`);
-        let img = await canvas.rank({ username: member.user.username, discrim: member.user.discriminator, level: data.level, rank: rank, neededXP: data.level * 300, currentXP: data.xp, avatarURL: member.user.displayAvatarURL({ format: 'png' }), color: "#FFFFFF", status: member.user.presence.status, background: userbackground });
+        const img = await canvas.rank({ username: member.user.username, discrim: member.user.discriminator, level: data.level, rank: rank, neededXP: data.level * 300, currentXP: data.xp, avatarURL: member.user.displayAvatarURL({ format: 'png' }), color: "#FFFFFF", status: member.user.presence.status, background: userbackground });
         const attachment = new MessageAttachment(img, "rank.png");
         const random = await random_num(0, 100);
         message.channel.send(random < 20 ? `Nếu bạn muốn có background custom, hãy vào support server!` : `Rank của bạn **${member.user.username}**`, attachment);
-    }
-}
+    },
+};

@@ -8,15 +8,15 @@ module.exports = {
     usage: 'girl',
     cooldown: 3,
     run: async (client, message, args) => {
-        let folder = readdirSync("././assets/gaixinhchonloc");
-        let randomFile = folder[Math.floor(Math.random() * folder.length)];
-        let file = readFileSync(`././assets/gaixinhchonloc/${randomFile}`);
-        let ext = randomFile.slice(-3);
-        let attachment = new MessageAttachment(file, `gaixinh.${ext}`);
-        let embed = new MessageEmbed()
+        const folder = readdirSync("././assets/gaixinhchonloc");
+        const randomFile = folder[Math.floor(Math.random() * folder.length)];
+        const file = readFileSync(`././assets/gaixinhchonloc/${randomFile}`);
+        const ext = randomFile.slice(-3);
+        const attachment = new MessageAttachment(file, `gaixinh.${ext}`);
+        const embed = new MessageEmbed()
             .attachFiles(attachment)
             .setImage(`attachment://gaixinh.${ext}`)
-            .setFooter('Nguồn: gaixinhchonloc.com')
+            .setFooter('Nguồn: gaixinhchonloc.com');
         message.channel.send(embed);
-    }
-}
+    },
+};

@@ -15,12 +15,12 @@ module.exports = {
         const roles = member.roles.cache
             .sort((a, b) => b.position - a.position)
             .filter(r => r.id !== message.guild.id)
-            .map(r => r)
+            .map(r => r);
         roles.join(", ") || 'none';
         // User variables
         const created = formatDate(member.user.createdAt);
-        let userFlags = ""
-        if (member.user.flags) userFlags = member.user.flags.toArray()
+        let userFlags = "";
+        if (member.user.flags) userFlags = member.user.flags.toArray();
         const embed = new MessageEmbed()
             .setFooter(member.displayName, member.user.displayAvatarURL())
             .setThumbnail(member.user.displayAvatarURL())
@@ -37,10 +37,10 @@ module.exports = {
             **- Tạo vào lúc**: ${created}
             **- Huy hiệu**: ${userFlags.length ? userFlags.map(flag => flags[flag]).join(", ") : "Không có" }`, true)
 
-        .setTimestamp()
+        .setTimestamp();
         if (member.user.presence.activities.length > 0)
             embed.addField('Đang chơi: ', stripIndents `** Tên game:** ${member.user.presence.activities[0].name}`);
 
         message.channel.send(embed);
-    }
-}
+    },
+};
