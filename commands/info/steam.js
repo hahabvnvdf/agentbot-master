@@ -41,7 +41,8 @@ module.exports = {
             embed.addField('Thông tin VAC', [
                 `Số lần bị VAC Ban: ${NumberOfVACBans}`,
                 `Số lần bị Game Ban: ${NumberOfGameBans}`,
-            ]);
+            ])
+            .setFooter('Sử dụng steam set <ID> để lưu ID của bạn!');
         message.channel.send(embed);
     },
 };
