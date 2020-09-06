@@ -23,15 +23,18 @@ module.exports = {
         if (lyrics_length > 2048) {
             const firstembed = new MessageEmbed()
                 .setAuthor(`Song: ${respond.name} by ${respond.artist.name}`)
-                .setDescription(lyrics.slice(0, 2048));
+                .setDescription(lyrics.slice(0, 2048))
+                .setFooter('Powered by KSoft.Si');
             const secondembed = new MessageEmbed()
-                .setDescription(lyrics.slice(2048, lyrics.length));
+                .setDescription(lyrics.slice(2048, lyrics.length))
+                .setFooter('Powered by KSoft.Si');
             message.channel.send(firstembed);
             message.channel.send(secondembed);
         } else {
             const embed = new MessageEmbed()
                 .setAuthor(`Song: ${respond.name} by ${respond.artist.name}`)
-                .setDescription(lyrics);
+                .setDescription(lyrics)
+                .setFooter('Powered by KSoft.Si');
             message.channel.send(embed);
         }
     },

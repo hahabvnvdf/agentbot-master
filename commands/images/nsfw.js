@@ -11,10 +11,10 @@ module.exports = {
         if (!message.channel.nsfw) return message.channel.send("Lệnh này chỉ sử dụng được ở channel có bật mode NSFW!");
         const respond = await ksoft.images.nsfw();
         const embed = new MessageEmbed()
-            .setTitle(`Click here to download!`)
+            .setTitle(`From ${respond.post.subreddit}`)
             .setDescription(`NSFW image:`)
             .setURL(respond.url)
-            .setFooter(`Get by AgentBot`)
+            .setFooter(`Powered by KSoft.Si`)
             .setImage(respond.url);
         return message.channel.send(embed);
     },
