@@ -1,12 +1,11 @@
 language: node_js
 node_js:
   - "stable"
-cache: npm
+cache: yarn
 install:
-  - npm install quick.eco@3.0.0
-  - npm install
+  - yarn install
 script:
-  - npm run test
+  - yarn run test
 deploy:
   provider: pages
   cleanup: true
