@@ -26,5 +26,5 @@ jobs:
         TOKEN: ${{ secrets.TOKEN }}
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm test
+    - run: yarn install
+    - run: yarn run test
