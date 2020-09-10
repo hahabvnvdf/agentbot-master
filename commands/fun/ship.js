@@ -52,6 +52,7 @@ module.exports = {
                     if (!member) return message.channel.send('Bạn hiện tại không ship với ai!');
                     else {
                             if (member.id == message.author.id) return message.channel.send('Bạn không thể ship với chính mình.');
+                            if (shipDb.has(member.id)) return message.channel.send('Người bạn tag đã có thuyền!');
                             // bắt đầu ship xD
                             const filter = m => m.author.id == member.id;
                             const msg = await message.channel.send(`${member}, bạn có muốn lên thuyền cùng **${message.member.nickname}** không?\nNhập **accept** để đồng ý!`);
