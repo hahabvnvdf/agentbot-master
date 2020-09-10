@@ -1,6 +1,6 @@
 {
   "name": "agent-bot",
-  "version": "5.5.0",
+  "version": "5.5.1",
   "main": "index.js",
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
@@ -30,7 +30,7 @@
     "pretty-ms": "^7.0.0",
     "public-ip": "^4.0.2",
     "quick.db": "^7.1.1",
-    "quick.eco": "^3.0.1",
+    "quick.eco": "3.0.1",
     "random-number-csprng": "^1.0.2",
     "relevant-urban": "^2.0.0",
     "snowshot": "^1.0.6",
@@ -38,8 +38,7 @@
     "twemoji-parser": "^13.0.0",
     "usa-states": "0.0.5",
     "vultrex.haste": "^1.0.1",
-    "weather-js": "^2.0.0",
-    "snyk": "^1.386.0"
+    "weather-js": "^2.0.0"
   },
   "devDependencies": {
     "eslint": "^7.7.0"
@@ -47,9 +46,7 @@
   "scripts": {
     "test": "cross-env TYPE_RUN=ci node index.js",
     "dev": "cross-env TYPE_RUN=dev nodemon index.js",
-    "build": "cross-env TYPE_RUN=production node index.js",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "build": "cross-env TYPE_RUN=production node index.js"
   },
   "repository": {
     "type": "git",
@@ -61,6 +58,5 @@
     "url": "https://github.com/phamleduy04/agentbot-master/issues"
   },
   "homepage": "https://github.com/phamleduy04/agentbot-master#readme",
-  "description": "Discord bot",
-  "snyk": true
+  "description": "Discord bot"
 }
