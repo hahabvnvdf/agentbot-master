@@ -8,3 +8,5 @@ patch:
         patched: '2020-08-31T01:05:36.958Z'
     - quick.eco > rex.db > lodash:
         patched: '2020-08-31T01:05:36.958Z'
+    - quick.eco > quick.db > lodash:
+        patched: '2020-09-10T04:28:54.191Z'
