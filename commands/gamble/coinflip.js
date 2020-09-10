@@ -22,18 +22,16 @@ module.exports = {
         if (!user_choose || user_choose == 'all' || !isNaN(user_choose)) return message.channel.send('Vui lòng chọn head hoặc tail.');
         switch(user_choose.toLowerCase()) {
             case 'tail':
-            case 't': {
+            case 't':
                 user_choose = 'tail';
                 break;
-            }
-            default: {
+            default:
                 user_choose = 'head';
                 break;
-            }
         }
         const userdata = eco.fetchMoney(message.author.id);
         let bet;
-        if (args[1] == 0 || userdata.amount == 0) return message.channel.send('Bạn không thể cược 0.');
+        if (args[1] === 0 || userdata.amount === 0) return message.channel.send('Bạn không thể cược 0.');
         if (args[1] == 'all') {
             bet = 100000;
             if (bet > userdata.amount) bet = userdata.amount;

@@ -1,5 +1,7 @@
 const canva = require('canvacord');
 const { MessageAttachment } = require('discord.js');
+const db = require('quick.db');
+const shipDb = new db.table('shipDb');
 module.exports = {
     name: "spank",
     category: "images",
@@ -12,6 +14,13 @@ module.exports = {
         const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false });
         const image = await canva.spank(url1, avaurl);
         const attach = new MessageAttachment(image, 'spank.png');
-        return message.channel.send(attach);
+        message.channel.send(attach);
+        if (shipDb.has(message.author.id)) {
+            const authorData = await shipDb.get(message.author.id);
+            if (authorData.target.id == nguoitag.id) {
+                authorData.target.spank++;
+                await shipDb.set(message.author.id, authorData);
+            }
+        }
     },
 };

@@ -1,24 +1,29 @@
 const { MessageEmbed } = require("discord.js");
 const axios = require('axios');
+const db = require('quick.db');
+const shipDb = new db.table('shipDb');
 module.exports = {
     name: "pat",
     category: "images",
     description: "pat someone :D ",
-    usage: "_pat [@tag]",
+    usage: "pat [@tag]",
     run: async (client, message, args) => {
         try {
-            const nguoitag = message.mentions.members.array() || message.guild.members.cache.get(args[0]);
-            const embed = new MessageEmbed();
-            await axios.get('https://some-random-api.ml/animu/pat').then(response => {
-                if (nguoitag.length == 0) {
-                    embed.setDescription(`${message.member.displayName} vỗ về đã tất cả mọi người ♥`)
-                        .setImage(response.data.link);
-                } else {
-                    embed.setDescription(`Awwww, ${message.member} đã vỗ về ${nguoitag} ♥`)
-                        .setImage(response.data.link);
+            const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+            const response = await axios.get('https://some-random-api.ml/animu/pat');
+            const embed = new MessageEmbed()
+                .setImage(response.data.link);
+                if (nguoitag.length == 0) embed.setDescription(`${message.member.displayName} vỗ về đã tất cả mọi người ♥`);
+                else embed.setDescription(`Awwww, ${message.member} đã vỗ về ${nguoitag} ♥`);
+                if (shipDb.has(message.author.id)) {
+                    const authorData = await shipDb.get(message.author.id);
+                    if (authorData.target.id == nguoitag.id) {
+                        authorData.target.pat++;
+                        await shipDb.set(message.author.id, authorData);
+                        embed.setFooter(`Lần vỗ về ${authorData.target.pat !== 1 ? `thứ ${authorData.target.pat}` : 'đầu tiên'} của bạn.`);
+                    }
                 }
                 message.channel.send(embed);
-            });
         }
         catch(e) {
             console.log(e);

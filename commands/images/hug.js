@@ -1,5 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const axios = require("axios");
+const db = require('quick.db');
+const shipDb = new db.table('shipDb');
 module.exports = {
     name: "hug",
     category: "images",
@@ -7,13 +9,25 @@ module.exports = {
     usage: "hug [@tag]",
     example: "hug (ôm tất cả) hoặc hug @phamleduy04",
     run: async (client, message, args) => {
-        const nguoitag = message.mentions.members.array() || message.guild.members.cache.get(args[0]);
+        let nguoitag = message.mentions.members.array();
+        if (nguoitag.length == 0) nguoitag = [message.guild.members.cache.get(args[0])];
         try {
-            const embed = new MessageEmbed();
             const response = await axios.get('https://some-random-api.ml/animu/hug');
-            if (nguoitag.length == 0) embed.setDescription(`${message.member} đã ôm tất cả mọi người <3`);
-            else embed.setDescription(`Awwww, ${message.member} đã ôm ${nguoitag} <3`);
-            embed.setImage(response.data.link);
+            const embed = new MessageEmbed()
+                .setImage(response.data.link);
+            if (nguoitag.length == 0 || !nguoitag[0]) embed.setDescription(`${message.member} đã ôm tất cả mọi người <3`);
+            else {
+                embed.setDescription(`Awwww, ${message.member} đã ôm ${nguoitag} <3`);
+                if (shipDb.has(message.author.id)) {
+                    const authorData = await shipDb.get(message.author.id);
+                    const nguoiTagID = nguoitag.map(member => member.id);
+                    if (nguoiTagID.includes(authorData.target.id)) {
+                        authorData.target.hugs++;
+                    await shipDb.set(message.author.id, authorData);
+                    embed.setFooter(`Cái ôm ${authorData.target.hugs !== 1 ? `thứ ${authorData.target.hugs}` : 'đầu tiên'} của bạn.`);
+                    }
+                }
+            }
             return message.channel.send(embed);
         }
         catch(e) {

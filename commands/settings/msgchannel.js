@@ -10,7 +10,7 @@ module.exports = {
         if(!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy lệnh này!');
         if (!args[0]) {
             const channelArray = await db.get(`${message.guild.id}.msgChannelOff`);
-            if (channelArray.length == 0) return message.channel.send('Server không có phòng nào đang tắt tính exp!');
+            if (channelArray.length === 0) return message.channel.send('Server không có phòng nào đang tắt tính exp!');
             const channels = [];
             channelArray.forEach(id => {
                 const channel = message.guild.channels.cache.get(id);
