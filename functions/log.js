@@ -1,15 +1,8 @@
-const logdna = require('@logdna/logger');
-const options = {
-    app: 'AgentBot',
-    level: "TRACE",
-};
-let logger;
-if (process.env.TYPE_RUN == "production") logger = logdna.createLogger(process.env.LOGDNA, options);
+const fs = require('fs');
 module.exports = {
     log: function(text) {
-        logger.log(text);
-    },
-    logErr: function(text) {
-        logger.error(text);
+        const oldLine = fs.readFileSync('./log.txt', 'utf-8');
+        fs.writeFileSync('./log.txt', `${oldLine}\n${text}`);
+        console.log(text);
     },
 };
