@@ -19,7 +19,9 @@ module.exports = {
 
     fetchMoney: async function(userID) {
         if(!userID) throw new Error('You are missing the userID!');
-        return await db.fetch(`money_${userID}`);
+        let money = await db.fetch(`money_${userID}`);
+        if (money === null) money = 0;
+        return money;
     },
 
     subtractMoney: async function(userID, value) {
