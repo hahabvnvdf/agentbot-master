@@ -14,6 +14,7 @@ const { timezone, ownerID } = require('./config.json');
 const { BID, BRAINKEY } = process.env;
 const { welcome } = require('./functions/canvasfunction');
 if (!process.env.TYPE_RUN) throw new Error("Chạy lệnh npm run dev hoặc npm run build");
+const { log, logErr } = require('./functions/log');
 
 // discord.bots.gg api
 const axios = require('axios');
@@ -28,7 +29,7 @@ if (process.env.TYPE_RUN == 'production') {
     const dbl = new DBL(process.env.TOPGG, client);
     // top.gg API
     dbl.on('error', e => {
-        console.log(e);
+        logErr(e);
     });
 }
 const db = require('quick.db');
@@ -222,7 +223,7 @@ client.on('voiceStateUpdate', (oldstate, newstate) => {
 });
 
 client.on('error', (err) => {
-    console.log(err);
+    logErr(err);
 });
 
 process.on('warning', console.warn);
@@ -240,6 +241,7 @@ y.addListener("data", res => {
 function logging(content) {
     const moment = require('moment-timezone');
     console.log(`${moment.tz(timezone).format("LTS")} || ${content}`);
+    log(content);
 }
 
 async function reset_afk(id) {
