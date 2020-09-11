@@ -20,7 +20,8 @@ module.exports = {
             if (!members.includes(ids)) continue;
             num++;
             embed.addField(`${num}. ${client.users.cache.get(ids).tag}`, `Tiền: ${laysodep(idList.data)} 💸`);
-            if (num > 10) break;
+            if (num > 9) break;
+            // 10 nguoi
         }
         return message.channel.send(embed);
     },
