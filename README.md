@@ -15,7 +15,7 @@
 
 [![Discord Bots](https://top.gg/api/widget/645883401500622848.svg)](https://top.gg/bot/645883401500622848)
 
-## Thông báo quan trông
+## Thông báo quan trọng
 - Nếu các bạn nào đã sử dụng agentbot phiên bản cũ vui lòng khi nâng cấp hãy [tải thêm mongoDB](https://www.mongodb.com/try/download/community) vì bot đã chuyển sang chạy mongoDB
 ## Support Server
 Cần sự giúp đỡ nhiều hơn? Có bất kỳ ý tưởng cho bot? Muốn báo cáo lỗi?
