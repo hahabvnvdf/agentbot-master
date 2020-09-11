@@ -6,7 +6,7 @@ module.exports = {
         if(!userID) throw new Error('You are missing the userID!');
         if(!value) throw new Error('You are missing the value!');
         if((isNaN(value))) throw new Error('Value must be a number!');
-        const money = await db.fetch(userID);
+        const money = await db.fetch(`money_${userID}`);
         if (money === null) await db.set(userID, 0);
         return await db.add(`money_${userID}`, value);
     },
@@ -26,8 +26,8 @@ module.exports = {
         if(!userID) throw new Error('You are missing the userID!');
         if(!value) throw new Error('You are missing the value!');
         if((isNaN(value))) throw new Error('Value must be a number!');
-        const money = await db.fetch(userID);
-        if (money === null) await db.set(userID, 0);
+        const money = await db.fetch(`money_${userID}`);
+        if (money === null) await db.set(`money_${userID}`, 0);
         return await db.subtract(`money_${userID}`, value);
     },
 
