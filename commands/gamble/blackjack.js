@@ -4,8 +4,7 @@ const check_game = new Set();
 const hitemoji = "👊";
 const stopemoji = "🛑";
 const ms = require('ms');
-const { max } = require('mathjs');
-const maxBet = 500000;
+const maxBet = 250000;
 module.exports = {
     name: 'blackjack',
     category: 'gamble',
