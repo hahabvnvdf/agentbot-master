@@ -30,7 +30,7 @@ module.exports = {
         else if (amount === undefined) return message.channel.send('Vui lòng nhập tiền cược');
         else if (amount <= 0) return message.channel.send('Tiền cược không thể nhỏ hơn hoặc bằng 0.');
         if (bet == 'all') {
-            if (maxBet < bet && maxBet > amount) {
+            if (maxBet > amount) {
                 bet = amount;
             }
             else bet = maxBet;
