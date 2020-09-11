@@ -4,6 +4,7 @@ const db = require('quick.db');
 const shipDb = new db.table('shipDb');
 module.exports = {
     name: "pat",
+    aliases: ['vodau', 'pet'],
     category: "images",
     description: "pat someone :D ",
     usage: "pat [@tag]",
