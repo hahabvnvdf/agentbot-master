@@ -3,6 +3,7 @@ const { randomcard, createembedfield, laysodep, locbai } = require('../../functi
 const ms = require('ms');
 const doubledownEmoji = "👌";
 const stopEmoji = "🛑";
+const maxBet = 250000;
 const check_game = new Set();
 module.exports = {
     name: 'baicao',
@@ -14,21 +15,22 @@ module.exports = {
         if (check_game.has(message.author.id)) return message.channel.send('Bạn chưa hoàn thành ván đấu, vui lòng hoàn thành ván chơi!');
         const playerDeck = [];
         const botsDeck = [];
-        const maxbet = 250000;
         const backcard = '<:back:709983842542288899>';
         let listofcard = require('../../assets/cardemojis.json').fulllist;
         const hide_deck = [];
-        let bet = undefined;
         const amount = await eco.fetchMoney(message.author.id);
-        if (args[0] == 0) return message.channel.send('Bạn không thể cược 0.');
-        else if (args[0] == 'all') {
-            bet = 100000;
-            if (bet > amount) bet = amount;
+        let bet = 1;
+        if (!args[0]) return message.channel.send('Vui lòng nhập tiền cược');
+        if (!isNaN(args[0])) bet = parseInt(args[0]);
+        if (args[0].toLowerCase() == 'all') bet = 'all';
+        else if (amount === undefined) return message.channel.send('Vui lòng nhập tiền cược');
+        else if (amount <= 0) return message.channel.send('Tiền cược không thể nhỏ hơn hoặc bằng 0.');
+        if (bet == 'all') {
+            if (maxBet < bet && maxBet > amount) {
+                bet = amount;
+            }
+            else bet = maxBet;
         }
-        else if (isNaN(args[0])) return message.channel.send('Vui lòng nhập tiền cược!');
-        else bet = args[0];
-        if (bet > parseInt(amount) || amount == 0) return message.channel.send('Bạn không có đủ tiền để chơi!');
-        else if (bet > maxbet) bet = maxbet;
         check_game.add(message.author.id);
         // 3 lá 1 set
         for (let i = 0; i < 3; i++) {

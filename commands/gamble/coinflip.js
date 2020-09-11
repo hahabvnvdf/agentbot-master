@@ -7,6 +7,7 @@ const dict = {
 };
 const { laysodep, sleep } = require('../../functions/utils');
 const ms = require('ms');
+const maxBet = 50000;
 module.exports = {
     name: 'coinflip',
     aliases: ['cf'],
@@ -16,7 +17,6 @@ module.exports = {
     usage: 'coinflip <user_choose> <tiền cược>',
     example: 'coinflip t 50000',
     run: async (client, message, args) => {
-        const maxbet = 50000;
         let user_choose = args[0];
         if (!user_choose || user_choose == 'all' || !isNaN(user_choose)) return message.channel.send('Vui lòng chọn head hoặc tail.');
         switch(user_choose.toLowerCase()) {
@@ -29,16 +29,18 @@ module.exports = {
                 break;
         }
         const amount = await eco.fetchMoney(message.author.id);
-        let bet;
-        if (args[1] === 0 || amount === 0) return message.channel.send('Bạn không thể cược 0.');
-        if (args[1] == 'all') {
-            bet = 100000;
-            if (bet > amount) bet = amount;
+        let bet = 1;
+        if (!args[1]) return message.channel.send('Vui lòng nhập tiền cược');
+        if (!isNaN(args[1])) bet = parseInt(args[0]);
+        if (args[1].toLowerCase() == 'all') bet = 'all';
+        else if (amount === undefined) return message.channel.send('Vui lòng nhập tiền cược');
+        else if (amount <= 0) return message.channel.send('Tiền cược không thể nhỏ hơn hoặc bằng 0.');
+        if (bet == 'all') {
+            if (maxBet < bet && maxBet > amount) {
+                bet = amount;
+            }
+            else bet = maxBet;
         }
-        else if (isNaN(args[1])) return message.channel.send('Vui lòng nhập tiền cược!');
-        else bet = args[1];
-        if (bet > parseInt(amount)) return message.channel.send('Bạn không có đủ tiền để chơi!');
-        else if (bet > maxbet) bet = maxbet;
         await message.channel.send(`${coin_gif} **${message.author.tag}** cược **${laysodep(bet)}** và đã chọn **${user_choose}**!`);
         // random
         const userrand = random[Math.floor(Math.random() * random.length)];
