@@ -1,5 +1,4 @@
-const Eco = require('quick.eco');
-const eco = new Eco.Manager();
+const eco = require('../../functions/economy');
 const { getcardvalue, randomcard, checkautowin, createembed, laysodep, createembedfield, locbai } = require('../../functions/utils');
 const check_game = new Set();
 const hitemoji = "👊";
@@ -23,16 +22,16 @@ module.exports = {
         const hide_deck = [];
         let listofcard = require('../../assets/cardemojis.json').fulllist;
         // check bet
-        const userdata = eco.fetchMoney(message.author.id);
+        const amount = await eco.fetchMoney(message.author.id);
         let bet;
         if (args[0] == 0) return message.channel.send('Bạn không thể cược 0.');
         if (args[0] == 'all') {
             bet = 100000;
-            if (bet > userdata.amount) bet = userdata.amount;
+            if (bet > amount) bet = amount;
         }
         else if (isNaN(args[0])) return message.channel.send('Vui lòng nhập tiền cược!');
         else bet = args[0];
-        if (bet > parseInt(userdata.amount) || userdata.amount == 0) return message.channel.send('Bạn không có đủ tiền để chơi!');
+        if (bet > parseInt(amount) || amount == 0) return message.channel.send('Bạn không có đủ tiền để chơi!');
         else if (bet > maxbet) bet = maxbet;
         check_game.add(message.author.id);
         for (let i = 0; i < 2; i++) {
@@ -59,7 +58,7 @@ module.exports = {
                 return await msg.edit(createembed(message.author, laysodep(bet), createembedfield(playerDeck), createembedfield(botDeck), getcardvalue(playerDeck), getcardvalue(botDeck), createembedfield(hide_deck), "thangx2"));
             }
         } else if (checkautowin(botDeck).check == true) {
-                await eco.removeMoney(message.author.id, bet);
+                await eco.subtractMoney(message.author.id, bet);
                 check_game.delete(message.author.id);
                 return await msg.edit(createembed(message.author, laysodep(bet), createembedfield(playerDeck), createembedfield(botDeck), getcardvalue(playerDeck), getcardvalue(botDeck), createembedfield(hide_deck), "thua"));
         }
@@ -129,6 +128,6 @@ async function money(userid, kind, amount) {
     if (kind == 'win') {
         await eco.addMoney(userid, amount);
     } else {
-        await eco.removeMoney(userid, amount);
+        await eco.subtractMoney(userid, amount);
     }
 }

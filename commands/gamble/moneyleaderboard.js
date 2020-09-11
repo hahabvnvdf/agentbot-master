@@ -1,24 +1,27 @@
-const Eco = require('quick.eco');
-const eco = new Eco.Manager();
+const eco = require('../../functions/economy');
 const { MessageEmbed } = require('discord.js');
 const { laysodep } = require('../../functions/utils');
 module.exports = {
     name: 'moneyleaderboard',
     aliases: ['mleaderboard', 'mlb'],
-    description: 'Xem bảng xếp hạng tiền của thế giới',
+    description: 'Xem bảng xếp hạng tiền',
     category: 'gamble',
     cooldown: 10,
     usage: 'mlb',
-    run: async (client, message, args) => {
-        const bxh = eco.leaderboard(message.guild.id, { limit: 10, raw: false });
-        const userdata = eco.fetchMoney(message.author.id);
+    run: async (client, message, _) => {
+        const bxh = await eco.leaderBoard(10, client, message, '💵');
+        const members = message.guild.members.cache.map(m => m.id);
+        let num = 0;
         const embed = new MessageEmbed()
-            .setAuthor('Bảng xếp hạng tiền')
-            .setDescription(`Hạng của bạn: **${userdata.position}**`);
-            bxh.forEach(user => {
-                const member = client.users.cache.get(user.id);
-                embed.addField(`\`${user.position}\`. ${member ? member.tag : 'vodanh#0000'}`, `Tiền: ${laysodep(user.money)} 💸`);
-            });
+            .setTitle(`Bảng xếp hạng của server ${message.guild.name}`);
+        for (let i = 0; i < bxh.length; i++) {
+            const idList = bxh[i];
+            const ids = idList.ID.split('_')[1];
+            if (!members.includes(ids)) continue;
+            num++;
+            embed.addField(`${num}. ${client.users.cache.get(ids).tag}`, `Tiền: ${laysodep(idList.data)} 💸`);
+            if (num > 10) break;
+        }
         return message.channel.send(embed);
     },
 };

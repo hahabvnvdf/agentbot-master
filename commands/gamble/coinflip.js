@@ -1,5 +1,4 @@
-const Eco = require('quick.eco');
-const eco = new Eco.Manager();
+const eco = require('../../functions/economy');
 const coin_gif = '<a:coin:710976678561841153>';
 const random = ['head', 'tail'];
 const dict = {
@@ -29,16 +28,16 @@ module.exports = {
                 user_choose = 'head';
                 break;
         }
-        const userdata = eco.fetchMoney(message.author.id);
+        const amount = await eco.fetchMoney(message.author.id);
         let bet;
-        if (args[1] === 0 || userdata.amount === 0) return message.channel.send('Bạn không thể cược 0.');
+        if (args[1] === 0 || amount === 0) return message.channel.send('Bạn không thể cược 0.');
         if (args[1] == 'all') {
             bet = 100000;
-            if (bet > userdata.amount) bet = userdata.amount;
+            if (bet > amount) bet = amount;
         }
         else if (isNaN(args[1])) return message.channel.send('Vui lòng nhập tiền cược!');
         else bet = args[1];
-        if (bet > parseInt(userdata.amount)) return message.channel.send('Bạn không có đủ tiền để chơi!');
+        if (bet > parseInt(amount)) return message.channel.send('Bạn không có đủ tiền để chơi!');
         else if (bet > maxbet) bet = maxbet;
         await message.channel.send(`${coin_gif} **${message.author.tag}** cược **${laysodep(bet)}** và đã chọn **${user_choose}**!`);
         // random
@@ -71,6 +70,6 @@ async function money(userid, kind, bet) {
     if (kind == 'win') {
         await eco.addMoney(userid, bet);
     } else {
-        await eco.removeMoney(userid, bet);
+        await eco.subtractMoney(userid, bet);
     }
 }

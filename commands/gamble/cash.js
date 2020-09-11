@@ -1,6 +1,6 @@
-const Eco = require('quick.eco');
-const eco = new Eco.Manager();
+const eco = require('../../functions/economy');
 const { laysodep } = require('../../functions/utils');
+
 module.exports = {
     name: "cash",
     cooldown: 5,
@@ -10,7 +10,7 @@ module.exports = {
     usage: "cash",
     run: async (client, message, args) => {
         const moneyEmoji = client.emojis.cache.find(e => e.name == "money" && e.guild.id == '702981787139309575');
-        const userdata = eco.fetchMoney(message.author.id);
-        message.channel.send(`${moneyEmoji ? moneyEmoji : ''} Bạn đang có **${laysodep(userdata.amount)}** tiền!`);
+        const money = await eco.fetchMoney(message.author.id);
+        message.channel.send(`${moneyEmoji ? moneyEmoji : ''} Bạn đang có **${laysodep(money)}** tiền!`);
     },
 };

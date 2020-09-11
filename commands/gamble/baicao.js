@@ -1,5 +1,4 @@
-const Eco = require('quick.eco');
-const eco = new Eco.Manager();
+const eco = require('../../functions/economy');
 const { randomcard, createembedfield, laysodep, locbai } = require('../../functions/utils');
 const ms = require('ms');
 const doubledownEmoji = "👌";
@@ -20,15 +19,15 @@ module.exports = {
         let listofcard = require('../../assets/cardemojis.json').fulllist;
         const hide_deck = [];
         let bet = undefined;
-        const userdata = eco.fetchMoney(message.author.id);
+        const amount = await eco.fetchMoney(message.author.id);
         if (args[0] == 0) return message.channel.send('Bạn không thể cược 0.');
         else if (args[0] == 'all') {
             bet = 100000;
-            if (bet > userdata.amount) bet = userdata.amount;
+            if (bet > amount) bet = amount;
         }
         else if (isNaN(args[0])) return message.channel.send('Vui lòng nhập tiền cược!');
         else bet = args[0];
-        if (bet > parseInt(userdata.amount) || userdata.amount == 0) return message.channel.send('Bạn không có đủ tiền để chơi!');
+        if (bet > parseInt(amount) || amount == 0) return message.channel.send('Bạn không có đủ tiền để chơi!');
         else if (bet > maxbet) bet = maxbet;
         check_game.add(message.author.id);
         // 3 lá 1 set
@@ -53,14 +52,14 @@ module.exports = {
             check_game.delete(message.author.id);
             return msg.edit(createembed(message.author, bet, createembedfield(playerDeck), createembedfield(botsDeck), usercard.point, botdata.point, createembedfield(hide_deck), 'jqklose'));
         }
-        if (userdata.amount >= bet * 2) msg.react(doubledownEmoji);
+        if (amount >= bet * 2) msg.react(doubledownEmoji);
         msg.react(stopEmoji);
         const filter = (reaction, user) => {
             return (reaction.emoji.name === doubledownEmoji || reaction.emoji.name === stopEmoji) && user.id === message.author.id;
         };
         const collector = msg.createReactionCollector(filter, { time: ms('1m'), maxEmojis: 1 });
-        collector.on('collect', async (reaction, user) => {
-            if (reaction.emoji.name === doubledownEmoji && userdata.amount >= bet * 2) {
+        collector.on('collect', async (reaction, _) => {
+            if (reaction.emoji.name === doubledownEmoji && amount >= bet * 2) {
                 // check người ta có đủ điều kiện để cược x2
                 bet = bet * 2;
                 await stop(usercard, botdata, bet, message.author, playerDeck, botsDeck, hide_deck, msg, check_game);
@@ -185,5 +184,5 @@ async function money(userid, kind, ammount) {
     if (isNaN(ammount)) return null;
     if (kind == 'thang') {
         await eco.addMoney(userid, ammount);
-    } else await eco.removeMoney(userid, ammount);
+    } else await eco.subtractMoney(userid, ammount);
 }
