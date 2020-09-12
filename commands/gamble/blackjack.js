@@ -36,7 +36,6 @@ module.exports = {
             else bet = maxBet;
         }
         if (bet > amount) return message.channel.send('Bạn không đủ tiền để chơi');
-        console.log(bet);
         check_game.add(message.author.id);
         for (let i = 0; i < 2; i++) {
             playerDeck.push(await randomcard(listofcard));
