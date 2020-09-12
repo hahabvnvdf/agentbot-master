@@ -35,6 +35,7 @@ module.exports = {
             }
             else bet = maxBet;
         }
+        if (bet > maxBet) bet = maxBet;
         if (bet > amount) return message.channel.send('Bạn không đủ tiền để chơi');
         check_game.add(message.author.id);
         for (let i = 0; i < 2; i++) {
