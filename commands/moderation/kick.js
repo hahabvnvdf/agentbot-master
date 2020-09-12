@@ -71,7 +71,7 @@ module.exports = {
             // The verification stuffs
             if (emoji === "✅") {
                 msg.delete();
-                toKick.send(`Bạn vừa bị kick ra khỏi server \`${toKick.guild.name}\`. Lý do: \`${args.slice(1).join(' ')}\``);
+                await toKick.send(`Bạn vừa bị kick ra khỏi server \`${toKick.guild.name}\`. Lý do: \`${args.slice(1).join(' ')}\``);
                 toKick.kick(reason)
                     .catch(err => {
                         if (err) return message.channel.send(`Bị lỗi khi kick: ${err.message}`);
