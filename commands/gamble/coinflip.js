@@ -41,6 +41,7 @@ module.exports = {
             }
             else bet = maxBet;
         }
+        if (bet > amount) return message.channel.send('Bạn không đủ tiền để chơi');
         await message.channel.send(`${coin_gif} **${message.author.tag}** cược **${laysodep(bet)}** và đã chọn **${user_choose}**!`);
         // random
         const userrand = random[Math.floor(Math.random() * random.length)];
