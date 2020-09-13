@@ -1,8 +1,7 @@
 const { ownerID } = require('../../config.json');
 const { inspect } = require('util');
 const { stripIndents } = require('common-tags');
-const { VultrexHaste } = require('vultrex.haste');
-const haste = new VultrexHaste({ url: "https://hasteb.in" });
+const { post } = require('../../functions/post');
 module.exports = {
         name: "eval",
         aliases: ["e"],
@@ -20,7 +19,7 @@ module.exports = {
                     return message.channel.send(stripIndents`
                         *Lệnh đã chạy xong trong ${difference[0] > 0 ? `${difference[0]}s ` : ""}${difference[1] / 1e6}ms*
                         \`\`\`js
-                        ${output.length > 1950 ? await haste.post(output) : output} 
+                        ${output.length > 1950 ? await post(output) : output} 
                         \`\`\`
                 `);
                 }

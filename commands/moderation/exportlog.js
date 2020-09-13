@@ -1,5 +1,4 @@
-const { VultrexHaste } = require('vultrex.haste');
-const haste = new VultrexHaste({ url: "https://hasteb.in" });
+const { post } = require('../../functions/post');
 const { readFileSync, existsSync } = require('fs');
 module.exports = {
     name: 'exportlog',
@@ -9,7 +8,7 @@ module.exports = {
         const logPath = '././log.txt';
         if (!existsSync(logPath)) return message.channel.send('Không tìm thấy file log.txt');
         const data = readFileSync(logPath, 'utf-8');
-        const res = await haste.post(data);
+        const res = await post(data);
         message.channel.send(res);
     },
 };

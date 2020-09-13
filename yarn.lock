@@ -3965,7 +3965,7 @@ node-canvas-with-twemoji-and-discord-emoji@^1.1.4:
     canvas "^2.6.1"
     twemoji "^12.1.5"
 
-node-fetch@^2.3.0, node-fetch@^2.6.0, node-fetch@^2.6.1:
+node-fetch@^2.3.0, node-fetch@^2.6.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
@@ -5977,11 +5977,6 @@ vscode-languageserver-types@^3.15.1:
   version "3.15.1"
   resolved "https://registry.yarnpkg.com/vscode-languageserver-types/-/vscode-languageserver-types-3.15.1.tgz#17be71d78d2f6236d414f0001ce1ef4d23e6b6de"
   integrity sha512-+a9MPUQrNGRrGU630OGbYVQ+11iOIovjCkqxajPa9w57Sd5ruK8WQNsslzpa0x/QJqC8kRc2DUxWjIFwoNm4ZQ==
-
-vultrex.haste@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/vultrex.haste/-/vultrex.haste-1.0.1.tgz#177e51039cf85155aa109cb18510ab6eb2365baa"
-  integrity sha512-yjFGdk6rM9atNkC0kvFqOPSLoHAfAska77bwXaJbVfuDDL0nFa0L+G/T/rGrK0sSDaMqGikiF3r/YqRg3/shqw==
 
 walkdir@^0.4.0:
   version "0.4.1"
