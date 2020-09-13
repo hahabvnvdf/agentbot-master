@@ -55,7 +55,7 @@
     "url": "git+https://github.com/phamleduy04/agentbot-master.git"
   },
   "author": "Duy Pham",
-  "license": "(GPL-3.0 OR GPL-2.0)",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/phamleduy04/agentbot-master/issues"
   },
