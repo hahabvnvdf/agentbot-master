@@ -5,9 +5,9 @@ const db = require('quick.db');
 module.exports = {
     name: "kick",
     category: "moderation",
-    description: "Kick người khác",
-    usage: "kick <@tag, id> [lý do]",
-    example: "kick @phamleduy04",
+    description: "Kick 1 người trong server",
+    usage: "<PREIFX>kick <@tag, id> [lý do]",
+    example: "<PREFIX>kick @phamleduy04",
     run: async (client, message, args) => {
         const serverdata = db.get(message.guild.id);
         const logChannel = message.guild.channels.cache.get(serverdata.logchannel) || message.channel;

@@ -3,7 +3,7 @@ module.exports = {
     name: "pray",
     category: "fun",
     description: "Cầu nguyện cho bạn bè :DD",
-    usage: "pray [mention | id | username]",
+    usage: "pray [@tag, id]",
     example: "pray @phamleduy04",
     run: async (client, message, args) => {
         if (!args[0]) return message.reply("Cầu nguyện thì phải cần tag nha bạn");

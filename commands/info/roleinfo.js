@@ -5,6 +5,7 @@ module.exports = {
     name: "roleinfo",
     category: "info",
     description: "Trà về thông tên về role",
+    usage: '<PREFIX>roleinfo <tên role>',
     run: async (client, message, args) => {
         const roles = message.guild.roles.cache.filter(r => r.managed === false).map(g => g.name);
         const search = args.join(' ');

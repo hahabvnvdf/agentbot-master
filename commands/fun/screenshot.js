@@ -8,6 +8,7 @@ module.exports = {
     name: 'screenshot',
     aliases: ['webshot'],
     category: 'fun',
+    usage: '<PREFIX>screenshot <URL của trang web>',
     description: 'Chụp ảnh của website và gởi vào discord!',
     run: async (client, message, args) => {
         if (!args[0]) return message.channel.send("Vui lòng nhập URL của website!");

@@ -1,8 +1,8 @@
 module.exports = {
     name: 'clean',
     category: 'moderation',
-    description: 'xoá những tin nhắn của bot',
-    usage: 'clean',
+    description: 'Dọn dẹp tin nhắn từ bot',
+    usage: '<PREFIX>clean',
     run: async (client, message, args) => {
         if (message.deletable) await message.delete();
         if (!message.member.hasPermission("MANAGE_MESSAGES"))

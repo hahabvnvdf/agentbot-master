@@ -3,6 +3,7 @@ const { ownerID } = require('../../config.json');
 const { laysodep } = require('../../functions/utils');
 module.exports = {
     name: 'checkmoney',
+    aliases: ['cmoney'],
     description: 'Kiểm tra tiền (owner bot only)',
     run: async (client, message, args) => {
         if (message.author.id !== ownerID) return message.channel.send('Chỉ có owner của bot mới có thể sử dụng lệnh này');

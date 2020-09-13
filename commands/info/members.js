@@ -5,8 +5,8 @@ module.exports = {
     name: "members",
     aliases: ['member'],
     category: "info",
-    description: "Xem member của 1 role nhất định.",
-    usage: "members <role_name>",
+    description: "Xem tên thành viên trong 1 role.",
+    usage: "<PREFIX>members <tên role>",
     run: async (client, message, args) => {
         if (!args[0]) return message.reply(`Ghi tên role giúp mình với D:`).then(m => m.delete({ timeout: 5000 }));
         let role = message.guild.roles.cache.get(args[0]);

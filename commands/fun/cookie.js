@@ -5,7 +5,7 @@ module.exports = {
     name: 'cookie',
     category: 'fun',
     description: 'Đưa cookie cho ăn nhoàm nhoàm nhoàm',
-    usage: 'cookie <@tag>',
+    usage: '<PREFIX>cookie <@tag>',
     run: async (client, message, args) => {
         const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!nguoitag) return message.channel.send('Vui lòng tag 1 ai đó!');

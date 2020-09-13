@@ -6,7 +6,7 @@ module.exports = {
     name: "slap",
     category: "images",
     description: "Tát ai đó",
-    usage: "slap <@tag>",
+    usage: "<PREFIX>slap <@tag>",
     run: async (client, message, args) => {
         const folder = readdirSync("././assets/slap/");
         const file = readFileSync(`././assets/slap/${folder[Math.floor(Math.random() * folder.length)]}`);

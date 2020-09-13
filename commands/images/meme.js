@@ -2,12 +2,11 @@ const { MessageEmbed } = require("discord.js");
 const { KSoftClient } = require('ksoft.js');
 const ksoft_key = process.env.KSOFTKEY;
 const ksoft = new KSoftClient(ksoft_key);
-
 module.exports = {
     name: "meme",
     category: "images",
-    usage: "meme",
-    description: "Gởi meme.",
+    usage: "<PREFIX>meme",
+    description: "Gởi meme",
     run: async (client, message, args) => {
         const res = await ksoft.images.meme();
         const embed = new MessageEmbed()

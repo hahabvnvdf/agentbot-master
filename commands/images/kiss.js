@@ -6,7 +6,7 @@ module.exports = {
     name: "kiss",
     category: "images",
     description: "Chụt chụt :D",
-    usage: "kiss <@tag>",
+    usage: "<PREFIX>kiss <@tag>",
     run: async (client, message, args) => {
         try {
             const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]);

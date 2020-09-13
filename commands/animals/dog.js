@@ -4,6 +4,7 @@ module.exports = {
     name: "dog",
     category: "animals",
     description: "Gởi ảnh/video về cún",
+    usage: "<PREFIX>dog",
     run: async (client, message, args) => {
         try {
             const response = await axios.get('https://random.dog/woof.json');

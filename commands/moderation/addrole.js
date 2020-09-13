@@ -3,9 +3,9 @@ module.exports = {
     name: "addrole",
     aliases: ["roleadd", "ar"],
     category: "moderation",
-    description: "Thêm role",
-    usage: "addrole <tag> <rolename>",
-    example: "ar @phamleduy04 DJ",
+    description: "Thêm role cho người nào đó",
+    usage: "<PREFIX>addrole <tag> <rolename>",
+    example: "<PREFIX>addrole @phamleduy04 DJ",
     run: async (client, message, args) => {
         if (!args[0]) {
             return message.reply("Bạn phải tag ai đó").then(m => m.delete({ timeout: 5000 }));

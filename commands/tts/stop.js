@@ -5,7 +5,7 @@ module.exports = {
     aliases: ['pause'],
     category: 'tts',
     description: 'Dừng ngay lệnh tts',
-    usage: 'stop',
+    usage: '<PREFIX>stop',
     run: async (client, message, args) => {
         const voiceChannel = message.member.voice.channel;
         if (message.author.id !== ownerID && !voiceChannel) return message.channel.send('Bạn phải vào voice mới có thể sử dụng lệnh này!');

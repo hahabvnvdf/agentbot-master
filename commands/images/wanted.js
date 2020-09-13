@@ -5,7 +5,7 @@ module.exports = {
     aliases: ['truyna'],
     category: 'images',
     description: 'Truy nã',
-    usage: 'truyna',
+    usage: '<PREFIX>truyna',
     run: async (client, message, args) => {
         const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false });

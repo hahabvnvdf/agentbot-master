@@ -5,6 +5,7 @@ const ms = require('ms');
 module.exports = {
     name: 'play',
     aliases: ['p'],
+    usage: '<PREFIX>p',
     note: 'Lệnh này chỉ cho Saddu, Duy.',
     run: async (client, message, args) => {
         if (canrunID.indexOf(message.author.id) == -1 && message.guild.id !== "311163013996478464") return message.channel.send('Bạn không thể sử dụng lệnh này!');

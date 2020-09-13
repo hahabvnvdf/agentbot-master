@@ -4,7 +4,6 @@ module.exports = {
     name: 'blacklist',
     description: 'Blacklist 1 server (owner bot only)',
     usage: 'blacklist <ID server>',
-    category: 'moderation',
     run: async (client, message, args) => {
         if (message.author.id !== ownerID) return message.channel.send('Bạn không có quyền sử dụng lệnh này!');
         const serverID = args[0];

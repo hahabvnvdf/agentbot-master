@@ -3,8 +3,8 @@ const afkData = new db.table('afkdata');
 module.exports = {
     name: 'afk',
     description: 'Ai đó sẽ nhận thông báo khi bạn afk',
-    usage: 'afk [lời nhắn]',
-    example: 'afk sẽ quay trở lại sau',
+    usage: '<PREFIX>afk [lời nhắn]',
+    example: '<PREFIX>afk sẽ quay trở lại sau',
     run: async (client, message, args) => {
         let userDb = afkData.get(message.author.id);
         if (!userDb) userDb = await afkData.set(message.author.id, { afk: false, loinhan: '' });

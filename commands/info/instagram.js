@@ -6,7 +6,7 @@ module.exports = {
     aliases: ["insta"],
     category: "info",
     description: "Trả về thông tin cơ bản của tài khoản Instagram",
-    usage: "instagram <token>",
+    usage: "<PREFIX> instagram <tên instagram>",
     run: async (client, message, args) => {
         if (!args[0]) return message.channel.send('Bạn vui lòng nhập instagram của bạn!');
         const instagram = args.join(' ');

@@ -4,7 +4,7 @@ module.exports = {
     name: "msgcount",
     category: "settings",
     description: "Tuỳ chỉnh bật tắt hệ thống rank của bot.",
-    usage: "msgcount <on, off>",
+    usage: "<PREFIX>msgcount <on, off>",
     note: "cần quyền MANAGE_MESSAGES",
     run: async (client, message, args) => {
         if(message.author.id !== ownerID && !message.member.hasPermission("MANAGE_MESSAGES")) return message.reply('Bạn cần có quyền MANAGE_MESSAGES để sử dụng lệnh này.');

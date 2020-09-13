@@ -4,8 +4,8 @@ const { ownerID } = require('../../config.json');
 module.exports = {
     name: "prefix",
     category: "settings",
-    description: "Đổi prefix của bot",
-    usage: `prefix [prefix mới]`,
+    description: "Đổi prefix của bot hoặc xem prefix",
+    usage: "<PREFIX>prefix [prefix mới]",
     note: "Người đổi prefix cần có quyền MANAGE_GUILD!",
     run: async (client, message, args) => {
         if(!message.member.hasPermission("MANAGE_GUILD") && message.author.id !== ownerID) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy');

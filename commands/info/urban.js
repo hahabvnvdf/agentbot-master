@@ -4,8 +4,8 @@ module.exports = {
     name: "urban",
     category: "info",
     description: "Từ điển từ lóng của Tiếng Anh",
-    usage: "urban <query>",
-    example: "urban yeet",
+    usage: "<PREFIX>urban <từ cần tìm>",
+    example: "<PREFIX>urban yeet",
     run: async (client, message, args, tools) => {
         if (!args[0]) return message.reply(`Bạn phải nhập gì đó để mình tìm chứ`);
         // Fetch from urban dict

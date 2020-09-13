@@ -4,8 +4,8 @@ module.exports = {
     name: "setlogchannel",
     category: "settings",
     description: "Set log channel for kick and ban",
-    usage: "setlogchannel <#channel, tên channel hoặc id>",
-    example: "setlogchannel #log-channel",
+    usage: "<PREFIX>setlogchannel <#channel, tên channel hoặc id>",
+    example: "<PREFIX>setlogchannel #log-channel",
     run: async (client, message, args) => {
         if (!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy lệnh này.');
         if (!args[0]) return message.channel.send("Vui lòng nhập channel!");

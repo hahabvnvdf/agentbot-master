@@ -6,8 +6,8 @@ module.exports = {
     name: "whois",
     aliases: ["who", "user", "info"],
     category: "info",
-    description: "Returns user information",
-    usage: "whois <tag,username,ID>",
+    description: "Thông tin về người dùng",
+    usage: "<PREFIX>whois <@tag,username,ID>",
     run: async (client, message, args) => {
         const member = getMember(message, args.join(' '));
             // Member variables

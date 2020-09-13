@@ -3,8 +3,8 @@ const { MessageAttachment } = require('discord.js');
 module.exports = {
     name: "hitler",
     category: 'images',
-    description: 'meme',
-    usage: 'hitler [@tag]',
+    description: 'xuất ra ảnh meme',
+    usage: '<PREFIX> hitler [@tag]',
     run: async (client, message, args) => {
         const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false });

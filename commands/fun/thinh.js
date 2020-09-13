@@ -4,7 +4,7 @@ module.exports = {
     aliases: ["xinthinh"],
     category: "fun",
     description: "Xin thính",
-    usage: "thinh",
+    usage: "<PREFIX>thinh",
     cooldown: 2,
     run: async (client, message, args) => {
         const random = array[Math.floor(Math.random() * array.length)];

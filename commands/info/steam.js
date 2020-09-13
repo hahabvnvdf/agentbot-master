@@ -8,8 +8,8 @@ module.exports = {
     name: "steam",
     category: "info",
     description: "Tra thông tin steam. Sử dụng set nếu lần sau không cần phải nhập steamID.",
-    usage: "steam [set] <steamID 64>",
-    example: "steam 76561198282352473",
+    usage: "<PREFIX>steam [set] <steamID 64>",
+    example: "<PREFIX> steam 76561198282352473",
     run: async (bot, message, args) => {
         const embed = new MessageEmbed();
         let userInput = args[0];

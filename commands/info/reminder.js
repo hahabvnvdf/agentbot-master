@@ -4,8 +4,8 @@ module.exports = {
     name: "reminder",
     category: "info",
     description: "Đặt lời nhắc",
-    usage: "reminder <time> (5s,15m,1h,2d) <text>",
-    example: "reminder 1h Đi học",
+    usage: "<PREFIX>reminder <time> (5s,15m,1h,2d) <text>",
+    example: "<PREFIX>reminder 1h Đi học",
     run: async (client, message, args) => {
         const reminderTime = args[0];
         if (!reminderTime) return message.reply("Vui lòng nhập thời gian.");

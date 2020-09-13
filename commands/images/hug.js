@@ -6,8 +6,8 @@ module.exports = {
     name: "hug",
     category: "images",
     description: "Ôm ai đó hoặc tất cả",
-    usage: "hug [@tag]",
-    example: "hug (ôm tất cả) hoặc hug @phamleduy04",
+    usage: "<PREFIX>hug [@tag]",
+    example: "<PREFIX>hug (ôm tất cả) hoặc <PREFIX>hug @phamleduy04",
     run: async (client, message, args) => {
         let nguoitag = message.mentions.members.array();
         if (nguoitag.length == 0) nguoitag = [message.guild.members.cache.get(args[0])];

@@ -8,8 +8,8 @@ module.exports = {
     aliases: ["lyric"],
     category: "info",
     description: "Tìm lời bài hát",
-    usage: "lyrics <tên bài hát>",
-    example: "lyrics bad guy",
+    usage: "<PREFIX>lyrics <tên bài hát>",
+    example: "<PREFIX>lyrics bad guy",
     run: async (client, message, args) => {
         if (!args[0]) return message.reply("Nhập tên bài hát cần tìm lyrics");
         const song = args.join(' ');

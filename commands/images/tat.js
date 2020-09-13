@@ -6,9 +6,9 @@ module.exports = {
     name: "tat",
     aliases: ["tats", "tát"],
     category: "images",
-    description: "Tát (batslap)",
-    usage: "tat [@tag]",
-    example: "tat @phamleduy04",
+    description: "Vẫn là tát nhưng kiểu khác",
+    usage: "<PREFIX>tat [@tag]",
+    example: "<PREFIX>tat @phamleduy04",
     run: async (client, message, args) => {
         const url1 = message.author.displayAvatarURL({ format: 'png', dynamic: false });
         const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;

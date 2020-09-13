@@ -3,12 +3,13 @@ const { utc } = require('moment');
 const os = require('os');
 const { MessageEmbed, version: djsversion } = require('discord.js');
 const { formatBytes, laysodep } = require('../../functions/utils');
+const prettyMilliseconds = require('pretty-ms');
 module.exports = {
     cooldown: 10,
     name: 'botinfo',
     category: 'info',
     description: 'Show info của bot!',
-    usage: 'botinfo',
+    usage: '<PREFIX>botinfo',
     run: async (client, message, args) => {
         const core = os.cpus()[0];
         const embed = new MessageEmbed()
@@ -17,6 +18,7 @@ module.exports = {
             .addField("General", [
                 `**--> Tên bot:** ${client.user.tag} (${client.user.id})`,
                 `**--> Số lệnh:** ${client.commands.size} lệnh`,
+                `**--> Uptime: ${prettyMilliseconds(client.uptime)}`,
                 `**--> Server:** ${laysodep(client.guilds.cache.size)}`,
                 `**--> Users:** ${laysodep(client.guilds.cache.reduce((a, b) => a + b.memberCount, 0))}`,
                 `**--> Channels:** ${laysodep(client.channels.cache.size)}`,

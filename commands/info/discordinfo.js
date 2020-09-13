@@ -4,7 +4,7 @@ module.exports = {
     name: 'discordinfo',
     aliases: ['discordstatus', 'status'],
     description: 'Thông tin về server của discord',
-    usage: 'status',
+    usage: '<PREFIX> status',
     run: async (client, message, args) => {
         try {
             await axios.get('https://srhpyqt94yxb.statuspage.io/api/v2/components.json').then(response => {

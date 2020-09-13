@@ -5,9 +5,9 @@ module.exports = {
     aliases: ['emoji', 'emo'],
     category: 'info',
     description: 'Phóng to emoji',
-    usage: 'enlarge <emoji>',
-    example: 'enlarge :joy:',
-    note: 'Một số emoji sẽ không làm được.',
+    usage: '<PREFIX>enlarge <emoji>',
+    example: '<PREFIX>enlarge :joy:',
+    note: 'Có thể một số emoji sẽ không phóng to được.',
     cooldown: 5,
     run: async (client, message, args) => {
         const emoji = args[0];

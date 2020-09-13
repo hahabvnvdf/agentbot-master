@@ -4,7 +4,7 @@ module.exports = {
     name: "links",
     aliases: ["link", "invite"],
     category: "info",
-    description: "Links ",
+    description: "Những link liên quan tới AgentBot",
     usage: "links",
     run: (client, message, args) => {
         const embed = new MessageEmbed()

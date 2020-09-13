@@ -6,8 +6,8 @@ module.exports = {
     name: "spank",
     category: "images",
     description: "Vỗ mông :))",
-    usage: "spank [@tag]",
-    example: "spank @phamleduy04",
+    usage: "<PREFIX>spank [@tag]",
+    example: "<PREFIX>spank @phamleduy04",
     run: async (client, message, args) => {
         const url1 = message.author.displayAvatarURL({ format: 'png', dynamic: false });
         const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;

@@ -5,7 +5,7 @@ module.exports = {
     aliases: ['dev'],
     description: 'Show info của owner của bot xD',
     category: 'info',
-    usage: 'developer',
+    usage: '<PREFIX> developer',
     run: async (client, message, args) => {
         const Dui = client.users.cache.get(ownerID);
         const embed = new MessageEmbed()

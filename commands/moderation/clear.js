@@ -4,8 +4,8 @@ module.exports = {
     aliases: ["purge"],
     category: "moderation",
     description: "Xoá tin nhắn",
-    usage: "clear [@tag] <số tin nhắn>",
-    example: "clear @phamleduy04 10",
+    usage: "<PREFIX>clear [@tag] <số tin nhắn>",
+    example: "<PREFIX>clear @phamleduy04 10",
     run: async (client, message, args) => {
         if (message.deletable) await message.delete();
         // Member doesn't have permissions

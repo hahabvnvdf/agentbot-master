@@ -5,8 +5,8 @@ module.exports = {
     category: 'gamble',
     aliases: ['transfer'],
     description: 'Chuyển tiền cho người khác!',
-    usage: 'give <@tag or ID> <so tien>',
-    example: 'give @phamleduy04 50000',
+    usage: '<PREFIX>give <@tag or ID> <so tien>',
+    example: '<PREFIX>give @phamleduy04 50000',
     run: async (client, message, args) => {
         const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         const amount = await eco.fetchMoney(message.author.id);

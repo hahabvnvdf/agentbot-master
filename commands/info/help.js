@@ -5,8 +5,8 @@ module.exports = {
     name: "help",
     aliases: ['h'],
     category: "info",
-    description: "Help",
-    usage: "help",
+    description: "Lệnh để xem list lệnh hay chi tiết của 1 lệnh cụ thể",
+    usage: "<PREFIX>help",
     run: async (client, message, args) => {
         const server_prefix = await db.get(`${message.guild.id}.prefix`);
         const embed = new MessageEmbed()
@@ -35,7 +35,7 @@ module.exports = {
     },
 };
 function getCMD(client, message, input) {
-    const server_data = db.get(message.guild.id);
+    const serverData = db.get(message.guild.id);
     const embed = new MessageEmbed();
     const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
 
@@ -45,15 +45,15 @@ function getCMD(client, message, input) {
         return message.channel.send(embed.setColor("RED").setDescription(info));
     }
 
-    if (cmd.name) info = `**Tên lệnh**: \`${server_data.prefix}${cmd.name}\``;
-    if (cmd.aliases) info += `\n**Tên rút gọn**: ${cmd.aliases.map(a => `\`${a}\``).join(", ")}`;
+    if (cmd.name) info = `**Tên lệnh**: \`${serverData.prefix}${cmd.name}\``;
+    if (cmd.aliases) info += `\n**Tên rút gọn**: ${cmd.aliases.map(a => `\`${serverData.prefix}${a}\``).join(", ")}`;
     if (cmd.description) info += `\n**Chi tiết về bot**: ${cmd.description}`;
     if (cmd.usage) {
-        info += `\n**Cách sử dụng lệnh**: \`${server_data.prefix}${cmd.usage}\``;
+        info += `\n**Cách sử dụng lệnh**: \`${cmd.usage}\``;
         embed.setFooter(`Cú pháp: <> = bắt buộc, [] = không bắt buộc`);
     }
     if (cmd.note) info += `\n**Note**: ${cmd.note}`;
-    if (cmd.example) info += `\n**VD**: \`${server_data.prefix}${cmd.example}\``;
+    if (cmd.example) info += `\n**VD**: \`${cmd.example}\``;
 
-    return message.channel.send(embed.setColor("GREEN").setDescription(info));
+    return message.channel.send(embed.setColor("GREEN").setDescription(info.replace(/<PREFIX>/g, serverData.prefix)));
 }

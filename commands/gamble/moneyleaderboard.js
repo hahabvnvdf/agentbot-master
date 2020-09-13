@@ -4,10 +4,10 @@ const { laysodep } = require('../../functions/utils');
 module.exports = {
     name: 'moneyleaderboard',
     aliases: ['mleaderboard', 'mlb'],
-    description: 'Xem bảng xếp hạng tiền',
+    description: 'Xem bảng xếp hạng tiền trong server',
     category: 'gamble',
     cooldown: 10,
-    usage: 'mlb',
+    usage: '<PREFIX>mlb',
     run: async (client, message, _) => {
         const bxh = await eco.leaderBoard(10, client, message, '💵');
         const members = message.guild.members.cache.map(m => m.id);

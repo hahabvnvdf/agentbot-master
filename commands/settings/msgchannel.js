@@ -4,8 +4,8 @@ module.exports = {
     name: 'msgchannel',
     category: 'settings',
     description: 'Tắt/Mở phòng tính điểm rank',
-    usage: 'msgchannel <#channel>',
-    example: 'msgchannel #welcome',
+    usage: '<PREFIX>msgchannel <#channel>',
+    example: '<PREIFX>msgchannel #welcome',
     run: async (client, message, args) => {
         if(!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy lệnh này!');
         if (!args[0]) {

@@ -3,7 +3,8 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
     name: "koala",
     category: "animals",
-    description: "Gởi ảnh của koala ",
+    description: "Gởi ảnh của koala",
+    usage: "<PREFIX>koala",
     run: async (client, message, args) => {
         try {
             const response = await axios.get('https://some-random-api.ml/img/koala');

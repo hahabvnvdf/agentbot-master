@@ -9,11 +9,10 @@ module.exports = {
     name: 'blackjack',
     category: 'gamble',
     cooldown: 10,
-    aliases: ['bj'],
+    aliases: ['bj', 'xidach'],
     description: 'Chơi blackjack (xì dách)',
-    note: 'Trên 21 điểm là thua :)',
-    usage: 'backjack <tiền cược>',
-    example: 'bj 10000',
+    usage: '<PREFIX>backjack <tiền cược hoặc "all">',
+    example: '<PREFIX>bj 10000',
     run: async (client, message, args) => {
         if (check_game.has(message.author.id)) return message.channel.send('Bạn chưa hoàn thành ván đấu, vui lòng hoàn thành ván chơi!');
         const playerDeck = [];

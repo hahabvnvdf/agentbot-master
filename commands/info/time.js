@@ -4,9 +4,9 @@ const timezonedb = process.env.TIMEZONEDB;
 module.exports = {
     name: 'time',
     category: 'info',
-    description: 'tìm giờ bằng cách nhập tên TP',
-    usage: 'time <nhập địa chỉ, zipcode, hay gì cũng được>',
-    example: 'time Dallas,TX',
+    description: 'Xem giờ ở một vị trí nào đó',
+    usage: '<PREFIX>time <nhập địa chỉ, zipcode, hay gì cũng được>',
+    example: '<PREFIX>time Dallas,TX',
     run: async (client, message, args) => {
         if (!args[0]) return message.reply('Ghi tên thành phố hoặc địa chỉ của bạn!.');
         const search = encodeURIComponent(args.join(' '));

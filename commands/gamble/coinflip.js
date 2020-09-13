@@ -14,8 +14,8 @@ module.exports = {
     cooldown: 5,
     category: 'gamble',
     description: 'Tung đồng xu (50%)',
-    usage: 'coinflip <user_choose> <tiền cược>',
-    example: 'coinflip t 50000',
+    usage: '<PREFIX>coinflip <Lựa chọn của bạn> <tiền cược>',
+    example: '<PREFIX>coinflip t 50000',
     run: async (client, message, args) => {
         let user_choose = args[0];
         if (!user_choose || user_choose == 'all' || !isNaN(user_choose)) return message.channel.send('Vui lòng chọn head hoặc tail.');

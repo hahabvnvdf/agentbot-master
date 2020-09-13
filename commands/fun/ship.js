@@ -2,31 +2,12 @@ const { MessageEmbed, MessageAttachment } = require("discord.js");
 const db = require('quick.db');
 const shipDb = new db.table('shipDb');
 const moment = require('moment');
-/*
-{
-    author.id = {
-        shipName: 'dui and bot' // max 40 ký tự
-        target: {
-            id: userID,
-            hugs: 1,
-            slaps: 1,
-            spank: 1,
-            kiss: 1,
-            cookie: 1,
-            pat: 1,
-            poke : 1,
-            punch: 0,
-            since: dateTime,
-        }
-    }
-}
-*/
 module.exports = {
     name: "ship",
     category: "fun",
     description: "Shippppppp",
-    usage: "ship [@tag]",
-    note: "ship rename để rename tên \nship sink để phá thuyền",
+    usage: "<PREFIX>ship [@tag]",
+    note: "<PREFIX>ship rename để rename tên \n<PREFIX>ship sink để phá thuyền",
     cooldown: 30,
     run: async (client, message, args) => {
         const embed = new MessageEmbed();

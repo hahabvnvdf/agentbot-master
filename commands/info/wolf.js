@@ -4,10 +4,9 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     name: "wolf",
     category: "info",
-    description: "Hỏi gì cũng được",
-    note: 'Hỏi bằng tiếng anh',
-    example: "wolf GDP of vietnam",
-    usage: "wolf <query>",
+    description: "Hỏi bot (toán, anh, văn, lịch sử, v.v) (sử dụng tiếng anh)",
+    example: "<PREFIX>wolf GDP of vietnam",
+    usage: "<PREFIX>wolf <câu hỏi>",
     run: async (client, message, args) => {
         const query = encodeURIComponent(args.join(' '));
         let data = await axios.get(`https://api.wolframalpha.com/v2/query?input=${query}&format=image&output=JSON&appid=${wolfarm_key}`)

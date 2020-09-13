@@ -4,8 +4,7 @@ module.exports = {
     aliases: ['leave', 'dis'],
     category: 'tts',
     description: 'Để disconnect cho bot',
-    usage: 'disconnect',
-    example: 'disconnect',
+    usage: '<PREFIX>disconnect',
     run: async (client, message, args) => {
         const voiceChannel = message.member.voice.channel;
         if (!voiceChannel) return message.channel.send('Bạn phải vào voice mới có thể sử dụng lệnh này!');

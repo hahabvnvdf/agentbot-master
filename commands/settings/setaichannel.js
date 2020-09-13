@@ -6,6 +6,7 @@ module.exports = {
     aliases: ['aichannel', 'ai'],
     description: 'Set channel cho bot AI nói chuyện',
     note: 'English only',
+    usage: '<PREFIX>setaichannel <#channel>',
     run: async (client, message, args) => {
         if(!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy lệnh này.');
         if (!args[0]) return message.channel.send("Vui lòng nhập channel!");

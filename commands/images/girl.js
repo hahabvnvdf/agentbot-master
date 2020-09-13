@@ -5,7 +5,7 @@ module.exports = {
     category: 'images',
     description: 'Show ảnh gái xD (nguồn từ gaixinhchonloc.com)',
     aliases: ['gai', 'gái'],
-    usage: 'girl',
+    usage: '<PREFIX>girl',
     cooldown: 3,
     run: async (client, message, args) => {
         const folder = readdirSync("././assets/gaixinhchonloc");

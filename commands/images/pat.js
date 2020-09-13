@@ -6,8 +6,8 @@ module.exports = {
     name: "pat",
     aliases: ['vodau', 'pet'],
     category: "images",
-    description: "pat someone :D ",
-    usage: "pat [@tag]",
+    description: "vỗ đầu ai đó",
+    usage: "<PREFIX>pat [@tag]",
     run: async (client, message, args) => {
         try {
             const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]);

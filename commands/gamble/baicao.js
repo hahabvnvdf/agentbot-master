@@ -9,7 +9,8 @@ module.exports = {
     name: 'baicao',
     cooldown: 5,
     aliases: ['bc'],
-    description: 'bài cào',
+    description: 'Chơi bài cào với bot',
+    usage: '<PREFIX>baicao <số tiền cược hoặc "all">',
     category: 'gamble',
     run: async (client, message, args) => {
         if (check_game.has(message.author.id)) return message.channel.send('Bạn chưa hoàn thành ván đấu, vui lòng hoàn thành ván chơi!');

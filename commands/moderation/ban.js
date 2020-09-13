@@ -5,9 +5,9 @@ const db = require('quick.db');
 module.exports = {
     name: "ban",
     category: "moderation",
-    description: "Ban người khác",
-    usage: "ban <@tag, id> [lý do]",
-    example: "ban @phamelduy04",
+    description: "Ban 1 người trong server",
+    usage: "<PREFIX>ban <@tag, id> [lý do]",
+    example: "<PREFIX>ban @phamelduy04",
     run: async (client, message, args) => {
         const serverdata = db.get(message.guild.id);
         const logChannel = message.guild.channels.cache.get(serverdata.logchannel) || message.channel;

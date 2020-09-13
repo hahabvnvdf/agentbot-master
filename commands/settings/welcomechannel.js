@@ -4,7 +4,7 @@ module.exports = {
     name: 'welcomechannel',
     category: 'settings',
     description: 'Chọn channel để bot nhắn tin nhắn chào mừng',
-    usage: 'welcomechannel <#channel hoặc ID>',
+    usage: '<PREFIX>welcomechannel <#channel hoặc ID>',
     run: async (client, message, args) => {
         if (!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy lệnh này.');
         if (!args[0]) return message.channel.send("Vui lòng nhập channel!");

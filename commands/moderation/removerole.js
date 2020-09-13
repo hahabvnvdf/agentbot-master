@@ -4,8 +4,8 @@ module.exports = {
     aliases: ["roleremove", "rr"],
     category: "moderation",
     description: "Xoá role",
-    usage: "removerole <tag> <rolename>",
-    example: "rr @phamleduy04 DJ",
+    usage: "<PREFIX>removerole <tag> <rolename>",
+    example: "<PREFIX>rr @phamleduy04 DJ",
     run: async (client, message, args) => {
         if (!args[0]) {
             return message.reply("Bạn phải tag ai đó").then(m => m.delete({ timeout: 5000 }));

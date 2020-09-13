@@ -3,9 +3,9 @@ const weather = require('weather-js');
 module.exports = {
     name: "weather",
     category: "info",
-    description: "Weather info",
-    usage: "weather <query> (zipcode or city)",
-    example: "weather Ho Chi Minh",
+    description: "Thông tin thời tiết",
+    usage: "<PREFIX>weather <mã bưu điện hoặc tên thành phố>",
+    example: "<PREFIX>weather Ho Chi Minh",
     run: (client, message, args) => {
         if (!args[0]) return message.channel.send("Vui lòng ghi tên thành phố");
         const query = args.join(' ');

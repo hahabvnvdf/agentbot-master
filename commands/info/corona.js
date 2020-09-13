@@ -9,9 +9,9 @@ module.exports = {
     name: "corona",
     category: "info",
     description: "Thông tin về coronavirus",
-    usage: "corona hoặc corona <tên quốc gia>",
-    note: "Tìm kiếm bang và quận của mỹ, lệnh là `corona usprovince <province_name,state_code>` và `corona usstate <state_name>`",
-    example: "corona usstate texas hoặc corona usprovince dallas,tx",
+    usage: "<PREFIX>corona hoặc <PREFIX>corona <tên quốc gia>",
+    note: "Tìm kiếm bang và quận của mỹ, lệnh là `<PREFIX>corona usprovince <province_name,state_code>` và `<PREFIX>corona usstate <state_name>`",
+    example: "<PREFIX>corona usstate texas hoặc <PREFIX>corona usprovince dallas,tx",
     run: async (client, message, args) => {
         if (!args[0]) {
             const data = await api.all();

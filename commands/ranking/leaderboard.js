@@ -7,12 +7,14 @@ module.exports = {
     name: "leaderboard",
     aliases: ["bxh"],
     category: "ranking",
-    description: "Xem bảng xếp hạng rank",
+    description: "Xem bảng xếp hạng nhắn tin trong server",
     usage: "leaderboard [số trang]",
     note: "Max level là 999",
     example: "leaderboard 2",
     run: async (client, message, args) => {
-        const server_prefix = db.get(`${message.guild.id}.prefix`) || "_";
+        const serverPrefix = db.get(`${message.guild.id}.prefix`) || "_";
+        const serverStatus = db.get(`${message.guild.id}.msgcount`);
+        if (serverStatus === false) return message.channel.send('Server không bật hệ thống rank!');
         const table = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name = 'xpdata';").get();
         if (!table['count(*)']) {
           // If the table isn't there, create it and setup the database correctly.
@@ -57,7 +59,7 @@ module.exports = {
             .setAuthor(`Bảng xếp hạng | ${message.guild.name}`, message.guild.iconURL())
             .setColor('RANDOM')
             .setDescription(page.map(e => `\`#${e.rank}\` | **${e.tag}** (Level ${e.level}, XP: ${e.xp}/${e.next_xp})`))
-            .setFooter(`Sử dụng lệnh ${server_prefix}bxh <số> để xem các hạng tiếp theo.`);
+            .setFooter(`Sử dụng lệnh ${serverPrefix}bxh <số> để xem các hạng tiếp theo.`);
         message.channel.send(embed);
     },
 };

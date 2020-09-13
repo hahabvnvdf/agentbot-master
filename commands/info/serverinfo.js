@@ -7,7 +7,7 @@ module.exports = {
     aliases: ['guild', 'server', 'guildinfo'],
     description: 'Đưa thông tin của server!',
     category: 'info',
-    usage: 'serverinfo',
+    usage: '<PREFIX>serverinfo',
     run: async (client, message, args) => {
         const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
         const members = message.guild.members.cache;

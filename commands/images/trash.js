@@ -4,8 +4,8 @@ module.exports = {
     name: "trash",
     category: "images",
     description: "Bỏ vào thùng rác",
-    usage: "trash [@tag]",
-    example: "trash @phamleduy04",
+    usage: "<PREFIX>trash [@tag]",
+    example: "<PREFIX>trash @phamleduy04",
     run: async (client, message, args) => {
         const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false });
