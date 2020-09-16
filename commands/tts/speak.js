@@ -58,11 +58,11 @@ module.exports = {
             setTimeout(async () => {
                 const checkTime = await db.get(`${message.guild.id}.endTime`);
                 if (checkTime && Date.now() > checkTime) {
-                    await db.delete(`${message.guild.id}.endTime`);
                     connection.disconnect();
                     voiceChannel.leave();
                     message.channel.send('Đã rời phòng vì không hoạt động!');
                 }
+                if (!message.guild.me.voice.channel) await db.delete(`${message.guild.id}.endTime`);
             }, ms('5m') + 1000);
         });
     },

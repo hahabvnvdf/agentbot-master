@@ -11,3 +11,4 @@ economy.sqlite
 .DS_Store
 /assets/.DS_Store
 .DS_Store
+creds.json
