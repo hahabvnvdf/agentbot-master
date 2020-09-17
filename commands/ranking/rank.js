@@ -4,6 +4,7 @@ const sql = new SQLite('./data.sqlite');
 const canvas = require('../../functions/canvasfunction');
 const fs = require('fs');
 const random_num = require('random-number-csprng');
+const db = require('quick.db');
 module.exports = {
     name: "rank",
     category: "ranking",
