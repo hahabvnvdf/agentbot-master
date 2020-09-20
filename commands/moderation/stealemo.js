@@ -2,7 +2,7 @@ const isURL = require('is-url');
 const { Util } = require('discord.js');
 module.exports = {
     name: 'stealemo',
-    aliases: ['cuopemo'],
+    aliases: ['cuopemo', 'cuopemoji'],
     description: 'Lấy emoji của server khác và upload vào server của chính mình',
     usage: '<PREFIX>cuopemo <emoji, hoặc URL của emoji> <tên emoji>',
     example: '<PREFIX>cuopemo :fun: vui',

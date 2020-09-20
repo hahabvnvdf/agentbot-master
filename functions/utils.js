@@ -5,22 +5,17 @@ const jimp = require('jimp');
 module.exports = {
     getMember: function(message, toFind = '') {
         toFind = toFind.toLowerCase();
-
         let target = message.guild.members.cache.get(toFind);
-
         if (!target && message.mentions.members)
             target = message.mentions.members.first();
-
         if (!target && toFind) {
             target = message.guild.members.cache.find(member => {
                 return member.displayName.toLowerCase().includes(toFind) ||
                     member.user.tag.toLowerCase().includes(toFind);
             });
         }
-
         if (!target)
             target = message.member;
-
         return target;
     },
 
@@ -243,5 +238,10 @@ module.exports = {
             }
         }
         return num;
+    },
+    capitalizeWords: function(string) {
+        return string.replace(/(?!^[0-9])(^|[^a-zA-Z\u00C0-\u017F\u0400-\u04FF'])([a-zA-Z\u00C0-\u017F\u0400-\u04FF])/g, function(m) {
+            return m.toUpperCase();
+        });
     },
 };

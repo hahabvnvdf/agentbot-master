@@ -1467,11 +1467,6 @@ canvas@^2.2.0, canvas@^2.6.1:
     node-pre-gyp "^0.11.0"
     simple-get "^3.0.3"
 
-capitalize@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/capitalize/-/capitalize-2.0.3.tgz#ccfeb1046d2a054eb30f34af907a70c3e90f3b73"
-  integrity sha512-Qc5ksT1/zEJBbFYD05h99hCNEW0cgyD0zzE5WvkgisNnppJ+16zfaSk34evF0j6pGW8hejkRUeygJ5uN5k22SQ==
-
 caseless@^0.12.0, caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
@@ -5731,11 +5726,6 @@ url-parse-lax@^3.0.0:
   integrity sha1-FrXK/Afb42dsGxmZF3gj1lA6yww=
   dependencies:
     prepend-http "^2.0.0"
-
-usa-states@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/usa-states/-/usa-states-0.0.5.tgz#3a88c972def5345ae9b87186fc4402385b861bb7"
-  integrity sha1-OojJct71NFrpuHGG/EQCOFuGG7c=
 
 utif@^2.0.1:
   version "2.0.1"

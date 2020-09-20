@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const axios = require('axios');
-const dateFormat = require("dateformat");
+const moment = require('moment');
 const db = require('quick.db');
 const steamDB = new db.table('steamdb');
 const steam_token = process.env.STEAMTOKEN;
@@ -22,9 +22,9 @@ module.exports = {
         }
         const publicinfo = await axios.get(`http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${steam_token}&steamids=${userInput}`);
         if (publicinfo.data.response.players.length == 0) return message.channel.send(invalid_input(embed));
-        const { gameextrainfo, personaname, avatarfull, timecreated, loccountrycode, personastate, realname, profileurl } = publicinfo.data.response.players[0];
+        const { gameextrainfo, personaname, avatarfull, timecreated, loccountrycode, personastate, realname, profileurl, steamid } = publicinfo.data.response.players[0];
         const state = ["Offline", "Online", "Busy", "Away", "Snooze", "Looking to trade", "Looking to play"];
-        embed.setAuthor(personaname, avatarfull)
+        embed.setAuthor(`${personaname} (${steamid})`)
             .setColor('#00ffff')
             .setTitle('Link tới profile')
             .setURL(profileurl)
@@ -33,7 +33,7 @@ module.exports = {
                 `Tên đầy đủ: ${realname || "Không có"}`,
                 `Trạng thái: ${state[personastate]}`,
                 `Quốc gia: :flag_${loccountrycode ? loccountrycode.toLowerCase() : "white"}:`,
-                `Ngày tạo: ${dateFormat(timecreated * 1000, "d/mm/yyyy (h:MM:ss TT)")}`,
+                `Ngày tạo steam: ${moment.unix(timecreated).format("DD/MM/YYYY")}`,
                 `${gameextrainfo ? `Đang chơi: ${gameextrainfo}` : ""}`,
             ]);
         const vacban = await axios.get(`http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key=${steam_token}&steamids=${userInput}`);

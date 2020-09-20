@@ -1,10 +1,8 @@
 const { MessageEmbed } = require("discord.js");
-const axios = require('axios');
 const api = require('novelcovid');
 api.settings({ baseUrl: 'https://disease.sh' });
-const { laysodep } = require('../../functions/utils');
-const capitalize = require("capitalize");
-const UsaStates = require('usa-states').UsaStates;
+const { laysodep, capitalizeWords } = require('../../functions/utils');
+const usaState = require('../../assets/usastate.json');
 module.exports = {
     name: "corona",
     category: "info",
@@ -28,11 +26,6 @@ module.exports = {
                 .addField('Ngày cập nhật: ', fulldate, true)
                 .setFooter('Nguồn: worldometers.info');
             message.channel.send(embed);
-        } else if (args[0] == 'vncity') {
-            if (!args[1]) return message.channel.send('Vui lòng nhập từ khoá cần tìm!');
-            const response = await axios.get(`https://corona-js.herokuapp.com/vnsearch?province=${args.splice(1).join(' ')}&lang=vn`);
-            if (!response.data.messages) return message.channel.send('Bot lỗi, vui lòng thử lại sau.');
-            message.channel.send(response.data.messages[0].text);
         } else if (args[0] == 'usstate') {
             if (!args[1]) return message.channel.send('Vui lòng nhập tên bang!');
             const statename = args.splice(1).join(' ');
@@ -48,8 +41,6 @@ module.exports = {
             message.channel.send(embed);
         } else if (args[0] == 'usprovince') {
             if (!args[1]) return message.channel.send('Vui lòng nhập tên quận!');
-            const usState = new UsaStates();
-            const usstate_json = usState.states;
             const query = args.splice(1).join(' ');
             if (!query.includes(',')) return message.channel.send('Vui lòng nhập tên bang cách tên quận bằng dấu phẩy(,)! (VD: Dallas,tx)');
             const arr_query = query.split(',');
@@ -58,11 +49,11 @@ module.exports = {
             let state = arr_query[1];
             if (state.length == 2) {
                 state = state.trim().toUpperCase();
-                let dataf = usstate_json.filter(e => e.abbreviation == state);
+                let dataf = usaState.filter(e => e.abbreviation == state);
                 dataf = dataf[0];
                 state = dataf.name;
             }
-            state = capitalize.words(state.trim());
+            state = capitalizeWords(state.trim());
             let data = await api.jhucsse.counties({ county: province_name });
             data = data.filter(e => e.province == state);
             data = data[0];

@@ -10,7 +10,6 @@
     "better-sqlite3": "^7.1.0",
     "canvacord": "^4.0.1",
     "canvas": "^2.6.1",
-    "capitalize": "^2.0.3",
     "common-tags": "^1.8.0",
     "cross-env": "^7.0.2",
     "dateformat": "^3.0.3",
@@ -27,7 +26,6 @@
     "ms": "^2.1.2",
     "nodemon": "^2.0.4",
     "novelcovid": "^3.0.0",
-    "pretty-ms": "^7.0.0",
     "public-ip": "^4.0.2",
     "quick.db": "^7.1.2",
     "quickmongo": "^2.0.0",
@@ -37,7 +35,6 @@
     "snyk": "^1.393.0",
     "string-similarity": "^4.0.2",
     "twemoji-parser": "^13.0.0",
-    "usa-states": "0.0.5",
     "weather-js": "^2.0.0"
   },
   "devDependencies": {
