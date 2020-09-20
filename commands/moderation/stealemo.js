@@ -4,7 +4,7 @@ module.exports = {
     name: 'stealemo',
     aliases: ['cuopemo'],
     description: 'Lấy emoji của server khác và upload vào server của chính mình',
-    usage: '<PREFIXcuopemo <emoji, hoặc URL của emoji> <tên emoji>',
+    usage: '<PREFIX>cuopemo <emoji, hoặc URL của emoji> <tên emoji>',
     example: '<PREFIX>cuopemo :fun: vui',
     cooldown: 10,
     run: async (client, message, args) => {
