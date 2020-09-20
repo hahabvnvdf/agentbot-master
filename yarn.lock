@@ -4467,10 +4467,10 @@ quick.db@^7.1.2:
     better-sqlite3 "^6.0.1"
     lodash "4.17.19"
 
-quickmongo@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/quickmongo/-/quickmongo-1.1.5.tgz#c49fe9110a6f697704a51328be6c64cf1e013731"
-  integrity sha512-Q0aLpxILVCAvjGC31tFfgT2IA/7oRpc93HrT+j7yzuNzSQvkIRaF527+D4aby0BVRFhR8qiK1Thau7ohCS+ICg==
+quickmongo@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/quickmongo/-/quickmongo-2.0.0.tgz#030119d93271f77bfd4bcbb25b759af3207c2cc3"
+  integrity sha512-nzFps5JKZjZUAvWKDceSm+QJf1/z3hzudsIpRwLgiheO/yP/dLuF2UMAHCU1/yGTuPfk/zjPz+CeA9Dh7nIryQ==
   dependencies:
     lodash "^4.17.19"
     mongoose "^5.10.6"
