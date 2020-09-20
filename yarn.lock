@@ -1403,7 +1403,7 @@ bindings@^1.5.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
-bl@^2.2.0:
+bl@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/bl/-/bl-2.2.1.tgz#8c11a7b730655c5d56898cdc871224f40fd901d5"
   integrity sha512-6Pesp1w0DEX1N550i/uGV/TqucVL4AM/pgThFSN/Qq9si1/DF9aIHs1BxD8V/QU0HoeHO6cQRTAuYnLPKq1e4g==
@@ -3623,10 +3623,10 @@ lodash.values@^4.3.0:
   resolved "https://registry.yarnpkg.com/lodash.values/-/lodash.values-4.3.0.tgz#a3a6c2b0ebecc5c2cba1c17e6e620fe81b53d347"
   integrity sha1-o6bCsOvsxcLLocF+bmIP6BtT00c=
 
-lodash@4.17.15:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+lodash@4.17.19:
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 lodash@^4.15.0, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19:
   version "4.17.20"
@@ -3826,12 +3826,12 @@ moment-timezone@^0.5.31:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.27.0.tgz#8bff4e3e26a236220dfe3e36de756b6ebaa0105d"
   integrity sha512-al0MUK7cpIcglMv3YF13qSgdAIqxHTO7brRtaz3DlSULbqfazqkc5kEjNrLDOM7fsjshoFIihnU8snrP7zUvhQ==
 
-mongodb@3.6.1:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.1.tgz#2c5cc2a81456ba183e8c432d80e78732cc72dabd"
-  integrity sha512-uH76Zzr5wPptnjEKJRQnwTsomtFOU/kQEU8a9hKHr2M7y9qVk7Q4Pkv0EQVp88742z9+RwvsdTw6dRjDZCNu1g==
+mongodb@3.6.2:
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.2.tgz#1154a4ac107bf1375112d83a29c5cf97704e96b6"
+  integrity sha512-sSZOb04w3HcnrrXC82NEh/YGCmBuRgR+C1hZgmmv4L6dBz4BkRse6Y8/q/neXer9i95fKUBbFi4KgeceXmbsOA==
   dependencies:
-    bl "^2.2.0"
+    bl "^2.2.1"
     bson "^1.1.4"
     denque "^1.4.1"
     require_optional "^1.0.1"
@@ -3844,14 +3844,14 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.9.25:
-  version "5.10.4"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.10.4.tgz#09519261998243de47ed72ed28dc8c3adbf6a910"
-  integrity sha512-GnN03Dw3Bf4FYL5bRU8rEv6Hh2NuODj6Em+52pm92YRdQFit3jqJn1aBzg6hOPJfgBaB5cfdjKXRjacrD4jhsA==
+mongoose@^5.10.6:
+  version "5.10.6"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.10.6.tgz#36faeb363627e7aac5c209a6d43368a8c6f3354f"
+  integrity sha512-p32oja2ydzFMS0K4P7G408Kagju6Qz/LmiAFAcP6BqnIi1McLTd6VZ3+ZQtQmaHM7w8iNupLLambCrsPKNJpYw==
   dependencies:
     bson "^1.1.4"
     kareem "2.3.1"
-    mongodb "3.6.1"
+    mongodb "3.6.2"
     mongoose-legacy-pluralize "1.0.2"
     mpath "0.7.0"
     mquery "3.2.2"
@@ -4615,21 +4615,21 @@ quick-lru@^5.1.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
 
-quick.db@^7.1.1:
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/quick.db/-/quick.db-7.1.1.tgz#76f941763d92bc05b6abd5d8bd3f26a858b17f3a"
-  integrity sha512-PziF96cxYNvHcgkZkEbZ3UzhR2bXcLff96n68J1DhE/2Q2ELeGnd/Z4jtqJqZz5rfiqXvzEbCznXV8wNsOTSww==
+quick.db@^7.1.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/quick.db/-/quick.db-7.1.2.tgz#ce8e96faf81faa4527fc63cfc93af6229ed5ba07"
+  integrity sha512-ItAgjP6CHlC8XN4AAc+K24jDxRmAkkIe5TQp6xyXF5QCCgFlpaknpA3OyLTQ4Dw0c7yq28bcD6SVc7ML/1T/DQ==
   dependencies:
     better-sqlite3 "^6.0.1"
-    lodash "4.17.15"
+    lodash "4.17.19"
 
-quickmongo@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/quickmongo/-/quickmongo-1.1.0.tgz#ac37372c8993b6c83a89e2fdfcc013763d354f40"
-  integrity sha512-zEIJmNWUBqUT1SX6+ubvvI/JWmLWmj65hd3n6IZamYG1iJ4rtJ5f6w4FqJQ1tMFAaQWLrJehAc03/2ctnqb9Rg==
+quickmongo@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/quickmongo/-/quickmongo-1.1.5.tgz#c49fe9110a6f697704a51328be6c64cf1e013731"
+  integrity sha512-Q0aLpxILVCAvjGC31tFfgT2IA/7oRpc93HrT+j7yzuNzSQvkIRaF527+D4aby0BVRFhR8qiK1Thau7ohCS+ICg==
   dependencies:
     lodash "^4.17.19"
-    mongoose "^5.9.25"
+    mongoose "^5.10.6"
 
 random-number-csprng@^1.0.2:
   version "1.0.2"
