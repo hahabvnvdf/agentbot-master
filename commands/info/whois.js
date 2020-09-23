@@ -1,7 +1,6 @@
 const { MessageEmbed } = require("discord.js");
-const { stripIndents } = require("common-tags");
 const { getMember, formatDate, trimArray } = require('../../functions/utils');
-const flags = require('../../assets/userflag.json');
+const flags = require('../../assets/json/userflag.json');
 module.exports = {
     name: "whois",
     aliases: ["who", "user", "info"],
@@ -25,21 +24,22 @@ module.exports = {
             .setFooter(member.displayName, member.user.displayAvatarURL())
             .setThumbnail(member.user.displayAvatarURL())
             .setColor(member.displayHexColor === '#000000' ? '#ffffff' : member.displayHexColor)
-
-        .addField('Thông tin thành viên (server):', stripIndents `**- Nickname:** ${member.displayName}
-            **- Tag:** : ${member}
-            **- Vào server vào ngày:** ${joined}
-            **- Roles:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? trimArray(roles, 10) : 'None'}`, true)
-
-        .addField('Thông tin người dùng:', stripIndents `**- ID:** ${member.user.id}
-            **- Tên người dùng**: ${member.user.username}
-            **- Tag**: ${member.user.tag}
-            **- Tạo vào lúc**: ${created}
-            **- Huy hiệu**: ${userFlags.length ? userFlags.map(flag => flags[flag]).join(", ") : "Không có" }`, true)
-
-        .setTimestamp();
+            .addField('Thông tin thành viên (server)', [
+                `**- Nickname:** ${member.displayName}`,
+                `**- Tag:** : ${member}`,
+                `**- Vào server vào ngày:** ${joined}`,
+                `**- Roles:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? trimArray(roles, 10) : 'Không có'}`,
+            ], true)
+            .addField('Thông tin người dùng', [
+                `**- ID:** ${member.user.id}`,
+                `**- Tên người dùng**: ${member.user.username}`,
+                `**- Tag**: ${member.user.tag}`,
+                `**- Tạo vào lúc**: ${created}`,
+                `**- Huy hiệu**: ${userFlags.length ? userFlags.map(flag => flags[flag]).join(", ") : "Không có" }`,
+            ], true)
+            .setTimestamp();
         if (member.user.presence.activities.length > 0)
-            embed.addField('Đang chơi: ', stripIndents `** Tên game:** ${member.user.presence.activities[0].name}`);
+            embed.addField('Đang chơi: ', `**- Tên game:** ${member.user.presence.activities[0].name}`);
 
         message.channel.send(embed);
     },

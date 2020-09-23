@@ -1,4 +1,4 @@
-const serverFlags = require('../../assets/serverflag.json');
+const serverFlags = require('../../assets/json/serverflag.json');
 const { MessageEmbed } = require('discord.js');
 const { trimArray } = require('../../functions/utils');
 const moment = require('moment');

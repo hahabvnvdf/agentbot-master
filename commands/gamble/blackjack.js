@@ -19,7 +19,7 @@ module.exports = {
         const botDeck = [];
         const backcard = '<:back:709983842542288899>';
         const hide_deck = [];
-        let listofcard = require('../../assets/cardemojis.json').fulllist;
+        let listofcard = require('../../assets/json/cardemojis.json').fulllist;
         // check bet
         const amount = await eco.fetchMoney(message.author.id);
         let bet = 1;

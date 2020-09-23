@@ -1,5 +1,4 @@
 const { MessageEmbed } = require("discord.js");
-const { stripIndents } = require("common-tags");
 const { promptMessage } = require('../../functions/utils');
 const db = require('quick.db');
 module.exports = {
@@ -16,7 +15,7 @@ module.exports = {
 
         // No args
         if (!args[0]) return message.reply("Vui lòng tag một người nào đó để ban.").then(m => m.delete({ timeout: 5000 }));
-        const reason = args.slice(1).join(' ') || "Không có lý do.";
+        const reason = args.slice(1).join(' ') || "Không có.";
 
         // No author permissions
         if (!message.member.hasPermission("BAN_MEMBERS")) {
@@ -55,9 +54,11 @@ module.exports = {
             .setThumbnail(toBan.user.displayAvatarURL())
             .setFooter(message.member.displayName, message.author.displayAvatarURL())
             .setTimestamp()
-            .setDescription(stripIndents `**- Đã ban:** ${toBan} (${toBan.id})
-            **- Người ban:** ${message.member} (${message.member.id})
-            **- Lý do:** ${reason}`);
+            .addField('Lệnh ban', [
+                `**- Đã ban:** ${toBan} (${toBan.id})`,
+                `**- Người ban:** ${message.member} (${message.member.id})`,
+                `**- Lý do:** ${reason}`,
+            ]);
 
         const promptEmbed = new MessageEmbed()
             .setColor("GREEN")
