@@ -7,8 +7,6 @@ install:
 script:
   - yarn run test
 deploy:
-  provider: pages
   cleanup: true
-  github-token: $GITHUB_TOKEN
   on: 
     branch: master
