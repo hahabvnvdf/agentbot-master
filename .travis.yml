@@ -6,7 +6,3 @@ install:
   - yarn install
 script:
   - yarn run test
-deploy:
-  cleanup: true
-  on: 
-    branch: master
