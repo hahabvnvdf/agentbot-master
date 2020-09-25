@@ -1,9 +1,10 @@
 module.exports = {
     name: 'unhide',
     aliases: ['hienchannel'],
+    category: 'moderation',
     description: 'Hiện channel nào đó (role @everyone)',
     usage: '<PREFIX>unhide <#channel>',
-    run: async(client, message, args) => {
+    run: async (client, message, args) => {
         const everyoneRole = message.guild.roles.everyone;
         if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.reply('Bạn cần có quyền `MANAGE_CHANNELS` để chạy lệnh này!');
         if (!args[0]) return message.channel.send('Vui lòng nhập channel!');
@@ -15,13 +16,13 @@ module.exports = {
             await channel.overwritePermissions([
                 {
                     id: everyoneRole,
-                    allow: ['VIEW_CHANNEL']
-                }
-            ])
+                    allow: ['VIEW_CHANNEL'],
+                },
+            ]);
             message.channel.send('Thao tác thành công');
         }
         catch(e) {
-            message.channel.send(`Bot lỗi: ${e.message}`)
+            message.channel.send(`Bot lỗi: ${e.message}`);
         }
-    }
-}
+    },
+};
