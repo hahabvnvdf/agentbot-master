@@ -197,7 +197,8 @@ client.on("message", async message => {
     let command = client.commands.get(cmd);
     if (!command) command = client.commands.get(client.aliases.get(cmd));
     if (command) {
-        const guildCheck = await commandDb.get(message.guild.id);
+        let guildCheck = await commandDb.get(message.guild.id);
+        if (!guildCheck) guildCheck = await commandDb.set(message.guild.id, []);
         if (guildCheck.includes(command.name)) return message.channel.send('Lệnh này đã bị tắt ở server này!');
         if (!cooldowns.has(command.name)) cooldowns.set(command.name, new Collection());
         const now = Date.now();
