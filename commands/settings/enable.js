@@ -7,6 +7,7 @@ module.exports = {
     description: 'Mở 1 lệnh nào đó trong server',
     usage: '<PREFIX>enable <tên lệnh, tên category>',
     run: async (client, message, args) => {
+        if(!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy lệnh này!');
         if (!command.has(message.guild.id)) return message.channel.send('Bạn chưa có tắt lệnh nào!');
         let guildDisable = await command.get(message.guild.id);
         if (!args[0]) return message.channel.send("Vui lòng nhập lệnh hoặc nhóm chủ đề");
