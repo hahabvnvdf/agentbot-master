@@ -13,12 +13,9 @@ module.exports = {
         const channel = message.guild.channels.cache.get(id);
         if (!channel) return message.channel.send('Channel bạn nhập không hợp lệ!');
         try {
-            await channel.overwritePermissions([
-                {
-                    id: everyoneRole,
-                    deny: ['VIEW_CHANNEL'],
-                },
-            ]);
+            await channel.updateOverwrite(everyoneRole, {
+                'VIEW_CHANNEL': false,
+            });
             message.channel.send('Thao tác thành công');
         }
         catch(e) {
