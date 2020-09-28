@@ -14,7 +14,7 @@ module.exports = {
         if (!channel) return message.channel.send('Channel bạn nhập không hợp lệ!');
         try {
             await channel.updateOverwrite(everyoneRole, {
-                'VIEW_CHANNEL': true,
+                'VIEW_CHANNEL': null,
             });
             message.channel.send('Thao tác thành công');
         }
