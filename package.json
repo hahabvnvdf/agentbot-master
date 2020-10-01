@@ -24,7 +24,6 @@
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
     "ms": "^2.1.2",
-    "nodemon": "^2.0.4",
     "novelcovid": "^3.0.0",
     "public-ip": "^4.0.2",
     "quick.db": "^7.1.2",
@@ -38,14 +37,16 @@
     "weather-js": "^2.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.7.0"
+    "eslint": "^7.10.0",
+    "nodemon": "^2.0.4"
   },
   "scripts": {
     "test": "cross-env TYPE_RUN=ci node index.js",
     "dev": "cross-env TYPE_RUN=dev nodemon index.js",
     "build": "cross-env TYPE_RUN=production node index.js",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "prepare": "npm run snyk-protect",
+    "eslint": "eslint '**/*.js'"
   },
   "repository": {
     "type": "git",
