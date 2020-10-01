@@ -1,6 +1,6 @@
 const db = require('quick.db');
 const canrunID = ["455935236262592512", "199276237250625536", "621890949244518451", "649875543759781898"];
-const dict = require('../../assets/playdatadict.json');
+const dict = require('../../assets/json/playdatadict.json');
 const ms = require('ms');
 module.exports = {
     name: 'play',

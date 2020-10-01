@@ -1,6 +1,5 @@
 const { MessageEmbed } = require("discord.js");
 const axios = require('axios');
-const { stripIndents } = require('common-tags');
 module.exports = {
     name: "instagram",
     aliases: ["insta"],
@@ -23,14 +22,15 @@ module.exports = {
             .setTitle(account.full_name)
             .setURL(`https://instagram.com/${instagram}`)
             .setThumbnail(account.profile_pic_url_hd)
-            .addField("Thông tin cá nhân", stripIndents `**- Tên người dùng:** ${account.username}
-            **- Tên đầy đủ:** ${account.full_name}
-            **- Bio:** ${account.biography.length == 0 ? "Không có" : account.biography}
-            **- Số bài đăng:** ${account.edge_owner_to_timeline_media.count}
-            **- Followers:** ${account.edge_followed_by.count}
-            **- Following:** ${account.edge_follow.count}
-            **- Private?:** ${account.is_private ? "Có 🔐" : "Không 🔓"}`);
-
+            .addField("Thông tin cá nhân", [
+                `**- Tên người dùng:** ${account.username}`,
+                `**- Tên đầy đủ:** ${account.full_name}`,
+                `**- Bio:** ${account.biography.length == 0 ? "Không có" : account.biography}`,
+                `**- Số bài đăng:** ${account.edge_owner_to_timeline_media.count}`,
+                `**- Followers:** ${account.edge_followed_by.count}`,
+                `**- Following:** ${account.edge_follow.count}`,
+                `**- Private?:** ${account.is_private ? "Có 🔐" : "Không 🔓"}`,
+            ]);
         message.channel.send(embed);
     },
 };

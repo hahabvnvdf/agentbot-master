@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const api = require('novelcovid');
 api.settings({ baseUrl: 'https://disease.sh' });
 const { laysodep, capitalizeWords } = require('../../functions/utils');
-const usaState = require('../../assets/usastate.json');
+const usaState = require('../../assets/json/usastate.json');
 module.exports = {
     name: "corona",
     category: "info",

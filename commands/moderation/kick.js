@@ -1,5 +1,4 @@
 const { MessageEmbed } = require("discord.js");
-const { stripIndents } = require("common-tags");
 const { promptMessage } = require("../../functions/utils");
 const db = require('quick.db');
 module.exports = {
@@ -54,9 +53,11 @@ module.exports = {
             .setThumbnail(toKick.user.displayAvatarURL())
             .setFooter(message.member.displayName, message.author.displayAvatarURL())
             .setTimestamp()
-            .setDescription(stripIndents `**- Đã kick:** ${toKick} (${toKick.id})
-            **- Người kick:** ${message.member} (${message.member.id})
-            **- Lý do:** ${reason}`);
+            .addField('Lệnh kick', [
+                `**- Đã kick:** ${toKick} (${toKick.id})`,
+                `**- Người kick:** ${message.member} (${message.member.id})`,
+                `**- Lý do:** ${reason}`,
+            ]);
 
         const promptEmbed = new MessageEmbed()
             .setColor("GREEN")

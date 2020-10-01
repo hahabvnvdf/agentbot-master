@@ -34,6 +34,7 @@ if (process.env.TYPE_RUN == 'production') {
 }
 const db = require('quick.db');
 const afkData = new db.table('afkdata');
+const commandDb = new db.table('disable');
 client.commands = new Collection();
 client.aliases = new Collection();
 const cooldowns = new Collection();
@@ -196,6 +197,9 @@ client.on("message", async message => {
     let command = client.commands.get(cmd);
     if (!command) command = client.commands.get(client.aliases.get(cmd));
     if (command) {
+        let guildCheck = await commandDb.get(message.guild.id);
+        if (!guildCheck) guildCheck = await commandDb.set(message.guild.id, []);
+        if (guildCheck.includes(command.name)) return message.channel.send('Lệnh này đã bị tắt ở server này!');
         if (!cooldowns.has(command.name)) cooldowns.set(command.name, new Collection());
         const now = Date.now();
         const timestamps = cooldowns.get(command.name);

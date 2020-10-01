@@ -8,7 +8,7 @@ module.exports = {
     description: "Shippppppp",
     usage: "<PREFIX>ship [@tag]",
     note: "<PREFIX>ship rename để rename tên \n<PREFIX>ship sink để phá thuyền",
-    cooldown: 30,
+    cooldown: 20,
     run: async (client, message, args) => {
         const embed = new MessageEmbed();
         const authorData = await shipDb.get(message.author.id);
@@ -64,7 +64,7 @@ module.exports = {
                     const { hugs, slaps, spank, kiss, cookie, pat, poke, since, punch } = authorData.target;
                     const targetData = await shipDb.get(authorData.target.id);
                     const { readFileSync } = require('fs');
-                    const ship = readFileSync('././assets/ship.png');
+                    const ship = readFileSync('././assets/images/ship.png');
                     const attachment = new MessageAttachment(ship, 'ship.png');
                     let arrTuongTac = [
                         hugs + targetData.target.hugs !== 0 ? `🤗 Ôm: ${hugs + targetData.target.hugs}` : '',
