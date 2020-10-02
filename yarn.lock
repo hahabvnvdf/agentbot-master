@@ -1796,9 +1796,9 @@ decamelize@^1.1.1, decamelize@^1.2.0:
   integrity sha1-9lNNFRSCabIDUue+4m9QH5oZEpA=
 
 decimal.js@^10.2.0:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/decimal.js/-/decimal.js-10.2.0.tgz#39466113a9e036111d02f82489b5fd6b0b5ed231"
-  integrity sha512-vDPw+rDgn3bZe1+F/pyEwb1oMG2XTlRVgAa6B4KccTEpYgF8w6eQllVbQcfIJnZyvzFtFpxnpGtx8dd7DJp/Rw==
+  version "10.2.1"
+  resolved "https://registry.yarnpkg.com/decimal.js/-/decimal.js-10.2.1.tgz#238ae7b0f0c793d3e3cea410108b35a2c01426a3"
+  integrity sha512-KaL7+6Fw6i5A2XSnsbhm/6B+NuEA7TZ4vqxnd5tXz9sbKtrN9Srj8ab4vKVdK8YAqZO9P1kg45Y6YLoduPf+kw==
 
 decompress-response@^3.3.0:
   version "3.3.0"
@@ -3516,10 +3516,10 @@ make-dir@^3.0.0:
   dependencies:
     semver "^6.0.0"
 
-mathjs@7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-7.2.0.tgz#9b8ce58fdf65eeff208d6883eff774773d30be80"
-  integrity sha512-9UBMWBB94eyrxX8gskBzkVJZBEig2BUL8CBglQoRW4X/ljdW6hBVm8sT6Jp1MhyEp+2flKJo81qwml6twScxFw==
+mathjs@7.3.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-7.3.0.tgz#02bce1341e7b7c839f91dc9d552e23e026de5288"
+  integrity sha512-6PwW9yYyL9iDtgDYN2Dyjc2t+ZIlbGkKxm5RZk+PDv6Hc1lEtGF0axMf9mirZTKU4o31a3m2CpnC+d1hXTUo0g==
   dependencies:
     complex.js "^2.0.11"
     decimal.js "^10.2.0"
@@ -3655,12 +3655,7 @@ moment-timezone@^0.5.31:
   dependencies:
     moment ">= 2.9.0"
 
-moment@2.28.0:
-  version "2.28.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.28.0.tgz#cdfe73ce01327cee6537b0fafac2e0f21a237d75"
-  integrity sha512-Z5KOjYmnHyd/ukynmFd/WwyXHd7L4J9vTI/nn5Ap9AVUgaAE15VvQ9MOGmJJygEUklupqIrFnor/tjTwRU+tQw==
-
-"moment@>= 2.9.0", moment@^2.27.0:
+moment@2.29.0, "moment@>= 2.9.0", moment@^2.27.0:
   version "2.29.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.0.tgz#fcbef955844d91deb55438613ddcec56e86a3425"
   integrity sha512-z6IJ5HXYiuxvFTI6eiQ9dm77uE0gyy1yXNApVHqTcnIKfY9tIwEjlzsZ6u1LQXvVgKeTnv9Xm7NDvJ7lso3MtA==
@@ -3683,10 +3678,10 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.10.6:
-  version "5.10.6"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.10.6.tgz#36faeb363627e7aac5c209a6d43368a8c6f3354f"
-  integrity sha512-p32oja2ydzFMS0K4P7G408Kagju6Qz/LmiAFAcP6BqnIi1McLTd6VZ3+ZQtQmaHM7w8iNupLLambCrsPKNJpYw==
+mongoose@^5.10.7:
+  version "5.10.7"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.10.7.tgz#5590037f4d9078f4d4edac5c77f27b53829b1c94"
+  integrity sha512-oiofFrD4I5p3PhJXn49QyrU1nX5CY01qhPkfMMrXYPhkfGLEJVwFVO+0PsCxD91A2kQP+d/iFyk5U8e86KI8eQ==
   dependencies:
     bson "^1.1.4"
     kareem "2.3.1"
@@ -4449,13 +4444,13 @@ quick.db@^7.1.2:
     better-sqlite3 "^6.0.1"
     lodash "4.17.19"
 
-quickmongo@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/quickmongo/-/quickmongo-2.0.1.tgz#6cf7b2296fb100149c4ab7017179e2afc07641b8"
-  integrity sha512-3Ujh1FCE+ZC2aTb04xoaSPkCk+93+KDaA0tPLagBaC976O9pDWku9hpVh/Fl85LmJSAOs2Foeq/KH1UorYua6w==
+quickmongo@2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/quickmongo/-/quickmongo-2.0.4.tgz#9a2e490d62a71201fe07600030cac3a48b4db4f8"
+  integrity sha512-lcSQDy6/Tpn1JK2DIy2lkeJbYo0HLxY0ZCTGR+fBkTd9gOAcHuH6v8gRJthq+UlA/++Yj1I/Ery5rn8lTIdjQg==
   dependencies:
     lodash "^4.17.19"
-    mongoose "^5.10.6"
+    mongoose "^5.10.7"
 
 random-number-csprng@^1.0.2:
   version "1.0.2"
