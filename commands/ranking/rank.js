@@ -1,10 +1,10 @@
 const { MessageAttachment } = require('discord.js');
 const SQLite = require('better-sqlite3');
 const sql = new SQLite('./data.sqlite');
-const canvas = require('../../functions/canvasfunction');
 const fs = require('fs');
 const random_num = require('random-number-csprng');
 const db = require('quick.db');
+const canvacord = require('canvacord');
 module.exports = {
     name: "rank",
     category: "ranking",
@@ -33,11 +33,21 @@ module.exports = {
       let rank = server_data.findIndex(userdata => userdata.user == member.user.id);
       if (rank == -1) return message.reply('Người bạn tìm không có rank!');
       rank++;
-      let userbackground;
+      const rankImage = new canvacord.Rank()
+        .registerFonts()
+        .setAvatar(member.user.displayAvatarURL({ format: 'png' }))
+        .setCurrentXP(data.xp)
+        .setRequiredXP(data.level * 300)
+        .setLevel(data.level)
+        .setRank(rank)
+        .setStatus(member.user.presence.status)
+        .setProgressBar("#FFFFFF", "COLOR")
+        .setUsername(member.user.username)
+        .setDiscriminator(member.user.discriminator);
       if (fs.existsSync(`././assets/userbackground/${member.id}.jpg`))
-        userbackground = fs.readFileSync(`././assets/userbackground/${member.id}.jpg`);
-      const img = await canvas.rank({ username: member.user.username, discrim: member.user.discriminator, level: data.level, rank: rank, neededXP: data.level * 300, currentXP: data.xp, avatarURL: member.user.displayAvatarURL({ format: 'png' }), color: "#FFFFFF", status: member.user.presence.status, background: userbackground });
-      const attachment = new MessageAttachment(img, "rank.png");
+        rankImage.setBackground('IMAGE', fs.readFileSync(`././assets/userbackground/${member.id}.jpg`));
+      const card = await rankImage.build();
+      const attachment = new MessageAttachment(card, "rank.png");
       const random = await random_num(0, 100);
       message.channel.send(random < 20 ? `Nếu bạn muốn có background custom, hãy vào support server!` : `Rank của bạn **${member.user.username}**`, attachment);
     },

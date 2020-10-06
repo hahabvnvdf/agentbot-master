@@ -13,7 +13,7 @@ module.exports = {
         const url1 = message.author.displayAvatarURL({ format: 'png', dynamic: false });
         const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false });
-        const image = await canva.batslap(url1, avaurl);
+        const image = await canva.slap(url1, avaurl);
         const attach = new MessageAttachment(image, 'batslap.png');
         message.channel.send(attach);
         if (shipDb.has(message.author.id)) {
