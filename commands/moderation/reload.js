@@ -8,5 +8,6 @@ module.exports = {
         await client.commands.clear();
         await client.aliases.clear();
         await handler(client);
+        message.channel.send('Đã reload bot thành công!');
     },
 };
