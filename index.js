@@ -47,6 +47,11 @@ client.categories = fs.readdirSync("./commands/");
 
 client.on("ready", () => {
     console.log(`Hi, ${client.user.username} is now online!`);
+
+    // change all voice status to default
+    db.all().forEach(async guild => {
+        await db.set(`${guild.ID}.botdangnoi`, false);
+    });
     // database
     const table = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name = 'xpdata';").get();
     if (!table['count(*)']) {
