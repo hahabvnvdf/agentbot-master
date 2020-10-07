@@ -54,6 +54,7 @@ module.exports = {
         await db.set(`${message.guild.id}.botdangnoi`, true);
         await db.set(`${message.guild.id}.endTime`, Date.now() + ms('5m'));
         dispatcher.on('finish', async () => {
+            dispatcher.destroy();
             await db.set(`${message.guild.id}.botdangnoi`, false);
             setTimeout(async () => {
                 const checkTime = await db.get(`${message.guild.id}.endTime`);
