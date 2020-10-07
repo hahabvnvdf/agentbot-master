@@ -1159,10 +1159,10 @@ camelcase@^5.0.0, camelcase@^5.3.1:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
-canvacord@5.0.6:
-  version "5.0.6"
-  resolved "https://registry.yarnpkg.com/canvacord/-/canvacord-5.0.6.tgz#64cc7a231a9ed76c212183bc32033ba912351d54"
-  integrity sha512-BlYeWrbA5bNZS2Z7PdsVoiG4BcQpOhkMynSzx8alQwdqvEmb5lPFdDFuXPAMDsO9/lIkkVaHTfXFCAR0rczQGA==
+canvacord@^5.0.7:
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/canvacord/-/canvacord-5.0.7.tgz#9aeac9a67c86246744e7f19f144f1092f91ceb55"
+  integrity sha512-G8Qw5SL2XwV+fMJoI7vaEIQbtag4LVm5GWgANhvp6lTcl5g32yCp9Vm8C7/SDXyPcoO9WfaWZjz2sBHyl4LLzg==
   dependencies:
     "@canvacord/assets" "^1.0.0"
     canvas "^2.6.1"
