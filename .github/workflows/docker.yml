@@ -9,11 +9,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Git checkout
-            uses: actions/checkout@v2
-        steps:
-            - name: install packages
-            uses: yarn install
-        - run: npm run docker-ci
+              uses: actions/checkout@v2
+            - uses: yarn install
+            - run: npm run docker-ci
         env: 
             TOKEN: ${{ secrets.TOKEN }}
             TESTBOTTOKEN: ${{ secrets.TESTBOTTOKEN }}
