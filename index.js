@@ -220,8 +220,9 @@ client.on("message", async message => {
 
 client.on('voiceStateUpdate', (oldstate, newstate) => {
     if (oldstate.member.id !== client.user.id) return;
-    if (newstate.channelID == null && (db.get(`${oldstate.guild.id}.botdangnoi`) == true)) {
+    if (newstate.channelID == null) {
         db.set(`${oldstate.guild.id}.botdangnoi`, false);
+        db.delete(`${oldstate.guild.id}.endtime`);
     }
 });
 

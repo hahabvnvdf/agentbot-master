@@ -57,6 +57,7 @@ module.exports = {
             await db.set(`${message.guild.id}.botdangnoi`, false);
             setTimeout(async () => {
                 const checkTime = await db.get(`${message.guild.id}.endTime`);
+                if (!checkTime) return;
                 if (checkTime && Date.now() > checkTime) {
                     connection.disconnect();
                     voiceChannel.leave();
