@@ -1,4 +1,4 @@
-const canva = require('canvacord');
+const { Canvas } = require('canvacord');
 const { MessageAttachment } = require('discord.js');
 module.exports = {
     name: 'jail',
@@ -8,7 +8,7 @@ module.exports = {
     run: async (client, message, args) => {
         const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false });
-        const image = await canva.jail(avaurl);
+        const image = await Canvas.jail(avaurl);
         const attachment = new MessageAttachment(image, 'jail.png');
         return message.channel.send(attachment);
     },

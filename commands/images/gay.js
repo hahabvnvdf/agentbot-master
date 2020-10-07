@@ -1,4 +1,4 @@
-const canva = require('canvacord');
+const { Canvas } = require('canvacord');
 const { MessageAttachment } = require('discord.js');
 module.exports = {
     name: "gay",
@@ -9,7 +9,7 @@ module.exports = {
     run: async (client, message, args) => {
         const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false });
-        const image = await canva.gay(avaurl);
+        const image = await Canvas.gay(avaurl);
         const attach = new MessageAttachment(image, 'gay.png');
         return message.channel.send(attach);
     },
