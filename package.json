@@ -43,9 +43,12 @@
     "test": "cross-env TYPE_RUN=ci node index.js",
     "dev": "cross-env TYPE_RUN=dev nodemon index.js",
     "build": "cross-env TYPE_RUN=production node index.js",
+    "dev-node": "cross-env TYPE_RUN=dev node index.js",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect",
-    "eslint": "eslint '**/*.js'"
+    "eslint": "eslint '**/*.js'",
+    "docker-test": "node test.js",
+    "docker-ci": "docker-compose -f docker-compose.dev.yml --abort-on-container-exit"
   },
   "repository": {
     "type": "git",

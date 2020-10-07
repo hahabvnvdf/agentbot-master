@@ -1,0 +1,21 @@
+name: Unittest
+on:
+    push:
+        branches: [ master ]
+
+jobs:
+    publish:
+        if: github.repository == 'phamleduy04/agentbot-master'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Git checkout
+            uses: actions/checkout@v2
+        steps:
+            - name: install packages
+            uses: yarn install
+        - run: npm run docker-ci
+        env: 
+            TOKEN: ${{ secrets.TOKEN }}
+            TESTBOTTOKEN: ${{ secrets.TESTBOTTOKEN }}
+            CHANNELID: ${{ secrets.CHANNELID }}
+

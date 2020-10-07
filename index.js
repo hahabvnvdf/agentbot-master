@@ -41,7 +41,6 @@ const cooldowns = new Collection();
 
 client.categories = fs.readdirSync("./commands/");
 
-
 ["command"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
@@ -124,7 +123,7 @@ client.on('guildMemberAdd', async member => {
 });
 
 client.on("message", async message => {
-    if (message.author.bot) return;
+    if (message.author.bot && process.env.TYPE_RUN !== 'ci') return;
     if (!message.guild) return;
     // prefix
     let serverData = await db.get(message.guild.id);
