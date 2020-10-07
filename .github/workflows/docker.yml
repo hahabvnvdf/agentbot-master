@@ -7,13 +7,19 @@ jobs:
     publish:
         if: github.repository == 'phamleduy04/agentbot-master'
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+              node-version: [ 12.x ]
         steps:
-            - name: Git checkout
-              uses: actions/checkout@v2
-            - uses: yarn install
+            - uses: actions/checkout@v2
+            - name: Use Node.js ${{ matrix.node-version }}
+                uses: actions/setup-node@v1
+                with:
+                    node-version: ${{ matrix.node-version }}
+            - run: yarn install
             - run: npm run docker-ci
-        env: 
-            TOKEN: ${{ secrets.TOKEN }}
-            TESTBOTTOKEN: ${{ secrets.TESTBOTTOKEN }}
-            CHANNELID: ${{ secrets.CHANNELID }}
+              env: 
+                TOKEN: ${{ secrets.TOKEN }}
+                TESTBOTTOKEN: ${{ secrets.TESTBOTTOKEN }}
+                CHANNELID: ${{ secrets.CHANNELID }}
 
