@@ -14,11 +14,9 @@ module.exports = {
     category: 'gamble',
     run: async (client, message, args) => {
         if (check_game.has(message.author.id)) return message.channel.send('Bạn chưa hoàn thành ván đấu, vui lòng hoàn thành ván chơi!');
-        const playerDeck = [];
-        const botsDeck = [];
+        const playerDeck = [], botsDeck = [], hideDeck = [];
         const backcard = '<:back:709983842542288899>';
         let listofcard = require('../../assets/json/cardemojis.json').fulllist;
-        const hide_deck = [];
         const amount = await eco.fetchMoney(message.author.id);
         let bet = 1;
         if (!args[0]) return message.channel.send('Vui lòng nhập tiền cược');
@@ -41,21 +39,21 @@ module.exports = {
             listofcard = locbai(listofcard, playerDeck);
             botsDeck.push(await randomcard(listofcard));
             listofcard = locbai(listofcard, botsDeck);
-            hide_deck.push(backcard);
+            hideDeck.push(backcard);
         }
-        const msg = await message.channel.send(createembed(message.author, bet, createembedfield(playerDeck), createembedfield(botsDeck), getval(playerDeck).point, getval(botsDeck).point, createembedfield(hide_deck), "not"));
+        const msg = await message.channel.send(createembed(message.author, bet, createembedfield(playerDeck), createembedfield(botsDeck), getval(playerDeck).point, getval(botsDeck).point, createembedfield(hideDeck), "not"));
         const usercard = getval(playerDeck);
         const botdata = getval(botsDeck);
         if (usercard.jqk === 3) {
             // x3 tiền + win
             await money(message.author.id, 'thang', bet * 3);
             check_game.delete(message.author.id);
-            return msg.edit(createembed(message.author, bet, createembedfield(playerDeck), createembedfield(botsDeck), usercard.point, botdata.point, createembedfield(hide_deck), 'jqkwin'));
+            return msg.edit(createembed(message.author, bet, createembedfield(playerDeck), createembedfield(botsDeck), usercard.point, botdata.point, createembedfield(hideDeck), 'jqkwin'));
         } else if (botdata.jqk === 3) {
             // mất tiền + thua
             await money(message.author.id, 'lose', bet);
             check_game.delete(message.author.id);
-            return msg.edit(createembed(message.author, bet, createembedfield(playerDeck), createembedfield(botsDeck), usercard.point, botdata.point, createembedfield(hide_deck), 'jqklose'));
+            return msg.edit(createembed(message.author, bet, createembedfield(playerDeck), createembedfield(botsDeck), usercard.point, botdata.point, createembedfield(hideDeck), 'jqklose'));
         }
         if (amount >= bet * 2) msg.react(doubledownEmoji);
         msg.react(stopEmoji);
@@ -67,10 +65,10 @@ module.exports = {
             if (reaction.emoji.name === doubledownEmoji && amount >= bet * 2) {
                 // check người ta có đủ điều kiện để cược x2
                 bet = bet * 2;
-                await stop(usercard, botdata, bet, message.author, playerDeck, botsDeck, hide_deck, msg, check_game);
+                await stop(usercard, botdata, bet, message.author, playerDeck, botsDeck, hideDeck, msg, check_game);
                 collector.stop();
             } else if (reaction.emoji.name === stopEmoji) {
-                await stop(usercard, botdata, bet, message.author, playerDeck, botsDeck, hide_deck, msg, check_game);
+                await stop(usercard, botdata, bet, message.author, playerDeck, botsDeck, hideDeck, msg, check_game);
                 collector.stop();
             }
         });
@@ -85,7 +83,7 @@ module.exports = {
 };
 
 // eslint-disable-next-line no-shadow
-async function stop(usercard, botdata, bet, user, playerDeck, botsDeck, hide_deck, msg, check_game) {
+async function stop(usercard, botdata, bet, user, playerDeck, botsDeck, hideDeck, msg, check_game) {
     check_game.delete(user.id);
     let kind_of_winning = undefined;
         if (usercard.point == botdata.point) {
@@ -93,7 +91,7 @@ async function stop(usercard, botdata, bet, user, playerDeck, botsDeck, hide_dec
         } else if (usercard.point > botdata.point) {
             kind_of_winning = 'thang';
         } else kind_of_winning = 'thua';
-        msg.edit(createembed(user, bet, createembedfield(playerDeck), createembedfield(botsDeck), usercard.point, botdata.point, createembedfield(hide_deck), kind_of_winning));
+        msg.edit(createembed(user, bet, createembedfield(playerDeck), createembedfield(botsDeck), usercard.point, botdata.point, createembedfield(hideDeck), kind_of_winning));
         if (kind_of_winning !== 'hoa') await money(user.id, kind_of_winning, bet);
 }
 
