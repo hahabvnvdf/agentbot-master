@@ -6,6 +6,7 @@ const { sleep } = require('../../functions/utils');
 const langList = require('../../assets/json/ttslang.json');
 const db = require('quick.db');
 const ms = require('ms');
+const randomNum = require('random-number-csprng');
 module.exports = {
     name: 'speak',
     aliases: ['say', 's'],
@@ -15,7 +16,10 @@ module.exports = {
     note: 'lang = en hoặc vi (mặc định là vi)',
     example: '<PREFIX>speak en hello world',
     run: async (client, message, args) => {
-        if (db.get(`${message.guild.id}.botdangnoi`) === true) return message.channel.send(`Có người khác đang xài lệnh rồi, vui lòng thử lại sau D:. Nếu bạn nghĩ đây là lỗi, sử dụng lệnh \`${db.get(`${message.guild.id}.prefix`)}fix\` để sửa lỗi!`);
+        if (db.get(`${message.guild.id}.botdangnoi`) === true) {
+            const random = await randomNum(0, 100);
+            return message.channel.send(`Có người khác đang xài lệnh rồi, vui lòng thử lại sau D:. ${random > 70 ? ` Nếu bạn nghĩ đây là lỗi, sử dụng lệnh \`${db.get(`${message.guild.id}.prefix`)}fix\` để sửa lỗi!` : ''}`);
+        }
         if (!args[0]) return message.channel.send('Vui lòng nhập gì đó :D.');
         const voiceChannel = message.member.voice.channel;
         if (!voiceChannel) return message.reply('Bạn phải vào voice channel để có thể sử dụng lệnh này.');
