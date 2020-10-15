@@ -1,6 +1,6 @@
 const eco = require('../../functions/economy');
 const { getcardvalue, randomcard, checkautowin, createembed, laysodep, createembedfield, locbai } = require('../../functions/utils');
-const check_game = new Set();
+const checkGame = new Set();
 const hitemoji = "👊";
 const stopemoji = "🛑";
 const ms = require('ms');
@@ -14,7 +14,7 @@ module.exports = {
     usage: '<PREFIX>backjack <tiền cược hoặc "all">',
     example: '<PREFIX>bj 10000',
     run: async (client, message, args) => {
-        if (check_game.has(message.author.id)) return message.channel.send('Bạn chưa hoàn thành ván đấu, vui lòng hoàn thành ván chơi!');
+        if (checkGame.has(message.author.id)) return message.channel.send('Bạn chưa hoàn thành ván đấu, vui lòng hoàn thành ván chơi!');
         const playerDeck = [];
         const botDeck = [];
         const backcard = '<:back:709983842542288899>';
@@ -36,7 +36,7 @@ module.exports = {
         }
         if (bet > maxBet) bet = maxBet;
         if (bet > amount) return message.channel.send('Bạn không đủ tiền để chơi');
-        check_game.add(message.author.id);
+        checkGame.add(message.author.id);
         for (let i = 0; i < 2; i++) {
             playerDeck.push(await randomcard(listofcard));
             listofcard = locbai(listofcard, playerDeck);
@@ -52,17 +52,17 @@ module.exports = {
             if (player_first.loaiwin == 'xidach') {
                 // cong tien thuong
                 await eco.addMoney(message.author.id, bet);
-                check_game.delete(message.author.id);
+                checkGame.delete(message.author.id);
                 return await msg.edit(createembed(message.author, laysodep(bet), createembedfield(playerDeck), createembedfield(botDeck), getcardvalue(playerDeck), getcardvalue(botDeck), createembedfield(hide_deck), "thang"));
             } else if (player_first.loaiwin == 'xibang') {
                 // x2 tien thuong
                 await eco.addMoney(message.author.id, bet * 2);
-                check_game.delete(message.author.id);
+                checkGame.delete(message.author.id);
                 return await msg.edit(createembed(message.author, laysodep(bet), createembedfield(playerDeck), createembedfield(botDeck), getcardvalue(playerDeck), getcardvalue(botDeck), createembedfield(hide_deck), "thangx2"));
             }
         } else if (checkautowin(botDeck).check == true) {
                 await eco.subtractMoney(message.author.id, bet);
-                check_game.delete(message.author.id);
+                checkGame.delete(message.author.id);
                 return await msg.edit(createembed(message.author, laysodep(bet), createembedfield(playerDeck), createembedfield(botDeck), getcardvalue(playerDeck), getcardvalue(botDeck), createembedfield(hide_deck), "thua"));
         }
         msg.react(hitemoji);
@@ -77,12 +77,12 @@ module.exports = {
                 listofcard = locbai(listofcard, playerDeck);
                 if (getcardvalue(playerDeck) > 21 || parseInt(getcardvalue(playerDeck).replace('*', '')) > 21) {
                     collector.stop();
-                    return await stop(message.author, listofcard, botDeck, playerDeck, msg, bet, check_game);
+                    return await stop(message.author, listofcard, botDeck, playerDeck, msg, bet, checkGame);
                 }
                 await msg.edit(createembed(message.author, laysodep(bet), createembedfield(playerDeck), createembedfield(botDeck), getcardvalue(playerDeck), getcardvalue(botDeck), createembedfield(hide_deck), "not"));
             } else if (reaction.emoji.name === stopemoji) {
                 collector.stop();
-                await stop(message.author, listofcard, botDeck, playerDeck, msg, bet, check_game);
+                await stop(message.author, listofcard, botDeck, playerDeck, msg, bet, checkGame);
             }
         });
         collector.on('end', async (collected, reason) => {
@@ -90,13 +90,13 @@ module.exports = {
                 msg.edit('Trò chơi hết hạn. Bạn sẽ bị trừ tiền.');
                 money(message.author.id, "thua", bet);
             }
-            check_game.delete(message.author.id);
+            checkGame.delete(message.author.id);
         });
     },
 };
 // eslint-disable-next-line no-shadow
-async function stop(player, listofcard, botDeck, playerDeck, msg, bet, check_game) {
-    check_game.delete(player.id);
+async function stop(player, listofcard, botDeck, playerDeck, msg, bet, checkGame) {
+    checkGame.delete(player.id);
     while (getcardvalue(botDeck) < 15 || parseInt(getcardvalue(botDeck).replace('*', '')) < 15) {
         botDeck.push(await randomcard(listofcard));
         listofcard = locbai(listofcard, botDeck);
