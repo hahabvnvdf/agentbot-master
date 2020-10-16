@@ -55,6 +55,7 @@ module.exports = {
         if (!connection) return message.channel.send('Bot không thể vào channel của bạn vào lúc này, vui lòng thử lại sau!');
         sleep(500);
         const dispatcher = connection.play(`./assets/ttsdata/${message.guild.id}.mp3`);
+        // nên thử connection.playArbitraryInput() k cần file
         await db.set(`${message.guild.id}.botdangnoi`, true);
         await db.set(`${message.guild.id}.endTime`, Date.now() + ms('5m'));
         dispatcher.on('finish', async () => {
@@ -63,7 +64,7 @@ module.exports = {
             setTimeout(async () => {
                 const checkTime = await db.get(`${message.guild.id}.endTime`);
                 if (!checkTime) return;
-                if (checkTime && Date.now() > checkTime) {
+                if (Date.now() > checkTime) {
                     connection.disconnect();
                     voiceChannel.leave();
                     message.channel.send('Đã rời phòng vì không hoạt động!');

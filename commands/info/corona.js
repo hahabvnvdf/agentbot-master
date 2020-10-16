@@ -69,6 +69,7 @@ module.exports = {
             message.channel.send(embed);
         } else {
             const data = await api.countries({ country: args.join(' ') });
+            if (data.message) return message.channel.send('Mình không tìm thấy tên nước mà bạn nhập.');
             const d = new Date(data.updated);
             const fulldate = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
             const embed = new MessageEmbed()
