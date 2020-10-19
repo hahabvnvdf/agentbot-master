@@ -28,5 +28,5 @@ jobs:
         TOKEN: ${{ secrets.TOKEN }}
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn install
+    - run: yarn install --frozen-lockfile
     - run: yarn run test
