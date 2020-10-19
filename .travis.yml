@@ -3,6 +3,6 @@ node_js:
   - "stable"
 cache: yarn
 install:
-  - yarn install
+  - yarn install --frozen-lockfile
 script:
   - yarn run test
