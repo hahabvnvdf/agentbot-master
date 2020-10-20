@@ -30,7 +30,7 @@
     "random-number-csprng": "^1.0.2",
     "relevant-urban": "^2.0.0",
     "snowshot": "^1.0.6",
-    "snyk": "^1.416.0",
+    "snyk": "^1.417.0",
     "string-similarity": "^4.0.2",
     "twemoji-parser": "^13.0.0",
     "weather-js": "^2.0.0"
