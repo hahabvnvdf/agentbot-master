@@ -13,7 +13,7 @@ module.exports = {
             const resp = math.evaluate(args.join(' '));
             const embed = new MessageEmbed()
                 .setColor(0xffffff)
-                .setTitle('Bot tình toán')
+                .setTitle('Bot tính toán')
                 .addField('Input', `\`\`\`${args.join(' ')}\`\`\``)
                 .addField('Output', `\`\`\`js\n${resp}\`\`\``);
             message.channel.send(embed);
