@@ -11,5 +11,7 @@
     "TEAM_USER": "Team User",
     "SYSTEM": "System",
     "VERIFIED_BOT": "Verified Bot",
-    "VERIFIED_DEVELOPER": "Verified Bot Developer"
+    "VERIFIED_DEVELOPER": "Verified Bot Developer",
+    "EARLY_VERIFIED_DEVELOPER": "Early Verified Developer",
+    "PARTNERED_SERVER_OWNER": "Partnered Server Owner"
 }
