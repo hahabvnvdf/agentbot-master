@@ -140,24 +140,17 @@ client.on("message", async message => {
     if (!db.has(`${message.guild.id}.msgChannelOff`)) await db.set(`${message.guild.id}.msgChannelOff`, []);
     const listChannelMsg = await db.get(`${message.guild.id}.msgChannelOff`);
     if (message.guild && db.get(`${message.guild.id}.msgcount`) && !cooldown.has(message.author.id) && !listChannelMsg.includes(message.channel.id)) {
-        let emoji;
-        try {
-            emoji = Util.parseEmoji(message.content);
+        let userdata = client.getScore.get(message.author.id, message.guild.id);
+        if (!userdata) userdata = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, xp: 0, level: 1 };
+        if (userdata.level !== 999) {
+        const xpAdd = Math.floor(Math.random() * 12);
+        const nextlvl = userdata.level * 300;
+        if(userdata.xp > nextlvl) {
+            userdata.level++;
+            message.reply(`Bạn đã lên cấp **${userdata.level}**!`);
         }
-        catch(e) {}
-        if (!emoji || emoji == null || emoji.id == null) {
-            let userdata = client.getScore.get(message.author.id, message.guild.id);
-            if (!userdata) userdata = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, xp: 0, level: 1 };
-            if (userdata.level !== 999) {
-            const xpAdd = Math.floor(Math.random() * 12);
-            const nextlvl = userdata.level * 300;
-            if(userdata.xp > nextlvl) {
-                userdata.level++;
-                message.reply(`Bạn đã lên cấp **${userdata.level}**!`);
-            }
-            userdata.xp += xpAdd;
-            client.setScore.run(userdata);
-            }
+        userdata.xp += xpAdd;
+        client.setScore.run(userdata);
         }
         cooldown.add(message.author.id);
             setTimeout(() => {

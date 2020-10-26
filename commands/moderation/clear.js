@@ -23,7 +23,7 @@ module.exports = {
         if (!amount) return message.reply('Vui lòng nhập số lượng tin nhắn để xoá.');
         if (amount < 1) return message.reply('Vui lòng nhập số lớn hơn 1.');
         if (amount > 100) return message.reply('Vui lòng nhập số nhỏ hơn 100.');
-        if (!amount && !user) return message.channel.send(`Sử dụng lệnh \`${db.get(`${message.guild.id}.prefix`)}help clear\` để biết thêm thông tin.`);
+        if (!user) return message.channel.send(`Sử dụng lệnh \`${db.get(`${message.guild.id}.prefix`)}help clear\` để biết thêm thông tin.`);
         if (!user) {
             message.channel.bulkDelete(amount, true).then(delmsg => {
                 message.channel.send(`Đã xoá \`${delmsg.size}\` tin nhắn!`).then(m => m.delete({ timeout: 5000 }));

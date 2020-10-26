@@ -29,8 +29,8 @@ module.exports = {
         if (!voiceChannel.joinable) return message.channel.send('Bot không vào được phòng của bạn');
         let text = args.join(' ');
         let lang = await db.get(`${message.guild.id}.defaulttts`);
-        if (!lang || lang === null) lang = 'vi-VN';
-        if (langList[args[0]]) {
+        if (!lang) lang = 'vi-VN';
+        else if (langList[args[0]]) {
             text = args.slice(1).join(' ');
             lang = langList[args[0]];
         }

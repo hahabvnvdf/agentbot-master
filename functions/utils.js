@@ -1,7 +1,6 @@
 const random = require('random-number-csprng');
 const { MessageEmbed } = require('discord.js');
 const axios = require('axios');
-const jimp = require('jimp');
 module.exports = {
     getMember: function(message, toFind = '') {
         toFind = toFind.toLowerCase();

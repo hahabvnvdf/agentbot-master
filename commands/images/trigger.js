@@ -1,5 +1,4 @@
 const { Canvas } = require('canvacord');
-const { cairoVersion } = require('canvas');
 const { MessageAttachment } = require('discord.js');
 module.exports = {
     name: "trigger",

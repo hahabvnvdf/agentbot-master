@@ -7,13 +7,13 @@ module.exports = {
     name: "setdefault",
     category: 'tts',
     aliases: ["setdef"],
-    description: "Set default tts lang for tts command",
+    description: "Chọn ngôn ngữ mặc định cho lệnh <PREFIX>speak",
     usage: "<PREFIX>setdefault <en or vi>",
     example: "<PREFIX>setdefault en",
     run: async (client, message, args) => {
         if(!args[0]) {
             const defaulttts = await db.get(`${message.guild.id}.defaulttts`);
-            if (!defaulttts || defaulttts === null) return message.channel.send('Giọng text to speech của bạn là \`vi-VN\`');
+            if (!defaulttts) return message.channel.send('Giọng text to speech của bạn là \`vi-VN\`');
             message.channel.send(`Ngôn ngữ của bạn là: ${langList[defaulttts]}`);
         }
         else if (!langList[args[0]]) return message.channel.send('Bạn phải nhập `\ en \` hoặc \` vi \` để set ngôn ngữ mặc định.');

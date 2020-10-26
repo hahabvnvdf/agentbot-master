@@ -7,7 +7,7 @@ module.exports = {
         if (message.author.id !== ownerID) return message.channel.send('Bạn không thể sử dụng lệnh này!');
         await client.commands.clear();
         await client.aliases.clear();
-        await handler(client);
+        handler(client);
         message.channel.send('Đã reload bot thành công!');
     },
 };
