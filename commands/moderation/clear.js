@@ -1,4 +1,3 @@
-const db = require('quick.db');
 module.exports = {
     name: "clear",
     aliases: ["purge"],
@@ -19,11 +18,10 @@ module.exports = {
         }
 
         const user = message.mentions.users.first();
-        const amount = !!parseInt(args[0]) ? parseInt(args[0]) : parseInt(args[1]);
+        const amount = !isNaN(args[0]) ? parseInt(args[0]) : parseInt(args[1]);
         if (!amount) return message.reply('Vui lòng nhập số lượng tin nhắn để xoá.');
         if (amount < 1) return message.reply('Vui lòng nhập số lớn hơn 1.');
         if (amount > 100) return message.reply('Vui lòng nhập số nhỏ hơn 100.');
-        if (!user) return message.channel.send(`Sử dụng lệnh \`${db.get(`${message.guild.id}.prefix`)}help clear\` để biết thêm thông tin.`);
         if (!user) {
             message.channel.bulkDelete(amount, true).then(delmsg => {
                 message.channel.send(`Đã xoá \`${delmsg.size}\` tin nhắn!`).then(m => m.delete({ timeout: 5000 }));
