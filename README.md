@@ -8,6 +8,7 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/phamleduy04/agentbot-master?style=for-the-badge)
 [![David](https://img.shields.io/david/phamleduy04/agentbot-master?style=for-the-badge)](https://david-dm.org/phamleduy04/agentbot-master)
 ![Codacy grade](https://img.shields.io/codacy/grade/641d77710a564cebba4f2b75b9f3a97d?logo=codacy&style=for-the-badge)
+[![DeepScan grade](https://deepscan.io/api/teams/11483/projects/14376/branches/266132/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11483&pid=14376&bid=266132)
 
 # AgentBot
 ## Thêm Agent Bot vào server của bạn
