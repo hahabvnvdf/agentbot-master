@@ -35,7 +35,7 @@
     "weather-js": "^2.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.12.0",
+    "eslint": "^7.12.1",
     "nodemon": "^2.0.6"
   },
   "scripts": {
