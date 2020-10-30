@@ -854,6 +854,11 @@ camelcase@^5.0.0, camelcase@^5.3.1:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
+camelcase@^6.0.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-6.2.0.tgz#924af881c9d525ac9d87f40d964e5cea982a1809"
+  integrity sha512-c7wVvbw3f37nuobQNtgsgG9POC9qMbNuMQmTCqZv23b6MIz0fcYpBiOlv9gEN/hdLdnZTDQhg6e9Dq5M1vKvfg==
+
 canvacord@^5.0.7:
   version "5.0.7"
   resolved "https://registry.yarnpkg.com/canvacord/-/canvacord-5.0.7.tgz#9aeac9a67c86246744e7f19f144f1092f91ceb55"
@@ -3239,6 +3244,11 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
+numeral@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/numeral/-/numeral-2.0.6.tgz#4ad080936d443c2561aed9f2197efffe25f4e506"
+  integrity sha1-StCAk21EPCVhrtnyGX7//iX05QY=
+
 oauth-sign@~0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
@@ -5171,6 +5181,16 @@ y18n@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.0.tgz#95ef94f85ecc81d007c264e190a120f0a3c8566b"
   integrity sha512-r9S/ZyXu/Xu9q1tYlpsLIsa3EeLXXk0VwlxqTcFRfg9EhMW+17kbt9G0NrgCmhGb5vT2hyhJZLfDGx+7+5Uj/w==
+
+yahoo-stock-api@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/yahoo-stock-api/-/yahoo-stock-api-1.0.5.tgz#86b3a22303b746fe6287187a39c771cfb11fcb19"
+  integrity sha512-qh56SF7Wc8CDs+UVBu89f80MkiZ5uNBvlP1V5Epu8kGIT2mQCl9uF66QaALm3yE8bA+BLcX1qa+LpOJ/hCy2bQ==
+  dependencies:
+    axios "^0.21.0"
+    camelcase "^6.0.0"
+    cheerio "^1.0.0-rc.3"
+    numeral "^2.0.6"
 
 yallist@^2.1.2:
   version "2.1.2"
