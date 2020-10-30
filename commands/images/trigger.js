@@ -7,7 +7,7 @@ module.exports = {
     usage: "<PREFIX>trigger [@tag]",
     example: "<PREFIX>trigger @phamleduy04",
     run: async (client, message, args) => {
-        const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+        const nguoitag = message.mentions.members.first() || await message.guild.members.fetch(args[0]) || message.member;
         const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false });
         const image = await Canvas.trigger(avaurl);
         const attach = new MessageAttachment(image, 'trigger.gif');

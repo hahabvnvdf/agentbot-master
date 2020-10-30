@@ -26,7 +26,7 @@ module.exports = {
         sql.pragma("journal_mode = wal");
       }
       const insert = sql.prepare("SELECT * FROM xpdata WHERE user = ? AND guild = ?");
-      const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+      const member = message.mentions.members.first() || await message.guild.members.fetch(args[0]) || message.member;
       if (member.user.bot) return message.reply('Bạn không thể xem rank của bot!');
       const data = insert.get(member.user.id, message.guild.id);
       const server_data = sql.prepare("SELECT * FROM xpdata WHERE guild = ? ORDER BY level DESC, xp DESC;").all(message.guild.id);

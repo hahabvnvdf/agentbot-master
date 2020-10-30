@@ -9,7 +9,7 @@ module.exports = {
     example: "<PREFIX>setnick @phamleduy04 Duy",
     run: async (client, message, args) => {
         if (!message.member.hasPermission('MANAGE_NICKNAMES') && message.author.id !== ownerID) return message.reply("Bạn cần có quyền `\ MANAGE_NICKNAMES `\ để có thể đổi nickname.");
-        const user = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        const user = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
         let output = args.slice(1).join(' ');
         if (!args[0]) return message.reply(`Phải tag ai đó chứ`);
         if (!output) output = user.user.username;

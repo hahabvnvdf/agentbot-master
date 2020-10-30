@@ -9,7 +9,7 @@ module.exports = {
     usage: "<PREFIX>members <tên role>",
     run: async (client, message, args) => {
         if (!args[0]) return message.reply(`Ghi tên role giúp mình với D:`).then(m => m.delete({ timeout: 5000 }));
-        let role = message.guild.roles.cache.get(args[0]);
+        let role = await message.guild.roles.fetch(args[0]);
         if (!role) {
             role = message.guild.roles.cache.filter(r => r.managed === false).array().map(g => g.name);
             const search = args.join(' ');

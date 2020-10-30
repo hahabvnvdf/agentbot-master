@@ -29,7 +29,7 @@ module.exports = {
                 .then(m => m.delete({ timeout: 5000 }));
         }
 
-        const toBan = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        const toBan = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
 
         // No member found
         if (!toBan) {

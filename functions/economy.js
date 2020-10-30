@@ -1,5 +1,5 @@
 const { Database } = require('quickmongo');
-const db = new Database(process.env.MONGODB || "mongodb://localhost/quickmongo");
+const db = new Database(process.env.MONGODB || "mongodb://localhost/economy");
 
 module.exports = {
     addMoney: async function(userID, value) {
@@ -40,5 +40,9 @@ module.exports = {
     reset: async function(userID) {
         if(!userID) throw new Error('You are missing the userID!');
         return await db.set(`money_${userID}`, 0);
+    },
+
+    getPing: async function() {
+        return db.fetchLatency();
     },
 };

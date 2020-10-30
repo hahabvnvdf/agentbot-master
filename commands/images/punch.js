@@ -12,7 +12,7 @@ module.exports = {
         const folder = readdirSync("././assets/slap");
         const file = readFileSync(`././assets/slap/${folder[Math.floor(Math.random() * folder.length)]}`);
         const attachment = new MessageAttachment(file, 'punch.gif');
-        const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        const nguoitag = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
         const embed = new MessageEmbed()
             .attachFiles(attachment)
             .setImage('attachment://punch.gif');

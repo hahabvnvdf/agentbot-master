@@ -8,7 +8,7 @@ module.exports = {
     usage: '<PREFIX>give <@tag or ID> <so tien>',
     example: '<PREFIX>give @phamleduy04 50000',
     run: async (client, message, args) => {
-        const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        const member = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
         if (!member) return message.channel.send('Hãy tag hoặc đưa ID của người đó!');
         if (member.user.bot) return message.channel.send('Bạn không thể gởi tiền cho bot!');
         const amount = await eco.fetchMoney(message.author.id);

@@ -10,7 +10,7 @@ module.exports = {
     example: "<PREFIX>hug (ôm tất cả) hoặc <PREFIX>hug @phamleduy04",
     run: async (client, message, args) => {
         let nguoitag = message.mentions.members.array();
-        if (nguoitag.length == 0) nguoitag = [message.guild.members.cache.get(args[0])];
+        if (nguoitag.length == 0) nguoitag = [await message.guild.members.fetch(args[0])];
         try {
             const response = await axios.get('https://some-random-api.ml/animu/hug');
             const embed = new MessageEmbed()

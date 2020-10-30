@@ -7,7 +7,7 @@ module.exports = {
     description: 'Đưa cookie cho ăn nhoàm nhoàm nhoàm',
     usage: '<PREFIX>cookie <@tag>',
     run: async (client, message, args) => {
-        const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        const nguoitag = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
         if (!nguoitag) return message.channel.send('Vui lòng tag 1 ai đó!');
         else if (nguoitag.id == message.author.id) return message.channel.send('Bạn không thể tự cho chính bạn cookie.');
         else {

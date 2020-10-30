@@ -12,7 +12,7 @@ module.exports = {
     run: async (client, message, args) => {
         const embed = new MessageEmbed();
         const authorData = await shipDb.get(message.author.id);
-        const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        const member = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
         switch (args[0]) {
             case 'rename':
                 if (!authorData) return message.channel.send('Bạn không có thuyền!');

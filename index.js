@@ -213,7 +213,7 @@ client.on("message", async message => {
         timestamps.set(message.author.id, now);
         setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
         if (blacklist_status === true && command.name !== 'blacklist') return message.channel.send('Server bạn đang nằm trong blacklist, vui lòng liên hệ owner của bot hoặc vào support server tại: https://top.gg/bot/645883401500622848');
-        logging(`${message.author.tag} đã sử dụng lệnh ${command.name} ở server ${message.guild.name}(${message.guild.id})`);
+        logging(`${message.author.tag} || ${command.name} || ${message.guild.name}(${message.guild.id})`);
         command.run(client, message, args);
     }
 });
@@ -244,7 +244,7 @@ y.addListener("data", res => {
 
 function logging(content) {
     const moment = require('moment-timezone');
-    log(`${moment.tz(timezone).format("LTS")} || ${content}`);
+    log(`${moment.tz(timezone).format("DD/MM/YYYY hh:mm:ss")} || ${content}`);
 }
 
 async function reset_afk(id) {
