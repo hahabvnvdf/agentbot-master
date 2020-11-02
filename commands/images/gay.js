@@ -7,7 +7,7 @@ module.exports = {
     usage: "<PREFIX>gay [@tag]",
     example: "<PREFIX>gay @phamleduy04",
     run: async (client, message, args) => {
-        const nguoitag = message.mentions.members.first() || await message.guild.members.fetch(args[0]) || message.member;
+        const nguoitag = args[0] && !isNaN(args[0]) ? message.mentions.members.first() || await message.guild.members.fetch(args[0]) : message.member;
         const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false, size: 1024 });
         const image = await Canvas.rainbow(avaurl);
         const attach = new MessageAttachment(image, 'gay.png');
