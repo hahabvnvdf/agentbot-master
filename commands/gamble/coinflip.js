@@ -6,7 +6,6 @@ const dict = {
     'tail': '<:tail:710976679568474202>',
 };
 const { laysodep, sleep } = require('../../functions/utils');
-const ms = require('ms');
 const maxBet = 50000;
 module.exports = {
     name: 'coinflip',
@@ -47,7 +46,7 @@ module.exports = {
         // random
         const userrand = random[Math.floor(Math.random() * random.length)];
         const final = check(user_choose, userrand);
-        sleep(ms('4s'));
+        await sleep(4000);
         if (final === true) {
             // win
             message.channel.send(`Và kết quả là ${dict[userrand]}(**${userrand}**), bạn đã thắng **${laysodep(bet)}**.`);

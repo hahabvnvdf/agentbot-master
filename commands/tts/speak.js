@@ -53,7 +53,7 @@ module.exports = {
             return message.channel.send('Bot không thể vào channel của bạn vào lúc này, vui lòng thử lại sau!');
         }
         if (!connection) return message.channel.send('Bot không thể vào channel của bạn vào lúc này, vui lòng thử lại sau!');
-        sleep(500);
+        await sleep(500);
         const dispatcher = connection.play(`./assets/ttsdata/${message.guild.id}.mp3`);
         // nên thử connection.playArbitraryInput() k cần file
         await db.set(`${message.guild.id}.botdangnoi`, true);
