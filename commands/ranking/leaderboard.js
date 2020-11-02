@@ -26,7 +26,7 @@ module.exports = {
         }
         let server_data = sql.prepare("SELECT * FROM xpdata WHERE guild = ? ORDER BY level DESC, xp DESC;").all(message.guild.id);
         server_data = await Promise.all(server_data.map(async (data, index) => {
-            const user = await message.guild.members.cache.get(data.user);
+            const user = await message.guild.members.fetch(data.user);
             if (user) {
                 let next_level_xp = data.level * 300;
                 if (next_level_xp.toString().length >= 4) {
