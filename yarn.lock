@@ -842,10 +842,10 @@ camelcase@^6.0.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-6.2.0.tgz#924af881c9d525ac9d87f40d964e5cea982a1809"
   integrity sha512-c7wVvbw3f37nuobQNtgsgG9POC9qMbNuMQmTCqZv23b6MIz0fcYpBiOlv9gEN/hdLdnZTDQhg6e9Dq5M1vKvfg==
 
-canvacord@^5.0.7:
-  version "5.0.7"
-  resolved "https://registry.yarnpkg.com/canvacord/-/canvacord-5.0.7.tgz#9aeac9a67c86246744e7f19f144f1092f91ceb55"
-  integrity sha512-G8Qw5SL2XwV+fMJoI7vaEIQbtag4LVm5GWgANhvp6lTcl5g32yCp9Vm8C7/SDXyPcoO9WfaWZjz2sBHyl4LLzg==
+canvacord@^5.0.8:
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/canvacord/-/canvacord-5.0.8.tgz#089c3d3963c0e508e787eb69e6034e605fa4f441"
+  integrity sha512-1/0+p40FHeyc7csAofXuAa0nULBAEnTl+KfN67LarfQFo85hgcEP+y+btJ0h5qSJkD14zZVcugZ/WWZlBX38nA==
   dependencies:
     "@canvacord/assets" "^1.0.0"
     canvas "^2.6.1"
@@ -2894,15 +2894,10 @@ moment-timezone@^0.5.31:
   dependencies:
     moment ">= 2.9.0"
 
-moment@2.29.1:
+moment@2.29.1, "moment@>= 2.9.0", moment@^2.29.0:
   version "2.29.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
-
-"moment@>= 2.9.0", moment@^2.29.0:
-  version "2.29.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.0.tgz#fcbef955844d91deb55438613ddcec56e86a3425"
-  integrity sha512-z6IJ5HXYiuxvFTI6eiQ9dm77uE0gyy1yXNApVHqTcnIKfY9tIwEjlzsZ6u1LQXvVgKeTnv9Xm7NDvJ7lso3MtA==
 
 mongodb@3.6.2:
   version "3.6.2"
