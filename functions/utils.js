@@ -45,7 +45,7 @@ module.exports = {
         return arr.slice((page - 1) * itemsPerPage, page * itemsPerPage);
     },
 
-    sleep: function(miliseconds) {
+    sleep: async function(miliseconds) {
         const start = new Date().getTime();
         for (let i = 0; i < 1e7; i++) {
             if ((new Date().getTime() - start) > miliseconds) {
