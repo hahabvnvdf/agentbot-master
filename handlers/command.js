@@ -8,8 +8,8 @@ table.setHeading("Command", "Load status");
         const commands = readdirSync(`./commands/${dir}/`).filter(file => file.endsWith(".js"));
         for (const file of commands) {
             const fileName = `../commands/${dir}/${file}`;
-            const pull = require(fileName);
             delete require.cache[require.resolve(fileName)];
+            const pull = require(fileName);
             if (pull.name) {
                 count++;
                 client.commands.set(pull.name, pull);

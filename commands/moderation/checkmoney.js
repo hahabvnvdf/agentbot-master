@@ -7,7 +7,7 @@ module.exports = {
     description: 'Kiểm tra tiền (owner bot only)',
     run: async (client, message, args) => {
         if (message.author.id !== ownerID) return message.channel.send('Chỉ có owner của bot mới có thể sử dụng lệnh này');
-        const member = args[0] && !isNaN(args[0]) ? message.mentions.members.first() || await message.guild.members.fetch(args[0]) : message.member;
+        const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         const amount = await eco.fetchMoney(member.id);
         message.channel.send(`\`${laysodep(amount)}\``);
     },
