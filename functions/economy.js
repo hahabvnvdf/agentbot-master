@@ -14,7 +14,7 @@ module.exports = {
     setMoney: async function(userID, value) {
         if(!userID) throw new Error('You are missing the userID!');
         if(!value) throw new Error('You are missing the value!');
-        return await db.set(`money_${userID}`, value);
+        return await db.set(`money_${userID}`, parseInt(value));
     },
 
     fetchMoney: async function(userID) {
@@ -30,7 +30,7 @@ module.exports = {
         if((isNaN(value))) throw new Error('Value must be a number!');
         const money = await db.fetch(`money_${userID}`);
         if (money === null) await db.set(`money_${userID}`, 0);
-        return await db.subtract(`money_${userID}`, value);
+        return await db.subtract(`money_${userID}`, parseInt(value));
     },
 
     leaderBoard: async function() {
