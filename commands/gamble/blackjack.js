@@ -5,6 +5,7 @@ const hitemoji = "👊";
 const stopemoji = "🛑";
 const ms = require('ms');
 const maxBet = 250000;
+const cardData = require('../../assets/json/cardemojis.json');
 module.exports = {
     name: 'blackjack',
     category: 'gamble',
@@ -17,9 +18,9 @@ module.exports = {
         if (checkGame.has(message.author.id)) return message.channel.send('Bạn chưa hoàn thành ván đấu, vui lòng hoàn thành ván chơi!');
         const playerDeck = [];
         const botDeck = [];
-        const backcard = '<:back:709983842542288899>';
+        const backcard = cardData.backcard;
         const hide_deck = [];
-        let listofcard = require('../../assets/json/cardemojis.json').fulllist;
+        let listofcard = cardData.fulllist;
         // check bet
         const amount = await eco.fetchMoney(message.author.id);
         let bet = 1;

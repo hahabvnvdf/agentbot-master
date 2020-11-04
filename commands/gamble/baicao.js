@@ -5,6 +5,7 @@ const doubledownEmoji = "👌";
 const stopEmoji = "🛑";
 const maxBet = 250000;
 const check_game = new Set();
+const cardData = require('../../assets/json/cardemojis.json');
 module.exports = {
     name: 'baicao',
     cooldown: 5,
@@ -15,8 +16,8 @@ module.exports = {
     run: async (client, message, args) => {
         if (check_game.has(message.author.id)) return message.channel.send('Bạn chưa hoàn thành ván đấu, vui lòng hoàn thành ván chơi!');
         const playerDeck = [], botsDeck = [], hideDeck = [];
-        const backcard = '<:back:709983842542288899>';
-        let listofcard = require('../../assets/json/cardemojis.json').fulllist;
+        const backcard = cardData.backcard;
+        let listofcard = cardData.fulllist;
         const amount = await eco.fetchMoney(message.author.id);
         let bet = 1;
         if (!args[0]) return message.channel.send('Vui lòng nhập tiền cược');
