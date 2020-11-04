@@ -243,6 +243,7 @@ y.addListener("data", res => {
 // end console chat
 
 function logging(content) {
+    if (process.env.TYPE_RUN !== 'production') return;
     const moment = require('moment-timezone');
     log(`${moment.tz(timezone).format("DD/MM/YYYY hh:mm:ss")} || ${content}`);
 }
