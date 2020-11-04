@@ -6,7 +6,7 @@ module.exports = {
     description: 'xuất ra ảnh meme',
     usage: '<PREFIX> hitler [@tag]',
     run: async (client, message, args) => {
-        const nguoitag = args[0] && !isNaN(args[0]) ? message.mentions.members.first() || await message.guild.members.fetch(args[0]) : message.member;
+        const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
         const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false });
         const image = await Canvas.hitler(avaurl);
         const attach = new MessageAttachment(image, 'hitler.png');
