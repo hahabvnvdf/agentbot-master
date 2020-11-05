@@ -161,9 +161,9 @@ client.on("message", async message => {
     const aiChannel = await db.get(`${message.guild.id}.aiChannel`);
     if (!aiChannel) await db.set(`${message.guild.id}.aiChannel`, null);
     else if (message.channel.id == aiChannel) {
-        await axios.get(`http://api.brainshop.ai/get?bid=${BID}&key=${BRAINKEY}&uid=1&msg=${encodeURIComponent(message.content)}`)
+        await axios.get(`https://simsimi.copcute.pw/api/?text=${encodeURIComponent(message.content)}&lang=vi_VN`)
             .then(response => {
-                message.channel.send(response.data.cnt);
+                message.channel.send(response.success);
             });
     }
     // check unafk
