@@ -143,12 +143,11 @@ client.on("message", async message => {
         let userdata = client.getScore.get(message.author.id, message.guild.id);
         if (!userdata) userdata = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, xp: 0, level: 1 };
         if (userdata.level !== 999) {
-        const xpAdd = Math.floor(Math.random() * 30);
-        const nextlvl = userdata.level * 200;
+        const xpAdd = Math.floor(Math.random() * 12);
+        const nextlvl = userdata.level * 300;
         if(userdata.xp > nextlvl) {
             userdata.level++;
             message.reply(`Bạn đã lên cấp **${userdata.level}**!`);
-            userdata.xp = 0;
         }
         userdata.xp += xpAdd;
         client.setScore.run(userdata);
