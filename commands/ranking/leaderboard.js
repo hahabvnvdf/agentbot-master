@@ -17,7 +17,7 @@ module.exports = {
         const serverStatus = db.get(`${message.guild.id}.msgcount`);
         if (serverStatus === false) return message.channel.send('Server không bật hệ thống rank!');
         let server_data = sql.prepare("SELECT * FROM xpdata WHERE guild = ? ORDER BY level DESC, xp DESC;").all(message.guild.id);
-        if (server_data.length == 0) return message.channel.send('Bảng xếp hạng đang trống!');
+        if (server_data.length === 0) return message.channel.send('Bảng xếp hạng đang trống!');
         server_data = await Promise.all(server_data.map(async (data, index) => {
             const user = message.guild.members.cache.get(data.user);
             if (user) {
