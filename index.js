@@ -228,13 +228,13 @@ client.on('voiceStateUpdate', (oldstate, newstate) => {
 });
 
 client.on('error', (err) => {
-    sendOwner(`Bot lỗi: ${err.message}\n\n${err.stack}`);
+    sendOwner(`Bot lỗi: ${err.message}`);
     log(err);
 });
 
 process.on('warning', (warn) => {
     console.warn(warn);
-    sendOwner(`Warning: ${warn.message}\n\n${warn.stack}`);
+    sendOwner(`Warning: ${warn.message}`);
 });
 
 // console chat
@@ -265,7 +265,8 @@ process.on('exit', (exitCode) => {
 
 async function sendOwner(content) {
     if (!content) return;
-    return await client.users.fetch(ownerID).send(content, { split: true });
+    const owner = await client.users.fetch(ownerID);
+    owner.send(content, { split: true, code: true });
 }
 
 if (process.env.TYPE_RUN == 'ci') process.exit();
