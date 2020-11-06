@@ -17,9 +17,10 @@ module.exports = {
             role = message.guild.roles.cache.find(el => el.name == matches.bestMatch.target);
         }
         const members = role.members.map(m => m.user);
+        if (members.length === 0) return message.channel.send('Không có ai đang có role này!');
         const embed = new MessageEmbed()
             .setTitle(`Thành viên trong \`${role.name}\``)
-            .setDescription(members.length < 30 ? members.join('\n') : members.length > 30 ? trimArray(members, 30) : 'None')
+            .setDescription(members.length < 30 ? members.join('\n') : trimArray(members, 30))
             .setFooter(`Số người có role này: ${role.members.size}`);
         message.channel.send(embed);
     },

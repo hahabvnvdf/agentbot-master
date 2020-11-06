@@ -8,7 +8,7 @@ module.exports = {
     usage: "<PREFIX>delete [@tag]",
     example: "<PREFIX>delete @phamleduy04",
     run: async (client, message, args) => {
-        const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+        const nguoitag = message.mentions.members.first() || message.member;
         const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false });
         const image = await Canvas.delete(avaurl);
         const attach = new MessageAttachment(image, 'delete.png');

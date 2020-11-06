@@ -265,7 +265,7 @@ process.on('exit', (exitCode) => {
 });
 
 async function sendOwner(content) {
-    if (!content) return;
+    if (!content || process.env.TYPE_RUN !== 'production') return;
     const owner = await client.users.fetch(ownerID);
     owner.send(content, { split: true, code: true });
 }

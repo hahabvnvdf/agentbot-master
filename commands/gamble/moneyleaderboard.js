@@ -9,8 +9,9 @@ module.exports = {
     cooldown: 10,
     usage: '<PREFIX>mlb',
     run: async (client, message, _) => {
+        const memberManager = await message.guild.members.fetch();
         const bxh = await eco.leaderBoard(10, client, message, '💵');
-        const members = message.guild.members.cache.map(m => m.id);
+        const members = memberManager.map(m => m.id);
         let num = 0;
         const embed = new MessageEmbed()
             .setTitle(`Bảng xếp hạng của server ${message.guild.name}`);
@@ -19,7 +20,8 @@ module.exports = {
             const ids = idList.ID.split('_')[1];
             if (!members.includes(ids)) continue;
             num++;
-            embed.addField(`${num}. ${client.users.cache.get(ids).tag}`, `Tiền: ${laysodep(idList.data)} 💸`);
+            const user = await client.users.fetch(ids);
+            embed.addField(`${num}. ${user.tag}`, `Tiền: ${laysodep(idList.data)} 💸`);
             if (num > 9) break;
             // 10 nguoi
         }

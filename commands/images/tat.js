@@ -11,7 +11,7 @@ module.exports = {
     example: "<PREFIX>tat @phamleduy04",
     run: async (client, message, args) => {
         const url1 = message.author.displayAvatarURL({ format: 'png', dynamic: false });
-        const nguoitag = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+        const nguoitag = message.mentions.members.first() || message.member;
         const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false });
         const image = await Canvas.slap(url1, avaurl);
         const attach = new MessageAttachment(image, 'batslap.png');

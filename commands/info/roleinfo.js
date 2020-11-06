@@ -7,13 +7,16 @@ module.exports = {
     description: "Trà về thông tên về role",
     usage: '<PREFIX>roleinfo <tên role>',
     run: async (client, message, args) => {
-        const roles = message.guild.roles.cache.filter(r => r.managed === false).map(g => g.name);
-        const search = args.join(' ');
-        const matches = stringSimilarity.findBestMatch(search, roles);
-        const find = matches.bestMatch.target;
-        let role = message.guild.roles.cache.find(el => el.name === find);
-        if (!isNaN(args[0])) role = message.guild.roles.cache.get(args[0]);
-        const membersWithRole = message.guild.roles.cache.get(role.id).members;
+        if (!args[0]) return message.channel.send('Vui lòng nhập ID của role hoặc tên của role!');
+        let role = await message.guild.roles.fetch(args[0]);
+        if (!role) {
+            const roles = message.guild.roles.cache.filter(r => r.managed === false).map(g => g.name);
+            const search = args.join(' ');
+            const matches = stringSimilarity.findBestMatch(search, roles);
+            const find = matches.bestMatch.target;
+            role = message.guild.roles.cache.find(el => el.name === find);
+        }
+        const membersWithRole = role.members;
         const embed = new MessageEmbed()
             .setColor(role.color)
             .setTitle("Roleinfo")
@@ -21,8 +24,8 @@ module.exports = {
             .addField("Tên role: ", role.name, true)
             .addField("Số lượng:", membersWithRole.size, true)
             .addField("Vị trí: ", role.position, true)
-            .addField("Mentionable: ", role.mentionable, true)
-            .addField("Hoist: ", role.hoist, true)
+            .addField("Tag được? ", role.mentionable ? "Có" : "Không", true)
+            .addField("Hiển thị? ", role.hoist ? "Có" : "Không", true)
             .addField("Màu: ", role.hexColor, true);
         message.channel.send(embed);
     },

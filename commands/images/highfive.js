@@ -7,9 +7,9 @@ module.exports = {
     usage: '<PREFIX> high5 <@tag, id>',
     example: '<PREFIX> high5 @phamleduy04',
     run: async (client, message, args) => {
-        const emoji = client.emojis.cache.get('741039423080366090') || '🙏';
+        const emoji = "<:highfive:741039423080366090>";
         const nguoitag = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
-        if (nguoitag.length == 0) return message.reply('Tag ai đó đi bạn ơi :(');
+        if (!nguoitag) return message.reply('Tag ai đó hoặc cho ID đi bạn!');
         if (nguoitag.user.id == message.author.id) return message.channel.send('Bạn không thể tự đập tay chính mình.');
         const folder = readdirSync('././assets/highfive/');
         const file = readFileSync(`././assets/highfive/${folder[Math.floor(Math.random() * folder.length)]}`);

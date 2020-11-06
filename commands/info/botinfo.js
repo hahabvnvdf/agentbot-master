@@ -11,6 +11,7 @@ module.exports = {
     description: 'Show info của bot!',
     usage: '<PREFIX>botinfo',
     run: async (client, message, args) => {
+        const guildManager = client.guilds.cache;
         const core = os.cpus()[0];
         const embed = new MessageEmbed()
             .setThumbnail(client.user.displayAvatarURL())
@@ -19,8 +20,8 @@ module.exports = {
                 `**--> Tên bot:** ${client.user.tag} (${client.user.id})`,
                 `**--> Số lệnh:** ${client.commands.size} lệnh`,
                 `**--> Uptime:** ${ms(client.uptime)}`,
-                `**--> Server:** ${laysodep(client.guilds.cache.size)}`,
-                `**--> Users:** ${laysodep(client.guilds.cache.reduce((a, b) => a + b.memberCount, 0))}`,
+                `**--> Server:** ${laysodep(guildManager.size)}`,
+                `**--> Users:** ${laysodep(guildManager.reduce((a, b) => a + b.memberCount, 0))}`,
                 `**--> Channels:** ${laysodep(client.channels.cache.size)}`,
                 `**--> Ngày tạo bot:** ${utc(client.user.createdTimestamp).format('MM/DD/YYYY HH:mm:ss')}`,
                 `**--> Node.js version:** ${process.version}`,

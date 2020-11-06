@@ -6,7 +6,7 @@ module.exports = {
     description: 'Kiểm tra tiền của người khác',
     ownerOnly: true,
     run: async (client, message, args) => {
-        const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+        const member = message.mentions.members.first() || message.member;
         const amount = await eco.fetchMoney(member.id);
         message.channel.send(`\`${laysodep(amount)}\``);
     },

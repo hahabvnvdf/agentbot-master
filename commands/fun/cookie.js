@@ -7,8 +7,8 @@ module.exports = {
     description: 'Đưa cookie cho ăn nhoàm nhoàm nhoàm',
     usage: '<PREFIX>cookie <@tag>',
     run: async (client, message, args) => {
-        const nguoitag = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
-        if (!nguoitag) return message.channel.send('Vui lòng tag 1 ai đó!');
+        const nguoitag = message.mentions.members.first() || await message.guild.members.fetch({ user: args[0] }).catch(() => undefined);
+        if (!nguoitag || !args[0]) return message.channel.send('Vui lòng tag 1 ai đó hoặc nhập ID!');
         else if (nguoitag.id == message.author.id) return message.channel.send('Bạn không thể tự cho chính bạn cookie.');
         else {
             let string;

@@ -16,7 +16,7 @@ module.exports = {
     run: async (client, message, args) => {
       const serverStatus = db.get(`${message.guild.id}.msgcount`);
       if (serverStatus === false) return message.channel.send('Server không bật hệ thống rank!');
-      const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+      const member = message.mentions.members.first() || message.member;
       if (member.user.bot) return message.reply('Bạn không thể xem rank của bot!');
       const data = client.getScore.get(member.user.id, message.guild.id);
       const server_data = sql.prepare("SELECT * FROM xpdata WHERE guild = ? ORDER BY level DESC, xp DESC;").all(message.guild.id);
