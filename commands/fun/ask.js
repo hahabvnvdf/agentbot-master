@@ -7,7 +7,6 @@ module.exports = {
     usage: "<PREFIX>ask <câu hỏi>",
     run: async (client, message, args) => {
         if (!args[0]) return message.reply("Hỏi gì đi chứ bạn :D.");
-        message.channel.send(args[129]);
         const random = askdb[Math.floor(Math.random() * askdb.length)];
         return message.reply(random);
     },
