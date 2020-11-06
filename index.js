@@ -245,8 +245,8 @@ y.addListener("data", res => {
     if (send.length == 0) return console.log("Kh gởi được tin nhắn trống :)");
     client.channels.cache.get("702983688811708416").send(send);
 });
-// end console chat
 
+// end console chat
 function logging(content) {
     if (process.env.TYPE_RUN !== 'production') return;
     const moment = require('moment-timezone');
@@ -257,6 +257,11 @@ async function reset_afk(id) {
     if (!id) throw new Error('Thiếu ID');
     return await afkData.set(id, { afk: false, loinhan: '' });
 }
+
+process.on('exit', (exitCode) => {
+    if (process.env.TYPE_RUN !== 'production') console.log('Exiting......');
+    sendOwner(`Bot đã thoát với exitCode: ${exitCode}`);
+});
 
 async function sendOwner(content) {
     if (!content) return;
