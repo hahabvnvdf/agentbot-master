@@ -265,7 +265,7 @@ process.on('exit', (exitCode) => {
 
 async function sendOwner(content) {
     if (!content) return;
-    return await client.users.cache.get(ownerID).send(content, { split: true });
+    return await client.users.fetch(ownerID).send(content, { split: true });
 }
 
 if (process.env.TYPE_RUN == 'ci') process.exit();
