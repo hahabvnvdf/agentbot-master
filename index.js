@@ -96,6 +96,7 @@ client.on("ready", () => {
 });
 
 client.on("guildCreate", async newguild => {
+    await newguild.members.fetch();
     const embed = new MessageEmbed()
         .setTitle("New Server Joined")
         .addField('Guild Name: ', newguild.name, true)
