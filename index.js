@@ -196,7 +196,7 @@ client.on("message", async message => {
     let command = client.commands.get(cmd);
     if (!command) command = client.commands.get(client.aliases.get(cmd));
     if (command) {
-        if (command.ownerOnly === true) return message.channel.send('Onwer only!');
+        if (command.ownerOnly === true && message.author.id !== ownerID) return message.channel.send('Lệnh này chỉ dành cho Owner của bot!');
         let guildCheck = await commandDb.get(message.guild.id);
         if (!guildCheck) guildCheck = await commandDb.set(message.guild.id, []);
         if (guildCheck.includes(command.name)) return message.channel.send('Lệnh này đã bị tắt ở server này!');
