@@ -3,7 +3,8 @@ const { readFileSync, existsSync } = require('fs');
 module.exports = {
     name: 'exportlog',
     aliases: ['explog'],
-    description: 'Xuất log ra hastebin (owner bot only)',
+    description: 'Xuất log ra hastebin',
+    ownerOnly: true,
     run: async (client, message, args) => {
         const logPath = '././log.txt';
         if (!existsSync(logPath)) return message.channel.send('Không tìm thấy file log.txt');

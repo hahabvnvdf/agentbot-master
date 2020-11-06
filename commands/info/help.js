@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { readdirSync } = require('fs');
 const db = require('quick.db');
+const { ownerID } = require('../../config.json');
 module.exports = {
     name: "help",
     aliases: ['h'],
@@ -41,9 +42,7 @@ function getCMD(client, message, input) {
 
     let info = `Không tìm thấy lệnh tên là: **${input.toLowerCase()}**`;
 
-    if (!cmd) {
-        return message.channel.send(embed.setColor("RED").setDescription(info));
-    }
+    if (!cmd || (cmd.ownerOnly == true && message.author.id !== ownerID)) return message.channel.send(embed.setColor("RED").setDescription(info));
 
     if (cmd.name) info = `**Tên lệnh**: \`${serverData.prefix}${cmd.name}\``;
     if (cmd.aliases) info += `\n**Tên rút gọn**: ${cmd.aliases.map(a => `\`${serverData.prefix}${a}\``).join(", ")}`;

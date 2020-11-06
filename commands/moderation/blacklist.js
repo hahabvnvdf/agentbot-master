@@ -1,11 +1,10 @@
 const db = require('quick.db');
-const { ownerID } = require('../../config.json');
 module.exports = {
     name: 'blacklist',
     description: 'Blacklist 1 server (owner bot only)',
     usage: 'blacklist <ID server>',
+    ownerOnly: true,
     run: async (client, message, args) => {
-        if (message.author.id !== ownerID) return message.channel.send('Bạn không có quyền sử dụng lệnh này!');
         const serverID = args[0];
         if (!serverID) return message.channel.send('Nhập server ID!');
         // check server

@@ -1,4 +1,3 @@
-const { ownerID } = require('../../config.json');
 const { inspect } = require('util');
 const { post } = require('../../functions/post');
 module.exports = {
@@ -6,8 +5,8 @@ module.exports = {
         aliases: ["e"],
         description: "Execute javascript code",
         usage: "<PREFIX>eval <js code>",
+        onwerOnly: true,
         run: async (client, message, args) => {
-            if (message.author.id != ownerID) return message.channel.send("Lệnh này chỉ dành cho owner của bot.");
             if (!args[0]) return message.reply('Nhập lệnh để chạy code...');
             try {
                 const start = process.hrtime();

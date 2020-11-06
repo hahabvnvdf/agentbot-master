@@ -1,5 +1,4 @@
 const db = require('quick.db');
-const canrunID = ["455935236262592512", "199276237250625536", "621890949244518451", "649875543759781898"];
 const dict = require('../../assets/json/playdatadict.json');
 const ms = require('ms');
 module.exports = {
@@ -7,8 +6,8 @@ module.exports = {
     aliases: ['p'],
     usage: '<PREFIX>p',
     note: 'Lệnh này chỉ cho Saddu, Duy.',
+    ownerOnly: true,
     run: async (client, message, args) => {
-        if (canrunID.indexOf(message.author.id) == -1 && message.guild.id !== "311163013996478464") return message.channel.send('Bạn không thể sử dụng lệnh này!');
         if (!args[0]) return message.channel.send('Nhập file cần play!');
         const status = await db.get(`${message.guild.id}.botdangnoi`);
         if (status == true) return message.channel.send('Có người khác đang sử dụng bot!');

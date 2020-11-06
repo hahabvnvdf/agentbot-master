@@ -11,7 +11,7 @@ const ms = require('ms');
 const cooldown = new Set();
 const client = new Client({ disableMentions: "everyone", retryLimit: 5 });
 const { timezone, ownerID } = require('./config.json');
-const { BID, BRAINKEY } = process.env;
+// const { BID, BRAINKEY } = process.env;
 const { welcome } = require('./functions/canvasfunction');
 if (!process.env.TYPE_RUN) throw new Error("Chạy lệnh npm run dev hoặc npm run build");
 const { log } = require('./functions/log');
@@ -196,6 +196,7 @@ client.on("message", async message => {
     let command = client.commands.get(cmd);
     if (!command) command = client.commands.get(client.aliases.get(cmd));
     if (command) {
+        if (command.ownerOnly === true) return message.channel.send('Onwer only!');
         let guildCheck = await commandDb.get(message.guild.id);
         if (!guildCheck) guildCheck = await commandDb.set(message.guild.id, []);
         if (guildCheck.includes(command.name)) return message.channel.send('Lệnh này đã bị tắt ở server này!');
@@ -227,10 +228,14 @@ client.on('voiceStateUpdate', (oldstate, newstate) => {
 });
 
 client.on('error', (err) => {
+    sendOwner(`Bot lỗi: ${err.message}\n\n${err.stack}`);
     log(err);
 });
 
-process.on('warning', console.warn);
+process.on('warning', (warn) => {
+    console.warn(warn);
+    sendOwner(`Warning: ${warn.message}\n\n${warn.stack}`);
+});
 
 // console chat
 const y = process.openStdin();
@@ -251,6 +256,11 @@ function logging(content) {
 async function reset_afk(id) {
     if (!id) throw new Error('Thiếu ID');
     return await afkData.set(id, { afk: false, loinhan: '' });
+}
+
+async function sendOwner(content) {
+    if (!content) return;
+    return await client.users.cache.get(ownerID).send(content, { split: true });
 }
 
 if (process.env.TYPE_RUN == 'ci') process.exit();
