@@ -13,7 +13,6 @@ module.exports = {
         const embed = new MessageEmbed();
         const authorData = await shipDb.get(message.author.id);
         const member = message.mentions.members.first() || await message.guild.members.fetch({ user: args[0] }).catch(() => undefined);
-        if (!member) return message.channel.send('Vui lòng tag hoặc nhập ID!');
         switch (args[0]) {
             case 'rename':
                 if (!authorData) return message.channel.send('Bạn không có thuyền!');
