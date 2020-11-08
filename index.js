@@ -161,10 +161,8 @@ client.on("message", async message => {
     const aiChannel = await db.get(`${message.guild.id}.aiChannel`);
     if (!aiChannel) await db.set(`${message.guild.id}.aiChannel`, null);
     else if (message.channel.id == aiChannel) {
-        await axios.get(`http://api.brainshop.ai/get?bid=${BID}&key=${BRAINKEY}&uid=1&msg=${encodeURIComponent(message.content)}`)
-            .then(response => {
-                message.channel.send(response.data.success);
-            });
+        const res = await axios.get(`http://api.brainshop.ai/get?bid=${BID}&key=${BRAINKEY}&uid=1&msg=${encodeURIComponent(message.content)}`)
+        message.channel.send(res.data.cnt);
     }
     // check unafk
     let checkAFK = await afkData.get(message.author.id);
