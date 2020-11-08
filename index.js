@@ -11,7 +11,7 @@ const ms = require('ms');
 const cooldown = new Set();
 const client = new Client({ disableMentions: "everyone", retryLimit: 5 });
 const { timezone, ownerID } = require('./config.json');
-// const { BID, BRAINKEY } = process.env;
+const { BID, BRAINKEY } = process.env;
 const { welcome } = require('./functions/canvasfunction');
 if (!process.env.TYPE_RUN) throw new Error("Chạy lệnh npm run dev hoặc npm run build");
 const { log } = require('./functions/log');
@@ -114,7 +114,6 @@ client.on("guildDelete", async oldguild => {
         .addField('Guild Name: ', oldguild.name, true)
         .addField('Guild ID: ', oldguild.id, true)
         .addField('Guild members: ', oldguild.memberCount, true)
-        .addField("Owner server: ", oldguild.owner.user.tag, true)
         .setFooter(`OwnerID: ${oldguild.ownerID}`);
     client.channels.cache.get('700071755146068099').send(embed);
     // agent's server
@@ -162,7 +161,7 @@ client.on("message", async message => {
     const aiChannel = await db.get(`${message.guild.id}.aiChannel`);
     if (!aiChannel) await db.set(`${message.guild.id}.aiChannel`, null);
     else if (message.channel.id == aiChannel) {
-        await axios.get(`https://simsimi.copcute.pw/api/?text=${encodeURI(message.content)}&lang=vi_VN`)
+        await axios.get(`http://api.brainshop.ai/get?bid=${BID}&key=${BRAINKEY}&uid=1&msg=${encodeURIComponent(message.content)}`)
             .then(response => {
                 message.channel.send(response.data.success);
             });
