@@ -135,9 +135,10 @@ client.on("message", async message => {
     // prefix
     let serverData = await db.get(message.guild.id);
     if (!serverData) {
-        serverData = db.set(message.guild.id, { prefix: "_", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false });
+        serverData = db.set(message.guild.id, { prefix: "_", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false, aiLang: 'vi' });
     }
-    if (!db.has(`${message.guild.id}.msgChannelOff`)) await db.set(`${message.guild.id}.msgChannelOff`, []);
+    const { msgChannelOff, aiChannel, aiLang } = serverData;
+    if (!msgChannelOff) await db.set(`${message.guild.id}.msgChannelOff`, []);
     const listChannelMsg = await db.get(`${message.guild.id}.msgChannelOff`);
     if (message.guild && db.get(`${message.guild.id}.msgcount`) && !cooldown.has(message.author.id) && !listChannelMsg.includes(message.channel.id)) {
         let userdata = client.getScore.get(message.author.id, message.guild.id);
@@ -158,11 +159,12 @@ client.on("message", async message => {
         }, ms('1m'));
     }
     // ai channel
-    const aiChannel = await db.get(`${message.guild.id}.aiChannel`);
-    if (!aiChannel) await db.set(`${message.guild.id}.aiChannel`, null);
-    else if (message.channel.id == aiChannel) {
-        const res = await axios.get(`http://api.brainshop.ai/get?bid=${BID}&key=${BRAINKEY}&uid=1&msg=${encodeURIComponent(message.content)}`);
-        message.channel.send(res.data.cnt);
+    if (message.channel.id == aiChannel) {
+        let url;
+        if (!aiLang || aiLang === 'vi') url = `https://simsimi.copcute.pw/api/?text=${encodeURIComponent(message.content)}&lang=vi_VN`;
+        else url = `http://api.brainshop.ai/get?bid=${BID}&key=${BRAINKEY}&uid=1&msg=${encodeURIComponent(message.content)}`;
+        const res = await axios.get(url);
+        message.channel.send(!aiLang || aiLang === 'vi' ? res.data.success : res.data.cnt);
     }
     // check unafk
     let checkAFK = await afkData.get(message.author.id);
