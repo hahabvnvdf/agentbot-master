@@ -9,5 +9,6 @@ module.exports = {
         if(!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền `MANAGE_GUILD` để chạy lệnh này!');
         if (!args[0] || !ansAccept.includes(args[0])) return message.channel.send('Vui lòng nhập `en` hoặc `vi` để cài đặt ngôn ngữ!');
         await db.set(`${message.guild.id}.aiLang`, args[0]);
+        message.channel.send('Thao tác thành công!');
     },
 };
