@@ -7,7 +7,7 @@ module.exports = {
     description: 'Tắt 1 lệnh nào đó trong server',
     usage: '<PREFIX>disable <tên lệnh, tên category>',
     run: async (client, message, args) => {
-        if(!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy lệnh này!');
+        if(!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền `MANAGE_GUILD` để chạy lệnh này!');
         if (!args[0]) return message.channel.send("Vui lòng nhập lệnh hoặc nhóm chủ đề");
         let guildDisable = await command.get(message.guild.id);
         if (!guildDisable) guildDisable = await command.set(message.guild.id, []);

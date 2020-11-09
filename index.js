@@ -11,7 +11,7 @@ const ms = require('ms');
 const cooldown = new Set();
 const client = new Client({ disableMentions: "everyone", retryLimit: 5 });
 const { timezone, ownerID } = require('./config.json');
-// const { BID, BRAINKEY } = process.env;
+const { BID, BRAINKEY } = process.env;
 const { welcome } = require('./functions/canvasfunction');
 if (!process.env.TYPE_RUN) throw new Error("Chạy lệnh npm run dev hoặc npm run build");
 const { log } = require('./functions/log');
@@ -114,7 +114,6 @@ client.on("guildDelete", async oldguild => {
         .addField('Guild Name: ', oldguild.name, true)
         .addField('Guild ID: ', oldguild.id, true)
         .addField('Guild members: ', oldguild.memberCount, true)
-        .addField("Owner server: ", oldguild.owner.user.tag, true)
         .setFooter(`OwnerID: ${oldguild.ownerID}`);
     client.channels.cache.get('700071755146068099').send(embed);
     // agent's server
@@ -136,9 +135,10 @@ client.on("message", async message => {
     // prefix
     let serverData = await db.get(message.guild.id);
     if (!serverData) {
-        serverData = db.set(message.guild.id, { prefix: "_", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false });
+        serverData = db.set(message.guild.id, { prefix: "_", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false, aiLang: 'vi' });
     }
-    if (!db.has(`${message.guild.id}.msgChannelOff`)) await db.set(`${message.guild.id}.msgChannelOff`, []);
+    const { msgChannelOff, aiChannel, aiLang } = serverData;
+    if (!msgChannelOff) await db.set(`${message.guild.id}.msgChannelOff`, []);
     const listChannelMsg = await db.get(`${message.guild.id}.msgChannelOff`);
     if (message.guild && db.get(`${message.guild.id}.msgcount`) && !cooldown.has(message.author.id) && !listChannelMsg.includes(message.channel.id)) {
         let userdata = client.getScore.get(message.author.id, message.guild.id);
@@ -159,13 +159,12 @@ client.on("message", async message => {
         }, ms('1m'));
     }
     // ai channel
-    const aiChannel = await db.get(`${message.guild.id}.aiChannel`);
-    if (!aiChannel) await db.set(`${message.guild.id}.aiChannel`, null);
-    else if (message.channel.id == aiChannel) {
-        await axios.get(`https://simsimi.copcute.pw/api/?text=${encodeURI(message.content)}&lang=vi_VN`)
-            .then(response => {
-                message.channel.send(response.data.success);
-            });
+    if (message.channel.id == aiChannel) {
+        let url;
+        if (!aiLang || aiLang === 'vi') url = `https://simsimi.copcute.pw/api/?text=${encodeURIComponent(message.content)}&lang=vi_VN`;
+        else url = `http://api.brainshop.ai/get?bid=${BID}&key=${BRAINKEY}&uid=1&msg=${encodeURIComponent(message.content)}`;
+        const res = await axios.get(url);
+        message.channel.send(!aiLang || aiLang === 'vi' ? res.data.success : res.data.cnt);
     }
     // check unafk
     let checkAFK = await afkData.get(message.author.id);
@@ -197,7 +196,9 @@ client.on("message", async message => {
     let command = client.commands.get(cmd);
     if (!command) command = client.commands.get(client.aliases.get(cmd));
     if (command) {
+        const botPerms = message.channel.permissionsFor(client.user);
         if (command.ownerOnly === true && message.author.id !== ownerID) return message.channel.send('Lệnh này chỉ dành cho Owner của bot!');
+        if (!botPerms.has(['SEND_MESSAGES'])) return message.author.send('Mình không có quyền gởi tin nhắn ở server này!');
         let guildCheck = await commandDb.get(message.guild.id);
         if (!guildCheck) guildCheck = await commandDb.set(message.guild.id, []);
         if (guildCheck.includes(command.name)) return message.channel.send('Lệnh này đã bị tắt ở server này!');
