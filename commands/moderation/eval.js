@@ -5,7 +5,7 @@ module.exports = {
         aliases: ["e"],
         description: "Execute javascript code",
         usage: "<PREFIX>eval <js code>",
-        onwerOnly: true,
+        ownerOnly: true,
         run: async (client, message, args) => {
             if (!args[0]) return message.reply('Nhập lệnh để chạy code...');
             try {
