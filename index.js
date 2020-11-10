@@ -198,7 +198,7 @@ client.on("message", async message => {
     if (command) {
         const botPerms = message.channel.permissionsFor(client.user);
         if (command.ownerOnly === true && message.author.id !== ownerID) return message.channel.send('Lệnh này chỉ dành cho Owner của bot!');
-        if (!botPerms.has(['SEND_MESSAGES'])) return message.author.send('Mình không có quyền gởi tin nhắn ở server này!');
+        if (!botPerms.has(['SEND_MESSAGES'])) return message.author.send('Mình không có quyền gởi tin nhắn ở server này!').catch(err => console.log(`${message.author.id} không mở DMs`));
         let guildCheck = await commandDb.get(message.guild.id);
         if (!guildCheck) guildCheck = await commandDb.set(message.guild.id, []);
         if (guildCheck.includes(command.name)) return message.channel.send('Lệnh này đã bị tắt ở server này!');
