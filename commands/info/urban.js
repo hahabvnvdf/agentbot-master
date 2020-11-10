@@ -9,17 +9,16 @@ module.exports = {
     run: async (client, message, args, tools) => {
         if (!args[0]) return message.reply(`Bạn phải nhập gì đó để mình tìm chứ`);
         // Fetch from urban dict
-        const res = await urban(args.join(' ')).catch(e => {
-            return "not found";
-        });
-        if (res == "not found") return message.channel.send(`Không tìm thấy từ **${args.join(' ')}**`);
+        const res = await urban(args.join(' ')).catch(() => null);
+        if (!res) return message.channel.send(`Không tìm thấy từ **${args.join(' ')}**`);
+        const { word, urbanURL, definition, example, thumbsUp, thumbsDown } = res;
         const embed = new MessageEmbed()
             .setColor('RANDOM')
-            .setTitle(res.word)
-            .setURL(res.urbanURL)
-            .setDescription(`**Definition:**\n*${res.definition}*\n\n**Example:**\n${res.example}*`)
-            .addField('Author: ', res.author, true)
-            .addField('Rating: ', `**\`Upvotes: ${res.thumbsUp} | Downvotes: ${res.thumbsDown}\`**`);
+            .setTitle(word)
+            .setURL(urbanURL)
+            .setDescription(`**Definition:**\n*${definition}*\n\n**Example:**\n${example}*`)
+            .addField('Author: ', author, true)
+            .addField('Rating: ', `**\`Upvotes: ${thumbsUp} | Downvotes: ${thumbsDown}\`**`);
         message.channel.send(embed);
     },
 };

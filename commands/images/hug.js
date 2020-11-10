@@ -10,12 +10,12 @@ module.exports = {
     example: "<PREFIX>hug (ôm tất cả) hoặc <PREFIX>hug @phamleduy04",
     run: async (client, message, args) => {
         let nguoitag = message.mentions.members.array();
-        if (nguoitag.length == 0) nguoitag = [await message.guild.members.fetch(args[0])];
+        if (nguoitag.length == 0) nguoitag = await message.guild.members.fetch({ user: args[0] }).catch(() => null);
         try {
             const response = await axios.get('https://some-random-api.ml/animu/hug');
             const embed = new MessageEmbed()
                 .setImage(response.data.link);
-            if (nguoitag.length == 0 || !nguoitag[0]) embed.setDescription(`${message.member} đã ôm tất cả mọi người <3`);
+            if (!nguoitag || nguoitag.length == 0) embed.setDescription(`${message.member} đã ôm tất cả mọi người <3`);
             else {
                 embed.setDescription(`Awwww, ${message.member} đã ôm ${nguoitag} <3`);
                 if (shipDb.has(message.author.id)) {

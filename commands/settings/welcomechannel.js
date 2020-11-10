@@ -20,6 +20,11 @@ module.exports = {
         }
         if (!channel) return message.channel.send('Không tìm thấy channel!');
         // log to database
+        const check = db.get(`${message.guild.id}.welcomechannel`);
+        if (check == channel.id) {
+            await db.delete(`${message.guild.id}.welcomechannel`);
+            return message.channel.send('Đã xoá channel thành công!');
+        }
         await db.set(`${message.guild.id}.welcomechannel`, channel.id);
         message.channel.send(`Thao tác thành công!`);
     },

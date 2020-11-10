@@ -2,19 +2,15 @@ const random = require('random-number-csprng');
 const { MessageEmbed } = require('discord.js');
 const axios = require('axios');
 module.exports = {
-    getMember: function(message, toFind = '') {
+    getMember: async function(message, toFind = '', authorReturn = true) {
+        if (!toFind) return authorReturn ? message.member : null;
         toFind = toFind.toLowerCase();
-        let target = message.guild.members.cache.get(toFind);
-        if (!target && message.mentions.members)
-            target = message.mentions.members.first();
-        if (!target && toFind) {
-            target = message.guild.members.cache.find(member => {
-                return member.displayName.toLowerCase().includes(toFind) ||
-                    member.user.tag.toLowerCase().includes(toFind);
-            });
-        }
-        if (!target)
-            target = message.member;
+        let target = await message.guild.members.fetch({ user: toFind }).catch(() => undefined);
+        if (!target && message.mentions.members) target = message.mentions.members.first();
+        if (!target && toFind)
+            target = await message.guild.members.fetch({ query: toFind, limit: 1 });
+            target = target[0];
+        if (!target) target = authorReturn ? message.member : null;
         return target;
     },
 

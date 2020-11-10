@@ -1,4 +1,5 @@
 const stringSimilarity = require('string-similarity');
+const { getMember } = require('../../functions/utils');
 module.exports = {
     name: "removerole",
     aliases: ["roleremove", "rr"],
@@ -15,7 +16,7 @@ module.exports = {
             const roles = message.guild.roles.cache.filter(r => r.managed === false).map(g => g.name);
             const search = args.slice(1).join(' ');
             const matches = stringSimilarity.findBestMatch(search, roles);
-            const user = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
+            const user = await getMember(message, args.join(' '));
             const role = message.guild.roles.cache.find(el => el.name === matches.bestMatch.target);
             if (!user)
                 return message.reply("Không tìm thấy người bạn tag, vui lòng thử lại.");

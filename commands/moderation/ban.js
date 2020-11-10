@@ -1,6 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const { promptMessage } = require('../../functions/utils');
 const db = require('quick.db');
+const { getMember } = require('../../functions/utils');
 module.exports = {
     name: "ban",
     category: "moderation",
@@ -29,7 +30,7 @@ module.exports = {
                 .then(m => m.delete({ timeout: 5000 }));
         }
 
-        const toBan = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
+        const toBan = await getMember(message, args.join(' '), false);
 
         // No member found
         if (!toBan) {

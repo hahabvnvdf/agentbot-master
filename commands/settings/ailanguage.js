@@ -8,6 +8,8 @@ module.exports = {
     run: async (client, message, args) => {
         if(!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền `MANAGE_GUILD` để chạy lệnh này!');
         if (!args[0] || !ansAccept.includes(args[0])) return message.channel.send('Vui lòng nhập `en` hoặc `vi` để cài đặt ngôn ngữ!');
+        const check = await db.get(`${message.guild.id}.aiChannel`);
+        if (!check) return message.channel.send('Bạn chưa cài đặt channel AI. Vui lòng sử dụng lệnh setchannelAI để sử dụng!');
         await db.set(`${message.guild.id}.aiLang`, args[0]);
         message.channel.send('Thao tác thành công!');
     },

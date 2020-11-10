@@ -8,7 +8,7 @@ module.exports = {
     description: "Thông tin về người dùng",
     usage: "<PREFIX>whois <@tag,username,ID>",
     run: async (client, message, args) => {
-        const member = getMember(message, args.join(' '));
+        const member = await getMember(message, args.join(' '));
             // Member variables
         const joined = formatDate(member.joinedAt);
         const roles = member.roles.cache
@@ -36,6 +36,7 @@ module.exports = {
                 `**- Tag**: ${member.user.tag}`,
                 `**- Tạo vào lúc**: ${created}`,
                 `**- Huy hiệu**: ${userFlags.length ? userFlags.map(flag => flags[flag]).join(", ") : "Không có" }`,
+                `**- Status?**: ${member.presence.status}`,
             ], true)
             .setTimestamp();
         if (member.user.presence.activities.length > 0)

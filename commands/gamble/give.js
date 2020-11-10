@@ -1,5 +1,5 @@
 const eco = require('../../functions/economy');
-const { laysodep } = require('../../functions/utils');
+const { laysodep, getMember } = require('../../functions/utils');
 module.exports = {
     name: 'give',
     category: 'gamble',
@@ -8,7 +8,7 @@ module.exports = {
     usage: '<PREFIX>give <@tag or ID> <so tien>',
     example: '<PREFIX>give @phamleduy04 50000',
     run: async (client, message, args) => {
-        const member = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
+        const member = await getMember(message, args.join(' '), false);
         if (!member) return message.channel.send('Hãy tag hoặc đưa ID của người đó!');
         if (member.user.bot) return message.channel.send('Bạn không thể gởi tiền cho bot!');
         const amount = await eco.fetchMoney(message.author.id);

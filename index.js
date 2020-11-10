@@ -1,4 +1,4 @@
-const { Collection, MessageEmbed, Client, Util, MessageAttachment } = require("discord.js");
+const { Collection, MessageEmbed, Client, MessageAttachment } = require("discord.js");
 const { config } = require("dotenv");
 config({
     path: __dirname + "/.env",
@@ -159,7 +159,7 @@ client.on("message", async message => {
         }, ms('1m'));
     }
     // ai channel
-    if (message.channel.id == aiChannel) {
+    if (message.channel.id == aiChannel && !message.author.bot) {
         let url;
         if (!aiLang || aiLang === 'vi') url = `https://simsimi.copcute.pw/api/?text=${encodeURIComponent(message.content)}&lang=vi_VN`;
         else url = `http://api.brainshop.ai/get?bid=${BID}&key=${BRAINKEY}&uid=1&msg=${encodeURIComponent(message.content)}`;

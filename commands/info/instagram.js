@@ -10,12 +10,8 @@ module.exports = {
         if (!args[0]) return message.channel.send('Bạn vui lòng nhập instagram của bạn!');
         const instagram = args.join(' ');
         const url = `https://instagram.com/${instagram}/?__a=1`;
-        let res;
-        try {
-            res = await axios.get(url, { headers: { cookie: process.env.INSTAGRAM_COOKIE } });
-        } catch(e) {
-            return message.channel.send('Mình không tìm thấy tên instagram của bạn!');
-        }
+        const res = await axios.get(url, { headers: { cookie: process.env.INSTAGRAM_COOKIE } }).catch(() => null);
+        if (!res) return message.channel.send('Mình không tìm thấy Instagram của bạn!');
         const account = res.data.graphql.user;
         const embed = new MessageEmbed()
             .setColor("RANDOM")

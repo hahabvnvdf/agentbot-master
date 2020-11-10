@@ -6,22 +6,21 @@ module.exports = {
     description: "Thông tin thời tiết",
     usage: "<PREFIX>weather <mã bưu điện hoặc tên thành phố>",
     example: "<PREFIX>weather Ho Chi Minh",
-    run: (client, message, args) => {
+    run: async (client, message, args) => {
         if (!args[0]) return message.channel.send("Vui lòng ghi tên thành phố");
         const query = args.join(' ');
-        weather.find({ search: query, degreeType: 'C' }, function(err, result) {
-            if (err) return message.channel.send(`Bot lỗi: ${err}`);
-            if (result.length === 0) return message.reply(`Bot không tìm được tên thành phố, vui lòng thử lại.`);
-            const current = result[0].current;
-            const embed = new MessageEmbed()
-                .setDescription(`**${current.skytext}** `)
-                .setThumbnail(current.imageUrl)
-                .setAuthor(`Thời tiết ở ${current.observationpoint} hôm nay`)
-                .addField(`Nhiệt độ: `, `${current.temperature} °C`, true)
-                .addField(`Feels like®: `, `${current.feelslike} °C`, true)
-                .addField(`Gió: `, current.winddisplay, true)
-                .addField(`Độ ẩm: `, `${current.humidity}%`, true);
-            return message.channel.send(embed);
-        });
+        const result = await weather.find({ search: query, degreeType: 'C' });
+        if (err) return message.channel.send(`Bot lỗi: ${err}`);
+        if (result.length === 0) return message.reply(`Bot không tìm được tên thành phố, vui lòng thử lại.`);
+        const { skytext, observationpoint, temperature, feelslike, winddisplay, humidity } = result[0].current;
+        const embed = new MessageEmbed()
+            .setDescription(`**${skytext}** `)
+            .setThumbnail(imageUrl)
+            .setAuthor(`Thời tiết ở ${observationpoint} hôm nay`)
+            .addField(`Nhiệt độ: `, `${temperature} °C`, true)
+            .addField(`Feels like®: `, `${feelslike} °C`, true)
+            .addField(`Gió: `, winddisplay, true)
+            .addField(`Độ ẩm: `, `${humidity}%`, true);
+        return message.channel.send(embed);
     },
 };

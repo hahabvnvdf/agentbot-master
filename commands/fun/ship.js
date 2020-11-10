@@ -2,6 +2,7 @@ const { MessageEmbed, MessageAttachment } = require("discord.js");
 const db = require('quick.db');
 const shipDb = new db.table('shipDb');
 const moment = require('moment');
+const { getMember } = require('../../functions/utils');
 module.exports = {
     name: "ship",
     category: "fun",
@@ -12,7 +13,7 @@ module.exports = {
     run: async (client, message, args) => {
         const embed = new MessageEmbed();
         const authorData = await shipDb.get(message.author.id);
-        const member = !args[0] ? null : message.mentions.members.first() || await message.guild.members.fetch({ user: args[0] }).catch(() => undefined);
+        const member = await getMember(message, args.join(' '), false);
         switch (args[0]) {
             case 'rename':
                 if (!authorData) return message.channel.send('Bạn không có thuyền!');

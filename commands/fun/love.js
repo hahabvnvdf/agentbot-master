@@ -9,7 +9,7 @@ module.exports = {
     example: `<PREFIX>love @phamleduy04`,
     run: async (client, message, args) => {
         // Get a member from mention, id, or username
-        let person = getMember(message, args[0]);
+        let person = await getMember(message, args.join(' '));
 
         if (!person || !args[0]) {
             person = message.guild.members.cache

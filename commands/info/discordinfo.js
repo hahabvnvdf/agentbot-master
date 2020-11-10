@@ -7,15 +7,14 @@ module.exports = {
     usage: '<PREFIX> status',
     run: async (client, message, args) => {
         try {
-            await axios.get('https://srhpyqt94yxb.statuspage.io/api/v2/components.json').then(response => {
-                const embed = new MessageEmbed()
-                    .setTitle('Thông tin server của Discord')
-                    .setTimestamp();
-                response.data.components.forEach(component => {
-                    embed.addField(component.name, component.status);
-                });
-                message.channel.send(embed);
+            const res = await axios.get('https://srhpyqt94yxb.statuspage.io/api/v2/components.json');
+            const embed = new MessageEmbed()
+                .setTitle('Thông tin server của Discord')
+                .setTimestamp();
+            res.data.components.forEach(component => {
+                embed.addField(component.name, component.status);
             });
+            message.channel.send(embed);
         }
         catch(e) {
             console.log(e);

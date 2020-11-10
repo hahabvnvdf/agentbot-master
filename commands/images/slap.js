@@ -2,6 +2,7 @@ const { MessageEmbed, MessageAttachment } = require("discord.js");
 const { readFileSync, readdirSync } = require('fs');
 const db = require('quick.db');
 const shipDb = new db.table('shipDb');
+const { getMember } = require('../../functions/utils');
 module.exports = {
     name: "slap",
     category: "images",
@@ -11,7 +12,7 @@ module.exports = {
         const folder = readdirSync("././assets/slap/");
         const file = readFileSync(`././assets/slap/${folder[Math.floor(Math.random() * folder.length)]}`);
         const attachment = new MessageAttachment(file, 'slap.gif');
-        const nguoitag = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
+        const nguoitag = await getMember(message, args.join(' '));
         const embed = new MessageEmbed()
             .attachFiles(attachment)
             .setImage('attachment://slap.gif');

@@ -2,6 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const axios = require('axios');
 const db = require('quick.db');
 const shipDb = new db.table('shipDb');
+const { getMember } = require('../../functions/utils');
 module.exports = {
     name: "pat",
     aliases: ['vodau', 'pet'],
@@ -10,11 +11,11 @@ module.exports = {
     usage: "<PREFIX>pat [@tag]",
     run: async (client, message, args) => {
         try {
-            const nguoitag = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
+            const nguoitag = await getMember(message, args.join(' '));
             const response = await axios.get('https://some-random-api.ml/animu/pat');
             const embed = new MessageEmbed()
                 .setImage(response.data.link);
-                if (nguoitag.length == 0) embed.setDescription(`${message.member.displayName} vỗ về đã tất cả mọi người ♥`);
+                if (!nguoitag || nguoitag.length == 0) embed.setDescription(`${message.member.displayName} vỗ về đã tất cả mọi người ♥`);
                 else embed.setDescription(`Awwww, ${message.member} đã vỗ về ${nguoitag} ♥`);
                 if (shipDb.has(message.author.id)) {
                     const authorData = await shipDb.get(message.author.id);

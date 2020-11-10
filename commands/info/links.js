@@ -11,7 +11,7 @@ module.exports = {
             .setTitle('Các link của AgentBot!')
             .setColor('RANDOM')
             .addField('Các link của AgentBot:', [
-                `[Add AgentBot vào server:](https://discordapp.com/api/oauth2/authorize?client_id=645883401500622848&permissions=8&scope=bot)`,
+                `[Add AgentBot vào server:](https://discord.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080898303)`,
                 `[Support server:](https://discord.gg/xAPtFDK)`,
                 `[Top.gg:](https://top.gg/bot/645883401500622848)`,
                 `[Github:](https://github.com/phamleduy04/agentbot-master)`,

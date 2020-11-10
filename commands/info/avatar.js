@@ -7,9 +7,9 @@ module.exports = {
     description: "Xem avatar của người khác",
     usage: "<PREFIX>avatar <tag>",
     example: "<PREFIX>avatar @phamleduy04",
-    run: (client, message, args) => {
+    run: async (client, message, args) => {
         const embed = new MessageEmbed();
-        const member = getMember(message, args.join(' '));
+        const member = await getMember(message, args.join(' '));
         const avaurl = member.user.displayAvatarURL({ format: 'jpg', dynamic: true, size: 1024 });
         embed.setImage(avaurl)
             .setTitle(`Link avatar: `)

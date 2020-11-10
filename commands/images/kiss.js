@@ -2,6 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const axios = require("axios");
 const db = require('quick.db');
 const shipDb = new db.table('shipDb');
+const { getMember } = require('../../functions/utils');
 module.exports = {
     name: "kiss",
     category: "images",
@@ -9,7 +10,7 @@ module.exports = {
     usage: "<PREFIX>kiss <@tag>",
     run: async (client, message, args) => {
         try {
-            const nguoitag = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
+            const nguoitag = await getMember(message, args.join(' '));
             const response = await axios.get(`https://api.giphy.com/v1/gifs/random?api_key=${process.env.GIPHY}&tag=kiss&rating=R`);
             if (!nguoitag) return message.reply('Tag 1 người nào đi bạn.');
             if (nguoitag.id == message.author.id) return message.channel.send('Bạn không thể tự thơm chính mình.');

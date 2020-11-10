@@ -2,6 +2,7 @@ const { readFileSync, readdirSync } = require('fs');
 const { MessageAttachment, MessageEmbed } = require('discord.js');
 const db = require('quick.db');
 const shipDb = new db.table('shipDb');
+const { getMember } = require('../../functions/utils');
 module.exports = {
     name: 'poke',
     aliases: ['chot', 'chọt'],
@@ -12,7 +13,7 @@ module.exports = {
         const folder = readdirSync('././assets/poke');
         const file = readFileSync(`././assets/poke/${folder[Math.floor(Math.random() * folder.length)]}`);
         const attachment = new MessageAttachment(file, 'poke.gif');
-        const nguoitag = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
+        const nguoitag = await getMember(message, args.join(' '));
         if (!nguoitag) return message.reply('Vui lòng tag một ai đó');
         else if (nguoitag.id == message.author.id) return message.channel.send('Bạn không thể tự tag chính mình.');
         const embed = new MessageEmbed()

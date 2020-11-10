@@ -5,6 +5,7 @@ const fs = require('fs');
 const random_num = require('random-number-csprng');
 const db = require('quick.db');
 const canvacord = require('canvacord');
+const { getMember } = require('../../functions/utils');
 module.exports = {
     name: "rank",
     category: "ranking",
@@ -16,7 +17,7 @@ module.exports = {
     run: async (client, message, args) => {
       const serverStatus = db.get(`${message.guild.id}.msgcount`);
       if (serverStatus === false) return message.channel.send('Server không bật hệ thống rank!');
-      const member = message.mentions.members.first() || message.member;
+      const member = getMember(message, args.join(' '));
       if (member.user.bot) return message.reply('Bạn không thể xem rank của bot!');
       const data = client.getScore.get(member.user.id, message.guild.id);
       const server_data = sql.prepare("SELECT * FROM xpdata WHERE guild = ? ORDER BY level DESC, xp DESC;").all(message.guild.id);

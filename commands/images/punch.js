@@ -2,6 +2,7 @@ const { MessageEmbed, MessageAttachment } = require("discord.js");
 const { readFileSync, readdirSync } = require('fs');
 const db = require('quick.db');
 const shipDb = new db.table('shipDb');
+const { getMember } = require('../../functions/utils');
 module.exports = {
     name: "punch",
     aliases: ['đấm', 'dam'],
@@ -12,11 +13,11 @@ module.exports = {
         const folder = readdirSync("././assets/slap");
         const file = readFileSync(`././assets/slap/${folder[Math.floor(Math.random() * folder.length)]}`);
         const attachment = new MessageAttachment(file, 'punch.gif');
-        const nguoitag = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
+        const nguoitag = await getMember(message, args.join(' '), false);
         const embed = new MessageEmbed()
             .attachFiles(attachment)
             .setImage('attachment://punch.gif');
-        if (nguoitag.length == 0) embed.setDescription(`${message.member} đã tự đấm chính mình 👊`);
+        if (!nguoitag || nguoitag.length == 0) embed.setDescription(`${message.member} đã tự đấm chính mình 👊`);
         else embed.setDescription(`${message.member} đã đấm vỡ mồm ${nguoitag} 👊`);
         if (shipDb.has(message.author.id)) {
             const authorData = await shipDb.get(message.author.id);

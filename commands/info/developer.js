@@ -8,7 +8,6 @@ module.exports = {
     usage: '<PREFIX> developer',
     run: async (client, message, args) => {
         const Dui = await client.users.fetch(ownerID);
-        console.log(Dui);
         const embed = new MessageEmbed()
             .setTitle(`Thông tin về Developer`)
             .addField('Thông tin cá nhân', [

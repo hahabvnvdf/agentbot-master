@@ -1,4 +1,5 @@
 const { ownerID } = require('../../config.json');
+const { getMember } = require('../../functions/utils');
 module.exports = {
     name: "setnick",
     aliases: ["setnickname"],
@@ -9,7 +10,7 @@ module.exports = {
     example: "<PREFIX>setnick @phamleduy04 Duy",
     run: async (client, message, args) => {
         if (!message.member.hasPermission('MANAGE_NICKNAMES') && message.author.id !== ownerID) return message.reply("Bạn cần có quyền `\ MANAGE_NICKNAMES `\ để có thể đổi nickname.");
-        const user = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
+        const user = await getMember(message, args.join(' '));
         let output = args.slice(1).join(' ');
         if (!args[0]) return message.reply(`Phải tag ai đó chứ`);
         if (!output) output = user.user.username;

@@ -2,6 +2,7 @@ const { Canvas } = require('canvacord');
 const { MessageAttachment } = require('discord.js');
 const db = require('quick.db');
 const shipDb = new db.table('shipDb');
+const { getMember } = require('../../functions/utils');
 module.exports = {
     name: "tat",
     aliases: ["tats", "tát"],
@@ -11,7 +12,7 @@ module.exports = {
     example: "<PREFIX>tat @phamleduy04",
     run: async (client, message, args) => {
         const url1 = message.author.displayAvatarURL({ format: 'png', dynamic: false });
-        const nguoitag = message.mentions.members.first() || message.member;
+        const nguoitag = await getMember(message, args.join(' '));
         const avaurl = nguoitag.user.displayAvatarURL({ format: 'png', dynamic: false });
         const image = await Canvas.slap(url1, avaurl);
         const attach = new MessageAttachment(image, 'batslap.png');

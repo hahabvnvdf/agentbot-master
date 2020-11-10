@@ -29,7 +29,7 @@ module.exports = {
                 .then(m => m.delete({ timeout: 5000 }));
         }
 
-        const toKick = message.mentions.members.first() || await message.guild.members.fetch(args[0]);
+        const toKick = await getMember(message, args.join(' '), false);
         // No member found
         if (!toKick) {
             return message.reply("Không tìm thấy người cần kick, vui lòng thử lại.")

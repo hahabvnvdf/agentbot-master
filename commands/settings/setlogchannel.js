@@ -7,7 +7,7 @@ module.exports = {
     usage: "<PREFIX>setlogchannel <#channel, tên channel hoặc id>",
     example: "<PREFIX>setlogchannel #log-channel",
     run: async (client, message, args) => {
-        if (!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy lệnh này.');
+        if (!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền `MANAGE_GUILD` để chạy lệnh này.');
         if (!args[0]) return message.channel.send("Vui lòng nhập channel!");
         let id = args[0];
         if (id.startsWith("<#")) id = id.slice(2, id.length - 1);
