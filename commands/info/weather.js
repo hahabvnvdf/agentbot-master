@@ -9,8 +9,8 @@ module.exports = {
     run: async (client, message, args) => {
         if (!args[0]) return message.channel.send("Vui lòng ghi tên thành phố");
         const query = args.join(' ');
-        const result = await weather.find({ search: query, degreeType: 'C' });
-        if (err) return message.channel.send(`Bot lỗi: ${err}`);
+        const result = await weather.find({ search: query, degreeType: 'C' }).catch(() => null);
+        if (!result) return message.channel.send("Bot lỗi, vui lòng thử lại sau!");
         if (result.length === 0) return message.reply(`Bot không tìm được tên thành phố, vui lòng thử lại.`);
         const { skytext, observationpoint, temperature, feelslike, winddisplay, humidity } = result[0].current;
         const embed = new MessageEmbed()
