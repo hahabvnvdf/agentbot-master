@@ -1,5 +1,6 @@
 const eco = require('../../functions/economy');
-const { randomcard, createembedfield, laysodep, locbai } = require('../../functions/utils');
+const { laysodep } = require('../../functions/utils');
+const { randomcard, createembedfield, locbai } = require('../../functions/cards');
 const ms = require('ms');
 const doubledownEmoji = "👌";
 const stopEmoji = "🛑";
