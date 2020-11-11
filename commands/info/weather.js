@@ -11,7 +11,7 @@ module.exports = {
         const query = args.join(' ');
         weather.find({ search: query, degreeType: 'C' }, (err, result) => {
             if (result.length === 0) return message.reply(`Bot không tìm được tên thành phố, vui lòng thử lại.`);
-            const { skytext, observationpoint, temperature, feelslike, winddisplay, humidity } = result[0].current;
+            const { skytext, observationpoint, temperature, feelslike, winddisplay, humidity, imageUrl } = result[0].current;
             const embed = new MessageEmbed()
                 .setDescription(`**${skytext}** `)
                 .setThumbnail(imageUrl)
