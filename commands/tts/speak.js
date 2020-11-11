@@ -69,7 +69,7 @@ module.exports = {
                     voiceChannel.leave();
                     message.channel.send('Đã rời phòng vì không hoạt động!');
                 }
-                if (!message.guild.me.voice.channel) await db.delete(`${message.guild.id}.endTime`);
+                if (!message.guild.me.voice) await db.delete(`${message.guild.id}.endTime`);
             }, ms('5m') + 1000);
         });
     },
