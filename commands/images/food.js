@@ -11,7 +11,7 @@ module.exports = {
         const subReddits = ["appetizers", "asianeats", "BBQ", "bento", "BreakfastFood", "burgers", "cakewin", "Canning", "cereal", "charcuterie", "Cheese", "chinesefood", "cider", "condiments", "curry", "culinaryplating", "cookingforbeginners", "cookingwithcondiments", "doener", "eatwraps", "fastfood", "fishtew", "fried", "GifRecipes", "grease", "hot_dog", "icecreamery", "irish_food", "JapaneseFood", "jello", "KoreanFood", "FoodPorn", "meat", "pasta", "pizza", "ramen", "seafood", "spicy", "steak", "sushi", "sushiroll", 'Vitamix'];
         const random = subReddits[Math.floor(Math.random() * subReddits.length)];
         try {
-            const img = await ksoft.images.reddit(random, { removeNSFW: true, span: 'month' });
+            const img = await images.reddit(random, { removeNSFW: true, span: 'month' });
             const embed = new MessageEmbed()
                 .setColor('RANDOM')
                 .setImage(img.url)
