@@ -96,13 +96,14 @@ client.on("ready", () => {
 });
 
 client.on("guildCreate", async newguild => {
+    const owner = await newguild.members.fetch(newguild.ownerID);
     await newguild.members.fetch();
     const embed = new MessageEmbed()
         .setTitle("New Server Joined")
         .addField('Guild Name: ', newguild.name, true)
         .addField('Guild ID: ', newguild.id, true)
         .addField("Guild members: ", newguild.memberCount, true)
-        .addField("Owner server: ", newguild.owner.user.tag, true)
+        .addField("Owner server: ", owner.user.tag, true)
         .setFooter(`OwnerID: ${newguild.ownerID}`);
     client.channels.cache.get('700071755146068099').send(embed);
     // agent's server
@@ -120,12 +121,11 @@ client.on("guildDelete", async oldguild => {
 });
 
 client.on('guildMemberAdd', async member => {
-    const memberManager = await member.guild.members.fetch();
     const serverdata = db.get(member.guild.id);
     if (!db.has(`${member.guild.id}.welcomechannel`)) return;
     const channel = member.guild.channels.cache.get(serverdata.welcomechannel);
     if (!channel) return;
-    const image = await welcome(member.user.username, member.user.discriminator, member.user.displayAvatarURL({ format: 'png', dynamic: false }), memberManager.size);
+    const image = await welcome(member.user.username, member.user.discriminator, member.user.displayAvatarURL({ format: 'png', dynamic: false }), member.guild.memberCount);
     const attachment = new MessageAttachment(image, 'welcome.png');
     return channel.send(attachment);
 });
