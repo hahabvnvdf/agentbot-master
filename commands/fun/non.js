@@ -2,6 +2,7 @@ const Canvas = require('canvas');
 const { join } = require('path');
 const { getMember } = require('../../functions/utils');
 const { MessageAttachment } = require('discord.js');
+const quotes = ['non lắm', 'búp trên cành', 'mới nhú', 'nảy mầm'];
 module.exports = {
     name: 'non',
     description: 'non lắm',
@@ -17,6 +18,6 @@ module.exports = {
         ctx.drawImage(avatar, 700, 125, 100, 100);
         const buffer = canvas.toBuffer();
         const attachment = new MessageAttachment(buffer);
-        message.channel.send(attachment);
+        message.channel.send(quotes[Math.floor(Math.random() * quotes.length)], attachment);
     },
 };
