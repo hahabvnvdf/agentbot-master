@@ -1,6 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const { promptMessage } = require("../../functions/utils");
 const db = require('quick.db');
+const { getMember } = require('../../functions/utils');
 module.exports = {
     name: "kick",
     category: "moderation",

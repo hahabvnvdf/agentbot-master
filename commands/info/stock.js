@@ -7,6 +7,7 @@ module.exports = {
     run: async (client, message, args) => {
         if (!args[0]) return message.channel.send('Vui lòng nhập mã cổ phiếu cần tra!');
         const { currency, response } = await getSymbol(args[0]);
+        if (!response) return message.channel.send('Mã cổ phiếu không tồn tại!');
         const { open, previousClose } = response;
         const embed = new MessageEmbed()
             .setTitle(`Thông tin cổ phiếu ${args[0].toUpperCase()}`)

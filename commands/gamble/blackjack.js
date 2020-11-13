@@ -1,5 +1,6 @@
 const eco = require('../../functions/economy');
-const { getcardvalue, randomcard, checkautowin, createembed, laysodep, createembedfield, locbai } = require('../../functions/utils');
+const { laysodep } = require('../../functions/utils');
+const { getcardvalue, randomcard, checkautowin, createembed, createembedfield, locbai } = require('../../functions/cards');
 const checkGame = new Set();
 const hitemoji = "👊";
 const stopemoji = "🛑";

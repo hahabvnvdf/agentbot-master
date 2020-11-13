@@ -1,3 +1,4 @@
+const { log } = require('../../functions/log');
 module.exports = {
     name: "clear",
     aliases: ["purge"],
@@ -25,6 +26,11 @@ module.exports = {
         if (!user) {
             message.channel.bulkDelete(amount, true).then(delmsg => {
                 message.channel.send(`Đã xoá \`${delmsg.size}\` tin nhắn!`).then(m => m.delete({ timeout: 5000 }));
+            })
+            .catch(error => {
+                if (error.code !== 10008) {
+                    log(`${error.message}`);
+                }
             });
         } else {
             message.channel.messages.fetch({
@@ -33,6 +39,11 @@ module.exports = {
                 messages = messages.filter(m => m.author.id === user.id).array().slice(0, amount);
                 message.channel.bulkDelete(messages, true).then(delmsg => {
                     message.channel.send(`Đã xoá \`${delmsg.size}\` tin nhắn!`).then(m => m.delete({ timeout: 5000 }));
+                })
+                .catch(error => {
+                    if (error.code !== 10008) {
+                        log(`${error.message}`);
+                    }
                 });
             });
         }

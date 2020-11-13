@@ -12,8 +12,9 @@ module.exports = {
     run: async (client, message, args) => {
         if (!args[0]) return message.reply("Nhập tên bài hát cần tìm lyrics");
         const song = args.join(' ');
-        const { lyrics, artist, name } = await ksoft.lyrics.get(song, false).catch(() => null);
+        const respond = await ksoft.lyrics.get(song, false).catch(() => null);
         if (!respond) return message.channel.send('Bot lỗi, vui lòng thử lại sau!');
+        const { name, lyrics, artist } = respond;
         const lyricsLength = lyrics.length;
         if (lyricsLength > 4095) return message.reply("Lyrics của bài hát bạn đang tìm quá dài để bot có thể xử lý.");
         const firstembed = new MessageEmbed()
