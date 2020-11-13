@@ -25,7 +25,7 @@ module.exports = {
                 embed.setFooter(`Cái tát ${authorData.target.slaps !== 1 ? `thứ ${authorData.target.slaps}` : 'đầu tiên'} của bạn.`);
             }
         }
-        else embed.setDescription(`${message.member} đã tát vỡ mồm ${nguoitag} 🤚`);
+        embed.setDescription(`${message.member} đã tát vỡ mồm ${nguoitag} 🤚`);
         message.channel.send(embed);
     },
 };
