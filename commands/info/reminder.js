@@ -9,7 +9,7 @@ module.exports = {
     run: async (client, message, args) => {
         const reminderTime = args[0];
         if (!reminderTime) return message.reply("Vui lòng nhập thời gian.");
-        const reminder = args.slice(1).join(" ");
+        const reminder = args.slice(1).join(" ") || `Lời nhắc của ${message.author.username}`;
         const embed = new MessageEmbed()
             .setColor("RANDOM")
             .setTitle(`${message.author.username}'s Reminder`)
