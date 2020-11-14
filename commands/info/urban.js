@@ -11,7 +11,7 @@ module.exports = {
         // Fetch from urban dict
         const res = await urban(args.join(' ')).catch(() => null);
         if (!res) return message.channel.send(`Không tìm thấy từ **${args.join(' ')}**`);
-        const { word, urbanURL, definition, example, thumbsUp, thumbsDown } = res;
+        const { word, urbanURL, definition, example, thumbsUp, thumbsDown, author } = res;
         const embed = new MessageEmbed()
             .setColor('RANDOM')
             .setTitle(word)
