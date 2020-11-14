@@ -10,6 +10,6 @@ module.exports = {
     usage: "<PREFIX>cash",
     run: async (client, message, args) => {
         const money = await eco.fetchMoney(message.author.id);
-        message.channel.send(`"<a:money:703041038637334540>" Bạn đang có **${laysodep(money)}** tiền!`);
+        message.channel.send(`<a:money:703041038637334540> Bạn đang có **${laysodep(money)}** tiền!`);
     },
 };
