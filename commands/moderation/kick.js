@@ -79,7 +79,10 @@ module.exports = {
                     logChannel.send(embed);
                 }
                 catch(err) {
-                    if (err.message.includes("Cannot send messages to this user")) return;
+                    if (err.message.includes("Cannot send messages to this user")) {
+                        toKick.kick(reason);
+                        logChannel.send(embed);
+                    }
                     else return message.channel.send(`Bị lỗi khi ban: ${err.message}`);
                 };
             } else if (emoji === "❌") {

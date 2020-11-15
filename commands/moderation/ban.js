@@ -80,12 +80,14 @@ module.exports = {
                     logChannel.send(embed);
                 }
                 catch(err) {
-                    if (err.message.includes("Cannot send messages to this user")) return;
+                    if (err.message.includes("Cannot send messages to this user")) {
+                        toBan.ban({ reason: reason });
+                        logChannel.send(embed);
+                    }
                     else return message.channel.send(`Bị lỗi khi ban: ${err.message}`);
                 };
             } else if (emoji === "❌") {
                 msg.delete();
-
                 message.reply(`Đã huỷ ban`)
                     .then(m => m.delete({ timeout: 10000 }));
             }
