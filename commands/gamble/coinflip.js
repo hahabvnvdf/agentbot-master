@@ -30,7 +30,7 @@ module.exports = {
         const amount = await eco.fetchMoney(message.author.id);
         let bet = 1;
         if (!args[1]) return message.channel.send('Vui lòng nhập tiền cược');
-        if (!isNaN(args[1])) bet = parseInt(args[0]);
+        if (!isNaN(args[1])) bet = parseInt(args[1]);
         if (args[1].toLowerCase() == 'all') bet = 'all';
         else if (amount === undefined) return message.channel.send('Vui lòng nhập tiền cược');
         else if (amount <= 0) return message.channel.send('Tiền cược không thể nhỏ hơn hoặc bằng 0.');
