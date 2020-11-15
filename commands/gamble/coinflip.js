@@ -2,8 +2,8 @@ const eco = require('../../functions/economy');
 const coin_gif = '<a:coin:710976678561841153>';
 const random = ['head', 'tail'];
 const dict = {
-    'head': '<:head:710976679203438703>',
-    'tail': '<:tail:710976679568474202>',
+    'head': '<:head:777374678121316364>',
+    'tail': '<:tail:777374678129967144>',
 };
 const { laysodep, sleep } = require('../../functions/utils');
 const maxBet = 50000;
@@ -30,7 +30,7 @@ module.exports = {
         const amount = await eco.fetchMoney(message.author.id);
         let bet = 1;
         if (!args[1]) return message.channel.send('Vui lòng nhập tiền cược');
-        if (!isNaN(args[1])) bet = parseInt(args[0]);
+        if (!isNaN(args[1])) bet = parseInt(args[1]);
         if (args[1].toLowerCase() == 'all') bet = 'all';
         else if (amount === undefined) return message.channel.send('Vui lòng nhập tiền cược');
         else if (amount <= 0) return message.channel.send('Tiền cược không thể nhỏ hơn hoặc bằng 0.');

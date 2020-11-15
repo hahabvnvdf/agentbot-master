@@ -72,13 +72,19 @@ module.exports = {
 
             // The verification stuffs
             if (emoji === "✅") {
-                msg.delete();
-                await toKick.send(`Bạn vừa bị kick ra khỏi server \`${toKick.guild.name}\`. Lý do: \`${args.slice(1).join(' ')}\``);
-                toKick.kick(reason)
-                    .catch(err => {
-                        if (err) return message.channel.send(`Bị lỗi khi kick: ${err.message}`);
-                    });
-                logChannel.send(embed);
+                try {
+                    if (message.deletable) msg.delete();
+                    await toKick.send(`Bạn vừa bị kick ra khỏi server \`${toKick.guild.name}\`. Lý do: \`${args.slice(1).join(' ')}\``);
+                    toKick.kick(reason);
+                    logChannel.send(embed);
+                }
+                catch(err) {
+                    if (err.message.includes("Cannot send messages to this user")) {
+                        toKick.kick(reason);
+                        logChannel.send(embed);
+                    }
+                    else return message.channel.send(`Bị lỗi khi ban: ${err.message}`);
+                };
             } else if (emoji === "❌") {
                 msg.delete();
                 message.reply(`Đã huỷ kick.`)

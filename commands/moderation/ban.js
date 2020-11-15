@@ -73,16 +73,21 @@ module.exports = {
 
             // Verification stuffs
             if (emoji === "✅") {
-                msg.delete();
-                await toBan.send(`Bạn vừa bị ban ở server \`${toBan.guild.name}\`. Lý do: \`${reason}\``);
-                toBan.ban({ reason: reason })
-                    .catch(err => {
-                        if (err) return message.channel.send(`Bị lỗi khi ban: ${err.message}`);
-                    });
-                logChannel.send(embed);
+                try {
+                    if (msg.deletable) msg.delete();
+                    await toBan.send(`Bạn vừa bị ban ở server \`${toBan.guild.name}\`. Lý do: \`${reason}\``);
+                    toBan.ban({ reason: reason });
+                    logChannel.send(embed);
+                }
+                catch(err) {
+                    if (err.message.includes("Cannot send messages to this user")) {
+                        toBan.ban({ reason: reason });
+                        logChannel.send(embed);
+                    }
+                    else return message.channel.send(`Bị lỗi khi ban: ${err.message}`);
+                };
             } else if (emoji === "❌") {
                 msg.delete();
-
                 message.reply(`Đã huỷ ban`)
                     .then(m => m.delete({ timeout: 10000 }));
             }
