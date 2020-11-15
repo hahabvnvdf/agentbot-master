@@ -21,7 +21,7 @@ module.exports = {
         server_data = await Promise.all(server_data.map(async (data, index) => {
             const user = message.guild.members.cache.get(data.user);
             if (user) {
-                let next_level_xp = data.level * 300;
+                let next_level_xp = data.level * 100;
                 if (next_level_xp.toString().length >= 4) {
                     next_level_xp = next_level_xp / 1000;
                     const int_part = Math.trunc(next_level_xp);

@@ -28,7 +28,7 @@ module.exports = {
         .registerFonts()
         .setAvatar(member.user.displayAvatarURL({ format: 'png' }))
         .setCurrentXP(data.xp)
-        .setRequiredXP(data.level * 300)
+        .setRequiredXP(data.level * 100)
         .setLevel(data.level)
         .setRank(rank)
         .setStatus(member.user.presence.status)
