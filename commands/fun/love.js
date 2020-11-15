@@ -16,9 +16,6 @@ module.exports = {
                 .filter(m => m.id !== message.author.id && !m.user.bot)
                 .random();
         }
-        if (message.author.id === person.id)
-            return message.reply("Bạn không thể đo tình yêu dành cho chính bản thân vì nó luôn luôn là 100%");
-
 
         const love = Math.random() * 100;
         const loveIndex = Math.floor(love / 10);
