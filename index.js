@@ -146,12 +146,12 @@ client.on("message", async message => {
         if (!userdata) userdata = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, xp: 0, level: 1 };
         if (userdata.level !== 999) {
         const xpAdd = Math.floor(Math.random() * 12);
-        const nextlvl = userdata.level * 300;
+        const nextlvl = userdata.level * 200;
         if(userdata.xp > nextlvl) {
             userdata.level++;
+            userdata.xp = 0;
             message.reply(`Bạn đã lên cấp **${userdata.level}**!`);
-        }
-        userdata.xp += xpAdd;
+        } else userdata.xp += xpAdd;
         client.setScore.run(userdata);
         }
         cooldown.add(message.author.id);
