@@ -146,7 +146,7 @@ client.on("message", async message => {
         if (!userdata) userdata = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, xp: 0, level: 1 };
         if (userdata.level !== 999) {
         const xpAdd = Math.floor(Math.random() * 12);
-        const nextlvl = userdata.level * 200;
+        const nextlvl = userdata.level * 100;
         if(userdata.xp > nextlvl) {
             userdata.level++;
             userdata.xp = 0;
