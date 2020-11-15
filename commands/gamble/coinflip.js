@@ -2,8 +2,8 @@ const eco = require('../../functions/economy');
 const coin_gif = '<a:coin:710976678561841153>';
 const random = ['head', 'tail'];
 const dict = {
-    'head': '<:head:710976679203438703>',
-    'tail': '<:tail:710976679568474202>',
+    'head': '<:head:777374678121316364>',
+    'tail': '<:tail:777374678129967144>',
 };
 const { laysodep, sleep } = require('../../functions/utils');
 const maxBet = 50000;
