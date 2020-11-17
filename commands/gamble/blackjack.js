@@ -77,7 +77,7 @@ module.exports = {
             if (reaction.emoji.name === hitemoji) {
                 playerDeck.push(await randomcard(listofcard));
                 listofcard = locbai(listofcard, playerDeck);
-                if (getcardvalue(playerDeck) > 21 || parseInt(getcardvalue(playerDeck).replace('*', '')) > 21) {
+                if (getcardvalue(playerDeck) > 21 || parseInt(getcardvalue(playerDeck).replace(/\*/g, '')) > 21) {
                     collector.stop();
                     return await stop(message.author, listofcard, botDeck, playerDeck, msg, bet, checkGame);
                 }
@@ -99,15 +99,15 @@ module.exports = {
 // eslint-disable-next-line no-shadow
 async function stop(player, listofcard, botDeck, playerDeck, msg, bet, checkGame) {
     checkGame.delete(player.id);
-    while (getcardvalue(botDeck) < 15 || parseInt(getcardvalue(botDeck).replace('*', '')) < 15) {
+    while (getcardvalue(botDeck) < 15 || parseInt(getcardvalue(botDeck).replace(/\*/, '')) < 15) {
         botDeck.push(await randomcard(listofcard));
         listofcard = locbai(listofcard, botDeck);
     }
     let kind_of_winning;
     let bot_points = getcardvalue(botDeck);
     let user_points = getcardvalue(playerDeck);
-    if (isNaN(bot_points)) bot_points = parseInt(bot_points.replace('*', ''));
-    if (isNaN(user_points)) user_points = parseInt(user_points.replace('*', ''));
+    if (isNaN(bot_points)) bot_points = parseInt(bot_points.replace(/\*/, ''));
+    if (isNaN(user_points)) user_points = parseInt(user_points.replace(/\*/, ''));
     if (user_points > 21 && bot_points > 21) {
         kind_of_winning = 'hoa';
     } else if (user_points == bot_points) {
