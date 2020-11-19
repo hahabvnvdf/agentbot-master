@@ -236,6 +236,7 @@ client.on('error', (err) => {
 });
 
 process.on('warning', (warn) => {
+    console.trace(warn);
     console.warn(warn);
     sendOwner(`Warning: ${warn.message}`);
 });
@@ -262,7 +263,7 @@ async function reset_afk(id) {
 }
 
 process.on('exit', (exitCode) => {
-    if (process.env.TYPE_RUN !== 'production') console.log('Exiting......');
+    if (process.env.TYPE_RUN !== 'production') return console.log('Exiting......');
     sendOwner(`Bot đã thoát với exitCode: ${exitCode}`);
 });
 
