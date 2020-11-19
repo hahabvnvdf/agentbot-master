@@ -236,7 +236,7 @@ client.on('error', (err) => {
 });
 
 process.on('warning', (warn) => {
-    if (warn.message.includes("Missing Permissions")) return;
+    if (warn.message.includes("Missing Permissions") || warn.message.includes("Unhandled promise rejection")) return;
     console.warn(warn);
     sendOwner(`Warning: ${warn.message}`);
 });
