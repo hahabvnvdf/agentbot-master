@@ -236,7 +236,7 @@ client.on('error', (err) => {
 });
 
 process.on('warning', (warn) => {
-    console.trace(warn);
+    if (warn.message.includes("Missing Permissions")) return;
     console.warn(warn);
     sendOwner(`Warning: ${warn.message}`);
 });
