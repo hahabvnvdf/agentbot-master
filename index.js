@@ -241,6 +241,10 @@ process.on('warning', (warn) => {
     sendOwner(`Warning: ${warn.message}`);
 });
 
+process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+});
+
 // console chat
 const y = process.openStdin();
 y.addListener("data", res => {
