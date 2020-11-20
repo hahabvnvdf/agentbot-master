@@ -10,8 +10,6 @@ module.exports = {
         if (!args[0]) return message.channel.send("Vui lòng ghi tên thành phố");
         const query = args.join(' ');
         weather.find({ search: query, degreeType: 'C' }, (err, result) => {
-            console.log(err);
-            console.log(result);
             if (err || !result || result.length == 0) return message.reply(`Bot không tìm được địa điểm, vui lòng thử từ khoá khác.`);
             const { skytext, observationpoint, temperature, feelslike, winddisplay, humidity, imageUrl } = result[0].current;
             const embed = new MessageEmbed()
