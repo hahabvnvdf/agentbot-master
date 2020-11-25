@@ -150,7 +150,7 @@ client.on("message", async message => {
         if(userdata.xp > nextlvl) {
             userdata.level++;
             userdata.xp = 0;
-            message.reply(`Bạn đã lên cấp **${userdata.level}**!`);
+            if (checkMsgPerm(message)) message.reply(`Bạn đã lên cấp **${userdata.level}**!`);
         } else userdata.xp += xpAdd;
         client.setScore.run(userdata);
         }
@@ -165,6 +165,7 @@ client.on("message", async message => {
         if (!aiLang || aiLang === 'vi') url = `https://simsimi.copcute.pw/api/?text=${encodeURIComponent(message.content)}&lang=vi_VN`;
         else url = `http://api.brainshop.ai/get?bid=${BID}&key=${BRAINKEY}&uid=1&msg=${encodeURIComponent(message.content)}`;
         const res = await axios.get(url);
+        if (!checkMsgPerm(message)) return message.author.send('Mình không có quyền gởi tin nhắn ở server này!').catch(err => console.log(`${message.author.id} không mở DMs`));
         message.channel.send(!aiLang || aiLang === 'vi' ? res.data.success : res.data.cnt);
     }
     // check unafk
@@ -197,9 +198,8 @@ client.on("message", async message => {
     let command = client.commands.get(cmd);
     if (!command) command = client.commands.get(client.aliases.get(cmd));
     if (command) {
-        const botPerms = message.channel.permissionsFor(client.user);
+        if (!checkMsgPerm(message)) return message.author.send('Mình không có quyền gởi tin nhắn ở server này!').catch(err => console.log(`${message.author.id} không mở DMs`));
         if (command.ownerOnly === true && message.author.id !== ownerID) return message.channel.send('Lệnh này chỉ dành cho Owner của bot!');
-        if (!botPerms.has(['SEND_MESSAGES'])) return message.author.send('Mình không có quyền gởi tin nhắn ở server này!').catch(err => console.log(`${message.author.id} không mở DMs`));
         let guildCheck = await commandDb.get(message.guild.id);
         if (!guildCheck) guildCheck = await commandDb.set(message.guild.id, []);
         if (guildCheck.includes(command.name)) return message.channel.send('Lệnh này đã bị tắt ở server này!');
@@ -221,6 +221,11 @@ client.on("message", async message => {
         command.run(client, message, args);
     }
 });
+
+async function checkMsgPerm(message) {
+    const botPerms = message.channel.permissionsFor(client.user);
+    return botPerms.has(['SEND_MESSAGES']);
+}
 
 client.on('voiceStateUpdate', (oldstate, newstate) => {
     if (oldstate.member.id !== client.user.id) return;
