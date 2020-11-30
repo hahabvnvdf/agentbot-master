@@ -77,7 +77,7 @@ module.exports = {
             const d = new Date(updated);
             const fulldate = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
             const embed = new MessageEmbed()
-                .setAuthor(`Thông tin về COVID-19 ở ${data.country}`)
+                .setAuthor(`Thông tin về COVID-19 ở ${country}`)
                 .setThumbnail(countryInfo.flag)
                 .addField('Số ca nhiễm: ', `${laysodep(cases)}(+${laysodep(todayCases)})`, true)
                 .addField('Số ca tử vong: ', `${laysodep(deaths)}(+${laysodep(todayDeaths)})`, true)
