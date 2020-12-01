@@ -7,6 +7,7 @@ const langList = require('../../assets/json/ttslang.json');
 const db = require('quick.db');
 const ms = require('ms');
 const randomNum = require('random-number-csprng');
+const timeOut = new Set();
 module.exports = {
     name: 'speak',
     aliases: ['say', 's'],
@@ -62,16 +63,20 @@ module.exports = {
         dispatcher.on('finish', async () => {
             dispatcher.destroy();
             await db.set(`${message.guild.id}.botdangnoi`, false);
-            setTimeout(async () => {
-                const checkTime = await db.get(`${message.guild.id}.endTime`);
-                if (!checkTime) return;
-                if (Date.now() > checkTime) {
-                    connection.disconnect();
-                    voiceChannel.leave();
-                    message.channel.send('Đã rời phòng vì không hoạt động!');
-                }
-                if (!message.guild.me.voice) await db.delete(`${message.guild.id}.endTime`);
-            }, ms('5m') + 1000);
+            if (!timeOut.has(message.guild.id)) {
+                timeOut.add(message.guild.id);
+                setTimeout(async () => {
+                    const checkTime = await db.get(`${message.guild.id}.endTime`);
+                    if (!checkTime) return;
+                    if (Date.now() > checkTime) {
+                        connection.disconnect();
+                        voiceChannel.leave();
+                        message.channel.send('Đã rời phòng vì không hoạt động!');
+                    }
+                    if (!message.guild.me.voice) await db.delete(`${message.guild.id}.endTime`);
+                    timeOut.delete(message.guild.id);
+                }, ms('5m') + 1000);
+            }
         });
     },
 };
