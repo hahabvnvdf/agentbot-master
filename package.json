@@ -10,7 +10,7 @@
     "better-sqlite3": "7.1.1",
     "canvacord": "^5.0.8",
     "canvas": "^2.6.1",
-    "cross-env": "^7.0.2",
+    "cross-env": "^7.0.3",
     "dateformat": "^4.0.0",
     "dblapi.js": "^2.4.1",
     "discord.js": "^12.5.1",
