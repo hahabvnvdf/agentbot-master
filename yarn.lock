@@ -97,10 +97,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@google-cloud/text-to-speech@^3.1.2":
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/@google-cloud/text-to-speech/-/text-to-speech-3.1.2.tgz#883bc3220a56b4a253cae86fcbaba4fbf76dfc56"
-  integrity sha512-PzJszO1844MUynozOJMlWqJEyL0F3IBo4XyYHi+ghuFIBiBSfvOBHheTCP8ow/xmTQrCm3QS1Cjv+YhsA0yOIw==
+"@google-cloud/text-to-speech@^3.1.3":
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/@google-cloud/text-to-speech/-/text-to-speech-3.1.3.tgz#20bbdb3635f647e2d386e4819be9ad448062daf9"
+  integrity sha512-Dhv3kT8L3vuVa0X/uOi/okbNC3fNtq0vcJsUEHFR8fd275Y0rFLNo28j566xy+VJ1g31uwXN6eT8Ubq8yZGgOA==
   dependencies:
     google-gax "^2.9.2"
 
