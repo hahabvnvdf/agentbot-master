@@ -1136,10 +1136,10 @@ data-uri-to-buffer@1:
   resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-1.2.0.tgz#77163ea9c20d8641b4707e8f18abdf9a78f34835"
   integrity sha512-vKQ9DTQPN1FLYiiEEOQ6IBGFqvjCa5rSK3cWMy/Nespm5d/x3dGFT9UBZnkLxCwua/IXBi2TYnwTEpsOvhC4UQ==
 
-dateformat@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-4.0.0.tgz#e2eaf8eaf384f0dcf834870c1b8c1b1bccca4539"
-  integrity sha512-zpKyDYpeePyYGJp2HhRxLHlA+jZQNjt+MwmcVmLxCIECeC4Ks3TI3yk/CSMKylbnCJ5htonfOugYtRRTpyoHow==
+dateformat@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-4.2.2.tgz#319b64b4298d6bd4f918c41ccf3959bf04eae750"
+  integrity sha512-xuYrpI9DKHMDmbGOuxYnDl2kP+/ADeCjGV55uk8zDpPr19VyTla4QcOVZvI5RqU59376dMe0oqs1HkF9S+tyxw==
 
 dblapi.js@^2.4.1:
   version "2.4.1"
