@@ -10,8 +10,8 @@ module.exports = {
     description: "Đấm ai đó",
     usage: "<PREFIX>punch <@tag>",
     run: async (client, message, args) => {
-        const folder = readdirSync("././assets/slap");
-        const file = readFileSync(`././assets/slap/${folder[Math.floor(Math.random() * folder.length)]}`);
+        const folder = readdirSync("././assets/punch");
+        const file = readFileSync(`././assets/punch/${folder[Math.floor(Math.random() * folder.length)]}`);
         const attachment = new MessageAttachment(file, 'punch.gif');
         const nguoitag = await getMember(message, args.join(' '), false);
         const embed = new MessageEmbed()
