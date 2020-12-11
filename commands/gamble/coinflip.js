@@ -16,9 +16,9 @@ module.exports = {
     usage: '<PREFIX>coinflip <Lựa chọn của bạn> <tiền cược>',
     example: '<PREFIX>coinflip t 50000',
     run: async (client, message, args) => {
-        let user_choose = args[0];
-        if (!user_choose || user_choose == 'all' || !isNaN(user_choose)) return message.channel.send('Vui lòng chọn head hoặc tail.');
-        switch(user_choose.toLowerCase()) {
+        let user_choose = args[0].toLowerCase();
+        if (!user_choose || !isNaN(user_choose)) return message.channel.send('Vui lòng chọn head hoặc tail.');
+        switch(user_choose) {
             case 'tail':
             case 't':
                 user_choose = 'tail';
@@ -28,18 +28,16 @@ module.exports = {
                 break;
         }
         const amount = await eco.fetchMoney(message.author.id);
+        if (amount == 0) return message.channel.send('Bạn không có tiền để chơi!');
         let bet = 1;
         if (!args[1]) return message.channel.send('Vui lòng nhập tiền cược');
         if (!isNaN(args[1])) bet = parseInt(args[1]);
-        if (args[1].toLowerCase() == 'all') bet = 'all';
-        else if (amount === undefined) return message.channel.send('Vui lòng nhập tiền cược');
-        else if (amount <= 0) return message.channel.send('Tiền cược không thể nhỏ hơn hoặc bằng 0.');
-        if (bet == 'all') {
-            if (maxBet < bet && maxBet > amount) {
-                bet = amount;
-            }
-            else bet = maxBet;
+        if (args[1].toLowerCase() == 'all') {
+           if (maxBet > amount) bet = amount;
+           else bet = maxBet;
         }
+        else if (!amount) return message.channel.send('Vui lòng nhập tiền cược');
+        if (bet == 0) return message.channel.send('Bạn không thể cược 0');
         if (bet > maxBet) bet = maxBet;
         if (bet > amount) return message.channel.send('Bạn không đủ tiền để chơi');
         await message.channel.send(`${coin_gif} **${message.author.tag}** cược **${laysodep(bet)}** và đã chọn **${user_choose}**!`);
