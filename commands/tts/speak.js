@@ -31,7 +31,7 @@ module.exports = {
         let text = args.join(' ');
         let lang = await db.get(`${message.guild.id}.defaulttts`);
         if (!lang) lang = 'vi-VN';
-        else if (langList[args[0]]) {
+        if (langList[args[0]]) {
             text = args.slice(1).join(' ');
             lang = langList[args[0]];
         }
@@ -41,7 +41,6 @@ module.exports = {
             voice: { languageCode: lang, ssmlGender: 'FEMALE' },
             audioConfig: { audioEncoding: 'MP3' },
         };
-
         const [response] = await ttsclient.synthesizeSpeech(request);
         const writeFile = util.promisify(fs.writeFile);
         await writeFile(`./assets/ttsdata/${message.guild.id}.mp3`, response.audioContent, 'binary');
