@@ -35,7 +35,7 @@
     "yahoo-stock-api": "^1.0.5"
   },
   "devDependencies": {
-    "eslint": "^7.15.0",
+    "eslint": "^7.16.0",
     "nodemon": "^2.0.6"
   },
   "scripts": {
