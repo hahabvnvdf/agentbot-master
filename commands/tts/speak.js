@@ -45,7 +45,6 @@ module.exports = {
             }
         }
         if (!connection) return message.channel.send('Bot không thể vào channel của bạn vào lúc này, vui lòng thử lại sau!');
-        await sleep(500);
         if (!message.guild.me.voice.selfDeaf) await message.guild.me.voice.setSelfDeaf(true);
         const url = getAudioUrl(text, {
             lang: lang,
