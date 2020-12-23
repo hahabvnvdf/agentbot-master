@@ -1,7 +1,5 @@
-const tts = require('@google-cloud/text-to-speech');
-const fs = require('fs');
-const util = require('util');
-const ttsclient = new tts.TextToSpeechClient();
+const googleURL = 'https://translate.google.com';
+const { getAudioUrl } = require('google-tts-api');
 const { sleep } = require('../../functions/utils');
 const langList = require('../../assets/json/ttslang.json');
 const db = require('quick.db');
@@ -17,6 +15,7 @@ module.exports = {
     note: 'lang = en hoặc vi (mặc định là vi)',
     example: '<PREFIX>speak en hello world',
     run: async (client, message, args) => {
+        let connection = message.member.voice ? message.member.voice.connection : null;
         if (db.get(`${message.guild.id}.botdangnoi`) === true) {
             const random = await randomNum(0, 100);
             return message.channel.send(`Có người khác đang xài lệnh rồi, vui lòng thử lại sau D:. ${random > 70 ? ` Nếu bạn nghĩ đây là lỗi, sử dụng lệnh \`${db.get(`${message.guild.id}.prefix`)}fix\` để sửa lỗi!` : ''}`);
@@ -36,27 +35,24 @@ module.exports = {
             lang = langList[args[0]];
         }
         // create request
-        const request = {
-            input: { text: text },
-            voice: { languageCode: lang, ssmlGender: 'FEMALE' },
-            audioConfig: { audioEncoding: 'MP3' },
-        };
-        const [response] = await ttsclient.synthesizeSpeech(request);
-        const writeFile = util.promisify(fs.writeFile);
-        await writeFile(`./assets/ttsdata/${message.guild.id}.mp3`, response.audioContent, 'binary');
-        // sau khi xử lý xong âm thanh, phát cho người dùng
-        let connection;
-        try {
-            connection = await voiceChannel.join();
-        }
-        catch(e) {
-            return message.channel.send('Bot không thể vào channel của bạn vào lúc này, vui lòng thử lại sau!');
+        if (!connection) {
+            try {
+                connection = await voiceChannel.join();
+                await sleep(1000);
+            }
+            catch(e) {
+                return message.channel.send('Bot không thể vào channel của bạn vào lúc này, vui lòng thử lại sau!');
+            }
         }
         if (!connection) return message.channel.send('Bot không thể vào channel của bạn vào lúc này, vui lòng thử lại sau!');
         await sleep(500);
         if (!message.guild.me.voice.selfDeaf) await message.guild.me.voice.setSelfDeaf(true);
-        const dispatcher = connection.play(`./assets/ttsdata/${message.guild.id}.mp3`);
-        // nên thử connection.playArbitraryInput() k cần file
+        const url = getAudioUrl(text, {
+            lang: lang,
+            slow: false,
+            host: googleURL,
+        });
+        const dispatcher = connection.play(url);
         await db.set(`${message.guild.id}.botdangnoi`, true);
         await db.set(`${message.guild.id}.endTime`, Date.now() + ms('5m'));
         dispatcher.on('finish', async () => {

@@ -224,6 +224,7 @@ client.on("message", async message => {
 
 function checkMsgPerm(message) {
     const botPerms = message.channel.permissionsFor(client.user);
+    if (!botPerms) return true;
     return botPerms.has(['SEND_MESSAGES']);
 }
 

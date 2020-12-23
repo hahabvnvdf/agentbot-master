@@ -1,5 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const axios = require('axios');
+const { laysodep } = require('../../functions/utils');
 module.exports = {
     name: "instagram",
     aliases: ["insta"],
@@ -13,19 +14,20 @@ module.exports = {
         const res = await axios.get(url, { headers: { cookie: process.env.INSTAGRAM_COOKIE } }).catch(() => null);
         if (!res) return message.channel.send('Mình không tìm thấy Instagram của bạn!');
         const account = res.data.graphql.user;
+        const { profile_pic_url_hd: profilePic, full_name, username, biography, edge_owner_to_timeline_media: sobaidang, edge_followed_by: follower, edge_follow: following, is_private } = account;
         const embed = new MessageEmbed()
             .setColor("RANDOM")
-            .setTitle(account.full_name)
+            .setTitle(full_name)
             .setURL(`https://instagram.com/${instagram}`)
-            .setThumbnail(account.profile_pic_url_hd)
+            .setThumbnail(profilePic)
             .addField("Thông tin cá nhân", [
-                `**- Tên người dùng:** ${account.username}`,
-                `**- Tên đầy đủ:** ${account.full_name}`,
-                `**- Bio:** ${account.biography.length == 0 ? "Không có" : account.biography}`,
-                `**- Số bài đăng:** ${account.edge_owner_to_timeline_media.count}`,
-                `**- Followers:** ${account.edge_followed_by.count}`,
-                `**- Following:** ${account.edge_follow.count}`,
-                `**- Private?:** ${account.is_private ? "Có 🔐" : "Không 🔓"}`,
+                `**- Tên người dùng:** ${username}`,
+                `**- Tên đầy đủ:** ${full_name}`,
+                `**- Bio:** ${biography.length == 0 ? "Không có" : biography}`,
+                `**- Số bài đăng:** ${laysodep(sobaidang.count)}`,
+                `**- Followers:** ${laysodep(follower)}`,
+                `**- Following:** ${laysodep(following)}`,
+                `**- Private?:** ${is_private ? "Có 🔐" : "Không 🔓"}`,
             ]);
         message.channel.send(embed);
     },
