@@ -1,4 +1,3 @@
-const googleURL = 'https://translate.google.com';
 const { getAudioUrl } = require('google-tts-api');
 const { sleep } = require('../../functions/utils');
 const langList = require('../../assets/json/ttslang.json');
@@ -15,7 +14,6 @@ module.exports = {
     note: 'lang = en hoặc vi (mặc định là vi)',
     example: '<PREFIX>speak en hello world',
     run: async (client, message, args) => {
-        let connection = message.member.voice ? message.member.voice.connection : null;
         if (db.get(`${message.guild.id}.botdangnoi`) === true) {
             const random = await randomNum(0, 100);
             return message.channel.send(`Có người khác đang xài lệnh rồi, vui lòng thử lại sau D:. ${random > 70 ? ` Nếu bạn nghĩ đây là lỗi, sử dụng lệnh \`${db.get(`${message.guild.id}.prefix`)}fix\` để sửa lỗi!` : ''}`);
@@ -34,8 +32,10 @@ module.exports = {
             text = args.slice(1).join(' ');
             lang = langList[args[0]];
         }
+        const bot = message.guild.me;
+        let connection = bot.voice ? bot.voice.connection : null;
         // create request
-        if (!connection) {
+        if (!connection || bot.voice.channelID !== voiceChannel.id) {
             try {
                 connection = await voiceChannel.join();
                 await sleep(1000);
@@ -49,7 +49,7 @@ module.exports = {
         const url = getAudioUrl(text, {
             lang: lang,
             slow: false,
-            host: googleURL,
+            host: 'https://translate.google.com',
         });
         const dispatcher = connection.play(url);
         await db.set(`${message.guild.id}.botdangnoi`, true);
