@@ -1,5 +1,5 @@
 const tts = require('@google-cloud/text-to-speech');
-const { synthesizeSpeech } = new tts.TextToSpeechClient();
+const ttsClient = new tts.TextToSpeechClient();
 const fs = require('fs');
 const { promisify } = require('util');
 const writeFile = promisify(fs.writeFile);
@@ -45,7 +45,7 @@ module.exports = {
             voice: { languageCode: lang, ssmlGender: 'FEMALE' },
             audioConfig: { audioEncoding: 'MP3' },
         };
-        const [response] = await synthesizeSpeech(request);
+        const [response] = await ttsClient.synthesizeSpeech(request);
         await writeFile(`./assets/ttsdata/${message.guild.id}.mp3`, response.audioContent, 'binary');
         // xử lý xong
         let connection = bot.voice ? bot.voice.connection : null;
