@@ -31,6 +31,7 @@ module.exports = {
                 await sleep(1000);
             }
             if (!connection) return message.channel.send('Bot không thể vào channel của bạn vào lúc này, vui lòng thử lại sau!');
+            if (!message.guild.me.voice.selfDeaf) await message.guild.me.voice.setSelfDeaf(true);
             await db.set(`${message.guild.id}.botdangnoi`, true);
             const dispatcher = connection.play(`./assets/playdata/${dict[args[0]]}`);
             await db.set(`${message.guild.id}.endTime`, Date.now() + ms('5m'));
