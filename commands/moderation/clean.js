@@ -6,7 +6,7 @@ module.exports = {
     run: async (client, message, args) => {
         if (message.deletable) await message.delete();
         message.channel.messages.fetch({
-            limit: 100,
+            limit: 50,
         }).then(async messages => {
             messages = messages.filter(msg => msg.author.id === client.user.id).array();
             await message.channel.bulkDelete(messages, true);
