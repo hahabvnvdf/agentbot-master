@@ -1,4 +1,8 @@
-const { getAudioUrl } = require('google-tts-api');
+const tts = require('@google-cloud/text-to-speech');
+const { synthesizeSpeech } = new tts.TextToSpeechClient();
+const fs = require('fs');
+const { promisify } = require('util');
+const writeFile = promisify(fs.writeFile);
 const { sleep } = require('../../functions/utils');
 const langList = require('../../assets/json/ttslang.json');
 const db = require('quick.db');
@@ -33,6 +37,17 @@ module.exports = {
             lang = langList[args[0]];
         }
         const bot = message.guild.me;
+        if (!message.guild.me.voice.selfDeaf) await message.guild.me.voice.setSelfDeaf(true);
+        if (args.length > 200) return message.reply('Không được quá 200 từ!');
+        // create request
+        const request = {
+            input: { text: text },
+            voice: { languageCode: lang, ssmlGender: 'FEMALE' },
+            audioConfig: { audioEncoding: 'MP3' },
+        };
+        const [response] = await synthesizeSpeech(request);
+        await writeFile(`./assets/ttsdata/${message.guild.id}.mp3`, response.audioContent, 'binary');
+        // xử lý xong
         let connection = bot.voice ? bot.voice.connection : null;
         // create request
         if (!connection || bot.voice.channelID !== voiceChannel.id) {
@@ -45,13 +60,7 @@ module.exports = {
             }
         }
         if (!connection) return message.channel.send('Bot không thể vào channel của bạn vào lúc này, vui lòng thử lại sau!');
-        if (!message.guild.me.voice.selfDeaf) await message.guild.me.voice.setSelfDeaf(true);
-        const url = getAudioUrl(text, {
-            lang: lang,
-            slow: false,
-            host: 'https://translate.google.com',
-        });
-        const dispatcher = connection.play(url);
+        const dispatcher = connection.play(`./assets/ttsdata/${message.guild.id}.mp3`);
         await db.set(`${message.guild.id}.botdangnoi`, true);
         await db.set(`${message.guild.id}.endTime`, Date.now() + ms('5m'));
         dispatcher.on('finish', async () => {
