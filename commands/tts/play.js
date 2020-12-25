@@ -10,7 +10,6 @@ module.exports = {
     usage: '<PREFIX>p <tên>',
     run: async (client, message, args) => {
         const prefix = await db.get(`${message.guild.id}.prefix`);
-        if (!args[0]) return message.channel.send('Nhập file cần play!');
         const status = await db.get(`${message.guild.id}.botdangnoi`);
         if (status == true) return message.channel.send('Có người khác đang sử dụng bot!');
         const voiceChannel = message.member.voice.channel;
@@ -18,7 +17,7 @@ module.exports = {
         const botPremission = voiceChannel.permissionsFor(client.user);
         if (!botPremission.has('CONNECT')) return message.channel.send('Bot không có quyền vào channel này!');
         if (!botPremission.has('SPEAK')) return message.channel.send('Bot không có quyền nói ở channel này!');
-        if (args[0] == 'showdict') {
+        if (!args[0] || args[0] == 'showdict') {
             const list = createArr(dict).map(e => `\`${e}\``).join(', ');
             return message.channel.send(`Lệnh: ${prefix}play <tên>\n\n${list}`);
         }
