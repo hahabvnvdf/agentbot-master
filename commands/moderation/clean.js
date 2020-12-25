@@ -10,7 +10,7 @@ module.exports = {
         }).then(async messages => {
             messages = messages.filter(msg => msg.author.id === client.user.id).array();
             await message.channel.bulkDelete(messages, true);
-            await message.channel.send('👍').then(m => m.delete({ timeout: 5000 }));
+            await message.channel.send('👍').then(m => m.delete({ timeout: 10000 }));
         });
     },
 };
