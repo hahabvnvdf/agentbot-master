@@ -23,6 +23,8 @@ module.exports = {
                 message.channel.send('Thao tác thành công 👍');
                 break;
             case 'sink':
+            case 'sank':
+            case 'chìm':
                 if (!authorData) return message.channel.send('Bạn không có thuyền!');
                 await shipDb.delete(message.author.id);
                 await shipDb.delete(authorData.target.id);

@@ -38,7 +38,7 @@ module.exports = {
             }).then(messages => {
                 messages = messages.filter(m => m.author.id === user.id).array().slice(0, amount);
                 message.channel.bulkDelete(messages, true).then(delmsg => {
-                    message.channel.send(`Đã xoá \`${delmsg.size}\` tin nhắn!`).then(m => m.delete({ timeout: 5000 }));
+                    message.channel.send(`Đã xoá \`${delmsg.size == 0 ? 1 : delmsg.size}\` tin nhắn!`).then(m => m.delete({ timeout: 5000 }));
                 })
                 .catch(error => {
                     if (error.code !== 10008) {
