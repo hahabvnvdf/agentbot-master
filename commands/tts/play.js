@@ -1,5 +1,5 @@
 const db = require('quick.db');
-const dict = require('../../assets/json/playdatadict.json');
+const dict = require('../../assets/json/playdata.json');
 const ms = require('ms');
 const { sleep } = require('../../functions/utils');
 const timeOut = new Set();
@@ -23,6 +23,7 @@ module.exports = {
         }
         if (!dict[args[0]]) return message.channel.send(`Tên không tồn tại! Sử dụng lệnh \`${prefix}play showdict\` để xem tất cả tên hiện có`);
         else {
+            const { fileName, volume } = dict[args[0]];
             const bot = message.guild.me;
             let connection = bot.voice ? bot.voice.connection : null;
             if (!connection || bot.voice.channelID !== voiceChannel.id) {
@@ -32,7 +33,7 @@ module.exports = {
             if (!connection) return message.channel.send('Bot không thể vào channel của bạn vào lúc này, vui lòng thử lại sau!');
             if (!message.guild.me.voice.selfDeaf) await message.guild.me.voice.setSelfDeaf(true);
             await db.set(`${message.guild.id}.botdangnoi`, true);
-            const dispatcher = connection.play(`./assets/playdata/${dict[args[0]]}`);
+            const dispatcher = connection.play(`./assets/playdata/${fileName}`, { volume: volume });
             await db.set(`${message.guild.id}.endTime`, Date.now() + ms('5m'));
             dispatcher.on('finish', async () => {
                 dispatcher.destroy();
