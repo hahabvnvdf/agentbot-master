@@ -8,7 +8,6 @@ module.exports = {
     run: (client, message, args) => {
         const embed = new MessageEmbed()
             .setAuthor('Owner bot: phamleduy04#9999')
-            .setTitle('Các link của AgentBot!')
             .setColor('RANDOM')
             .addField('Các link của AgentBot:', [
                 `[Add AgentBot vào server:](https://discord.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2080898303)`,
