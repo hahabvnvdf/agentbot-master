@@ -18,7 +18,8 @@ module.exports = {
     note: 'lang = en hoặc vi (mặc định là vi)',
     example: '<PREFIX>speak en hello world',
     run: async (client, message, args, serverData) => {
-        const { botdangnoi, prefix, defaulttts: lang } = serverData;
+        const { botdangnoi, prefix } = serverData;
+        let lang = serverData.defaulttts;
         if (botdangnoi === true) {
             const random = await randomNum(0, 100);
             return message.channel.send(`Có người khác đang xài lệnh rồi, vui lòng thử lại sau D:. ${random > 70 ? ` Nếu bạn nghĩ đây là lỗi, sử dụng lệnh \`${prefix}fix\` để sửa lỗi!` : ''}`);
