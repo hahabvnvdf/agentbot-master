@@ -29,10 +29,6 @@ module.exports = {
         `**--> Channel:** ${channels.filter(c => c.type === 'text').size + channels.filter(c => c.type === 'voice').size} (${channels.filter(c => c.type === 'text').size} text channel và ${channels.filter(c => c.type === 'voice').size} voice channel)`,
         `**--> Số boost:** ${message.guild.premiumSubscriptionCount || '0'}`,
         `**--> Ngày tạo server:** ${moment(message.guild.createdTimestamp).format('MM/DD/YYYY hh:mm:ss')}`])
-            .addField('Thống kê thành viên', [`**--> Online:** ${members.filter(m => m.presence.status === 'online').size}`,
-        `**--> Không hoạt động:** ${members.filter(m => m.presence.status === 'idle').size}`,
-        `**--> Không làm phiền:** ${members.filter(m => m.presence.status === 'dnd').size}`,
-        `**--> Offline:** ${members.filter(m => m.presence.status === 'offline').size}`])
             .addField(`Roles: `, roles.length < 10 ? roles.join(', ') : roles.length > 10 ? trimArray(roles, 10) : 'None')
             .setTimestamp();
         message.channel.send(embed);

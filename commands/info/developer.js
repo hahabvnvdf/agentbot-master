@@ -14,7 +14,6 @@ module.exports = {
                 `Tên Discord: ${Dui.tag}`,
                 "Quốc gia: :flag_vn:",
                 `ID user: ${Dui.id}`,
-                `Online? ${Dui.presence.status == 'online' ? 'Có' : 'Không'}`,
             ])
             .setThumbnail(Dui.displayAvatarURL());
         message.channel.send(embed);

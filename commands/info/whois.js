@@ -36,7 +36,6 @@ module.exports = {
                 `**- Tag**: ${member.user.tag}`,
                 `**- Tạo vào lúc**: ${created}`,
                 `**- Huy hiệu**: ${userFlags.length ? userFlags.map(flag => flags[flag]).join(", ") : "Không có" }`,
-                `**- Status?**: ${member.presence.status}`,
             ], true)
             .setTimestamp();
         if (member.user.presence.activities.length > 0)
