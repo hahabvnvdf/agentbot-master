@@ -71,7 +71,7 @@ module.exports = {
                 timeOut.add(message.guild.id);
                 setTimeout(async () => {
                     const checkTime = await db.get(`${message.guild.id}.endTime`);
-                    if (!checkTime) return;
+                    if (!checkTime) return timeOut.delete(message.guild.id);
                     if (Date.now() > checkTime) {
                         connection.disconnect();
                         voiceChannel.leave();
