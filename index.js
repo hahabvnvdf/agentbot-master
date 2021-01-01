@@ -218,7 +218,7 @@ client.on("message", async message => {
         setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
         if (blacklist_status === true && command.name !== 'blacklist') return message.channel.send('Server bạn đang nằm trong blacklist, vui lòng liên hệ owner của bot hoặc vào support server tại: https://top.gg/bot/645883401500622848');
         logging(`${message.author.tag} || ${command.name} || ${message.guild.name}(${message.guild.id})`);
-        command.run(client, message, args);
+        command.run(client, message, args, serverData);
     }
 });
 

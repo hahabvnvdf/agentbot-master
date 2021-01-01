@@ -6,13 +6,13 @@ module.exports = {
     description: 'Tắt/Mở phòng tính điểm rank',
     usage: '<PREFIX>msgchannel <#channel>',
     example: '<PREIFX>msgchannel #welcome',
-    run: async (client, message, args) => {
+    run: async (client, message, args, serverData) => {
         if(!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy lệnh này!');
+        const { msgChannelOff } = serverData;
         if (!args[0]) {
-            const channelArray = await db.get(`${message.guild.id}.msgChannelOff`);
-            if (channelArray.length === 0) return message.channel.send('Server không có phòng nào đang tắt tính exp!');
+            if (msgChannelOff.length === 0) return message.channel.send('Server không có phòng nào đang tắt tính exp!');
             const channels = [];
-            channelArray.forEach(id => {
+            msgChannelOff.forEach(id => {
                 const channel = message.guild.channels.cache.get(id);
                 if (channel) channels.push(channel);
             });
@@ -30,10 +30,9 @@ module.exports = {
         }
         if (!channel) return message.channel.send('Không tìm thấy channel!');
         // check
-        const serverChannel = await db.get(`${message.guild.id}.msgChannelOff`);
-        if (serverChannel.includes(channel.id)) {
-            serverChannel.filter(ch => ch !== channel.id);
-            await db.set(`${message.guild.id}.msgChannelOff`, serverChannel);
+        if (msgChannelOff.includes(channel.id)) {
+            msgChannelOff.filter(ch => ch !== channel.id);
+            await db.set(`${message.guild.id}.msgChannelOff`, msgChannelOff);
             message.channel.send(`✅ Đã bật ${channel} thành channel tính kinh nghiệm!`);
         } else {
             // log to database

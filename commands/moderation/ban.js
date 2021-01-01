@@ -1,6 +1,5 @@
 const { MessageEmbed } = require("discord.js");
 const { promptMessage } = require('../../functions/utils');
-const db = require('quick.db');
 const { getMember } = require('../../functions/utils');
 module.exports = {
     name: "ban",
@@ -8,9 +7,9 @@ module.exports = {
     description: "Ban 1 người trong server",
     usage: "<PREFIX>ban <@tag, id> [lý do]",
     example: "<PREFIX>ban @phamelduy04",
-    run: async (client, message, args) => {
-        const serverdata = db.get(message.guild.id);
-        const logChannel = message.guild.channels.cache.get(serverdata.logchannel) || message.channel;
+    run: async (client, message, args, serverData) => {
+        const { logchannel: logChannelID } = serverData;
+        const logChannel = message.guild.channels.cache.get(logChannelID) || message.channel;
 
         if (message.deletable) message.delete();
 

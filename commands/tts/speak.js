@@ -17,10 +17,11 @@ module.exports = {
     usage: '<PREFIX>speak [lang] <text>',
     note: 'lang = en hoặc vi (mặc định là vi)',
     example: '<PREFIX>speak en hello world',
-    run: async (client, message, args) => {
-        if (db.get(`${message.guild.id}.botdangnoi`) === true) {
+    run: async (client, message, args, serverData) => {
+        const { botdangnoi, prefix, defaulttts: lang } = serverData;
+        if (botdangnoi === true) {
             const random = await randomNum(0, 100);
-            return message.channel.send(`Có người khác đang xài lệnh rồi, vui lòng thử lại sau D:. ${random > 70 ? ` Nếu bạn nghĩ đây là lỗi, sử dụng lệnh \`${db.get(`${message.guild.id}.prefix`)}fix\` để sửa lỗi!` : ''}`);
+            return message.channel.send(`Có người khác đang xài lệnh rồi, vui lòng thử lại sau D:. ${random > 70 ? ` Nếu bạn nghĩ đây là lỗi, sử dụng lệnh \`${prefix}fix\` để sửa lỗi!` : ''}`);
         }
         if (!args[0]) return message.channel.send('Vui lòng nhập gì đó :D.');
         const voiceChannel = message.member.voice.channel;
@@ -30,7 +31,6 @@ module.exports = {
         if (!botpermission.has('SPEAK')) return message.channel.send('Bot không có quyền nói trong channel của bạn!');
         if (!voiceChannel.joinable) return message.channel.send('Bot không vào được phòng của bạn');
         let text = args.join(' ');
-        let lang = await db.get(`${message.guild.id}.defaulttts`);
         if (!lang) lang = 'vi-VN';
         if (langList[args[0]]) {
             text = args.slice(1).join(' ');

@@ -1,6 +1,5 @@
 const { MessageEmbed } = require('discord.js');
 const { readdirSync } = require('fs');
-const db = require('quick.db');
 const { ownerID } = require('../../config.json');
 module.exports = {
     name: "help",
@@ -8,8 +7,8 @@ module.exports = {
     category: "info",
     description: "Lệnh để xem list lệnh hay chi tiết của 1 lệnh cụ thể",
     usage: "<PREFIX>help",
-    run: async (client, message, args) => {
-        const server_prefix = await db.get(`${message.guild.id}.prefix`);
+    run: async (client, message, args, serverData) => {
+        const serverPrefix = serverData.prefix;
         const embed = new MessageEmbed()
             .setColor("#00FFFF")
             .setAuthor(`Help command`, message.guild.iconURL())
@@ -27,16 +26,16 @@ module.exports = {
                     console.log(e);
                 }
             });
-            embed.setDescription(`Danh sách lệnh cho bot **${message.guild.me.displayName}**\n Prefix của bot là: \`${server_prefix}\`\nTổng lệnh bot có: ${commandsize} lệnh\nCần sự giúp đỡ nhiều hơn? Hãy tham gia [Agent's Server](https://discord.gg/SEMXgcj)`)
-                .setFooter(`Sử dụng ${server_prefix}help {lệnh} để xem chi tiết.`);
+            embed.setDescription(`Danh sách lệnh cho bot **${message.guild.me.displayName}**\n Prefix của bot là: \`${serverPrefix}\`\nTổng lệnh bot có: ${commandsize} lệnh\nCần sự giúp đỡ nhiều hơn? Hãy tham gia [Agent's Server](https://discord.gg/SEMXgcj)`)
+                .setFooter(`Sử dụng ${serverPrefix}help {lệnh} để xem chi tiết.`);
             return message.channel.send(embed);
         } else {
-            return getCMD(client, message, args[0]);
+            return getCMD(client, message, args[0], serverData);
         }
     },
 };
-function getCMD(client, message, input) {
-    const serverData = db.get(message.guild.id);
+function getCMD(client, message, input, serverData) {
+    const { prefix } = serverData;
     const embed = new MessageEmbed();
     const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
 
@@ -44,8 +43,8 @@ function getCMD(client, message, input) {
 
     if (!cmd || (cmd.ownerOnly == true && message.author.id !== ownerID)) return message.channel.send(embed.setColor("RED").setDescription(info));
 
-    if (cmd.name) info = `**Tên lệnh**: \`${serverData.prefix}${cmd.name}\``;
-    if (cmd.aliases) info += `\n**Tên rút gọn**: ${cmd.aliases.map(a => `\`${serverData.prefix}${a}\``).join(", ")}`;
+    if (cmd.name) info = `**Tên lệnh**: \`${prefix}${cmd.name}\``;
+    if (cmd.aliases) info += `\n**Tên rút gọn**: ${cmd.aliases.map(a => `\`${prefix}${a}\``).join(", ")}`;
     if (cmd.description) info += `\n**Chi tiết về bot**: ${cmd.description}`;
     if (cmd.usage) {
         info += `\n**Cách sử dụng lệnh**: \`${cmd.usage}\``;
@@ -54,5 +53,5 @@ function getCMD(client, message, input) {
     if (cmd.note) info += `\n**Note**: ${cmd.note}`;
     if (cmd.example) info += `\n**VD**: \`${cmd.example}\``;
 
-    return message.channel.send(embed.setColor("GREEN").setDescription(info.replace(/<PREFIX>/g, serverData.prefix)));
+    return message.channel.send(embed.setColor("GREEN").setDescription(info.replace(/<PREFIX>/g, prefix)));
 }

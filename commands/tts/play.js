@@ -8,9 +8,8 @@ module.exports = {
     category: 'tts',
     aliases: ['p'],
     usage: '<PREFIX>p <tên>',
-    run: async (client, message, args) => {
-        const prefix = await db.get(`${message.guild.id}.prefix`);
-        const status = await db.get(`${message.guild.id}.botdangnoi`);
+    run: async (client, message, args, serverData) => {
+        const { prefix, botdangnoi: status } = serverData;
         if (status == true) return message.channel.send('Có người khác đang sử dụng bot!');
         const voiceChannel = message.member.voice.channel;
         if (!voiceChannel) return message.reply('Bạn phải vào voice channel để sử dụng lệnh này.');

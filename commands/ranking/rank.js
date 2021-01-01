@@ -3,7 +3,6 @@ const SQLite = require('better-sqlite3');
 const sql = new SQLite('./data.sqlite');
 const fs = require('fs');
 const random_num = require('random-number-csprng');
-const db = require('quick.db');
 const canvacord = require('canvacord');
 const { getMember } = require('../../functions/utils');
 module.exports = {
@@ -14,8 +13,8 @@ module.exports = {
     example: "<PREFIX>rank @phamleduy04",
     note: "Max level là 999",
     cooldown: 15,
-    run: async (client, message, args) => {
-      const serverStatus = db.get(`${message.guild.id}.msgcount`);
+    run: async (client, message, args, serverData) => {
+      const { msgcount: serverStatus } = serverData;
       if (serverStatus === false) return message.channel.send('Server không bật hệ thống rank!');
       const member = await getMember(message, args.join(' '));
       if (member.user.bot) return message.reply('Bạn không thể xem rank của bot!');

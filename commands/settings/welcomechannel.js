@@ -5,8 +5,9 @@ module.exports = {
     category: 'settings',
     description: 'Chọn channel để bot nhắn tin nhắn chào mừng',
     usage: '<PREFIX>welcomechannel <#channel hoặc ID>',
-    run: async (client, message, args) => {
+    run: async (client, message, args, serverData) => {
         if (!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy lệnh này.');
+        const { welcomechannel: check } = serverData;
         if (!args[0]) return message.channel.send("Vui lòng nhập channel!");
         let id = args[0];
         if (id.startsWith("<#")) id = id.slice(2, id.length - 1);
@@ -20,7 +21,6 @@ module.exports = {
         }
         if (!channel) return message.channel.send('Không tìm thấy channel!');
         // log to database
-        const check = db.get(`${message.guild.id}.welcomechannel`);
         if (check == channel.id) {
             await db.delete(`${message.guild.id}.welcomechannel`);
             return message.channel.send('Đã xoá channel thành công!');

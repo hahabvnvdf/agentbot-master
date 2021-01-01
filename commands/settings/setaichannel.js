@@ -7,7 +7,7 @@ module.exports = {
     description: 'Set channel cho bot AI nói chuyện',
     note: 'English only',
     usage: '<PREFIX>setaichannel <#channel>',
-    run: async (client, message, args) => {
+    run: async (client, message, args, serverData) => {
         if(!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy lệnh này.');
         if (!args[0]) return message.channel.send("Vui lòng nhập channel!");
         let id = args[0];
@@ -22,8 +22,7 @@ module.exports = {
         }
         if (!channel) return message.channel.send('Không tìm thấy channel!');
         // check in db
-        const guildData = await db.get(message.guild.id);
-        const aiChannelID = guildData.aiChannel;
+        const { aiChannel: aiChannelID } = serverData;
         if (aiChannelID == channel.id) {
             await db.set(`${message.guild.id}.aiChannel`, null);
             message.channel.send(`Đã xoá ${channel}!`);

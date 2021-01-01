@@ -2,7 +2,6 @@ const SQLite = require('better-sqlite3');
 const sql = new SQLite('./data.sqlite');
 const { pages } = require('../../functions/utils');
 const { MessageEmbed } = require('discord.js');
-const db = require('quick.db');
 module.exports = {
     name: "leaderboard",
     aliases: ["bxh"],
@@ -11,10 +10,9 @@ module.exports = {
     usage: "leaderboard [số trang]",
     note: "Max level là 999",
     example: "leaderboard 2",
-    run: async (client, message, args) => {
+    run: async (client, message, args, serverData) => {
         await message.guild.members.fetch();
-        const serverPrefix = db.get(`${message.guild.id}.prefix`) || "_";
-        const serverStatus = db.get(`${message.guild.id}.msgcount`);
+        const { prefix, msgcount: serverStatus } = serverData;
         if (serverStatus === false) return message.channel.send('Server không bật hệ thống rank!');
         let server_data = sql.prepare("SELECT * FROM xpdata WHERE guild = ? ORDER BY level DESC, xp DESC;").all(message.guild.id);
         if (server_data.length === 0) return message.channel.send('Bảng xếp hạng đang trống!');
@@ -52,7 +50,7 @@ module.exports = {
             .setAuthor(`Bảng xếp hạng | ${message.guild.name}`, message.guild.iconURL())
             .setColor('RANDOM')
             .setDescription(page.map(e => `\`#${e.rank}\` | **${e.tag}** (Level ${e.level}, XP: ${e.xp}/${e.next_xp})`))
-            .setFooter(`Sử dụng lệnh ${serverPrefix}bxh <số> để xem các hạng tiếp theo.`);
+            .setFooter(`Sử dụng lệnh ${prefix}bxh <số> để xem các hạng tiếp theo.`);
         message.channel.send(embed);
     },
 };
