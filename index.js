@@ -136,7 +136,7 @@ client.on("message", async message => {
     // prefix
     let serverData = await db.get(message.guild.id);
     if (!serverData) {
-        serverData = db.set(message.guild.id, { prefix: "_", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false, aiLang: 'vi' });
+        serverData = await db.set(message.guild.id, { prefix: "_", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false, aiLang: 'vi' });
     }
     const { msgChannelOff, aiChannel, aiLang } = serverData;
     if (!msgChannelOff) await db.set(`${message.guild.id}.msgChannelOff`, []);
