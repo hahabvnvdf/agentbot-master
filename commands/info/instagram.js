@@ -25,8 +25,8 @@ module.exports = {
                 `**- Tên đầy đủ:** ${full_name}`,
                 `**- Bio:** ${biography.length == 0 ? "Không có" : biography}`,
                 `**- Số bài đăng:** ${laysodep(sobaidang.count)}`,
-                `**- Followers:** ${laysodep(follower)}`,
-                `**- Following:** ${laysodep(following)}`,
+                `**- Followers:** ${laysodep(follower.count)}`,
+                `**- Following:** ${laysodep(following.count)}`,
                 `**- Private?:** ${is_private ? "Có 🔐" : "Không 🔓"}`,
             ]);
         message.channel.send(embed);
