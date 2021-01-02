@@ -162,11 +162,11 @@ client.on("message", async message => {
     // ai channel
     if (message.channel.id == aiChannel && !message.author.bot) {
         let url;
-        if (!aiLang || aiLang === 'vi') url = `https://simsimi.copcute.pw/api/?text=${encodeURIComponent(message.content)}&lang=vi_VN`;
+        if (!aiLang || aiLang === 'vi') url = `https://api.simsimi.net/v1/?text=${encodeURIComponent(message.content)}&lang=vi_VN`;
         else url = `http://api.brainshop.ai/get?bid=${BID}&key=${BRAINKEY}&uid=1&msg=${encodeURIComponent(message.content)}`;
         const res = await axios.get(url);
         if (!checkMsgPerm(message)) return message.author.send('Mình không có quyền gởi tin nhắn ở server này!').catch(err => console.log(`${message.author.id} không mở DMs`));
-        message.channel.send(!aiLang || aiLang === 'vi' ? res.data.success : res.data.cnt);
+        message.channel.send(!aiLang || aiLang === 'vi' ? res.data.messages[0].response : res.data.cnt);
     }
     // check unafk
     let checkAFK = await afkData.get(message.author.id);
