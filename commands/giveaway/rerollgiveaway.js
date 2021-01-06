@@ -6,6 +6,7 @@ module.exports = {
     description: 'Chọn người chiến thắng khác',
     usage: '<PREFIX>reroll <messageID>',
     run: async (client, message, args) => {
+        if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("Bạn không có quyền `MANAGE_CHANNELS`");
         const messageID = args[0];
         client.giveawaysManager.reroll(messageID, { messages: ga.message })
         .catch(() => {
