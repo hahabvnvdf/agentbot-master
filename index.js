@@ -13,6 +13,7 @@ const client = new Client({ disableMentions: "everyone", retryLimit: 5 });
 const { timezone, ownerID } = require('./config.json');
 const { BID, BRAINKEY } = process.env;
 const { welcome } = require('./functions/canvasfunction');
+const { GiveawaysManager } = require('discord-giveaways');
 if (!process.env.TYPE_RUN) throw new Error("Chạy lệnh npm run dev hoặc npm run build");
 const { log } = require('./functions/log');
 
@@ -37,6 +38,16 @@ const afkData = new db.table('afkdata');
 const commandDb = new db.table('disable');
 client.commands = new Collection();
 client.aliases = new Collection();
+const giveawayManager = new GiveawaysManager(client, {
+    storage: './assets/json/giveaways.json',
+    updateCountdownEvery: 10000,
+    default: {
+        botsCanWin: false,
+        embedColor: '#FF0000',
+        reaction: '🎉',
+    },
+});
+client.giveawaysManager = giveawayManager;
 const cooldowns = new Collection();
 
 client.categories = fs.readdirSync("./commands/");
@@ -44,6 +55,7 @@ client.categories = fs.readdirSync("./commands/");
 ["command"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
+
 
 client.on("ready", () => {
     console.log(`Hi, ${client.user.username} is now online!`);
