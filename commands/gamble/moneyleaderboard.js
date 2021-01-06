@@ -11,7 +11,7 @@ module.exports = {
     run: async (client, message, _) => {
         const memberManager = await message.guild.members.fetch();
         const bxh = await eco.leaderBoard(10, client, message, '💵');
-        const members = memberManager.map(m => m.id);
+        const members = memberManager.filter(m => !m.user.bot).map(m => m.id);
         let num = 0;
         const embed = new MessageEmbed()
             .setTitle(`Bảng xếp hạng của server ${message.guild.name}`);
