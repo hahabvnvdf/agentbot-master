@@ -1,6 +1,7 @@
 const ga = require('../../functions/giveaway');
 module.exports = {
     name: 'rerollgiveaway',
+    category: 'giveaway',
     aliases: ['reroll', 'quaylai', 'rerollgiveaways'],
     description: 'Chọn người chiến thắng khác',
     usage: '<PREFIX>reroll <messageID>',
