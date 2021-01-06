@@ -8,6 +8,7 @@ module.exports = {
     usage: '<PREFIX>start <thời gian GA(10s, 20m, 1d)> <số người thắng> <phần thưởng>',
     example: '<PREIFX>start 1d 1 100000 agent money',
     run: async (client, message, args) => {
+        if (message.deletable) message.delete();
         client.giveawaysManager.start(message.channel, {
             time: ms(args[0]),
             winnerCount: parseInt(args[1]),

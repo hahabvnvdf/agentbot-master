@@ -16,6 +16,7 @@ const message = {
         days: 'ngày',
         pluralS: false,
     },
+    congrat: 'Chúc mừng người chiến thắng mới: {winners}!',
 };
 
 module.exports = {
