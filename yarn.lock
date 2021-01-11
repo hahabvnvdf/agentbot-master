@@ -1304,10 +1304,10 @@ diff@^4.0.1:
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"
   integrity sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
 
-discord-giveaways@^4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/discord-giveaways/-/discord-giveaways-4.4.2.tgz#0e33a26b7ff79d94fc0c90b664327eaa6164e1b6"
-  integrity sha512-xjHe/J+mewxmhEG13NMO8EfnD5BCSTVbTE/cavGeLm8jRQloL0C0eWwPdZPll/89J/Om5+vFrWoxcv/a0Cl9gw==
+discord-giveaways@^4.4.3:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/discord-giveaways/-/discord-giveaways-4.4.3.tgz#76d547f672ecc2244b33cd0875f6353e79bfd8e5"
+  integrity sha512-/IgXWLA6p0bk348/xIrXsHeNQGZW5688fC6DTz5whC5hEAebjoY0usOSq/74iCQ99oQfIHsl6gx4j06UZcIc1w==
   dependencies:
     deepmerge "^4.2.2"
 
