@@ -30,6 +30,7 @@
     "random-number-csprng": "^1.0.2",
     "relevant-urban": "^2.0.0",
     "snyk": "^1.437.3",
+    "sourcebin-wrapper": "^1.6.0",
     "string-similarity": "^4.0.4",
     "twemoji-parser": "^13.0.0",
     "weather-js": "^2.0.0",

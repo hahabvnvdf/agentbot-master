@@ -352,6 +352,11 @@
     tar-stream "^2.1.2"
     tmp "^0.1.0"
 
+"@sourcebin/linguist@0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@sourcebin/linguist/-/linguist-0.0.2.tgz#1ba5568669ad2f11e9b472b8141437b4b2579954"
+  integrity sha512-hleL3Mp5D5Fnwglpfkgj6iWlGQ46gckjlaqXCIkh092HDiC4WP+LONZI0kHMDPCMe5sa0zjM0wLs1L+sEVA4gA==
+
 "@szmarczak/http-timer@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@szmarczak/http-timer/-/http-timer-1.1.2.tgz#b1665e2c461a2cd92f4c1bbf50d5454de0d4b421"
@@ -3065,7 +3070,7 @@ node-canvas-with-twemoji-and-discord-emoji@^1.1.4:
     canvas "^2.6.1"
     twemoji "^13.0.1"
 
-node-fetch@^2.3.0, node-fetch@^2.6.1:
+node-fetch@^2.3.0, node-fetch@^2.6.0, node-fetch@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
@@ -4346,6 +4351,14 @@ source-map@^0.6.0, source-map@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
+
+sourcebin-wrapper@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/sourcebin-wrapper/-/sourcebin-wrapper-1.6.0.tgz#286028e41a60a16e639f719bc327b6998844fa9e"
+  integrity sha512-YY2FOVz8OJ4Rm1ZXEZxx4p6T84FDXXVVsDODBDLT4rAvbPQ4z3196gu0dAzIX+d1AhOpI2s+Giph+qJb6NwlSA==
+  dependencies:
+    "@sourcebin/linguist" "0.0.2"
+    node-fetch "^2.6.0"
 
 sparse-bitfield@^3.0.3:
   version "3.0.3"
