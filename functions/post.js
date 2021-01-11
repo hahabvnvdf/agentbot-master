@@ -1,13 +1,13 @@
-const axios = require('axios');
-const url = "https://hasteb.in/documents";
+const { create, BinFile } = require('sourcebin-wrapper');
 module.exports = {
     post: async function(content) {
-        try {
-            const res = await axios.post(url, content);
-            return `https://hasteb.in/${res.data.key}`;
-        }
-        catch (e) {
-            return { error: true, message: e.message };
-        }
+        const res = await create([
+            new BinFile({
+                name: 'log.js',
+                content: content,
+                languageId: 'js',
+            }),
+        ]);
+        return res.shortened;
     },
 };
