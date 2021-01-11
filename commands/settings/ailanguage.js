@@ -2,7 +2,7 @@ const db = require('quick.db');
 const ansAccept = ['en', 'vi'];
 module.exports = {
     name: 'ailanguage',
-    aliases: ['ailang', 'ngonnguai'],
+    aliases: ['ailang', 'ngonnguai', 'setailang'],
     description: 'Thay đổi ngôn ngữ AI',
     category: 'settings',
     run: async (client, message, args, serverData) => {

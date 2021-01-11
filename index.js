@@ -172,13 +172,12 @@ client.on("message", async message => {
         }, ms('1m'));
     }
     // ai channel
-    if (message.channel.id == aiChannel && !message.author.bot) {
-        let url;
-        if (!aiLang || aiLang === 'vi') url = `https://api.simsimi.net/v1/?text=${encodeURIComponent(message.content)}&lang=vi_VN`;
-        else url = `http://api.brainshop.ai/get?bid=${BID}&key=${BRAINKEY}&uid=1&msg=${encodeURIComponent(message.content)}`;
-        const res = await axios.get(url);
-        if (!checkMsgPerm(message)) return message.author.send('Mình không có quyền gởi tin nhắn ở server này!').catch(err => console.log(`${message.author.id} không mở DMs`));
-        message.channel.send(!aiLang || aiLang === 'vi' ? res.data.messages[0].response : res.data.cnt);
+    if (!message.content.startsWith(serverData.prefix) && message.channel.id == aiChannel && !message.author.bot) {
+        let res;
+        if (!aiLang || aiLang === 'vi') res = await axios.get(`https://api.simsimi.net/v1/?text=${encodeURIComponent(message.content)}&lang=vi_VN`);
+        else res = await axios.get(`https://api.snowflakedev.xyz/api/chatbot?name=Agent%20Bot&gender=male&user=${message.author.id}&message=${encodeURIComponent(message.content)}`, { headers: { Authorization: process.env.SNOWFLAKEAPI } });
+        if (!checkMsgPerm(message)) return message.author.send('Mình không có quyền gởi tin nhắn ở server này!').catch(err => console.log(err.message));
+        message.channel.send(!aiLang || aiLang === 'vi' ? res.data.messages[0].response : res.data.message);
     }
     // check unafk
     let checkAFK = await afkData.get(message.author.id);
@@ -200,8 +199,7 @@ client.on("message", async message => {
     for (const thisprefix of prefixlist) {
         if (message.content.toLowerCase().startsWith(thisprefix)) prefix = thisprefix;
     }
-    if (prefix === null) return;
-    if (!message.content.startsWith(prefix)) return;
+    if (prefix === null || !message.content.startsWith(prefix)) return;
     const blacklist_status = await db.get(`${message.guild.id}.blacklist`);
     if (!blacklist_status) await db.set(`${message.guild.id}.blacklist`, false);
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
