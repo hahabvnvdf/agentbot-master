@@ -33,7 +33,7 @@
     "string-similarity": "^4.0.4",
     "twemoji-parser": "^13.0.0",
     "weather-js": "^2.0.0",
-    "yahoo-stock-api": "^1.0.5"
+    "yahoo-stock-api": "^1.0.6"
   },
   "devDependencies": {
     "eslint": "^7.17.0",
