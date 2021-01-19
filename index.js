@@ -11,7 +11,6 @@ const ms = require('ms');
 const cooldown = new Set();
 const client = new Client({ disableMentions: "everyone", retryLimit: 5 });
 const { timezone, ownerID } = require('./config.json');
-const { BID, BRAINKEY } = process.env;
 const { welcome } = require('./functions/canvasfunction');
 const { GiveawaysManager } = require('discord-giveaways');
 if (!process.env.TYPE_RUN) throw new Error("Chạy lệnh npm run dev hoặc npm run build");
@@ -36,8 +35,6 @@ if (process.env.TYPE_RUN == 'production') {
 const db = require('quick.db');
 const afkData = new db.table('afkdata');
 const commandDb = new db.table('disable');
-client.commands = new Collection();
-client.aliases = new Collection();
 const giveawayManager = new GiveawaysManager(client, {
     storage: './assets/json/giveaways.json',
     updateCountdownEvery: 10000,
@@ -47,9 +44,11 @@ const giveawayManager = new GiveawaysManager(client, {
         reaction: '🎉',
     },
 });
-client.giveawaysManager = giveawayManager;
 const cooldowns = new Collection();
-
+client.commands = new Collection();
+client.aliases = new Collection();
+client.giveawaysManager = giveawayManager;
+client.snipes = new Map();
 client.categories = fs.readdirSync("./commands/");
 
 ["command"].forEach(handler => {
@@ -244,6 +243,16 @@ client.on('voiceStateUpdate', (oldstate, newstate) => {
         db.set(`${oldstate.guild.id}.botdangnoi`, false);
         db.delete(`${oldstate.guild.id}.endtime`);
     }
+});
+
+client.on('messageDelete', message => {
+    if (message.author.bot) return;
+    client.snipes.set(message.channel.id, {
+        content: message.content,
+        author: message.author,
+        image: message.attachments.first() ? message.attachments.first().proxyURL : null,
+        ID: message.id,
+    });
 });
 
 client.on('error', (err) => {
