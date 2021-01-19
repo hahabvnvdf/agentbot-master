@@ -7,7 +7,7 @@ module.exports = {
     run: async (client, message, args) => {
         const msg = client.snipes.get(message.channel.id);
         if (!msg) return message.reply('Không tìm thấy!');
-
+        message.react('<:target:801105643221942292>');
         const embed = new MessageEmbed()
             .setAuthor(`Người gởi: ${msg.author.tag}`, msg.author.displayAvatarURL())
             .setColor('RED')
