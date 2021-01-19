@@ -19,7 +19,7 @@
     "ffmpeg-static": "^4.2.7",
     "is-url": "^1.2.4",
     "ksoft.js": "^3.1.4",
-    "mathjs": "8.1.1",
+    "mathjs": "9.0.0",
     "moment": "2.29.1",
     "moment-timezone": "^0.5.32",
     "ms": "^2.1.3",
@@ -37,7 +37,7 @@
     "yahoo-stock-api": "^1.0.6"
   },
   "devDependencies": {
-    "eslint": "^7.17.0",
+    "eslint": "^7.18.0",
     "nodemon": "^2.0.7"
   },
   "scripts": {
