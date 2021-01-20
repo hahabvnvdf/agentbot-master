@@ -3,7 +3,7 @@ const { getMember, formatDate, trimArray } = require('../../functions/utils');
 const flags = require('../../assets/json/userflag.json');
 module.exports = {
     name: "whois",
-    aliases: ["who", "user", "info"],
+    aliases: ["who", "user", "info", "userinfo"],
     category: "info",
     description: "Thông tin về người dùng",
     usage: "<PREFIX>whois <@tag,username,ID>",
