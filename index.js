@@ -1,7 +1,6 @@
 const { Collection, MessageEmbed, Client, MessageAttachment } = require("discord.js");
-const { config } = require("dotenv");
-config({
-    path: __dirname + "/.env",
+require("dotenv").config({
+    path: __dirname + '/.env',
 });
 const timerEmoji = '<a:timer:714891786274734120>';
 const fs = require("fs");
@@ -15,7 +14,10 @@ const { welcome } = require('./functions/canvasfunction');
 const { GiveawaysManager } = require('discord-giveaways');
 if (!process.env.TYPE_RUN) throw new Error("Chạy lệnh npm run dev hoặc npm run build");
 const { log } = require('./functions/log');
+const { verifyWord, updateNoiTu } = require('./functions/utils');
 
+// load trước ~1mb
+require('./assets/json/words_dictionary.json');
 // discord.bots.gg api
 const axios = require('axios');
 const instance = axios.create({
@@ -144,12 +146,12 @@ client.on('guildMemberAdd', async member => {
 client.on("message", async message => {
     if (message.author.bot && process.env.TYPE_RUN !== 'ci') return;
     if (!message.guild) return;
+    const guildID = message.guild.id;
     // prefix
-    let serverData = await db.get(message.guild.id);
-    if (!serverData) {
-        serverData = await db.set(message.guild.id, { prefix: "_", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false, aiLang: 'vi' });
-    }
-    const { msgChannelOff, aiChannel, aiLang } = serverData;
+    let serverData = await db.get(guildID);
+    if (!serverData) serverData = await db.set(message.guild.id, { prefix: "_", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false, aiLang: 'vi', noitu: null, noituStart: false, noituArray: [], maxWords: 1500, noituLastUser: null });
+    const { msgChannelOff, aiChannel, aiLang, noitu, noituStart, noituArray, maxWords, noituLastUser } = serverData;
+    if (!maxWords) await updateNoiTu(message.guild.id);
     if (!msgChannelOff) await db.set(`${message.guild.id}.msgChannelOff`, []);
     const listChannelMsg = await db.get(`${message.guild.id}.msgChannelOff`);
     if (message.guild && db.get(`${message.guild.id}.msgcount`) && !cooldown.has(message.author.id) && !listChannelMsg.includes(message.channel.id)) {
@@ -169,6 +171,32 @@ client.on("message", async message => {
             setTimeout(() => {
                 cooldown.delete(message.author.id);
         }, ms('1m'));
+    }
+    // noitu
+    if (message.channel.id == noitu && !message.content.startsWith(serverData.prefix)) {
+        if (message.content.match(/\W/g) || message.content.includes(' ') || message.content.length == 0) return;
+        const query = message.content.toLowerCase();
+        if (noituLastUser == message.author.id) return errnoitu(message, 'Bạn đã nối từ trước đó rồi, vui lòng chờ!');
+        if (!verifyWord(query) || query.length == 1) return errnoitu(message, `Từ \`${message.content}\` không tồn tại trong từ điển của bot!`);
+        if (!noituStart) await db.set(`${guildID}.noituStart`, true);
+        else {
+            const lastWord = noituArray[noituArray.length - 1];
+            const shouldStart = lastWord.slice(-1);
+            if (!query.startsWith(shouldStart)) return errnoitu(message, `Từ của bạn phải bắt đầu bằng chữ \`${shouldStart}\`!`);
+        }
+        if (noituArray.includes(query)) return errnoitu(message, `Từ \`${query}\` đã có người nối từ trước!`);
+        await message.react('✅');
+        await db.push(`${guildID}.noituArray`, query);
+        await db.set(`${guildID}.noituLastUser`, message.author.id);
+        if (noituArray.length + 1 > maxWords) {
+            const embed = new MessageEmbed()
+                .setAuthor('Agent Bot', client.user.avatarURL())
+                .setDescription(`Trò chơi kết thúc vì số từ chơi đã vượt giới hạn (${maxWords} từ)`)
+                .setFooter(`Sử dụng lệnh ${serverData.prefix}}setmaxword để tăng giới hạn.`);
+            message.channel.send(embed);
+            await updateNoiTu(guildID, maxWords);
+        }
+        return;
     }
     // ai channel
     if (!message.content.startsWith(serverData.prefix) && message.channel.id == aiChannel && !message.author.bot) {
@@ -300,6 +328,11 @@ async function sendOwner(content) {
     if (!content || process.env.TYPE_RUN !== 'production') return;
     const owner = await client.users.fetch(ownerID);
     owner.send(content, { split: true, code: true });
+}
+
+function errnoitu(message, string) {
+    message.react('❌');
+    return message.reply(string);
 }
 
 if (process.env.TYPE_RUN == 'ci') process.exit();
