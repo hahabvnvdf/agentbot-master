@@ -6,8 +6,8 @@ module.exports = {
     description: 'Set channel dùng để chơi nối từ',
     category: 'noitu',
     usage: '<PREFIX>noitu <#channel>',
-    ownerOnly: true,
     run: async (client, message, args, guildData) => {
+        if(!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền `MANAGE_GUILD` để chạy lệnh này!');
         if (!has(`${message.guild.id}.noitu`)) await set(`${message.guild.id}.noitu`, null);
         const channel = await getChannel(message, args.join(' '), false);
         if (!channel) return message.channel.send('Không tìm thấy channel, vui lòng thử lại sau!');
