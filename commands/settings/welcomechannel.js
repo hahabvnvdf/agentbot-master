@@ -9,8 +9,6 @@ module.exports = {
         if (!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy lệnh này.');
         const { welcomechannel: check } = serverData;
         if (!args[0]) return message.channel.send("Vui lòng nhập channel!");
-        let id = args[0];
-        if (id.startsWith("<#")) id = id.slice(2, id.length - 1);
         const channel = await getChannel(message, args.join(' '), true);
         // log to database
         if (check == channel.id) {
