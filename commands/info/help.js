@@ -45,7 +45,7 @@ function getCMD(client, message, input, serverData) {
 
     if (cmd.name) info = `**Tên lệnh**: \`${prefix}${cmd.name}\``;
     if (cmd.aliases) info += `\n**Tên rút gọn**: ${cmd.aliases.map(a => `\`${prefix}${a}\``).join(", ")}`;
-    if (cmd.description) info += `\n**Chi tiết về bot**: ${cmd.description}`;
+    if (cmd.description) info += `\n**Chi tiết lệnh**: ${cmd.description}`;
     if (cmd.usage) {
         info += `\n**Cách sử dụng lệnh**: \`${cmd.usage}\``;
         embed.setFooter(`Cú pháp: <> = bắt buộc, [] = không bắt buộc`);
