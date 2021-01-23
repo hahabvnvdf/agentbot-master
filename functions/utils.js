@@ -25,7 +25,7 @@ module.exports = {
             const matches = findBestMatch(toFind, listChannel);
             if (matches.bestMatch.rating > 0.6) channel = message.guild.channels.cache.find(ch => ch.name == matches.bestMatch.target);
         }
-        if (!channel && sameChannelReturn) return message.channel; 
+        if (!channel && sameChannelReturn) return message.channel;
         return channel;
     },
 
