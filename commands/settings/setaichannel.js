@@ -1,4 +1,3 @@
-const ss = require('string-similarity');
 const db = require('quick.db');
 const { getChannel } = require('../../functions/utils');
 module.exports = {

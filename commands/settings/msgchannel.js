@@ -1,5 +1,5 @@
 const db = require('quick.db');
-const ss = require('string-similarity');
+const { getChannel } = require('../../functions/utils');
 module.exports = {
     name: 'msgchannel',
     category: 'settings',
@@ -18,16 +18,7 @@ module.exports = {
             });
             return await message.channel.send(`Những phòng đang tắt tính kinh nghiệm là: ${channels.join(' ')}`);
         }
-        let id = args[0];
-        if (id.startsWith("<#")) id = id.slice(2, id.length - 1);
-        let channel = message.guild.channels.cache.get(id);
-        if (isNaN(id)) {
-            const listChannel = message.guild.channels.cache.filter(c => c.type == 'text').map(ch => ch.name);
-            const channel_name = args.join(' ');
-            const matches = ss.findBestMatch(channel_name, listChannel);
-            if (matches.bestMatch.rating < 0.6) return message.channel.send(`Không tìm thấy channel tên ${channel_name}`);
-            channel = message.guild.channels.cache.find(ch => ch.name == matches.bestMatch.target);
-        }
+        const channel = await getChannel(message, args.join(' '), true);
         if (!channel) return message.channel.send('Không tìm thấy channel!');
         // check
         if (msgChannelOff.includes(channel.id)) {
