@@ -10,7 +10,7 @@ module.exports = {
     example: "<PREFIX>hug (ôm tất cả) hoặc <PREFIX>hug @phamleduy04",
     run: async (client, message, args) => {
         let nguoitag = message.mentions.members.array();
-        if (nguoitag.length == 0) nguoitag = await message.guild.members.fetch({ user: args[0] }).catch(() => null);
+        if (nguoitag.length == 0 && args[0]) nguoitag = await message.guild.members.fetch({ user: args[0] }).catch(() => null);
         try {
             const response = await axios.get('https://some-random-api.ml/animu/hug');
             const embed = new MessageEmbed()
@@ -23,8 +23,8 @@ module.exports = {
                     const nguoiTagID = nguoitag.map(member => member.id);
                     if (nguoiTagID.includes(authorData.target.id)) {
                         authorData.target.hugs++;
-                    await shipDb.set(message.author.id, authorData);
-                    embed.setFooter(`Cái ôm ${authorData.target.hugs !== 1 ? `thứ ${authorData.target.hugs}` : 'đầu tiên'} của bạn.`);
+                        await shipDb.set(message.author.id, authorData);
+                        embed.setFooter(`Cái ôm ${authorData.target.hugs !== 1 ? `thứ ${authorData.target.hugs}` : 'đầu tiên'} của bạn.`);
                     }
                 }
             }
