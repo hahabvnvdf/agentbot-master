@@ -2,6 +2,7 @@ const { Collection, MessageEmbed, Client, MessageAttachment } = require("discord
 require("dotenv").config({
     path: __dirname + '/.env',
 });
+const { DBOTGG, TYPE_RUN, TOPGG, SNOWFLAKEAPI, TOKEN, SIMSIMI } = process.env;
 const timerEmoji = '<a:timer:714891786274734120>';
 const fs = require("fs");
 const SQLite = require('better-sqlite3');
@@ -12,7 +13,7 @@ const client = new Client({ disableMentions: "everyone", retryLimit: 5 });
 const { timezone, ownerID } = require('./config.json');
 const { welcome } = require('./functions/canvasfunction');
 const { GiveawaysManager } = require('discord-giveaways');
-if (!process.env.TYPE_RUN) throw new Error("Chạy lệnh npm run dev hoặc npm run build");
+if (!TYPE_RUN) throw new Error("Chạy lệnh npm run dev hoặc npm run build");
 const { log } = require('./functions/log');
 const { verifyWord, updateNoiTu } = require('./functions/utils');
 
@@ -23,12 +24,12 @@ const axios = require('axios');
 const instance = axios.create({
     baseURL: 'https://discord.bots.gg/api/v1/',
     timeout: 10000,
-    headers: { "Authorization": process.env.DBOTGG },
+    headers: { "Authorization": DBOTGG },
 });
 
-if (process.env.TYPE_RUN == 'production') {
+if (TYPE_RUN == 'production') {
     const DBL = require('dblapi.js');
-    const dbl = new DBL(process.env.TOPGG, client);
+    const dbl = new DBL(TOPGG, client);
     // top.gg API
     dbl.on('error', e => {
         log(e);
@@ -89,7 +90,7 @@ client.on("ready", () => {
             type: "PLAYING",
         },
     });
-    if (process.env.TYPE_RUN == 'production') {
+    if (TYPE_RUN == 'production') {
         instance.post(`bots/${client.user.id}/stats`, {
             guildCount: client.guilds.cache.size,
         });
@@ -144,7 +145,7 @@ client.on('guildMemberAdd', async member => {
 });
 
 client.on("message", async message => {
-    if (message.author.bot && process.env.TYPE_RUN !== 'ci') return;
+    if (message.author.bot && TYPE_RUN !== 'ci') return;
     if (!message.guild) return;
     const guildID = message.guild.id;
     // prefix
@@ -201,8 +202,8 @@ client.on("message", async message => {
     // ai channel
     if (!message.content.startsWith(serverData.prefix) && message.channel.id == aiChannel && !message.author.bot) {
         let res;
-        if (!aiLang || aiLang === 'vi') res = await axios.get(`https://api.simsimi.net/v1/?text=${encodeURIComponent(message.content)}&lang=vi_VN`);
-        else res = await axios.get(`https://api.snowflakedev.xyz/api/chatbot?name=Agent%20Bot&gender=male&user=${message.author.id}&message=${encodeURIComponent(message.content)}`, { headers: { Authorization: process.env.SNOWFLAKEAPI } });
+        if (!aiLang || aiLang === 'vi') res = await axios.get(`https://api.simsimi.net/v1/c3c/?text=${encodeURIComponent(message.content)}&lang=vi_VN&key=${SIMSIMI}`);
+        else res = await axios.get(`https://api.snowflakedev.xyz/api/chatbot?name=Agent%20Bot&gender=male&user=${message.author.id}&message=${encodeURIComponent(message.content)}`, { headers: { Authorization: SNOWFLAKEAPI } });
         if (!checkMsgPerm(message)) return message.author.send('Mình không có quyền gởi tin nhắn ở server này!').catch(err => console.log(err.message));
         message.channel.send(!aiLang || aiLang === 'vi' ? res.data.messages[0].response : res.data.message);
     }
@@ -309,7 +310,7 @@ y.addListener("data", res => {
 
 // end console chat
 function logging(content) {
-    if (process.env.TYPE_RUN !== 'production') return;
+    if (TYPE_RUN !== 'production') return;
     const moment = require('moment-timezone');
     log(`${moment.tz(timezone).format("DD/MM/YYYY hh:mm:ss")} || ${content}`);
 }
@@ -320,12 +321,12 @@ async function reset_afk(id) {
 }
 
 process.on('exit', (exitCode) => {
-    if (process.env.TYPE_RUN !== 'production') return console.log('Exiting......');
+    if (TYPE_RUN !== 'production') return console.log('Exiting......');
     sendOwner(`Bot đã thoát với exitCode: ${exitCode}`);
 });
 
 async function sendOwner(content) {
-    if (!content || process.env.TYPE_RUN !== 'production') return;
+    if (!content || TYPE_RUN !== 'production') return;
     const owner = await client.users.fetch(ownerID);
     owner.send(content, { split: true, code: true });
 }
@@ -335,5 +336,5 @@ function errnoitu(message, string) {
     return message.reply(string);
 }
 
-if (process.env.TYPE_RUN == 'ci') process.exit();
-client.login(process.env.TOKEN);
+if (TYPE_RUN == 'ci') process.exit();
+client.login(TOKEN);
