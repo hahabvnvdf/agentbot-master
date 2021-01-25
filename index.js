@@ -15,7 +15,7 @@ const { welcome } = require('./functions/canvasfunction');
 const { GiveawaysManager } = require('discord-giveaways');
 if (!TYPE_RUN) throw new Error("Chạy lệnh npm run dev hoặc npm run build");
 const { log } = require('./functions/log');
-const { verifyWord, updateNoiTu } = require('./functions/utils');
+const { verifyWord, updateNoiTu, laysodep } = require('./functions/utils');
 
 // load trước ~1mb
 require('./assets/json/words_dictionary.json');
@@ -82,28 +82,29 @@ client.on("ready", () => {
     // And then we have two prepared statements to get and set the score data.
     client.getScore = sql.prepare("SELECT * FROM xpdata WHERE user = ? AND guild = ?");
     client.setScore = sql.prepare("INSERT OR REPLACE INTO xpdata (id, user, guild, xp, level) VALUES (@id, @user, @guild, @xp, @level);");
+    const guildCount = client.guilds.cache.size;
     // set presence
     client.user.setPresence({
         status: "online",
         activity: {
-            name: `Đang phục vụ ${client.guilds.cache.size} servers`,
+            name: `Đang phục vụ ${laysodep(guildCount)} servers`,
             type: "PLAYING",
         },
     });
     if (TYPE_RUN == 'production') {
         instance.post(`bots/${client.user.id}/stats`, {
-            guildCount: client.guilds.cache.size,
+            guildCount: guildCount,
         });
         setInterval(function() {
             client.user.setPresence({
                 status: "online",
                 activity: {
-                    name: `Đang phục vụ ${client.guilds.cache.size} servers`,
+                    name: `Đang phục vụ ${laysodep(guildCount)} servers`,
                     type: 'PLAYING',
                 },
             });
             instance.post(`bots/${client.user.id}/stats`, {
-                guildCount: client.guilds.cache.size,
+                guildCount: guildCount,
             });
         }, 36e5);
     }
@@ -150,7 +151,7 @@ client.on("message", async message => {
     const guildID = message.guild.id;
     // prefix
     let serverData = await db.get(guildID);
-    if (!serverData) serverData = await db.set(message.guild.id, { prefix: "_", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false, aiLang: 'vi', noitu: null, noituStart: false, noituArray: [], maxWords: 1500, noituLastUser: null });
+    if (!serverData) serverData = await db.set(message.guild.id, { prefix: TYPE_RUN == 'production' ? "_" : "*", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false, aiLang: 'vi', noitu: null, noituStart: false, noituArray: [], maxWords: 1500, noituLastUser: null });
     const { msgChannelOff, aiChannel, aiLang, noitu, noituStart, noituArray, maxWords, noituLastUser } = serverData;
     if (!maxWords) await updateNoiTu(message.guild.id);
     if (!msgChannelOff) await db.set(`${message.guild.id}.msgChannelOff`, []);
