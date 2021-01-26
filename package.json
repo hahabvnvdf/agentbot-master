@@ -1,7 +1,7 @@
 {
   "name": "agent-bot",
-  "version": "5.8.10",
-  "main": "index.js",
+  "version": "5.9.0",
+  "main": "bot.js",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
     "@google-cloud/text-to-speech": "^3.1.3",
@@ -41,9 +41,9 @@
     "nodemon": "^2.0.7"
   },
   "scripts": {
-    "test": "cross-env TYPE_RUN=ci node index.js",
-    "dev": "cross-env TYPE_RUN=dev nodemon index.js",
-    "build-with-inspect": "cross-env TYPE_RUN=production node --inspect --max-old-space-size=2048 index.js",
+    "test": "cross-env TYPE_RUN=ci node bot.js",
+    "dev": "cross-env TYPE_RUN=dev nodemon bot.js",
+    "build-inspect": "cross-env TYPE_RUN=production node --inspect --max-old-space-size=2048 index.js",
     "build": "cross-env TYPE_RUN=production node --max-old-space-size=2048 index.js",
     "dev-node": "cross-env TYPE_RUN=dev node index.js",
     "snyk-protect": "snyk protect",
