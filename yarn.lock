@@ -2795,10 +2795,10 @@ make-dir@^3.0.0:
   dependencies:
     semver "^6.0.0"
 
-mathjs@9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-9.0.0.tgz#2edd3dfdca805d7e0e5454a46b2798d95a837887"
-  integrity sha512-ZfNz90wyed1MJUQOfL+Jr9IWG6vevVPM+cFf93sV568lbY8w2obEv5Ba7e7+Ylg5Zv0PTPtEY5CbqivHw/AxGQ==
+mathjs@9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-9.1.0.tgz#7ffba667032308c8df4310525f3f8c3ee1e63d50"
+  integrity sha512-grFrHG7KwQTRFSmkG+FBhl9VmX97G9JNSdSOULbxFJAaH777qi7OihXpeQULTzC5aUo7LwvWRVpw1kXJKxm0Hg==
   dependencies:
     complex.js "^2.0.11"
     decimal.js "^10.2.1"
