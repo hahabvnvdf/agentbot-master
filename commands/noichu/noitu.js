@@ -1,11 +1,11 @@
 const { getChannel, updateNoiTu } = require('../../functions/utils');
 const { set, has } = require('quick.db');
 module.exports = {
-    name: 'noitu',
-    aliases: ['setnoitu', 'wordchannel', 'setwordchannel'],
-    description: 'Set channel dùng để chơi nối từ',
-    category: 'noitu',
-    usage: '<PREFIX>noitu <#channel>',
+    name: 'noichu',
+    aliases: ['setnoichu', 'wordchannel', 'setwordchannel'],
+    description: 'Set channel dùng để chơi nối chữ',
+    category: 'noichu',
+    usage: '<PREFIX>noichu <#channel>',
     run: async (client, message, args, guildData) => {
         if(!message.member.hasPermission("MANAGE_GUILD")) return message.reply('Bạn cần có quyền `MANAGE_GUILD` để chạy lệnh này!');
         if (!has(`${message.guild.id}.noitu`)) await set(`${message.guild.id}.noitu`, null);

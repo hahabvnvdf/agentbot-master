@@ -3,12 +3,12 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     name: 'getdef',
     aliases: ['dinhnghia', 'getdefinition', 'definition'],
-    category: 'noitu',
-    description: 'Lấy định nghĩa của từ trong game nối từ',
+    category: 'noichu',
+    description: 'Lấy định nghĩa của từ trong game nối chữ',
     usage: '<PREFIX>getdef',
     run: async (client, message, args, guildData) => {
         const { noituArray } = guildData;
-        if (noituArray.length == 0) return message.reply('Lệnh này chỉ sử dụng khi chơi nối từ!');
+        if (noituArray.length == 0) return message.reply('Lệnh này chỉ sử dụng khi chơi nối chữ!');
         const lastWord = noituArray[noituArray.length - 1];
         let res;
         try {
