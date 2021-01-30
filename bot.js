@@ -82,7 +82,7 @@ client.on("ready", async () => {
     // And then we have two prepared statements to get and set the score data.
     client.getScore = sql.prepare("SELECT * FROM xpdata WHERE user = ? AND guild = ?");
     client.setScore = sql.prepare("INSERT OR REPLACE INTO xpdata (id, user, guild, xp, level) VALUES (@id, @user, @guild, @xp, @level);");
-    const guildCount = await getGuildCount();
+    const guildCount = TYPE_RUN == 'production' ? await getGuildCount() : client.guilds.cache.size;
     // set presence
     client.user.setPresence({
         status: "online",

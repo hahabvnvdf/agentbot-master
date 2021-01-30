@@ -31,6 +31,10 @@
         "fileName": "cekt.mp3",
         "volume": 0.75
     },
+    "cvad": {
+        "fileName": "cvad.mp3",
+        "volume": 0.75
+    },
     "cts": {
         "fileName": "cts.mp3",
         "volume": 1
