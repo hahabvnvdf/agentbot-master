@@ -14,9 +14,10 @@ module.exports = {
         const query = args[0].toLowerCase();
         if (query == 'disable' || query == 'enable') return message.channel.send('Bạn không thể tắt lệnh này!');
         if (guildDisable.includes(query)) return message.channel.send('Bạn đã disable lệnh này rồi');
-        const listCommand = client.commands.map(el => el.name);
+        const listCommand = client.commands.filter(el => el.category == 'settings').map(el => el.name);
         const category = [... new Set(client.commands.map(el => el.category))].filter(el => el != null);
         if (category.includes(query)) {
+            if (query.toLowerCase() == 'settings') return message.channel.send('Bạn không thể disbale category này!');
             const goToDisable = client.commands.filter(el => el.category == query).map(el => el.name);
             goToDisable.forEach(async cmd => {
                 guildDisable.push(cmd);

@@ -1,6 +1,6 @@
 {
   "name": "agent-bot",
-  "version": "5.9.1",
+  "version": "5.9.2",
   "main": "bot.js",
   "dependencies": {
     "@discordjs/opus": "^0.4.0",
