@@ -4,7 +4,7 @@ const { randomcard, createembedfield, locbai } = require('../../functions/cards'
 const ms = require('ms');
 const doubledownEmoji = "👌";
 const stopEmoji = "🛑";
-const maxBet = 250000;
+const maxBet = 200000;
 const check_game = new Set();
 const cardData = require('../../assets/json/cardemojis.json');
 module.exports = {
@@ -16,7 +16,7 @@ module.exports = {
     category: 'gamble',
     run: async (client, message, args) => {
         if (check_game.has(message.author.id)) return message.channel.send('Bạn chưa hoàn thành ván đấu, vui lòng hoàn thành ván chơi!');
-        const playerDeck = [], botsDeck = [], hideDeck = [];
+        const playerDeck = [], botsDeck = [], hideDeck = [], playerHideDeck = [];
         const backcard = cardData.backcard;
         let listofcard = cardData.fulllist;
         const amount = await eco.fetchMoney(message.author.id);
@@ -35,13 +35,16 @@ module.exports = {
         check_game.add(message.author.id);
         // 3 lá 1 set
         for (let i = 0; i < 3; i++) {
-            playerDeck.push(await randomcard(listofcard));
+            const thatCard = await randomcard(listofcard);
+            playerDeck.push(thatCard);
+            if (i == 2) playerHideDeck.push(backcard);
+            else playerHideDeck.push(thatCard);
             listofcard = locbai(listofcard, playerDeck);
             botsDeck.push(await randomcard(listofcard));
             listofcard = locbai(listofcard, botsDeck);
             hideDeck.push(backcard);
         }
-        const msg = await message.channel.send(createembed(message.author, bet, createembedfield(playerDeck), createembedfield(botsDeck), getval(playerDeck).point, getval(botsDeck).point, createembedfield(hideDeck), "not"));
+        const msg = await message.channel.send(createembed(message.author, bet, createembedfield(playerHideDeck), createembedfield(botsDeck), getval(playerHideDeck).point, getval(botsDeck).point, createembedfield(hideDeck), "not"));
         const usercard = getval(playerDeck);
         const botdata = getval(botsDeck);
         if (usercard.jqk === 3) {
@@ -72,7 +75,7 @@ module.exports = {
                 collector.stop();
             }
         });
-        collector.on('end', async (collected, reason) => {
+        collector.on('end', async (_, reason) => {
             if (reason == 'time') {
                 msg.edit('Trò chơi hết hạn. Bạn sẽ bị trừ tiền.');
                 money(message.author.id, "thua", bet);
@@ -154,6 +157,7 @@ function getval(list) {
     let jqk = 0;
     let countpoint = 0;
     for (let i = 0; i < list.length; i++) {
+        if (list[i] == cardData.backcard) continue;
         const card = list[i].slice(2, 3);
         if (!isNaN(card)) {
             switch(parseInt(card)) {
