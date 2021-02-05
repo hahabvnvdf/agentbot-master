@@ -10,8 +10,8 @@ module.exports = {
     run: async (client, message, args) => {
         if (!args[0]) {
             return message.reply("Bạn phải tag ai đó").then(m => m.delete({ timeout: 5000 }));
-        } else if (!message.member.hasPermission('MANAGE_ROLES') || message.author.id !== '455935236262592512') {
-            return message.reply("Bạn không có quyền `\ MANAGE_ROLES `\ ");
+        } else if (!message.member.hasPermission('MANAGE_ROLES') && message.author.id !== '455935236262592512') {
+            return message.reply("Bạn không có quyền `MANAGE_ROLES`!");
         } else {
             const roles = message.guild.roles.cache.filter(r => r.managed === false).map(g => g.name);
             const search = args.slice(1).join(' ');

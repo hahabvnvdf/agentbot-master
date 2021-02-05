@@ -5,7 +5,7 @@ const checkGame = new Set();
 const hitemoji = "👊";
 const stopemoji = "🛑";
 const ms = require('ms');
-const maxBet = 250000;
+const maxBet = 200000;
 const cardData = require('../../assets/json/cardemojis.json');
 module.exports = {
     name: 'blackjack',
@@ -85,7 +85,7 @@ module.exports = {
                 await stop(message.author, listofcard, botDeck, playerDeck, msg, bet, checkGame);
             }
         });
-        collector.on('end', async (collected, reason) => {
+        collector.on('end', async (_, reason) => {
             if (reason == 'time') {
                 msg.edit('Trò chơi hết hạn. Bạn sẽ bị trừ tiền.');
                 money(message.author.id, "thua", bet);
