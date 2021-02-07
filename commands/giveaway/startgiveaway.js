@@ -6,7 +6,7 @@ module.exports = {
     category: 'giveaway',
     description: 'Bắt đầu Giveaway',
     usage: '<PREFIX>start <thời gian GA(10s, 20m, 1d)> <số người thắng> <phần thưởng>',
-    example: '<PREIFX>start 1d 1 100000 agent money',
+    example: '<PREFIX>start 1d 1 100000 agent money',
     run: async (client, message, args, guildData) => {
         const userRoles = message.member.roles.cache.map(r => r.name.toLowerCase());
         if (!message.member.hasPermission('MANAGE_CHANNELS') && !userRoles.includes('giveaway')) return message.reply("Bạn không có quyền `MANAGE_CHANNELS`");
