@@ -18,6 +18,7 @@ module.exports = {
     note: 'lang = en hoặc vi (mặc định là vi)',
     example: '<PREFIX>speak en hello world',
     run: async (client, message, args, serverData) => {
+        const guildID = message.guild.id;
         const { botdangnoi, prefix } = serverData;
         let lang = serverData.defaulttts;
         if (botdangnoi === true) {
@@ -47,7 +48,7 @@ module.exports = {
             audioConfig: { audioEncoding: 'MP3' },
         };
         const [response] = await ttsClient.synthesizeSpeech(request);
-        await writeFile(`./assets/ttsdata/${message.guild.id}.mp3`, response.audioContent, 'binary');
+        await writeFile(`./assets/ttsdata/${guildID}.mp3`, response.audioContent, 'binary');
         // xử lý xong
         let connection = bot.voice ? bot.voice.connection : null;
         // create request
@@ -61,25 +62,29 @@ module.exports = {
             }
         }
         if (!connection) return message.channel.send('Bot không thể vào channel của bạn vào lúc này, vui lòng thử lại sau!');
-        const dispatcher = connection.play(`./assets/ttsdata/${message.guild.id}.mp3`);
-        await db.set(`${message.guild.id}.botdangnoi`, true);
-        await db.set(`${message.guild.id}.endTime`, Date.now() + ms('5m'));
+        const dispatcher = connection.play(`./assets/ttsdata/${guildID}.mp3`);
+        await db.set(`${guildID}.botdangnoi`, true);
+        await db.set(`${guildID}.endTime`, Date.now() + ms('5m'));
         dispatcher.on('finish', async () => {
             dispatcher.destroy();
-            await db.set(`${message.guild.id}.botdangnoi`, false);
-            if (!timeOut.has(message.guild.id)) {
-                timeOut.add(message.guild.id);
-                setTimeout(async () => {
-                    const checkTime = await db.get(`${message.guild.id}.endTime`);
-                    if (!checkTime) return timeOut.delete(message.guild.id);
+            await db.set(`${guildID}.botdangnoi`, false);
+            if (client.ttsTimeout.has(guildID)) {
+                clearTimeout(client.ttsTimeOut.get(guildID));
+           }
+            if (!timeOut.has(guildID)) {
+                timeOut.add(guildID);
+                const timeoutFunc = setTimeout(async () => {
+                    const checkTime = await db.get(`${guildID}.endTime`);
+                    if (!checkTime) return timeOut.delete(guildID);
                     if (Date.now() > checkTime) {
                         connection.disconnect();
                         voiceChannel.leave();
                         message.channel.send('Đã rời phòng vì không hoạt động!');
                     }
-                    if (!message.guild.me.voice) await db.delete(`${message.guild.id}.endTime`);
-                    timeOut.delete(message.guild.id);
+                    if (!message.guild.me.voice) await db.delete(`${guildID}.endTime`);
+                    timeOut.delete(guildID);
                 }, ms('5m') + 1000);
+                client.ttsTimeout.set(guildID, timeoutFunc);
             }
         });
     },

@@ -9,6 +9,7 @@ module.exports = {
     aliases: ['p'],
     usage: '<PREFIX>p <tên>',
     run: async (client, message, args, serverData) => {
+        const guildID = message.guild.id;
         const { prefix, botdangnoi: status } = serverData;
         if (status == true) return message.channel.send('Có người khác đang sử dụng bot!');
         const voiceChannel = message.member.voice.channel;
@@ -31,25 +32,29 @@ module.exports = {
             }
             if (!connection) return message.channel.send('Bot không thể vào channel của bạn vào lúc này, vui lòng thử lại sau!');
             if (!message.guild.me.voice.selfDeaf) await message.guild.me.voice.setSelfDeaf(true);
-            await db.set(`${message.guild.id}.botdangnoi`, true);
+            await db.set(`${guildID}.botdangnoi`, true);
             const dispatcher = connection.play(`./assets/playdata/${fileName}`, { volume: volume });
-            await db.set(`${message.guild.id}.endTime`, Date.now() + ms('5m'));
+            await db.set(`${guildID}.endTime`, Date.now() + ms('5m'));
             dispatcher.on('finish', async () => {
                 dispatcher.destroy();
-                await db.set(`${message.guild.id}.botdangnoi`, false);
-                if (!timeOut.has(message.guild.id)) {
-                    timeOut.add(message.guild.id);
-                    setTimeout(async () => {
-                        const checkTime = await db.get(`${message.guild.id}.endTime`);
+                await db.set(`${guildID}.botdangnoi`, false);
+                if (client.ttsTimeout.has(guildID)) {
+                    clearTimeout(client.ttsTimeOut.get(guildID));
+               }
+                if (!timeOut.has(guildID)) {
+                    timeOut.add(guildID);
+                    const timeoutFunc = setTimeout(async () => {
+                        const checkTime = await db.get(`${guildID}.endTime`);
                         if (!checkTime) return;
                         if (Date.now() > checkTime) {
                             connection.disconnect();
                             voiceChannel.leave();
                             message.channel.send('Đã rời phòng vì không hoạt động!');
                         }
-                        if (!message.guild.me.voice) await db.delete(`${message.guild.id}.endTime`);
-                        timeOut.delete(message.guild.id);
+                        if (!message.guild.me.voice) await db.delete(`${guildID}.endTime`);
+                        timeOut.delete(guildID);
                     }, ms('5m') + 1000);
+                    client.ttsTimeout.set(guildID, timeoutFunc);
                 }
             });
         }
