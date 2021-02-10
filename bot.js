@@ -138,7 +138,7 @@ client.on("guildDelete", async oldguild => {
         .addField('Guild ID: ', oldguild.id, true)
         .addField('Guild members: ', oldguild.memberCount, true)
         .setFooter(`OwnerID: ${oldguild.ownerID}`);
-    client.channels.cache.get('700071755146068099').send(embed);
+    client.channels.cache.get('809139238524026900').send(embed);
     // agent's server
 });
 
