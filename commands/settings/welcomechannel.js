@@ -16,6 +16,6 @@ module.exports = {
             return message.channel.send('Đã xoá channel thành công!');
         }
         await db.set(`${message.guild.id}.welcomechannel`, channel.id);
-        message.channel.send(`Thao tác thành công!`);
+        message.channel.send(`✅ | Thao tác thành công!`);
     },
 };

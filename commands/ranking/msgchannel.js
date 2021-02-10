@@ -2,7 +2,7 @@ const db = require('quick.db');
 const { getChannel } = require('../../functions/utils');
 module.exports = {
     name: 'msgchannel',
-    category: 'settings',
+    category: 'ranking',
     description: 'Tắt/Mở phòng tính điểm rank',
     usage: '<PREFIX>msgchannel <#channel>',
     example: '<PREIFX>msgchannel #welcome',
@@ -16,7 +16,7 @@ module.exports = {
                 const channel = message.guild.channels.cache.get(id);
                 if (channel) channels.push(channel);
             });
-            return await message.channel.send(`Những phòng đang tắt tính kinh nghiệm là: ${channels.join(' ')}`);
+            return message.channel.send(`Những phòng đang tắt tính kinh nghiệm là: ${channels.join(' ')}`);
         }
         const channel = await getChannel(message, args.join(' '), true);
         if (!channel) return message.channel.send('Không tìm thấy channel!');

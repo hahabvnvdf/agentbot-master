@@ -42,7 +42,7 @@ module.exports = {
                 };
             }
         }));
-        server_data = server_data.filter(data => data !== undefined);
+        server_data = server_data.filter(data => data);
         if (args[0] && isNaN(args[0])) return message.reply('Vui lòng nhập số trang');
         const page = pages(server_data, 10, args[0] || 1);
         if (!page) return message.reply('Trang bạn nhập không tồn tại!');

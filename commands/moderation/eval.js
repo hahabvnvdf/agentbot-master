@@ -6,7 +6,7 @@ module.exports = {
         description: "Execute javascript code",
         usage: "<PREFIX>eval <js code>",
         ownerOnly: true,
-        run: async (client, message, args) => {
+        run: async (client, message, args, guildDb) => {
             if (!args[0]) return message.reply('Nhập lệnh để chạy code...');
             try {
                 const start = process.hrtime();

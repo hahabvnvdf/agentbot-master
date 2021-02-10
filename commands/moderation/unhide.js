@@ -16,7 +16,7 @@ module.exports = {
             await channel.updateOverwrite(everyoneRole, {
                 'VIEW_CHANNEL': null,
             });
-            message.channel.send('Thao tác thành công');
+            message.channel.send('✅ | Thao tác thành công!');
         }
         catch(e) {
             message.channel.send(`Bot lỗi: ${e.message}`);

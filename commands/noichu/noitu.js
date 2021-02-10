@@ -17,7 +17,7 @@ module.exports = {
             return message.channel.send(`Đã xoá phòng ${channel}`);
         }
         await set(`${message.guild.id}.noitu`, channel.id);
-        message.channel.send('Thao tác thành công');
+        message.channel.send('✅ | Thao tác thành công!');
         channel.send('Trò chơi bắt đầu! Vui lòng nhập 1 từ bất kỳ!');
     },
 };

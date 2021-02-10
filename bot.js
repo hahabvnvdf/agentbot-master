@@ -1,7 +1,5 @@
 const { Collection, MessageEmbed, Client, MessageAttachment } = require("discord.js");
-require("dotenv").config({
-    path: __dirname + '/.env',
-});
+require("dotenv").config();
 const { DBOTGG, TYPE_RUN, TOPGG, SNOWFLAKEAPI, TOKEN, SIMSIMI } = process.env;
 const timerEmoji = '<a:timer:714891786274734120>';
 const fs = require("fs");
@@ -36,6 +34,7 @@ if (TYPE_RUN == 'production') {
     });
 }
 const db = require('quick.db');
+const { all } = require("novelcovid");
 const afkData = new db.table('afkdata');
 const commandDb = new db.table('disable');
 const giveawayManager = new GiveawaysManager(client, {
@@ -63,11 +62,13 @@ client.on("ready", async () => {
     console.log(`Hi, ${client.user.username} is now online!`);
 
     // change all voice status to default
-    /*
-    db.all().forEach(async guild => {
-        await db.set(`${guild.ID}.botdangnoi`, false);
+    const allDb = db.all();
+    allDb.forEach(guild => {
+        db.set(`${guild.ID}.botdangnoi`, false);
+        if (!db.has(`${guild.ID}.rankChannel`)) db.set(`${guild.ID}.rankChannel`, false);
+        console.log('Applied new database!');
     });
-    */
+
     // database
     const table = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name = 'xpdata';").get();
     if (!table['count(*)']) {
@@ -151,8 +152,8 @@ client.on("message", async message => {
     const guildID = message.guild.id;
     // prefix
     let serverData = await db.get(guildID);
-    if (!serverData) serverData = await db.set(message.guild.id, { prefix: TYPE_RUN == 'production' ? "_" : "*", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false, aiLang: 'vi', noitu: null, noituStart: false, noituArray: [], maxWords: 1500, noituLastUser: null });
-    const { msgChannelOff, aiChannel, aiLang, noitu, noituStart, noituArray, maxWords, noituLastUser } = serverData;
+    if (!serverData) serverData = await db.set(message.guild.id, { prefix: TYPE_RUN == 'production' ? "_" : "*", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false, aiLang: 'vi', noitu: null, noituStart: false, noituArray: [], maxWords: 1500, noituLastUser: null, rankChannel: 'default' });
+    const { msgChannelOff, aiChannel, aiLang, noitu, noituStart, noituArray, maxWords, noituLastUser, rankChannel } = serverData;
     if (!maxWords) await updateNoiTu(message.guild.id);
     if (!msgChannelOff) await db.set(`${message.guild.id}.msgChannelOff`, []);
     const listChannelMsg = await db.get(`${message.guild.id}.msgChannelOff`);
@@ -162,10 +163,15 @@ client.on("message", async message => {
         if (userdata.level !== 999) {
         const xpAdd = Math.floor(Math.random() * 12);
         const nextlvl = userdata.level * 100;
-        if(userdata.xp > nextlvl) {
+        if (userdata.xp > nextlvl) {
             userdata.level++;
             userdata.xp = 0;
-            if (checkMsgPerm(message)) message.reply(`Bạn đã lên cấp **${userdata.level}**!`);
+            const rankUpMsg = `Bạn đã lên cấp **${userdata.level}**!`;
+            if (checkMsgPerm(message) && rankChannel == 'default') message.reply(rankUpMsg);
+            else if (rankChannel) {
+                const channel = message.guild.channels.cache.get(rankChannel);
+                channel.reply(rankUpMsg);
+            }
         } else userdata.xp += xpAdd;
         client.setScore.run(userdata);
         }
@@ -175,8 +181,7 @@ client.on("message", async message => {
         }, ms('1m'));
     }
     // noitu
-    if (message.channel.id == noitu && !message.content.startsWith(serverData.prefix)) {
-        if (message.content.match(/\W/g) || message.content.includes(' ') || message.content.length == 0) return;
+    if (isInChannel(message, serverData, noitu)) {
         const query = message.content.toLowerCase();
         if (noituLastUser == message.author.id) return errnoitu(message, 'Bạn đã nối từ trước đó rồi, vui lòng chờ!');
         if (!verifyWord(query) || query.length == 1) return errnoitu(message, `Từ \`${message.content}\` không tồn tại trong từ điển của bot!`);
@@ -201,7 +206,7 @@ client.on("message", async message => {
         return;
     }
     // ai channel
-    if (!message.content.startsWith(serverData.prefix) && message.channel.id == aiChannel && !message.author.bot) {
+    if (isInChannel(message, serverData, aiChannel)) {
         let res;
         if (!aiLang || aiLang === 'vi') res = await axios.get(`https://api.simsimi.net/v1/c3c/?text=${encodeURIComponent(message.content)}&lang=vi_VN&key=${SIMSIMI}`);
         else res = await axios.get(`https://api.snowflakedev.xyz/api/chatbot?name=Agent%20Bot&gender=male&user=${message.author.id}&message=${encodeURIComponent(message.content)}`, { headers: { Authorization: SNOWFLAKEAPI } });
@@ -291,7 +296,7 @@ client.on('error', (err) => {
 });
 
 process.on('warning', (warn) => {
-    if (warn.message.includes("Missing Permissions") || warn.message.includes("Unhandled promise rejection")) return;
+    if (warn.message.includes("Missing Permissions")) return;
     console.warn(warn);
     sendOwner(`Warning: ${warn.message}`);
 });
@@ -340,6 +345,10 @@ function errnoitu(message, string) {
 async function getGuildCount() {
     const arr = await client.shard.fetchClientValues('guilds.cache.size');
     return arr.reduce((p, n) => p + n, 0);
+}
+
+function isInChannel(message, serverData, channelID) {
+    return !message.content.startsWith(serverData.prefix) && message.channel.id == channelID && !message.content.match(/\W/g) && !message.content.includes(' ') && message.content.length != 0 && !message.author.bot;
 }
 
 if (TYPE_RUN == 'ci') process.exit();

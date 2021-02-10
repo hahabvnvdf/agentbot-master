@@ -10,6 +10,6 @@ module.exports = {
         if (!query) return message.reply(`Số từ tối đa hiện tại: ${guildData.maxWords}`);
         if (query < 500) return message.reply('Số lần tối đa không được dưới 500 lần!');
         await set(`${message.guild.id}.maxWords`, query);
-        message.channel.send('Thao tác thành công!');
+        message.channel.send('✅ | Thao tác thành công!');
     },
 };

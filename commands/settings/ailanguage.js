@@ -11,6 +11,6 @@ module.exports = {
         const { aiChannel: check } = serverData;
         if (!check) return message.channel.send('Bạn chưa cài đặt channel AI. Vui lòng sử dụng lệnh setchannelAI để sử dụng!');
         await db.set(`${message.guild.id}.aiLang`, args[0]);
-        message.channel.send('Thao tác thành công!');
+        message.channel.send('✅ | Thao tác thành công!');
     },
 };

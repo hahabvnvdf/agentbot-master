@@ -22,6 +22,6 @@ module.exports = {
         else if (listCommand.includes(query)) guildDisable = guildDisable.filter(el => el !== query);
         else return message.channel.send('Vui lòng nhập lệnh hoặc chủ đề!');
         await command.set(message.guild.id, [...new Set(guildDisable)]);
-        message.channel.send('Thao tác thành công!');
+        message.channel.send('✅ | Thao tác thành công!');
     },
 };

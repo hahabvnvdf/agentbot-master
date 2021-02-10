@@ -20,7 +20,7 @@ module.exports = {
                 const newName = args.slice(1).join(' ');
                 await shipDb.set(`${message.author.id}.shipName`, newName);
                 await shipDb.set(`${authorData.target.id}.shipName`, newName);
-                message.channel.send('Thao tác thành công 👍');
+                message.channel.send('✅ | Thao tác thành công!');
                 break;
             case 'sink':
             case 'sank':

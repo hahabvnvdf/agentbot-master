@@ -26,6 +26,6 @@ module.exports = {
         }
         else if (listCommand.includes(query)) await command.push(message.guild.id, query);
         else return message.channel.send('Vui lòng nhập lệnh hoặc chủ đề!');
-        message.channel.send('Thao tác thành công!');
+        message.channel.send('✅ | Thao tác thành công!');
     },
 };

@@ -19,7 +19,7 @@ module.exports = {
         try {
             if (emoji.id) emoji = `https://cdn.discordapp.com/emojis/${emoji.id}.${emoji.animated ? "gif" : "png"}`;
             await message.guild.emojis.create(emoji, args.slice(1).join(' '));
-            message.channel.send('Thao tác thành công!');
+            message.channel.send('✅ | Thao tác thành công!');
         }
 
         catch(e) {
