@@ -60,13 +60,6 @@ client.categories = fs.readdirSync("./commands/");
 client.on("ready", async () => {
     console.log(`Hi, ${client.user.username} is now online!`);
 
-    // change all voice status to default
-    const allDb = db.all();
-    allDb.forEach(guild => {
-        db.set(`${guild.ID}.botdangnoi`, false);
-    });
-    console.log('Applied new database!');
-
     // database
     const table = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name = 'xpdata';").get();
     if (!table['count(*)']) {
@@ -107,6 +100,13 @@ client.on("ready", async () => {
             });
         }, 36e5);
     }
+
+    // change all voice status to default
+    const allDb = db.all();
+    allDb.forEach(guild => {
+        db.set(`${guild.ID}.botdangnoi`, false);
+    });
+    console.log('Applied new database!');
 });
 
 client.on("guildCreate", async newguild => {
