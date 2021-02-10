@@ -6,7 +6,7 @@ for (let i = 0; i < allDb.length; i++) {
     try {
         if (!db.has(`${guild}.rankChannel`)) db.set(`${guild}.rankChannel`, false);
     } catch(e) {
-        console.log(e);
+        console.log(e.message);
         continue;
     }
 

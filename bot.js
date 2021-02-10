@@ -34,6 +34,7 @@ if (TYPE_RUN == 'production') {
     });
 }
 const db = require('quick.db');
+const { all } = require("novelcovid");
 const afkData = new db.table('afkdata');
 const commandDb = new db.table('disable');
 const giveawayManager = new GiveawaysManager(client, {
@@ -103,9 +104,16 @@ client.on("ready", async () => {
 
     // change all voice status to default
     const allDb = db.all();
-    allDb.forEach(guild => {
-        db.set(`${guild.ID}.botdangnoi`, false);
-    });
+    for (let i = 0; i < allDb.length; i++) {
+        try {
+            const guild = allDb[i].ID;
+            db.set(`${guild}.botdangnoi`, false);
+        }
+        catch(e) {
+            console.log(e.message);
+            continue;
+        }
+    }
     console.log('Applied new database!');
 });
 
