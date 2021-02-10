@@ -4,7 +4,7 @@ const allDb = db.all();
 for (let i = 0; i < allDb.length; i++) {
     const guild = allDb[i].ID;
     try {
-        if (!db.has(`${guild.ID}.rankChannel`)) db.set(`${guild.ID}.rankChannel`, false);
+        if (!db.has(`${guild}.rankChannel`)) db.set(`${guild}.rankChannel`, false);
     } catch(e) {
         console.log(e);
         continue;
