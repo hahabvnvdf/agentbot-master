@@ -8,7 +8,7 @@ module.exports = {
     usage: '<PREFIX>getdef',
     run: async (client, message, args, guildData) => {
         const { noituArray } = guildData;
-        if (noituArray.length == 0) return message.reply('Lệnh này chỉ sử dụng khi chơi nối chữ!');
+        if (noituArray.length == 0) return message.reply('Lệnh này chỉ sử dụng khi chơi nối từ!');
         const lastWord = noituArray[noituArray.length - 1];
         let res;
         try {
