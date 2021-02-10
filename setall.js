@@ -1,16 +1,7 @@
 const db = require('quick.db');
-
-async function main() {
-    const all = await db.fetchAll();
-    for (let i = 0; i < all.length - 1; i++) {
-        const key = all[i].ID;
-        await db.set(`${key}.noitu`, null);
-        await db.set(`${key}.noituStart`, false);
-        await db.set(`${key}.noituArray`, []);
-        await db.set(`${key}.maxWords`, 1500);
-
-    }
-    console.log('done');
-}
-
-main();
+const allDb = db.all();
+allDb.forEach(guild => {
+    db.set(`${guild.ID}.botdangnoi`, false);
+    if (!db.has(`${guild.ID}.rankChannel`)) db.set(`${guild.ID}.rankChannel`, false);
+});
+console.log('Applied new database!');

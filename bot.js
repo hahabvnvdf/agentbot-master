@@ -34,7 +34,6 @@ if (TYPE_RUN == 'production') {
     });
 }
 const db = require('quick.db');
-const { all } = require("novelcovid");
 const afkData = new db.table('afkdata');
 const commandDb = new db.table('disable');
 const giveawayManager = new GiveawaysManager(client, {
@@ -65,9 +64,8 @@ client.on("ready", async () => {
     const allDb = db.all();
     allDb.forEach(guild => {
         db.set(`${guild.ID}.botdangnoi`, false);
-        if (!db.has(`${guild.ID}.rankChannel`)) db.set(`${guild.ID}.rankChannel`, false);
-        console.log('Applied new database!');
     });
+    console.log('Applied new database!');
 
     // database
     const table = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name = 'xpdata';").get();
