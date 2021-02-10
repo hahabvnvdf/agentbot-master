@@ -24,7 +24,7 @@ module.exports = async (client) => {
 
     client.getScore = sql.prepare("SELECT * FROM xpdata WHERE user = ? AND guild = ?");
     client.setScore = sql.prepare("INSERT OR REPLACE INTO xpdata (id, user, guild, xp, level) VALUES (@id, @user, @guild, @xp, @level);");
-    const guildCount = TYPE_RUN == 'production' ? await getGuildCount() : client.guilds.cache.size;
+    const guildCount = TYPE_RUN == 'production' ? await getGuildCount(client) : client.guilds.cache.size;
 
     // set presence
     client.user.setPresence({
@@ -74,7 +74,7 @@ module.exports = async (client) => {
     console.log('botdangnoi reseted!');
 };
 
-async function getGuildCount() {
+async function getGuildCount(client) {
     const arr = await client.shard.fetchClientValues('guilds.cache.size');
     return arr.reduce((p, n) => p + n, 0);
 }
