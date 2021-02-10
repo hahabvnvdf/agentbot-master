@@ -15,8 +15,7 @@ module.exports = {
         const attachment = new MessageAttachment(file, `gaixinh.${ext}`);
         const embed = new MessageEmbed()
             .attachFiles(attachment)
-            .setImage(`attachment://gaixinh.${ext}`)
-            .setFooter('Nguồn: gaixinhchonloc.com');
+            .setImage(`attachment://gaixinh.${ext}`);
         message.channel.send(embed);
     },
 };
