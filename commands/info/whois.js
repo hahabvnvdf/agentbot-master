@@ -15,7 +15,6 @@ module.exports = {
             .sort((a, b) => b.position - a.position)
             .filter(r => r.id !== message.guild.id)
             .map(r => r);
-        roles.join(", ") || 'none';
         // User variables
         const created = formatDate(member.user.createdAt);
         let userFlags = "";
@@ -28,7 +27,7 @@ module.exports = {
                 `**- Nickname:** ${member.displayName}`,
                 `**- Tag:** ${member}`,
                 `**- Vào server vào ngày:** ${joined}`,
-                `**- Roles:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? trimArray(roles, 10) : 'Không có'}`,
+                `**- Roles:** ${roles.length < 10 ? roles.join(', ') : roles.length >= 10 ? trimArray(roles, 10) : roles.length == 0 ? 'Không có' : ''}`,
             ], true)
             .addField('Thông tin người dùng', [
                 `**- ID:** ${member.user.id}`,
