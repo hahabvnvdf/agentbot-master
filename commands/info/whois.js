@@ -27,7 +27,7 @@ module.exports = {
                 `**- Nickname:** ${member.displayName}`,
                 `**- Tag:** ${member}`,
                 `**- Vào server vào ngày:** ${joined}`,
-                `**- Roles:** ${roles.length < 10 ? roles.join(', ') : roles.length >= 10 ? trimArray(roles, 10) : roles.length == 0 ? 'Không có' : ''}`,
+                `**- Roles:** ${roles.length == 0 ? 'Không có' : roles.length < 10 ? roles.join(', ') : roles.length >= 10 ? trimArray(roles, 10) : ''}`,
             ], true)
             .addField('Thông tin người dùng', [
                 `**- ID:** ${member.user.id}`,
