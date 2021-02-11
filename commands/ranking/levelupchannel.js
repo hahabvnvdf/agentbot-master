@@ -5,11 +5,13 @@ module.exports = {
     aliases: ['levelup', 'lvlupchannel'],
     category: 'ranking',
     description: 'tuỳ chỉnh channel bot gởi tin nhắn khi người dùng lên cấp',
-    usage: '<PREFIX>levelupchannel <#channel | none>',
-    note: 'none = tắt tin nhắn khi lên cấp',
+    usage: '<PREFIX>levelupchannel <#channel | none | reset>',
+    note: 'none = tắt tin nhắn khi lên cấp\nreset = khôi phục mặc định',
     cooldown: 30,
     run: async (client, message, args) => {
-        if (args[0].toLowerCase() == 'none') await db.set(`${message.guild.id}.rankChannel`, null);
+        const query = args[0].toLowerCase();
+        if (query == 'none') await db.set(`${message.guild.id}.rankChannel`, null);
+        else if (query == 'reset') await db.set(`${message.guild.id}.rankChannel`, 'default');
         else {
             const channel = await getChannel(message, args.join(' '), true);
             await db.set(`${message.guild.id}.rankChannel`, channel.id);
