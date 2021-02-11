@@ -31,11 +31,11 @@ module.exports = async (client, message) => {
         if (userdata.xp > nextlvl) {
             userdata.level++;
             userdata.xp = 0;
-            const rankUpMsg = `Bạn đã lên cấp **${userdata.level}**!`;
-            if (checkMsgPerm(client, message) && rankChannel == 'default') message.reply(rankUpMsg);
+            const rankUpMsg = `${message.author}, Bạn đã lên cấp **${userdata.level}**!`;
+            if (checkMsgPerm(client, message) && rankChannel == 'default') message.channel.send(rankUpMsg);
             else if (rankChannel) {
                 const channel = message.guild.channels.cache.get(rankChannel);
-                channel.reply(rankUpMsg);
+                channel.send(rankUpMsg);
             }
         } else userdata.xp += xpAdd;
         client.setScore.run(userdata);
