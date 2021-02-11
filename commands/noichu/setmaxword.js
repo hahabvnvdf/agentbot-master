@@ -4,7 +4,6 @@ module.exports = {
     aliases: ['maxword', 'maxwords', 'setmaxwords'],
     category: 'noichu',
     description: 'Set số lần nối chữ tối đa trong 1 game',
-    category: 'noitu',
     usage: '<PREFIX>setmaxword <số>',
     run: async (client, message, args, guildData) => {
         const query = parseInt(args[0]);

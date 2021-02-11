@@ -9,7 +9,7 @@ module.exports = {
         if (!args[0] || isNaN(args[0])) return message.reply('Số thứ nhất không hợp lệ, vui lòng thử lại');
         const first = parseInt(args[0]);
         const second = parseInt(args[1]) || null;
-        if (!second) return message.reply('Số thứ hai không hợp lệ, vui lòng thử lại!');
+        if (second === null) return message.reply('Số thứ hai không hợp lệ, vui lòng thử lại!');
         try {
             const randomNum = await random(second ? first : 0, second ? second : first);
             return message.channel.send(`🎲 Số của bạn là: ${randomNum}`);
