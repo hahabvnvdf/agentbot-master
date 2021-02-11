@@ -5,9 +5,6 @@ module.exports = (client, oldstate, newstate) => {
         const guildID = oldstate.guild.id;
         db.set(`${guildID}.botdangnoi`, false);
         db.delete(`${guildID}.endtime`);
-        try {
-            if (client.ttsTimeout.has(guildID)) clearTimeout(client.ttsTimeOut.get(guildID));
-        }
-        catch {}
+        if (client.ttsTimeout.has(guildID)) clearTimeout(client.ttsTimeout.get(guildID));
     }
 };

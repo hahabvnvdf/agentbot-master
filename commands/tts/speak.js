@@ -69,7 +69,7 @@ module.exports = {
             dispatcher.destroy();
             await db.set(`${guildID}.botdangnoi`, false);
             if (client.ttsTimeout.has(guildID)) {
-                clearTimeout(client.ttsTimeOut.get(guildID));
+                clearTimeout(client.ttsTimeout.get(guildID));
            }
             if (!timeOut.has(guildID)) {
                 timeOut.add(guildID);
