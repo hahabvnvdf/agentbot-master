@@ -26,7 +26,7 @@ module.exports = {
             .setColor(member.displayHexColor === '#000000' ? '#ffffff' : member.displayHexColor)
             .addField('Thông tin thành viên (server)', [
                 `**- Nickname:** ${member.displayName}`,
-                `**- Tag:** : ${member}`,
+                `**- Tag:** ${member}`,
                 `**- Vào server vào ngày:** ${joined}`,
                 `**- Roles:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? trimArray(roles, 10) : 'Không có'}`,
             ], true)
