@@ -33,7 +33,7 @@ module.exports = async (client, message) => {
             userdata.xp = 0;
             const rankUpMsg = `${message.author}, Bạn đã lên cấp **${userdata.level}**!`;
             if (rankChannel == 'default' && checkMsgPerm(client, message)) message.channel.send(rankUpMsg);
-            else if (!isNaN(rankChannel)) {
+            else if (rankChannel && !isNaN(rankChannel)) {
                 const channel = message.guild.channels.cache.get(rankChannel);
                 channel.send(rankUpMsg);
             }
