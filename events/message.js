@@ -46,7 +46,7 @@ module.exports = async (client, message) => {
         }, ms('1m'));
     }
     // noitu
-    if (isInChannel(message, serverData, noitu)) {
+    if (isInChannel(message, serverData, noitu, 'noichu')) {
         const query = message.content.toLowerCase();
         if (noituLastUser == message.author.id) return errnoitu(message, 'Bạn đã nối từ trước đó rồi, vui lòng chờ!');
         if (!verifyWord(query) || query.length == 1) return errnoitu(message, `Từ \`${message.content}\` không tồn tại trong từ điển của bot!`);
@@ -148,20 +148,11 @@ function errnoitu(message, string) {
 }
 
 function isInChannel(message, serverData, channelID, type) {
-    // can't start with prefix
-    // have same channel
-    // has word
-    // can't have symbol
-    // can't be a bot
-    // can't be empty
-
-    // noichu : can't have whitespace
     const { author, content, channel } = message;
     const prefix = serverData.prefix;
     const result = !content.startsWith(prefix) && channel.id == channelID && !content.match(/[<>]/g) && content.length != 0 && !author.bot;
     if (type == 'noichu' && message.content.includes(' ')) return false;
     return result;
-    // return !message.content.startsWith(serverData.prefix) && message.channel.id == channelID && message.content.match(/\w/g) && !message.content.match(/[<>]/g) && !message.content.includes(' ') && message.content.length != 0 && !message.author.bot;
 }
 
 
