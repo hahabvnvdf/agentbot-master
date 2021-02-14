@@ -148,7 +148,20 @@ function errnoitu(message, string) {
 }
 
 function isInChannel(message, serverData, channelID, type) {
-    return !message.content.startsWith(serverData.prefix) && message.channel.id == channelID && message.content.match(/\w/g) && !message.content.match(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/g) && !message.content.includes(' ') && message.content.length != 0 && !message.author.bot;
+    // can't start with prefix
+    // have same channel
+    // has word
+    // can't have symbol
+    // can't be a bot
+    // can't be empty
+
+    // noichu : can't have whitespace
+    const { author, content, channel } = message;
+    const prefix = serverData.prefix;
+    const result = !content.startsWith(prefix) && channel.id == channelID && !content.match(/[<>]/g) && content.length != 0 && !author.bot;
+    if (type == 'noichu' && message.content.includes(' ')) return false;
+    return result;
+    // return !message.content.startsWith(serverData.prefix) && message.channel.id == channelID && message.content.match(/\w/g) && !message.content.match(/[<>]/g) && !message.content.includes(' ') && message.content.length != 0 && !message.author.bot;
 }
 
 
