@@ -147,8 +147,8 @@ function errnoitu(message, string) {
     return message.reply(string);
 }
 
-function isInChannel(message, serverData, channelID) {
-    return !message.content.startsWith(serverData.prefix) && message.channel.id == channelID && !message.content.match(/\W/g) && !message.content.includes(' ') && message.content.length != 0 && !message.author.bot;
+function isInChannel(message, serverData, channelID, type) {
+    return !message.content.startsWith(serverData.prefix) && message.channel.id == channelID && message.content.match(/\w/g) && !message.content.match(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/g) && !message.content.includes(' ') && message.content.length != 0 && !message.author.bot;
 }
 
 
