@@ -13,10 +13,10 @@ module.exports = {
         } else if (!message.member.hasPermission('MANAGE_ROLES') && message.author.id !== '455935236262592512') {
             return message.reply("Bạn không có quyền `MANAGE_ROLES`!");
         } else {
+            const user = await getMember(message, args[0]);
             const roles = message.guild.roles.cache.filter(r => r.managed === false).map(g => g.name);
             const search = args.slice(1).join(' ');
             const matches = stringSimilarity.findBestMatch(search, roles);
-            const user = await getMember(message, args.join(' '));
             const role = message.guild.roles.cache.find(el => el.name === matches.bestMatch.target);
             if (!user)
                 return message.reply("Không tìm thấy người bạn tag, vui lòng thử lại.");
