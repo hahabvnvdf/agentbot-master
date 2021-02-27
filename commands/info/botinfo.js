@@ -18,6 +18,7 @@ module.exports = {
             .setColor(message.guild.me.displayHexColor || 'RANDOM')
             .addField("General", [
                 `**--> Tên bot:** ${client.user.tag} (${client.user.id})`,
+                `**--> Số shard:** ${client.shard.count}`,
                 `**--> Số lệnh:** ${client.commands.filter(el => el.category && !el.ownerOnly).size} lệnh`,
                 `**--> Uptime:** ${ms(client.uptime)}`,
                 `**--> Server:** ${laysodep(guildManager.size)}`,
