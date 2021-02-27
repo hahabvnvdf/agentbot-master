@@ -76,7 +76,7 @@ module.exports = async (client, message) => {
         if (!aiLang || aiLang === 'vi') res = await axios.get(`https://api.simsimi.net/v1/c3c/?text=${encodeURIComponent(message.content)}&lang=vi_VN&key=${SIMSIMI}`);
         else res = await axios.get(`https://api.snowflakedev.xyz/api/chatbot?name=Agent%20Bot&gender=male&user=${message.author.id}&message=${encodeURIComponent(message.content)}`, { headers: { Authorization: SNOWFLAKEAPI } });
         if (!checkMsgPerm(client, message)) return message.author.send('Mình không có quyền gởi tin nhắn ở server này!').catch(err => console.log(err.message));
-        if (aiLang === 'vi' && res.data.message.response.includes('no-reply@simsimi.com')) return message.channel.send('Bot lỗi, vui lòng thử lại sau!');
+        if (aiLang === 'vi' && res.data.messages.response.includes('no-reply@simsimi.com')) return message.channel.send('Bot lỗi, vui lòng thử lại sau!');
         return message.channel.send(!aiLang || aiLang === 'vi' ? res.data.messages.response : res.data.message);
     }
     // check unafk
