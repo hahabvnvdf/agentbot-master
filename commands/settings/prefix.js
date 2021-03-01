@@ -8,9 +8,9 @@ module.exports = {
     usage: "<PREFIX>prefix [prefix mới]",
     note: "Người đổi prefix cần có quyền MANAGE_GUILD!",
     run: async (client, message, args, serverData) => {
-        if(!message.member.hasPermission("MANAGE_GUILD") && message.author.id !== ownerID) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy');
         const { prefix } = serverData;
         if (!args[0]) return message.channel.send(`Prefix của server là \`${prefix}\``);
+        if(!message.member.hasPermission("MANAGE_GUILD") && message.author.id !== ownerID) return message.reply('Bạn cần có quyền MANAGE_GUILD để chạy');
         const newprefix = args[0];
         await db.set(`${message.guild.id}.prefix`, newprefix);
         const embed = new MessageEmbed()
