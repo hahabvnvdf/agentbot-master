@@ -12,10 +12,10 @@ module.exports = {
         const { open, previousClose, marketCap, fiftyTwoWeekRange } = response;
         const embed = new MessageEmbed()
             .setTitle(`Thông tin cổ phiếu ${args[0].toUpperCase()}`)
-            .addField('Open: ', open)
-            .addField('Market cap', laysodep(marketCap))
-            .addField('52 Week Range', fiftyTwoWeekRange)
-            .addField('Previous Close Pirce: ', previousClose)
+            .addField('Open: ', open, true)
+            .addField('Market cap', laysodep(marketCap), true)
+            .addField('52 Week Range', fiftyTwoWeekRange, true)
+            .addField('Previous Close Pirce: ', previousClose, true)
             .setFooter(`Đơn vị tiền tệ: ${currency}`);
         message.channel.send(embed);
     },
