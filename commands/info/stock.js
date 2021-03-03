@@ -1,5 +1,6 @@
 const { getSymbol } = require('yahoo-stock-api');
 const { MessageEmbed } = require('discord.js');
+const { laysodep } = require('../../functions/utils');
 module.exports = {
     name: 'stock',
     category: 'info',
@@ -8,10 +9,12 @@ module.exports = {
         if (!args[0]) return message.channel.send('Vui lòng nhập mã cổ phiếu cần tra!');
         const { currency, response } = await getSymbol(args[0]);
         if (!response) return message.channel.send('Mã cổ phiếu không tồn tại!');
-        const { open, previousClose } = response;
+        const { open, previousClose, marketCap, fiftyTwoWeekRange } = response;
         const embed = new MessageEmbed()
             .setTitle(`Thông tin cổ phiếu ${args[0].toUpperCase()}`)
             .addField('Open: ', open)
+            .addField('Market cap', laysodep(marketCap))
+            .addField('52 Week Range', fiftyTwoWeekRange)
             .addField('Previous Close Pirce: ', previousClose)
             .setFooter(`Đơn vị tiền tệ: ${currency}`);
         message.channel.send(embed);
