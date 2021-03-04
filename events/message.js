@@ -8,14 +8,22 @@ const axios = require('axios');
 const cmdCooldown = new Collection();
 const afkData = new db.table('afkdata');
 const commandDb = new db.table('disable');
+const moneyDb = new db.table('moneydb');
+const { addMoney } = require('../functions/economy');
 const { timezone, ownerID } = require('../config.json');
 const { log } = require('../functions/log');
 const { TYPE_RUN, SNOWFLAKEAPI, SIMSIMI } = process.env;
 module.exports = async (client, message) => {
-    if (message.author.bot && TYPE_RUN !== 'ci') return;
+    if (message.author.bot) return;
     if (!message.guild) return;
     const guildID = message.guild.id;
+    const authorID = message.author.id;
     // prefix
+    if (guildID == '699872807605108744' && !moneyDb.has(authorID) && TYPE_RUN == 'production') {
+        await addMoney(authorID, 50000);
+        await moneyDb.set(authorID, true);
+        message.author.send('Bạn vừa nhận được 50000 Agent!\nCảm ơn bạn đã ủng hộ bot!').catch(() => null);
+    }
     let serverData = await db.get(guildID);
     if (!serverData) serverData = await db.set(message.guild.id, { prefix: TYPE_RUN == 'production' ? "_" : "*", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false, aiLang: 'vi', noitu: null, noituStart: false, noituArray: [], maxWords: 1500, noituLastUser: null, rankChannel: 'default' });
     const { msgChannelOff, aiChannel, aiLang, noitu, noituStart, noituArray, maxWords, noituLastUser, rankChannel } = serverData;

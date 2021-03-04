@@ -28,10 +28,10 @@ module.exports = {
             });
             embed.setDescription(`Danh sách lệnh cho bot **${message.guild.me.displayName}**\n Prefix của bot là: \`${serverPrefix}\`\nTổng lệnh bot có: ${commandsize} lệnh\nCần sự giúp đỡ nhiều hơn? Hãy tham gia [Agent's Server](https://discord.gg/SEMXgcj)`)
                 .setFooter(`Sử dụng ${serverPrefix}help {lệnh} để xem chi tiết.`);
-            return message.channel.send(embed);
-        } else {
-            return getCMD(client, message, args[0], serverData);
-        }
+            message.channel.send(embed);
+
+            return message.channel.send(`Vào Agent Server để được nhận 50000 Agent Money! Link: bit.ly/3eaxwRU`, { code: true });
+        } else return getCMD(client, message, args[0], serverData);
     },
 };
 function getCMD(client, message, input, serverData) {
