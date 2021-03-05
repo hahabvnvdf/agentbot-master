@@ -36,11 +36,9 @@ module.exports = {
             const dispatcher = connection.play(`./assets/playdata/${fileName}`, { volume: volume });
             await db.set(`${guildID}.endTime`, Date.now() + ms('5m'));
             dispatcher.on('finish', async () => {
-                dispatcher.destroy();
+                // dispatcher.destroy();
                 await db.set(`${guildID}.botdangnoi`, false);
-                if (client.ttsTimeout.has(guildID)) {
-                    clearTimeout(client.ttsTimeout.get(guildID));
-               }
+                if (client.ttsTimeout.has(guildID)) clearTimeout(client.ttsTimeout.get(guildID));
                 if (!timeOut.has(guildID)) {
                     timeOut.add(guildID);
                     const timeoutFunc = setTimeout(async () => {
