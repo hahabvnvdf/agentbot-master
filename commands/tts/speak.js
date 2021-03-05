@@ -78,6 +78,7 @@ module.exports = {
                     if (!checkTime) return timeOut.delete(guildID);
                     if (Date.now() > checkTime) {
                         connection.disconnect();
+                        connection = null;
                         voiceChannel.leave();
                         message.channel.send('Đã rời phòng vì không hoạt động!');
                     }

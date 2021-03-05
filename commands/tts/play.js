@@ -48,6 +48,7 @@ module.exports = {
                         if (!checkTime) return;
                         if (Date.now() > checkTime) {
                             connection.disconnect();
+                            connection = null;
                             voiceChannel.leave();
                             message.channel.send('Đã rời phòng vì không hoạt động!');
                         }
