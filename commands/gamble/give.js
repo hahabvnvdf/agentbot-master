@@ -15,6 +15,7 @@ module.exports = {
         if (message.author.id == member.id) return message.channel.send('Bạn không thể tự chuyển tiền cho chính mình!');
         const soTienChuyen = parseInt(args[1]);
         if (!soTienChuyen) return message.channel.send('Hãy nhập số tiền cần chuyển.');
+        if (soTienChuyen < 0) return message.channel.send('Bạn không thể chuyển tiền dưới 0');
         if (amount < soTienChuyen) return message.channel.send('Bạn không đủ tiền để chuyển');
         await eco.addMoney(member.id, soTienChuyen);
         await eco.subtractMoney(message.author.id, soTienChuyen);
