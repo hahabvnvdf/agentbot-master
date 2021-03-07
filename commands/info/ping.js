@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
-
 const { getPing } = require('../../functions/economy');
+
 module.exports = {
     name: "ping",
     category: "info",
@@ -9,8 +9,8 @@ module.exports = {
     run: async (client, message, args) => {
         const msg = await message.channel.send(`🏓 Pinging....`);
         try {
-            const myIP = await publicIP.v4();
-            const data = IPDATA;
+            data = IPDATA;
+            const mongoPing = await getPing();
             const response = await axios.get('https://srhpyqt94yxb.statuspage.io/api/v2/components.json');
             let api = response.data.components.filter(el => el.name == "API");
             api = api[0];
