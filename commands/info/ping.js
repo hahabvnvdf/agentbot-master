@@ -19,7 +19,7 @@ module.exports = {
             let api = response.data.components.filter(el => el.name == "API");
             api = api[0];
             const embed = new MessageEmbed()
-                .addField('Độ trễ (bot):', `${Math.floor(msg.createdTimestamp - message.createdTimestamp)}ms`, true)
+                .addField('Độ trễ (bot):', `${Math.floor(Date.now() - message.createdTimestamp)}ms`, true)
                 .addField('Độ trễ (API): ', `${client.ws.ping}ms`, true)
                 .addField('Độ trễ (MongoDB): ', [
                     `Read: ${mongoPing.read}ms`,
@@ -32,7 +32,7 @@ module.exports = {
         }
         catch(e) {
             console.log(e);
-            return msg.edit(`Pong! \`${Math.floor(msg.createdTimestamp - message.createdTimestamp)}ms\``);
+            return msg.edit(`Pong! \`${Math.floor(Date.now() - message.createdTimestamp)}ms\``);
         }
     },
 };
