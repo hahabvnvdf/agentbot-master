@@ -30,7 +30,7 @@ module.exports = {
                 .setFooter(`Sử dụng ${serverPrefix}help {lệnh} để xem chi tiết.`);
             message.channel.send(embed);
 
-            return message.channel.send(`Vào Support Server để được nhận 50000 Agent Money! Link: bit.ly/3eaxwRU`, { code: true });
+            return message.channel.send(`MỚI:\n\n- Lệnh slut, work để kiếm thêm tiền! \n- Vào Support Server để được nhận 50000 Agent Money! Link: bit.ly/3eaxwRU`, { code: true });
         } else return getCMD(client, message, args[0], serverData);
     },
 };
