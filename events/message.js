@@ -124,7 +124,7 @@ module.exports = async (client, message) => {
         if (!cmdCooldown.has(command.name)) cmdCooldown.set(command.name, new Collection());
         const now = Date.now();
         const timestamps = cmdCooldown.get(command.name);
-        const cooldownAmount = (command.msgCooldown || 3) * 1000;
+        const cooldownAmount = (command.cooldown || 3) * 1000;
         if (timestamps.has(message.author.id) && message.author.id !== ownerID) {
             const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
             if (now < expirationTime) {
