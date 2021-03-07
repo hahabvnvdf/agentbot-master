@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const { getPing } = require('../../functions/economy');
-
+const axios = require('axios');
 module.exports = {
     name: "ping",
     category: "info",
