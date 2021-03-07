@@ -10,6 +10,9 @@ const instance = axios.create({
     headers: { "Authorization": DBOTGG },
 });
 const db = require('quick.db');
+
+const publicIP = require('public-ip');
+const ipgeolocation = process.env.IPGEOLOCATION;
 module.exports = async (client) => {
     console.log(`Hi, ${client.user.username} is now online!`);
 
@@ -21,7 +24,9 @@ module.exports = async (client) => {
       sql.pragma("synchronous = 1");
       sql.pragma("journal_mode = wal");
     }
-
+    const myIP = await publicIP.v4();
+    const res = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${ipgeolocation}&ip=${myIP}`);
+    global.IPDATA = res.data;
     client.getScore = sql.prepare("SELECT * FROM xpdata WHERE user = ? AND guild = ?");
     client.setScore = sql.prepare("INSERT OR REPLACE INTO xpdata (id, user, guild, xp, level) VALUES (@id, @user, @guild, @xp, @level);");
     const guildCount = TYPE_RUN == 'production' ? await getGuildCount(client) : client.guilds.cache.size;
