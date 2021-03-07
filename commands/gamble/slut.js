@@ -1,11 +1,18 @@
 const { addMoney, subtractMoney, fetchMoney } = require('../../functions/economy');
 const random = require('random-number-csprng');
+const subtractReasonList = [
+    "Bạn đang đứng đường thì bị công an bắt và bị phạt {money} Agent money.",
+    "Sau khi bạn phục vụ thì bị khách quỵt mất {money} Agent money.",
+    "Bạn vừa phát hiện khách bạn bị HIV, đi chữa mất {money} Agent money.",
+    "Đang phục vụ thì bị đưa đi cách ly bắt buộc, tốn mất {money} Agent money.",
+    "Bạn sau khi làm xong thì bị nhà nghỉ chém giá, lỗ mất {money} Agent money.",
+];
 module.exports = {
     name: 'slut',
     category: 'gamble',
     description: 'Kiếm tiền nhiều hơn lệnh `work` nhưng sẽ có tỉ lệ thua',
     usage: 'slut',
-    cooldown: 120,
+    cooldown: 300,
     run: async (client, message, args) => {
         const authorID = message.author.id;
         let randomNum = await random(2000, 4000);
@@ -21,7 +28,8 @@ module.exports = {
            const userMoney = await fetchMoney(authorID);
            if (userMoney < randomNum) randomNum = userMoney;
            await subtractMoney(authorID, randomNum);
-           message.channel.send(`Bạn đang đứng đường thì bị công an bắt và bị phạt \`${randomNum}\` Agent money. 😢`);
+           const reasonNum = await random(0, subtractReasonList.length - 1);
+           message.channel.send(`${subtractReasonList[reasonNum].replace('{money}', `\`${randomNum}\``)} 😢`);
        }
     },
 };
