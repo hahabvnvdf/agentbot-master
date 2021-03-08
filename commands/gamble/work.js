@@ -7,6 +7,8 @@ const reasonList = [
     "Bạn đang đi trên đường thì nhặt được {money} Agent money. Bạn đã quyết định tạm thời bỏ túi luôn!",
     "Bạn vừa đòi nợ `{user}` và lấy được {money} Agent money!",
     "Bạn vừa đi đánh đề và thắng được {money} Agent money!",
+    "Bạn làm bartender đi lắc nước được {money} Agent money!",
+    "Bạn tạo kênh youtube được donate {money} Agent money!",
 ];
 module.exports = {
     name: 'work',
