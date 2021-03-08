@@ -25,6 +25,7 @@ module.exports = {
             await addMoney(authorID, randomNum);
             message.channel.send(`Bạn đã nhận được: 💵 \`${randomNum}\` Agent money.`);
        } else {
+           randomNum = await random(500, 2000);
            const userMoney = await fetchMoney(authorID);
            if (userMoney < randomNum) randomNum = userMoney;
            await subtractMoney(authorID, randomNum);
