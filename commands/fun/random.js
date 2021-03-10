@@ -12,7 +12,7 @@ module.exports = {
         if (args[1] && second === null) return message.reply('Số thứ hai không hợp lệ, vui lòng thử lại!');
         try {
             const randomNum = await random(second ? first : 0, second ? second : first);
-            return message.channel.send(`🎲 Số của bạn là: ${randomNum}`);
+            return message.channel.send(`🎲 Số của bạn là: ${Math.abs(randomNum)}`);
         }
         catch (err) {
             if (err.message.includes('The maximum value must be higher than the minimum value')) return message.channel.send('Số đầu tiên phải nhỏ hơn số thứ hai!');
