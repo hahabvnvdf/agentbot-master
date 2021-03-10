@@ -9,6 +9,8 @@ module.exports = {
         if (!args[0] || isNaN(args[0])) return message.reply('Số thứ nhất không hợp lệ, vui lòng thử lại');
         const first = parseInt(args[0]);
         const second = parseInt(args[1]) || null;
+        if (first < 0 || second < 0) return message.channel.send('Số không thể nhỏ hơn 0');
+        if (first > 1000000000 || second > 1000000000) return message.channel.send('Số không thể lớn hơn 1 000 000 000');
         if (args[1] && second === null) return message.reply('Số thứ hai không hợp lệ, vui lòng thử lại!');
         try {
             const randomNum = await random(second ? first : 0, second ? second : first);
