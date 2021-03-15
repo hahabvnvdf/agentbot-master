@@ -1,8 +1,8 @@
 const SQLite = require('better-sqlite3');
 const sql = new SQLite('./data.sqlite');
 const publicIP = require('public-ip');
-const { TYPE_RUN } = process.env;
-const { laysodep } = require('../functions/utils');
+// const { TYPE_RUN } = process.env;
+// const { laysodep } = require('./functions/utils');
 const ipgeolocation = process.env.IPGEOLOCATION;
 
 module.exports = async (client, id) => {
@@ -22,7 +22,8 @@ module.exports = async (client, id) => {
     const res = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${ipgeolocation}&ip=${myIP}`);
     global.IPDATA = res.data;
 
-    const guildCount = TYPE_RUN == 'production' ? await getGuildCount(client) : client.guilds.cache.size;
+    /*
+    let guildCount = TYPE_RUN == 'production' ? await getGuildCount(client) : client.guilds.cache.size;
     client.user.setPresence({
         status: "online",
         activity: {
@@ -30,7 +31,8 @@ module.exports = async (client, id) => {
             type: 'PLAYING',
         },
     });
-    setInterval(function() {
+    setInterval(async () => {
+        guildCount = TYPE_RUN == 'production' ? await getGuildCount(client) : client.guilds.cache.size;
         client.user.setPresence({
             status: "online",
             activity: {
@@ -39,6 +41,7 @@ module.exports = async (client, id) => {
             },
         });
     }, 36e5);
+    */
 };
 
 async function getGuildCount(client) {
