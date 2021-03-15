@@ -1,6 +1,7 @@
 const SQLite = require('better-sqlite3');
 const sql = new SQLite('./data.sqlite');
 const publicIP = require('public-ip');
+const axios = require('axios');
 // const { TYPE_RUN } = process.env;
 // const { laysodep } = require('./functions/utils');
 const ipgeolocation = process.env.IPGEOLOCATION;
@@ -43,8 +44,9 @@ module.exports = async (client, id) => {
     }, 36e5);
     */
 };
-
+/*
 async function getGuildCount(client) {
     const arr = await client.shard.fetchClientValues('guilds.cache.size');
     return arr.reduce((p, n) => p + n, 0);
 }
+*/
