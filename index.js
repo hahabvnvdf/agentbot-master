@@ -14,9 +14,7 @@ poster.on('posted', () => {
     console.log('Posted stats to top.gg');
 });
 
-manager.on('shardCreate', (shard) => console.log(`Shard ${shard.id} đã được spawn!`));
-
-manager.spawn();
+manager.spawn().then(() => console.log('All shard is done!'));
 
 // change all voice status to default
 const allDb = db.all();
