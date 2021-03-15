@@ -6,6 +6,7 @@ const AutoPoster = require('topgg-autoposter');
 const manager = new ShardingManager('./bot.js', {
     totalShards: 'auto',
     token: TOKEN,
+    execArgv: ['--trace-warnings'],
 });
 const poster = AutoPoster(TOPGG, manager);
 
