@@ -1,7 +1,7 @@
 const { ShardingManager } = require('discord.js');
 require("dotenv").config();
 const { TOKEN, TOPGG, TYPE_RUN, DBOTGG } = process.env;
-const { laysodep } = require('../functions/utils');
+const { laysodep } = require('./functions/utils');
 const AutoPoster = require('topgg-autoposter');
 const axios = require('axios');
 const instance = axios.create({
