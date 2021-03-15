@@ -2,7 +2,7 @@ const SQLite = require('better-sqlite3');
 const sql = new SQLite('./data.sqlite');
 const publicIP = require('public-ip');
 const { TYPE_RUN } = process.env;
-const { laysodep } = require('./functions/utils');
+const { laysodep } = require('../functions/utils');
 const ipgeolocation = process.env.IPGEOLOCATION;
 
 module.exports = async (client, id) => {
