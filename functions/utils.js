@@ -49,12 +49,7 @@ module.exports = {
     },
 
     sleep: async function(miliseconds) {
-        const start = new Date().getTime();
-        for (let i = 0; i < 1e7; i++) {
-            if ((new Date().getTime() - start) > miliseconds) {
-                break;
-            }
-        }
+        return new Promise((res) => setTimeout(res, miliseconds));
     },
 
     laysodep: function(num) {

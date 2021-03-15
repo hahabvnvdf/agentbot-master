@@ -491,6 +491,14 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
+"@top-gg/sdk@^3.0.9":
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@top-gg/sdk/-/sdk-3.0.9.tgz#e42b6d1784d0105de8cd95f16ba06650afe26b6b"
+  integrity sha512-AskJQk6+89lIGu6UzjsDxXe4wRuc9lbpXwftIzzng2+kB8R3ZzN7hwa1nC/AacLG07m0gbBwQBWlE5IgexA/kg==
+  dependencies:
+    node-fetch "^2.6.1"
+    raw-body "^2.4.1"
+
 "@types/braces@*":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/braces/-/braces-3.0.0.tgz#7da1c0d44ff1c7eb660a36ec078ea61ba7eb42cb"
@@ -1338,11 +1346,6 @@ dateformat@4.5.1:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-4.5.1.tgz#c20e7a9ca77d147906b6dc2261a8be0a5bd2173c"
   integrity sha512-OD0TZ+B7yP7ZgpJf5K2DIbj3FZvFvxgFUuaqA/V5zTjAtAAXZ1E8bktHxmAGs4x5b7PflqA9LeQ84Og7wYtF7Q==
-
-dblapi.js@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/dblapi.js/-/dblapi.js-2.4.1.tgz#a0a09ab1e2bd6e3381205c488d582964087f47a9"
-  integrity sha512-g+u1inF/qOLit5qPK4hBGk5pKL1vy09uBLV+nukkRMvw2S9D1PyiyO70n4fboUXOgbExPp6Sho/Y782OqQOUiQ==
 
 debug@2, debug@^2.2.0:
   version "2.6.9"
@@ -3954,7 +3957,7 @@ random-number-csprng@^1.0.2:
     bluebird "^3.3.3"
     create-error "^0.3.1"
 
-raw-body@^2.2.0:
+raw-body@^2.2.0, raw-body@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.4.1.tgz#30ac82f98bb5ae8c152e67149dac8d55153b168c"
   integrity sha512-9WmIKF6mkvA0SLmA2Knm9+qj89e+j1zqgyn8aXGd7+nAduPoqgI9lO57SAZNn/Byzo5P7JhXTyg9PzaJbH73bA==
@@ -5036,6 +5039,14 @@ toml@^3.0.0:
   resolved "https://registry.yarnpkg.com/toml/-/toml-3.0.0.tgz#342160f1af1904ec9d204d03a5d61222d762c5ee"
   integrity sha512-y/mWCZinnvxjTKYhJ+pYxwD0mRLVvOtdS2Awbgxln6iEnt4rk0yBxeSBHkGJcPucRiG0e55mwWp+g/05rsrd6w==
 
+topgg-autoposter@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/topgg-autoposter/-/topgg-autoposter-1.1.9.tgz#b8a3b0a3275b1337ff0bf65b4c05f539f3a6873e"
+  integrity sha512-NHyBvak1yz5fazlVNYFvvC6JLDlJCbOF9VcVtCuLMlnlCIT/HKElacmj3Rr8TaUqc7aYpWG2zBpcki2uBjyK6Q==
+  dependencies:
+    "@top-gg/sdk" "^3.0.9"
+    typescript "^4.2.3"
+
 touch@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/touch/-/touch-3.1.0.tgz#fe365f5f75ec9ed4e56825e0bb76d24ab74af83b"
@@ -5143,6 +5154,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typescript@^4.2.3:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.3.tgz#39062d8019912d43726298f09493d598048c1ce3"
+  integrity sha512-qOcYwxaByStAWrBf4x0fibwZvMRG+r4cQoTjbPtUlrWjBHbmCAww1i448U0GJ+3cNNEtebDteo/cHOR3xJ4wEw==
 
 undefsafe@^2.0.3:
   version "2.0.3"

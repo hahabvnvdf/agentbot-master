@@ -12,7 +12,6 @@
     "canvas": "2.7.0",
     "cross-env": "^7.0.3",
     "dateformat": "4.5.1",
-    "dblapi.js": "^2.4.1",
     "discord-giveaways": "^4.4.3",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
@@ -33,6 +32,7 @@
     "snyk": "1.487.0",
     "sourcebin-wrapper": "^1.6.0",
     "string-similarity": "^4.0.4",
+    "topgg-autoposter": "^1.1.9",
     "twemoji-parser": "^13.0.0",
     "weather-js": "^2.0.0",
     "yahoo-stock-api": "^1.0.6"
