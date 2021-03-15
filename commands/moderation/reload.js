@@ -7,6 +7,7 @@ module.exports = {
         await client.commands.clear();
         await client.aliases.clear();
         handler(client);
+        if (process.env.TYPE_RUN == 'production') client.shard.respawnAll();
         message.channel.send('Đã reload bot thành công!');
     },
 };
