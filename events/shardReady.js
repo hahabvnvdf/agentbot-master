@@ -2,12 +2,6 @@ const SQLite = require('better-sqlite3');
 const sql = new SQLite('./data.sqlite');
 const publicIP = require('public-ip');
 const { TYPE_RUN } = process.env;
-const axios = require('axios');
-const instance = axios.create({
-    baseURL: 'https://discord.bots.gg/api/v1/',
-    timeout: 10000,
-    headers: { "Authorization": DBOTGG },
-});
 const { laysodep } = require('./functions/utils');
 const ipgeolocation = process.env.IPGEOLOCATION;
 
@@ -43,9 +37,6 @@ module.exports = async (client, id) => {
                 name: `Đang phục vụ ${laysodep(guildCount)} servers`,
                 type: 'PLAYING',
             },
-        });
-        instance.post(`bots/${client.user.id}/stats`, {
-            guildCount: guildCount,
         });
     }, 36e5);
 };

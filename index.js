@@ -1,13 +1,12 @@
 const { ShardingManager } = require('discord.js');
 require("dotenv").config();
-const { TOKEN, TOPGG, DBOTGG } = process.env;
+const { TOKEN, TOPGG } = process.env;
 const db = require('quick.db');
 const AutoPoster = require('topgg-autoposter');
 const manager = new ShardingManager('./bot.js', {
     totalShards: 'auto',
     token: TOKEN,
 });
-
 const poster = AutoPoster(TOPGG, manager);
 
 poster.on('posted', () => {
