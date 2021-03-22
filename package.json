@@ -52,7 +52,8 @@
     "eslint": "eslint '**/*.js'",
     "docker-test": "node test.js",
     "docker-ci": "docker-compose -f docker-compose.dev.yml --abort-on-container-exit",
-    "pm2": "pm2 start npm -- run build --log"
+    "pm2": "pm2 start npm -- run build --log",
+    "pm2-inspect": "pm2 start npm -- run build-inspect --log"
   },
   "repository": {
     "type": "git",
