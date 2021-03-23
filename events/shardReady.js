@@ -2,8 +2,6 @@ const SQLite = require('better-sqlite3');
 const sql = new SQLite('./data.sqlite');
 const publicIP = require('public-ip');
 const axios = require('axios');
-// const { TYPE_RUN } = process.env;
-// const { laysodep } = require('./functions/utils');
 const ipgeolocation = process.env.IPGEOLOCATION;
 
 module.exports = async (client, id) => {
@@ -22,31 +20,4 @@ module.exports = async (client, id) => {
     const myIP = await publicIP.v4();
     const res = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${ipgeolocation}&ip=${myIP}`);
     global.IPDATA = res.data;
-
-    /*
-    let guildCount = TYPE_RUN == 'production' ? await getGuildCount(client) : client.guilds.cache.size;
-    client.user.setPresence({
-        status: "online",
-        activity: {
-            name: `Đang phục vụ ${laysodep(guildCount)} servers`,
-            type: 'PLAYING',
-        },
-    });
-    setInterval(async () => {
-        guildCount = TYPE_RUN == 'production' ? await getGuildCount(client) : client.guilds.cache.size;
-        client.user.setPresence({
-            status: "online",
-            activity: {
-                name: `Đang phục vụ ${laysodep(guildCount)} servers`,
-                type: 'PLAYING',
-            },
-        });
-    }, 36e5);
-    */
 };
-/*
-async function getGuildCount(client) {
-    const arr = await client.shard.fetchClientValues('guilds.cache.size');
-    return arr.reduce((p, n) => p + n, 0);
-}
-*/

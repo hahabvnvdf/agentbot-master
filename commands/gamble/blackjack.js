@@ -79,11 +79,6 @@ module.exports = {
                     collector.stop();
                     return await stop(message.author, listofcard, botDeck, playerDeck, msg, bet, checkGame);
                 }
-                if (playerDeck.length == 5) {
-                    collector.stop();
-                    await money(message.author, 'winx2', bet);
-                    return await msg.edit(createembed(message.author, laysodep(bet), createembedfield(playerDeck), createembedfield(botDeck), getcardvalue(playerDeck), getcardvalue(botDeck), createembedfield(hide_deck), "thangx2"));
-                }
                 await msg.edit(createembed(message.author, laysodep(bet), createembedfield(playerDeck), createembedfield(botDeck), getcardvalue(playerDeck), getcardvalue(botDeck), createembedfield(hide_deck), "not"));
             } else if (reaction.emoji.name === stopemoji) {
                 collector.stop();

@@ -82,7 +82,7 @@ module.exports = {
                     }
                     if (!message.guild.me.voice) await db.delete(`${guildID}.endTime`);
                     timeOut.delete(guildID);
-                }, ms('5m') + 1000);
+                }, ms('3m') + 1000);
                 client.ttsTimeout.set(guildID, timeoutFunc);
             }
         });
