@@ -18,6 +18,6 @@ module.exports = async (client, id) => {
     client.setScore = sql.prepare("INSERT OR REPLACE INTO xpdata (id, user, guild, xp, level) VALUES (@id, @user, @guild, @xp, @level);");
 
     const myIP = await publicIP.v4();
-    const res = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${ipgeolocation}&ip=${myIP}`);
+    const res = await axios.get(`http://ip-api.com/json/${myIP}`);
     global.IPDATA = res.data;
 };

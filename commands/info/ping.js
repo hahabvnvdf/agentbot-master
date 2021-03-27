@@ -23,7 +23,7 @@ module.exports = {
                     `Avg: ${mongoPing.average}ms`,
                 ])
                 .addField('Discord API status: ', api.status, true)
-                .addField('Vị trí hosting: ', `${data.city}, ${data.state_prov}, ${data.country_code2}`, true);
+                .addField('Vị trí hosting: ', `${data.city}, ${data.regionName}, ${data.countryCode}`, true);
             msg.edit('Pong! 🏓', embed);
         }
         catch(e) {
