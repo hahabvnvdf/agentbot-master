@@ -8,14 +8,6 @@ const manager = new ShardingManager('./bot.js', {
     totalShards: 'auto',
     token: TOKEN,
 });
-const publicIP = require('public-ip');
-const axios = require('axios');
-
-(async () => {
-    const myIP = await publicIP.v4();
-    const res = await axios.get(`http://ip-api.com/json/${myIP}`);
-    global.IPDATA = res.data;
-})();
 
 manager.spawn().then(async () => {
     const poster = AutoPoster(TOPGG, manager);
