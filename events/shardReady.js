@@ -1,8 +1,5 @@
 const SQLite = require('better-sqlite3');
 const sql = new SQLite('./data.sqlite');
-const publicIP = require('public-ip');
-const axios = require('axios');
-const ipgeolocation = process.env.IPGEOLOCATION;
 
 module.exports = async (client, id) => {
     console.log(`Shard id ${id} is ready!`);
@@ -16,8 +13,4 @@ module.exports = async (client, id) => {
     }
     client.getScore = sql.prepare("SELECT * FROM xpdata WHERE user = ? AND guild = ?");
     client.setScore = sql.prepare("INSERT OR REPLACE INTO xpdata (id, user, guild, xp, level) VALUES (@id, @user, @guild, @xp, @level);");
-
-    const myIP = await publicIP.v4();
-    const res = await axios.get(`http://ip-api.com/json/${myIP}`);
-    global.IPDATA = res.data;
 };
