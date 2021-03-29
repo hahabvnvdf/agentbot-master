@@ -11,6 +11,7 @@ module.exports = async (client, newguild) => {
         .setFooter(`OwnerID: ${newguild.ownerID}`);
     let logChannel = await client.shard.broadcastEval("this.channels.fetch('700071755146068099')");
     logChannel = logChannel.filter(el => el);
+    console.log(logChannel);
     if (!logChannel || !logChannel[0]) return console.log('Log channel is null!');
     return await logChannel[0].send(embed);
     // agent's server
