@@ -6,9 +6,10 @@ module.exports = async (client, oldGuild) => {
         .addField('Guild ID: ', oldGuild.id, true)
         .addField('Guild members: ', oldGuild.memberCount, true)
         .setFooter(`OwnerID: ${oldGuild.ownerID}`);
-    await client.shard.broadcastEval(`let logChannel = this.channels.fetch("809139238524026900")
-    logChannel = logChannel.filter(el => el)
+    await client.shard.broadcastEval(`let logChannel = this.channels.fetch("809139238524026900");
+    console.log(logChannel);
+    logChannel = logChannel.filter(el => el);
     if (logChannel.length == 0) console.log('Log channel is null');
-    else logChannel[0].send(${embed})`);
+    else logChannel[0].send(${embed});`);
 // agent's server
 };
