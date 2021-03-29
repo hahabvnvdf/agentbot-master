@@ -9,7 +9,7 @@ module.exports = {
     note: 'none = tắt tin nhắn khi lên cấp\nreset = khôi phục mặc định',
     cooldown: 30,
     run: async (client, message, args) => {
-        const query = args[0].toLowerCase();
+        const query = args[0] ? args[0].toLowerCase() : null;
         if (query == 'none') await db.set(`${message.guild.id}.rankChannel`, null);
         else if (query == 'reset') await db.set(`${message.guild.id}.rankChannel`, 'default');
         else {
