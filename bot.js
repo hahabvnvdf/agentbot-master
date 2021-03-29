@@ -2,7 +2,7 @@ const { Collection, Client } = require("discord.js");
 require("dotenv").config();
 const { TYPE_RUN, TOKEN } = process.env;
 const fs = require("fs");
-const client = new Client({ disableMentions: "everyone", retryLimit: 5 });
+const client = new Client({ disableMentions: "everyone", retryLimit: 5, ws: { intents: [ "GUILDS", "GUILD_MEMBERS", "GUILD_EMOJIS", "GUILD_VOICE_STATES", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS" ] } });
 const { ownerID } = require('./config.json');
 const { GiveawaysManager } = require('discord-giveaways');
 if (!TYPE_RUN) throw new Error("Chạy lệnh npm run dev hoặc npm run build");
