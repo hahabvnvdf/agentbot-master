@@ -10,7 +10,13 @@ if (!TYPE_RUN) throw new Error("Chạy lệnh npm run dev hoặc npm run build")
 // load trước ~1mb
 require('./assets/json/words_dictionary.json');
 
-const giveawayManager = new GiveawaysManager(client, {
+const giveawayManagerShard = class extends GiveawaysManager {
+    async refreshStorage() {
+        return client.shard.broadcastEval(() => this.giveawaysManager.getAllGiveaways());
+    };
+};
+
+const giveawayManager = new giveawayManagerShard(client, {
     storage: './assets/json/giveaways.json',
     updateCountdownEvery: 10000,
     default: {
@@ -19,6 +25,7 @@ const giveawayManager = new GiveawaysManager(client, {
         reaction: '🎉',
     },
 });
+
 client.commands = new Collection();
 client.aliases = new Collection();
 client.giveawaysManager = giveawayManager;
