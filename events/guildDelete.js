@@ -7,7 +7,7 @@ module.exports = async (client, oldGuild) => {
         .addField('Guild members: ', oldGuild.memberCount, true)
         .setFooter(`OwnerID: ${oldGuild.ownerID}`);
     const logChannel = await client.shard.broadcastEval('this.channels.fetch("809139238524026900")');
-    if (!logChannel) return console.log('Log channel is null!');
-    return await logChannel.send(embed);
+    if (!logChannel || !logChannel[0]) return console.log('Log channel is null!');
+    return await logChannel[0].send(embed);
 // agent's server
 };
