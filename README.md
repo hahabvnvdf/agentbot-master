@@ -11,6 +11,18 @@
 [![DeepScan grade](https://deepscan.io/api/teams/11483/projects/14376/branches/266132/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11483&pid=14376&bid=266132)
 
 # AgentBot
+## License
+Agent Bot is licensed under the terms of [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://github.com/phamleduy04/agentbot-master/blob/master/LICENSE)("CC-BY-NC-SA-4.0"). Commercial use is not allowed under this license. This includes any kind of revenue made with or based upon the software, even donations.
+
+The CC-BY-NC-SA-4.0 allows you to:
+- [x] **Share** -- copy and redistribute the material in any medium or format
+- [x] **Adapt** -- remix, transform, and build upon the material
+
+Under the following terms:
+- **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+- **NonCommercial** — You may not use the material for commercial purposes. 
+- **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
+
 ## Thêm Agent Bot vào server của bạn
 <img align="right" src="https://cdn.discordapp.com/attachments/699884417069613076/742487900045836408/unknown.png" height="256" width="256"></img>
 
