@@ -17,6 +17,7 @@ module.exports = {
             winnerCount: parseInt(args[1]),
             prize: args.slice(2).join(' '),
             messages: ga.message,
+            hostedBy: message.author.id,
         });
     },
 };
