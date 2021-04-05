@@ -14,6 +14,8 @@ module.exports = {
     usage: 'slut',
     cooldown: 300,
     run: async (client, message, args) => {
+        const userMoney = await fetchMoney(authorID);
+        if (userMoney == 0) return message.channel.send('Bạn không có tiền để sử dụng lệnh này!');
         const authorID = message.author.id;
         let randomNum = await random(2000, 4000);
         /*
@@ -26,9 +28,7 @@ module.exports = {
             message.channel.send(`Bạn đã nhận được: 💵 \`${randomNum}\` Agent money.`);
        } else {
            randomNum = await random(500, 2000);
-           const userMoney = await fetchMoney(authorID);
            if (userMoney < randomNum) randomNum = userMoney;
-           await subtractMoney(authorID, randomNum);
            const reasonNum = await random(0, subtractReasonList.length - 1);
            message.channel.send(`${subtractReasonList[reasonNum].replace('{money}', `\`${randomNum}\``)} 😢`);
        }
