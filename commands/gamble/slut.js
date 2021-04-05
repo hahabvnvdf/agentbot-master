@@ -14,9 +14,9 @@ module.exports = {
     usage: 'slut',
     cooldown: 300,
     run: async (client, message, args) => {
+        const authorID = message.author.id;
         const userMoney = await fetchMoney(authorID);
         if (userMoney == 0) return message.channel.send('Bạn không có tiền để sử dụng lệnh này!');
-        const authorID = message.author.id;
         let randomNum = await random(2000, 4000);
         /*
         0: thua
