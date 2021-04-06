@@ -14,8 +14,6 @@ module.exports = {
         if (dispatcher) await dispatcher.destroy();
         message.react('✅');
         await db.set(`${message.guild.id}.botdangnoi`, false);
-        if (client.ttsTimeout.has(guildID)) {
-            clearTimeout(client.ttsTimeout.get(guildID));
-        }
+        if (client.ttsTimeout.has(message.guild.id)) clearTimeout(client.ttsTimeout.get(message.guild.id));
     },
 };
