@@ -47,16 +47,6 @@ process.on('unhandledRejection', (reason, p) => {
     console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
 });
 
-// console chat
-const y = process.openStdin();
-y.addListener("data", res => {
-    const x = res.toString().trim().split(/ +/g);
-    const send = x.join(' ');
-    if (send.length == 0) return console.log("Kh gởi được tin nhắn trống :)");
-    client.channels.cache.get("702983688811708416").send(send);
-});
-
-
 process.on('exit', (exitCode) => {
     if (TYPE_RUN !== 'production') return console.log('Exiting......');
     sendOwner(`Bot đã thoát với exitCode: ${exitCode}`);
