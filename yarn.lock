@@ -5392,10 +5392,10 @@ toml@^3.0.0:
   resolved "https://registry.yarnpkg.com/toml/-/toml-3.0.0.tgz#342160f1af1904ec9d204d03a5d61222d762c5ee"
   integrity sha512-y/mWCZinnvxjTKYhJ+pYxwD0mRLVvOtdS2Awbgxln6iEnt4rk0yBxeSBHkGJcPucRiG0e55mwWp+g/05rsrd6w==
 
-topgg-autoposter@^1.1.9:
-  version "1.1.9"
-  resolved "https://registry.yarnpkg.com/topgg-autoposter/-/topgg-autoposter-1.1.9.tgz#b8a3b0a3275b1337ff0bf65b4c05f539f3a6873e"
-  integrity sha512-NHyBvak1yz5fazlVNYFvvC6JLDlJCbOF9VcVtCuLMlnlCIT/HKElacmj3Rr8TaUqc7aYpWG2zBpcki2uBjyK6Q==
+topgg-autoposter@^1.1.10:
+  version "1.1.10"
+  resolved "https://registry.yarnpkg.com/topgg-autoposter/-/topgg-autoposter-1.1.10.tgz#e692d1e49602e5c50f5bec6c97588e7cede9480a"
+  integrity sha512-VdqHxr1MmxAwilow0PWlVW9fEhKcSqdnRRr+74bd/E4CycQ2eMr6DkrZhnQiFVh1jqr1+DFHxUdRwL/C7IdEHQ==
   dependencies:
     "@top-gg/sdk" "^3.0.9"
     typescript "^4.2.3"
