@@ -3399,10 +3399,10 @@ matcher@^3.0.0:
   dependencies:
     escape-string-regexp "^4.0.0"
 
-mathjs@9.3.1:
-  version "9.3.1"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-9.3.1.tgz#118c64974c961824f193456bd26bce6e2ee2519a"
-  integrity sha512-XZCNK+/8tK9Ow+rmPvhDF4OGHWducfSSkB404yjKjpVGDwc6By+E2/kkK6mGMJ/nVOKYg28Zrw0aDAbsw2d0hQ==
+mathjs@9.3.2:
+  version "9.3.2"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-9.3.2.tgz#6523dd5c963d200ff1cea0ff7963b10521b82185"
+  integrity sha512-0YKSKAeN9OkbIQrxfxnBT4kk/KlH71piWOsvVvAasyRIj/Xd/zlpc5VP/aFxwr+llOq2F3f6booPEu2fWv3yjQ==
   dependencies:
     complex.js "^2.0.11"
     decimal.js "^10.2.1"
