@@ -125,7 +125,7 @@ module.exports = {
 
     updateNoiTu: async function(guildID, maxWords = 1500) {
         await db.set(`${guildID}.noitu`, null);
-        await db.set(`${guildID}.noituStart`, false);
+        await db.set(`${guildID}.noituStart`, true);
         await db.set(`${guildID}.noituArray`, []);
         await db.set(`${guildID}.maxWords`, maxWords);
         await db.set(`${guildID}.noituLastUser`, null);

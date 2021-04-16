@@ -72,7 +72,7 @@ module.exports = async (client, message) => {
             const embed = new MessageEmbed()
                 .setAuthor('Agent Bot', client.user.avatarURL())
                 .setDescription(`Trò chơi kết thúc vì số từ chơi đã vượt giới hạn (${maxWords} từ)\n\nVui lòng nhập từ mới!`)
-                .setFooter(`Sử dụng lệnh ${serverData.prefix}}setmaxword để tăng giới hạn.`);
+                .setFooter(`Sử dụng lệnh ${serverData.prefix}setmaxword để tăng giới hạn.`);
             message.channel.send(embed);
             await updateNoiTu(guildID, maxWords);
         }
