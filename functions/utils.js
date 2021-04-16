@@ -123,8 +123,8 @@ module.exports = {
         return false;
     },
 
-    updateNoiTu: async function(guildID, maxWords = 1500) {
-        await db.set(`${guildID}.noitu`, null);
+    updateNoiTu: async function(guildID, maxWords = 1500, noituChannel) {
+        await db.set(`${guildID}.noitu`, noituChannel);
         await db.set(`${guildID}.noituStart`, true);
         await db.set(`${guildID}.noituArray`, []);
         await db.set(`${guildID}.maxWords`, maxWords);

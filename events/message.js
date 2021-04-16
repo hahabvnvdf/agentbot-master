@@ -59,7 +59,7 @@ module.exports = async (client, message) => {
         if (noituLastUser == message.author.id) return errnoitu(message, 'Bạn đã nối từ trước đó rồi, vui lòng chờ!');
         if (!verifyWord(query) || query.length == 1) return errnoitu(message, `Từ \`${message.content}\` không tồn tại trong từ điển của bot!`);
         if (!noituStart) await db.set(`${guildID}.noituStart`, true);
-        else {
+        else if (noituArray.length !== 0) {
             const lastWord = noituArray[noituArray.length - 1];
             const shouldStart = lastWord.slice(-1);
             if (!query.startsWith(shouldStart)) return errnoitu(message, `Từ của bạn phải bắt đầu bằng chữ \`${shouldStart}\`!`);
@@ -74,7 +74,7 @@ module.exports = async (client, message) => {
                 .setDescription(`Trò chơi kết thúc vì số từ chơi đã vượt giới hạn (${maxWords} từ)\n\nVui lòng nhập từ mới!`)
                 .setFooter(`Sử dụng lệnh ${serverData.prefix}setmaxword để tăng giới hạn.`);
             message.channel.send(embed);
-            await updateNoiTu(guildID, maxWords);
+            await updateNoiTu(guildID, maxWords, noitu);
         }
         return;
     }
